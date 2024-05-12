@@ -177,7 +177,7 @@
 		<English>Blasphemy! The hot sun seems to have addled his mind! Quickly, raise a tithe from all the God-fearing citizens and send a missionary to this city! These lost souls need God's help.</English>
 		<French>Balsphème ! Le soleil brûlant semble avoir attaqué son esprit ! Levez rapidement la dîme chez tous les citoyens craignant Dieu et envoyez un missionnaire à la ville ! Ces âmes perdues ont besoin de l'aide de Dieu.</French>
 		<German>Dem hat die Wüstensonne wohl das Hirn verdorrt! Rasch, sammelt Geld von den gottesfürchtigen Bürgern und schickt einen Missionar in die Stadt! Die verirrten Seelen brauchen unsere Hilfe.</German>
-		<Russian>Кощунство! Жаркое солнце, кажется, смутило его разум! Быстро соберите десятину со всех богобоязненных горожан и отправьте миссионера в этот город! Эти заблудшие души нуждаются в Божьей помощи.</Russian>
+		<Russian>Кощунство! Жаркое солнце помутило его разум! Быстро соберите десятину со всех богобоязненных горожан и отправьте миссионера в этот город! Эти заблудшие души нуждаются в Божьей помощи.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_BOOK_MORMON_2</Tag>
@@ -988,10 +988,10 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FIVE_MARKETS_DONE_1</Tag>
-		<English>They could build a larger market in one of our cities. Thus they will profit as well.</English>
-		<French>Ils peuvent construire un marché encore plus grand dans l'une de nos villes. Les profits générés augmenteront ainsi.</French>
-		<German>Sie sollen in einer unserer Städte den vorhandenen Marktplatz ausbauen. So profitieren sie selbst auch davon.</German>
-		<Russian>Они могли бы построить рынок побольше в одном из наших городов. Таким образом, они также получат прибыль.</Russian>
+		<English>We now have the markets, but we should also expand trade with the Natives. It's time to hire a courageous native trader.</English>
+		<French>Nous avons maintenant les places de marché, mais nous devrions également développer le commerce avec les autochtones. Nous voulons que vous engagiez un marchand aborigène courageux.</French>
+		<German>Wir haben zwar nun die Marktplätze, aber wir sollten den Handel mit den Ureinwohnern noch zusätzlich ausbauen. Sie sollen einen couragierten Ureinwohnerhändler anheuern.</German>
+		<Russian>Теперь, когда у нас есть рынки, нужно расширять торговлю с индейцами. Пусть пришлют нам самого опытного торговца с индейцами.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FIVE_MARKETS_DONE_2</Tag>
@@ -1093,7 +1093,7 @@
 		<English>Search for this poor woman and bring her to the colonies. We can at least give her proper work and a steady income without angering the court too much. But do it quietly.</English>
 		<French>Cherchez cette pauvre femme et amenez-la ici.Au moins, nous pouvons lui donner un métier honorable et un revenu stable sans trop froisser la cour. Agissez toutefois discrètement.</French>
 		<German>Sucht nach der armen Frau und bringt sie in die Kolonien. Wir können ihr zumindest eine anständige Arbeitstelle mit stetigem Einkommen beschaffen, ohne den Hof zu sehr zu verärgern. Lasst dies jedoch leise geschehen.</German>
-		<Russian>Найдите эту бедную женщину и приведите ее в колонии. По крайней мере, мы можем дать ей достойную работу и стабильный доход, не слишком раздражая Двор. Но сделайте это по-тихому.</Russian>
+		<Russian>Найдите эту несчастную женщину и привезите ее в колонии. По крайней мере, мы можем дать ей достойную работу и стабильный доход, не слишком раздражая Двор. Но сделайте это по-тихому.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_GOVERNOR_LOVER_2</Tag>
@@ -1142,7 +1142,7 @@
 		<English>A vision after my own heart! Well, I will have this Great Tool Factory built, as the first of its kind in America. Of course, I expect the artisans to honour this commitment ...</English>
 		<French>Une vision selon mon propre cœur ! Je ferai construire cette Hauts fourneaux, la première installation de production de ce type en Amérique. Bien sûr, j'attends des artisans qu'ils honorent cet engagement...</French>
 		<German>Eine Vision nach meinem Geschmack! Wohlan, ich werde diese Große Eisenwarenfabrik errichten lassen, als erste Produktionsstätte dieser Art in Amerika. Natürlich erwarte ich, dass die Handwerkerschaft dieses Engagement honorieren wird ...</German>
-		<Russian>Какое интересное видени! Да, я построю Завод инструментов, первый в своем роде в Америке. Надеюсь, ремесленники выполнят свои обязательства...</Russian>
+		<Russian>Чертовски интересное предложение! Да, я построю Завод инструментов, первый в своем роде в Америке. Надеюсь, ремесленники выполнят свои обязательства...</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_GREAT_TOOL_FACTORY_DONE_1</Tag>
@@ -1415,7 +1415,7 @@
 		<English>Well, then sell them the supplies they came for.</English>
 		<French>Bien. Vendons leurs ce dont ils ont besoin.</French>
 		<German>Dann verkauft ihnen die Vorräte, die sie wollen.</German>
-		<Russian>Ну, тогда продай им припасы, за которыми они пришли.</Russian>
+		<Russian>Продайте им припасы, за которыми они пришли.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_MAN_FROM_THE_WILDERNESS_2</Tag>
@@ -1429,7 +1429,7 @@
 		<English>Try to convince them to join our forces as rangers.</English>
 		<French>Essayez de les convaincre de rejoindre nos forces en tant que gardes-forestiers.</French>
 		<German>Versucht sie zu überzeugen, unseren Truppen als Rangers zu dienen.</German>
-		<Russian>Попытайтесь убедить их присоединиться к нашим силам в качестве рейнджеров.</Russian>
+		<Russian>Попытайтесь убедить их присоединиться к нам в качестве рейнджеров.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_MINING_ACCIDENT_1</Tag>

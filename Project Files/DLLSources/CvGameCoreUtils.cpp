@@ -168,6 +168,93 @@ float directionAngle( DirectionTypes eDirection )
 	}
 }
 
+// returns minimal number of steps (clockwise or counterclockwise) from one direction to another
+int getDirectionDiff(DirectionTypes direction1, DirectionTypes direction2)
+{
+	FAssertMsg(direction1 >= FIRST_DIRECTION && direction1 < NUM_DIRECTION_TYPES 
+		&& direction2 >= FIRST_DIRECTION && direction2 < NUM_DIRECTION_TYPES,
+		"Invalid DirectionTypes enum argument");
+
+	// in case one of directions is NO_DIRECTION
+	if (direction1 == NO_DIRECTION || direction2 == NO_DIRECTION)
+	{
+		if (direction1 == NO_DIRECTION && direction2 == NO_DIRECTION)
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
+		}
+	}
+
+	int diff = std::abs(direction1 - direction2);
+	if (diff <= NUM_DIRECTION_TYPES / 2)
+	{
+		return diff;
+	}
+	else
+	{
+		return NUM_DIRECTION_TYPES - diff;
+	}
+}
+
+DirectionTypes getDirectionFrom_dX_dY(int dX, int dY)
+{
+	int x, y;
+	if (dX < 0) x = -1;
+	else if (dX > 0) x = 1;
+	else x = 0;
+
+	if (dY < 0) y = -1;
+	else if (dY > 0) y = 1;
+	else y = 0;
+
+	switch (x)
+	{
+	case -1:
+		switch (y)
+		{
+		case -1:
+			return DIRECTION_SOUTHWEST;
+		case 0:
+			return DIRECTION_WEST;
+		case 1:
+			return DIRECTION_NORTHWEST;
+		default:
+			break;
+		}
+	case 0:
+		switch (y)
+		{
+		case -1:
+			return DIRECTION_SOUTH;
+		case 0:
+			return NO_DIRECTION;
+		case 1:
+			return DIRECTION_NORTH;
+		default:
+			break;
+		}
+	case 1:
+		switch (y)
+		{
+		case -1:
+			return DIRECTION_SOUTHEAST;
+		case 0:
+			return DIRECTION_EAST;
+		case 1:
+			return DIRECTION_NORTHEAST;
+		default:
+			break;
+		}
+	default:
+		break;
+	}
+
+	return NO_DIRECTION;
+}
+
 bool atWar(TeamTypes eTeamA, TeamTypes eTeamB)
 {
 	if (eTeamA == NO_TEAM || eTeamB == NO_TEAM)
@@ -288,6 +375,9 @@ bool shouldMoveBefore(const CvUnit* pUnitA, const CvUnit* pUnitB)
 
 bool shouldUnitMove(const CvUnit* pUnit)
 {
+	if (pUnit->isTempUnit())
+		return false;
+
 	if (pUnit->isDead() || pUnit->isDelayedDeath())
 	{
 		return false;
@@ -505,7 +595,7 @@ bool isPlotEventTrigger(EventTriggerTypes eTrigger)
 
 	if (kTrigger.getNumPlotsRequired() > 0)
 	{
-		if (kTrigger.getPlotType() != NO_PLOT)
+		if (kTrigger.getPlotTypes().hasContent())
 		{
 			return true;
 		}
@@ -1629,6 +1719,12 @@ int pathValid_join(FAStarNode* parent, FAStarNode* node, CvSelectionGroup* pSele
 		!kMap.getPlot(kToPlot.getX(), kFromPlot.getY()).isWater() /*&&
 		!pSelectionGroup->canMoveAllTerrain()*/) // WTP: Not supported
 		return FALSE;
+
+	if (kToPlot.getTurnDamage() > 0 && !pSelectionGroup->getHeadUnit()->isAllowDangerousPath())
+	{
+		return FALSE;
+	}
+
 	return TRUE;
 }
 
@@ -2064,62 +2160,6 @@ int routeValid(FAStarNode* parent, FAStarNode* node, int data, const void* point
 	return FALSE;
 }
 
-int coastalRouteValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointer, FAStar* finder)
-{
-	CvPlot* pNewPlot;
-
-	if (parent == NULL)
-	{
-		return true;
-	}
-
-	pNewPlot = GC.getMap().plotSoren(node->m_iX, node->m_iY);
-
-	const PlayerTypes ePlayer = ((PlayerTypes)(gDLL->getFAStarIFace()->GetInfo(finder)));
-
-	// Erik: It's ok to check for a city here since cities they have to be separated by at least 1-non city plot
-	// Erik: TODO: check that it's our own city! When we implement trading with natives\Europeans, we can allow it
-	if (pNewPlot->isCity())
-	{
-		return true;
-	}
-
-	// WTP, ray, Canal - START
-	if (pNewPlot->getImprovementType() != NO_IMPROVEMENT && GC.getImprovementInfo(pNewPlot->getImprovementType()).isCanal())
-	{
-		return true;
-	}
-	// WTP, ray, Canal - END
-
-	const TeamTypes eTeam = GET_PLAYER(ePlayer).getTeam();
-
-	if (pNewPlot->isWater() && pNewPlot->isRevealed(eTeam, false) && !pNewPlot->isImpassable())
-	{
-		const FeatureTypes featureType = pNewPlot->getFeatureType();
-
-		// Erik: If the plot has a feature it can't be impassable
-		if (featureType != NO_FEATURE)
-		{
-			const CvFeatureInfo& kFeatureInfo = GC.getFeatureInfo(featureType);
-
-			// Erik: Just in case impassable terrain is added to the game (unused in WTP)
-			if (!kFeatureInfo.isImpassable())
-			{
-				return false;
-			}
-		}
-
-		//WTP, ray, Large Rivers
-		// if (pNewPlot->getTerrainType() == TERRAIN_COAST || pNewPlot->getTeam() == eTeam)
-		//WTP, ray, Lakes
-		if (pNewPlot->getTerrainType() == TERRAIN_COAST || pNewPlot->getTerrainType() == TERRAIN_SHALLOW_COAST || pNewPlot->getTerrainType() == TERRAIN_LARGE_RIVERS || pNewPlot->getTerrainType() == TERRAIN_LAKE || pNewPlot->getTerrainType() == TERRAIN_ICE_LAKE || pNewPlot->getTeam() == eTeam)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
 
 int borderValid(FAStarNode* parent, FAStarNode* node, int data, const void* pointer, FAStar* finder)
 {
@@ -2602,4 +2642,19 @@ CvWString getStrategyString(StrategyTypes eStrategy)
 	}
 
 	return szString;
+}
+
+bool generatePathForHypotheticalUnit(const CvPlot* pFrom, const CvPlot* pTo, PlayerTypes ePlayer, UnitTypes eUnit, int iFlags, int iMaxTurns)
+{
+	CvPlayerAI& kPlayer = GET_PLAYER(ePlayer);
+	const int iPower = kPlayer.getPower();
+	const int iAssets = kPlayer.getAssets();
+	PROFILE_FUNC();
+	CvUnit* const pTempUnit = kPlayer.getOrCreateTempUnit(eUnit, pFrom->getX(), pFrom->getY());
+	pTempUnit->finishMoves();
+	const bool bResult = pTempUnit->generatePath(pTo, iFlags, false, NULL, iMaxTurns, /*bUseTempFinder*/true);
+	kPlayer.releaseTempUnit();
+	return bResult;
+	FAssert(iPower == kPlayer.getPower());
+	FAssert(iAssets == kPlayer.getAssets());
 }
