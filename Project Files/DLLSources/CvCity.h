@@ -432,7 +432,7 @@ public:
 	//Androrc Multiple Professions per Building
 	void alterUnitWorkingBuilding(BuildingTypes eBuilding, int iUnitId, bool bAskProfession);
 	//Androrc End
-	void alterUnitProfession(int iUnitId, ProfessionTypes eProfession);
+	void alterUnitProfession(int iUnitId, ProfessionTypes eProfession, bool bPay = false);
 	void ejectToTransport(int iUnitId, int iTransportId);
 	void replaceCitizen(int iUnitId, int iReplacedUnitId, bool bAskProfession);
 	bool isHasRealBuilding(BuildingTypes eIndex) const;
@@ -1019,6 +1019,12 @@ protected:
 	void handleAutoTraderouteSetup(bool bReset, bool bImportAll, bool bAutoExportAll);
 
 	// auto traderoute - end - Nightinggale
+
+//bobisback import mod
+	void handleDemandedImport();
+	void handleConstructionImport();
+	void handleMilitaryImport();
+	void handleLivestockImport();	
 
 public:
 	int getMarketModifier() const { return m_iCacheMarketModifier; }
