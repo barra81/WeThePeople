@@ -72,13 +72,6 @@ private:
 	ProfessionTypes m_eProfession;
 };
 
-enum Port
-{
-	EUROPE,
-	AFRICA,
-	PORT_ROYAL
-};
-
 class CvUnit : public CvDLLEntity
 {
 
@@ -836,6 +829,9 @@ public:
 	void groupTransportedYieldUnits(CvUnit* pYieldUnit);
 	bool isTempUnit() const;
 
+	bool is(UnitAIStates) const;
+	bool is(UnitAITypes) const;
+
 protected:
 
 	void updateVisibilityCache(int iNewRange);
@@ -994,7 +990,7 @@ protected:
 	YieldTypes getYieldUncached() const;
 	YieldTypes m_eCachedYield;
 // unit yield cache - end - Nightinggale
-	int getCargoValue(Port port) const;
+	int getCargoValue(TradeLocationTypes eLocation) const;
 	// WTP, ray, prevent Coastal Ships to Display EUROPE, AFRICA and Port Royal in GO-TO - START
 	//int canCrossCoastOnly() const;
 	// WTP, ray, prevent Coastal Ships to Display EUROPE, AFRICA and Port Royal in GO-TO - END
@@ -1011,6 +1007,16 @@ public:
 inline bool CvUnit::isHasPromotion(PromotionTypes eIndex) const
 {
 	return m_embisPromotionApplied.get(eIndex);
+}
+
+inline bool CvUnit::is(UnitAIStates eUnitAIState) const
+{
+	return AI_getUnitAIState() == eUnitAIState;
+}
+
+inline bool CvUnit::is(UnitAITypes eUnitAI) const
+{
+	return AI_getUnitAIType() == eUnitAI;
 }
 
 #endif
