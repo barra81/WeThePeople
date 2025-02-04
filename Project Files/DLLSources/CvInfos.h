@@ -2781,6 +2781,7 @@ public:
 	YieldTypes getIndex() const { return m_eIndex; }
 	DllExport int getChar() const;
 	DllExport void setChar(int i);
+	CvWString getCharLink() const;
 	const char* getIcon() const;
 	WidgetTypes getWikiWidget() const;
 	YieldTypes getID() const;
