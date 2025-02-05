@@ -1354,6 +1354,8 @@ enum NetContactTypes
 
 enum ContactTypes
 {
+	NO_CONTACT = -1,
+
 	CONTACT_JOIN_WAR,
 	CONTACT_STOP_TRADING,
 	CONTACT_GIVE_HELP,
@@ -1370,6 +1372,8 @@ enum ContactTypes
 	// R&R, ray, Natives raiding party - END
 
 	NUM_CONTACT_TYPES,
+
+	FIRST_CONTACT = 0,
 
 	COMPILE_TIME_NUM_CONTACT_TYPES = NUM_CONTACT_TYPES,
 
