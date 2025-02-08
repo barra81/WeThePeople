@@ -4573,11 +4573,11 @@ bool CvCity::hasOtherProductionBuilding(BuildingTypes eBuilding, int iMax) const
 
 	int iCount = 0;
 
-	for (int i = 0; i < GC.getNumProfessionInfos(); ++i)
+	for (ProfessionTypes eProfession = FIRST_PROFESSION; eProfession < NUM_PROFESSION_TYPES; ++eProfession)
 	{
-		CvProfessionInfo& kProfession = GC.getProfessionInfo((ProfessionTypes)i);
+		CvProfessionInfo& kProfession = GC.getProfessionInfo(eProfession);
 
-		if (GC.getCivilizationInfo(kOwner.getCivilizationType()).isValidProfession(i))
+		if (GC.getCivilizationInfo(kOwner.getCivilizationType()).isValidProfession(eProfession))
 		{
 			if (kProfession.getSpecialBuilding() != kBuildingInfo.getSpecialBuildingType())
 			{
@@ -11346,11 +11346,11 @@ UnitClassTypes CvCity::bestTeachUnitClass()
 	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
 
 	std::vector<int> values(GC.getNumUnitClassInfos(), 0);
-	for (int i = 0; i < GC.getNumUnitClassInfos(); ++i)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		if (GC.getCivilizationInfo(kOwner.getCivilizationType()).getTeachUnitClassWeight(i) > 0)
+		if (GC.getCivilizationInfo(kOwner.getCivilizationType()).getTeachUnitClassWeight(eUnitClass) > 0)
 		{
-			UnitTypes eLoopUnit = (UnitTypes)GC.getUnitClassInfo((UnitClassTypes) i).getDefaultUnitIndex();
+			UnitTypes eLoopUnit = (UnitTypes)GC.getUnitClassInfo(eUnitClass).getDefaultUnitIndex();
 			if (eLoopUnit != NO_UNIT)
 			{
 				int iValue = 0;
@@ -11429,8 +11429,8 @@ UnitClassTypes CvCity::bestTeachUnitClass()
 					}
 				}
 
-				iValue *= GC.getCivilizationInfo(kOwner.getCivilizationType()).getTeachUnitClassWeight(i);
-				values[i] = iValue;
+				iValue *= GC.getCivilizationInfo(kOwner.getCivilizationType()).getTeachUnitClassWeight(eUnitClass);
+				values[eUnitClass] = iValue;
 			}
 		}
 	}
