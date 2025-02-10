@@ -2024,8 +2024,6 @@ public:
 	int getWaves(int index);
 	// TAC - AI Revolution - koma13 - END
 
-	int getOppressometerGrowthHandicap() const;
-
 	// Arrays
 	int getGoodies(int i) const;
 
@@ -2087,8 +2085,6 @@ protected:
 	int m_iMissionFailureThresholdPercent;
 	int m_iKingNumUnitMultiplier;
 	int m_iKingGoldThresholdPercent;
-
-	int m_iOppressometerGrowthHandicap;
 
 	CvString m_szHandicapName;
 
