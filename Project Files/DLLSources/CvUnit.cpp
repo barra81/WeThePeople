@@ -14431,7 +14431,7 @@ int CvUnit::getTriggerValue(EventTriggerTypes eTrigger, const CvPlot* pPlot, boo
 		}
 	}
 
-	if (bCheckPlot)
+	if (bCheckPlot && pPlot != NULL)
 	{
 		if (kTrigger.isUnitsOnPlot())
 		{
