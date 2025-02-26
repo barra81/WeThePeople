@@ -15,7 +15,8 @@
 #include "CvDLLXMLIFaceBase.h"
 #include "CvGameTextMgr.h"
 #include "CvGameCoreUtils.h"
-#include "iconv/converters.h"
+#include "lib/iconv/converters.h"
+#include "CvInitCore.h"
 
 // static pointer used only by CvInfoBase
 // main purpose is to add read functions to CvInfoBase
