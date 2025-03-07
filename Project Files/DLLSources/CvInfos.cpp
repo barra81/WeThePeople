@@ -9877,6 +9877,7 @@ m_eIndex(NO_YIELD),
 m_iChar(0),
 m_iPriceChangeThreshold(0),
 m_iPriceCorrectionPercent(0),
+m_iDomesticPriceBonus(0),
 m_iNativeBuyPrice(0),
 m_iNativeSellPrice(0),
 m_iNativeConsumptionPercent(0),
@@ -9980,6 +9981,10 @@ int CvYieldInfo::getPriceChangeThreshold() const
 int CvYieldInfo::getPriceCorrectionPercent() const
 {
 	return m_iPriceCorrectionPercent;
+}
+int CvYieldInfo::getDomesticPriceBonus() const
+{
+	return m_iDomesticPriceBonus;
 }
 int CvYieldInfo::getNativeBuyPrice() const
 {
