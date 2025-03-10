@@ -831,6 +831,8 @@ public:
 
 	bool is(UnitAIStates) const;
 	bool is(UnitAITypes) const;
+	
+	bool canChangeProfession() const;
 
 protected:
 
