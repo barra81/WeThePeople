@@ -697,6 +697,7 @@ enum TaskTypes
 	TASK_YIELD_TRADEROUTE, // transport feeder - Nightinggale
 	TASK_AUTO_TRADEROUTE, // auto traderoute - Nightinggale
 	TASK_CHOOSE_CITY_PLOT_YIELD,
+	TASK_PURCHASE_PROFESSION,
 
 	NUM_TASK_TYPES
 };
@@ -2184,6 +2185,7 @@ enum JITarrayTypes
 	JIT_ARRAY_STRATEGY,
 	JIT_ARRAY_PLOT_TYPE,
 	JIT_ARRAY_CIV_CATEGORY,
+	JIT_ARRAY_FATHERCATEGORY,
 
 	// defined by GlobalTypes.xml
 

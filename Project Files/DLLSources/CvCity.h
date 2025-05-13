@@ -432,7 +432,7 @@ public:
 	//Androrc Multiple Professions per Building
 	void alterUnitWorkingBuilding(BuildingTypes eBuilding, int iUnitId, bool bAskProfession);
 	//Androrc End
-	void alterUnitProfession(int iUnitId, ProfessionTypes eProfession);
+	void alterUnitProfession(int iUnitId, ProfessionTypes eProfession, bool bPay = false);
 	void ejectToTransport(int iUnitId, int iTransportId);
 	void replaceCitizen(int iUnitId, int iReplacedUnitId, bool bAskProfession);
 	bool isHasRealBuilding(BuildingTypes eIndex) const;
@@ -729,7 +729,7 @@ public:
 	int getBestYieldsAmountAvailable(YieldTypes eYield, ProfessionTypes eProfession, const CvUnit* pUnit) const;
 	// R&R, ray , MYCP partially based on code of Aymerick - END
 	void addPopulationUnit(CvUnit* pUnit, ProfessionTypes eProfession);
-	bool removePopulationUnit(CvUnit* pUnit, bool bDelete, ProfessionTypes eProfession, bool conquest = false);
+	bool removePopulationUnit(AssertCallerData assertData, CvUnit* pUnit, bool bDelete, ProfessionTypes eProfession, bool conquest = false);
 	CvUnit* removeUnitType(UnitTypes eUnit, ProfessionTypes eProfession);
 	void removeNonCityPopulationUnits();
 	int getPopulationUnitId(int iPlotIndex) const;

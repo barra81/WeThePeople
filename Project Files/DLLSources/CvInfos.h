@@ -406,6 +406,7 @@ public:
 	// R&R, ray , MYCP partially based on code of Aymerick - END
 
 	bool isWorkSlot() const;
+	bool requireAnyYields() const;
 
 	/// Move Into Peak - start - Nightinggale
 	bool allowsMoveIntoPeak() const {return m_bMoveIntoPeak;}
@@ -4765,7 +4766,8 @@ class CvFatherInfo : public CvInfoBase
 public:
 	DllExport CvFatherInfo();
 	virtual ~CvFatherInfo();
-	int getFatherCategory() const;
+	FatherCategoryTypes getFatherCategory() const;
+	FatherPointTypes getFatherPointType() const;
 	TraitTypes getTrait() const;
 	int getFreeUnits(int iUnitClass) const;
 	int getPointCost(int iFatherPointType) const;
@@ -4783,7 +4785,7 @@ public:
 	bool read(CvXMLLoadUtility* pXML);
 
 protected:
-	int m_iFatherCategory;
+	FatherCategoryTypes m_eFatherCategory;
 	TraitTypes m_eTrait;
 	CivEffectTypes m_eCivEffect;
 	int* m_aiFreeUnits;

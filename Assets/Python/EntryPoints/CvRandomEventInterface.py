@@ -1886,7 +1886,7 @@ def CheckLandmark(argsList):
 	eEvent = argsList[0]
 	kTriggeredData = argsList[1]
 	event = gc.getEventInfo(eEvent)
-	szLandmark = "TXT_KEY_"+event.getType()+"_LANDMARK"
+	szLandmark = "TXT_KEY_%s_LANDMARK"%(event.getType())
 	for i in range (CyEngine().getNumSigns()):
 		Sign = CyEngine().getSignByIndex(i)
 		if (Sign.getPlot().getX() == kTriggeredData.iPlotX and Sign.getPlot().getY() == kTriggeredData.iPlotY):
@@ -1898,7 +1898,7 @@ def SetLandmark(argsList):
 	kTriggeredData = argsList[1]
 	event = gc.getEventInfo(eEvent)
 	if GlobalDefines.SHOW_LANDMARKS == 1:
-		szLandmark = "TXT_KEY_"+event.getType()+"_LANDMARK"
+		szLandmark = "TXT_KEY_%s_LANDMARK"%(event.getType())
 		plot = gc.getMap().plot(kTriggeredData.iPlotX,  kTriggeredData.iPlotY)
 		CyEngine().addSign(plot, -1, szLandmark)
 
@@ -2465,39 +2465,25 @@ def canTriggerTavernVsChapel(argsList):
 				return False
 	return True
 
-#def doPirateAttack1(argsList):
-#	iEvent = argsList[0]
-#	kTriggeredData = argsList[1]
-#	pPlot = gc.getMap().plot(kTriggeredData.iPlotX, kTriggeredData.iPlotY)
-#	bPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
-#	if pPlot.isNone() == False:
-#		newUnit = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_PRIVATEER'), pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH)
-#		newUnit.setHasPromotion(gc.getInfoTypeForString('PROMOTION_COMBAT2'), True)
-#		iRnd = CyGame().getSorenRandNum(1000, "YarrrrMatey")
-#		if iRnd > 80:
-#			newUnit.setName("Blackbeard")
-#		elif iRnd > 60:
-#			newUnit.setName("Anne Bonny")
-#		elif iRnd > 40:
-#			newUnit.setName("Calico Jack Rackham")
-#		elif iRnd > 20:
-#			newUnit.setName("Black Bart")
-#		else:
-#			newUnit.setName("Dread Pirate Roberts")
-#		newUnit2 = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_SLOOP'), pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH)
-#		newUnit3 = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_BRIGANTINE'), pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH)
-#
-#def doPirateAttack2(argsList):
-#	iEvent = argsList[0]
-#	kTriggeredData = argsList[1]
-#	pPlot = gc.getMap().plot(kTriggeredData.iPlotX, kTriggeredData.iPlotY)
-#	bPlayer = gc.getPlayer(gc.getBARBARIAN_PLAYER())
-#	if pPlot.isNone() == False:
-#		newUnit = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_MAN_O_WAR'), pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH)
-#		newUnit.setHasPromotion(gc.getInfoTypeForString('PROMOTION_COMBAT2'), True)
-#		newUnit2 = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_FRIGATE'), pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH)
-#		newUnit3 = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_BRIGANTINE'), pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH)
-#		newUnit3 = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_PRIVATEER'), pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH)
+def doPirateAttack1(argsList):
+	iEvent = argsList[0]
+	kTriggeredData = argsList[1]
+	pPlot = gc.getMap().plot(kTriggeredData.iPlotX, kTriggeredData.iPlotY)
+	bPlayer = gc.getPlayer(gc.getGame().getBarbarianPlayer())
+	if pPlot.isNone() == False:
+		newUnit = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_PRIVATEER'), 0, pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH, 0)
+		newUnit2 = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_PIRATE_CUTTER'), 0, pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH, 0)
+
+def doPirateAttack2(argsList):
+	iEvent = argsList[0]
+	kTriggeredData = argsList[1]
+	pPlot = gc.getMap().plot(kTriggeredData.iPlotX, kTriggeredData.iPlotY)
+	bPlayer = gc.getPlayer(gc.getGame().getBarbarianPlayer())
+	if pPlot.isNone() == False:
+		newUnit = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_PIRATE_FRIGATE'), 0, pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH, 0)
+		newUnit2 = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_PIRATE_FRIGATE'), 0, pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH, 0)
+		newUnit = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_PRIVATEER'), 0, pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH, 0)
+		newUnit2 = bPlayer.initUnit(gc.getInfoTypeForString('UNIT_PIRATE_CUTTER'), 0, pPlot.getX(), pPlot.getY(), UnitAITypes.UNITAI_PIRATE_SEA, DirectionTypes.DIRECTION_SOUTH, 0)
 
 ######## BEER ROBBERY ###########
 
