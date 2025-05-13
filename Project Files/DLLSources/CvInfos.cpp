@@ -16,6 +16,7 @@
 #include "CvGameTextMgr.h"
 #include "CvGameCoreUtils.h"
 #include "iconv/converters.h"
+#include "CvInitCore.h"
 
 // static pointer used only by CvInfoBase
 // main purpose is to add read functions to CvInfoBase
@@ -1525,6 +1526,7 @@ bool CvPromotionInfo::readPass2(CvXMLLoadUtility* pXML)
 //------------------------------------------------------------------------------------------------------
 CvProfessionInfo::CvProfessionInfo() :
 	m_eIndex(NO_PROFESSION),
+	m_ePediaUnitGraphics(NO_UNIT),
 	m_iUnitCombatType(NO_UNITCOMBAT),
 	// R&R, ray , MYCP partially based on code of Aymerick - START
 	// m_iYieldProduced(NO_YIELD),
@@ -1574,6 +1576,12 @@ CvProfessionInfo::~CvProfessionInfo()
 {
 	SAFE_DELETE_ARRAY(m_abFreePromotions);
 }
+
+UnitTypes CvProfessionInfo::getPediaUnitGraphics() const
+{
+	return m_ePediaUnitGraphics;
+}
+
 int CvProfessionInfo::getUnitCombatType() const
 {
 	return m_iUnitCombatType;
@@ -1904,6 +1912,7 @@ bool CvProfessionInfo::read(CvXMLLoadUtility* pXML)
 	m_iUnitCombatType = pXML->FindInInfoClass(szTextVal);
 	pXML->GetChildXmlValByName(szTextVal, "DefaultUnitAI");
 	m_iDefaultUnitAIType = pXML->FindInInfoClass(szTextVal);
+	pXML->GetEnum(getType(), m_ePediaUnitGraphics, "PediaUnitGraphics", false);
 	// R&R, ray , MYCP partially based on code of Aymerick - START
 	// pXML->GetChildXmlValByName(szTextVal, "YieldProduced");
 	// m_iYieldProduced = pXML->FindInInfoClass(szTextVal);
@@ -3670,25 +3679,29 @@ const char* CvUnitInfo::getButton() const
 }
 void CvUnitInfo::updateArtDefineButton()
 {
-	m_szArtDefineButton = getArtInfo(0, NO_PROFESSION)->getButton();
+	m_szArtDefineButton = getArtInfo(0, NO_PROFESSION, NO_PLAYER)->getButton();
 }
-const CvArtInfoUnit* CvUnitInfo::getArtInfo(int index, int iProfession) const
+const CvArtInfoUnit* CvUnitInfo::getArtInfo(int index, ProfessionTypes eProfession, PlayerTypes ePlayer) const
 {
 	//Androrc UnitArtStyles
 //	return ARTFILEMGR.getUnitArtInfo(getArtDefineTag(index, iProfession));
 	UnitArtStyleTypes eStyle = NO_UNIT_ARTSTYLE;
 	if (GC.getGameINLINE().isFinalInitialized())
 	{
-		eStyle = (UnitArtStyleTypes) GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getUnitArtStyleType();
+		if (!VARINFO<PlayerTypes>::isInRange(ePlayer))
+		{
+			ePlayer = GC.getGameINLINE().getActivePlayer();
+		}
+
+		eStyle = GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getUnitArtStyleType();
 	}
-	return ARTFILEMGR.getUnitArtInfo(getArtDefineTag(index, iProfession, eStyle));
+	return ARTFILEMGR.getUnitArtInfo(getArtDefineTag(index, eProfession, eStyle));
 	//Androrc End
 }
 //Androrc UnitArtStyles
-const CvArtInfoUnit* CvUnitInfo::getUnitArtStylesArtInfo(int index, int iProfession, int iStyle) const
+const CvArtInfoUnit* CvUnitInfo::getUnitArtStylesArtInfo(int index, ProfessionTypes eProfession, UnitArtStyleTypes eStyle) const
 {
-	UnitArtStyleTypes eStyle = (UnitArtStyleTypes) iStyle;
-	return ARTFILEMGR.getUnitArtInfo(getArtDefineTag(index, iProfession, eStyle));
+	return ARTFILEMGR.getUnitArtInfo(getArtDefineTag(index, eProfession, eStyle));
 }
 //Androrc End
 const CvUnitMeshGroups& CvUnitInfo::getProfessionMeshGroup(int iProfession) const
@@ -6185,7 +6198,7 @@ CvCivilizationInfo::CvCivilizationInfo():
 m_iDefaultPlayerColor(NO_PLAYERCOLOR),
 m_iArtStyleType(NO_ARTSTYLE),
 //Androrc UnitArtStyles
-m_iUnitArtStyleType(NO_UNIT_ARTSTYLE),
+m_eUnitArtStyleType(NO_UNIT_ARTSTYLE),
 //Androrc End
 m_iNumCityNames(0),
 
@@ -6255,18 +6268,18 @@ void CvCivilizationInfo::reset()
 	m_szCachedShortDescription.clear();
 	m_szCachedAdjective.clear();
 }
-int CvCivilizationInfo::getDefaultPlayerColor() const
+PlayerColorTypes CvCivilizationInfo::getDefaultPlayerColor() const
 {
-	return m_iDefaultPlayerColor;
+	return (PlayerColorTypes)m_iDefaultPlayerColor;
 }
-int CvCivilizationInfo::getArtStyleType() const
+ArtStyleTypes CvCivilizationInfo::getArtStyleType() const
 {
-	return m_iArtStyleType;
+	return (ArtStyleTypes)m_iArtStyleType;
 }
 //Androrc UnitArtStyles
-int CvCivilizationInfo::getUnitArtStyleType() const
+UnitArtStyleTypes CvCivilizationInfo::getUnitArtStyleType() const
 {
-	return m_iUnitArtStyleType;
+	return m_eUnitArtStyleType;
 }
 //Androrc End
 int CvCivilizationInfo::getNumCityNames() const
@@ -6328,9 +6341,9 @@ int CvCivilizationInfo::getFavoredTerrain() const
 {
 	return m_iFavoredTerrain;
 }
-int CvCivilizationInfo::getCapturedCityUnitClass() const
+UnitClassTypes CvCivilizationInfo::getCapturedCityUnitClass() const
 {
-	return m_iCapturedCityUnitClass;
+	return (UnitClassTypes)m_iCapturedCityUnitClass;
 }
 ProfessionTypes CvCivilizationInfo::getDefaultProfession() const
 {
@@ -6454,76 +6467,76 @@ void CvCivilizationInfo::setArtDefineTag(const char* szVal)
 	Parameters:
 		int iIndexBuildingClass ... index, that corresponds to the list of BuildingClasses
 */
-int CvCivilizationInfo::getCivilizationBuildings(int i) const
+BuildingTypes CvCivilizationInfo::getCivilizationBuildings(BuildingClassTypes eBuildingClass) const
 {
-	FAssertMsg(i < GC.getNumBuildingClassInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiCivilizationBuildings ? m_aiCivilizationBuildings[i] : -1;
+	FAssertMsg(eBuildingClass < NUM_BUILDINGCLASS_TYPES, "Index out of bounds");
+	FAssertMsg(eBuildingClass > NO_BUILDINGCLASS, "Index out of bounds");
+	return m_aiCivilizationBuildings ? (BuildingTypes)m_aiCivilizationBuildings[eBuildingClass] : NO_BUILDING;
 }
 
-int CvCivilizationInfo::getCivilizationUnits(int i) const
+UnitTypes CvCivilizationInfo::getCivilizationUnits(UnitClassTypes eUnitClass) const
 {
-	FAssertMsg(i < GC.getNumUnitClassInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiCivilizationUnits ? m_aiCivilizationUnits[i] : -1;
+	FAssertMsg(eUnitClass < NUM_UNITCLASS_TYPES, "Index out of bounds");
+	FAssertMsg(eUnitClass > NO_UNITCLASS, "Index out of bounds");
+	return m_aiCivilizationUnits ? (UnitTypes)m_aiCivilizationUnits[eUnitClass] : NO_UNIT;
 }
 
 int CvCivilizationInfo::getNumCivilizationFreeUnits() const
 {
 	return m_aCivilizationFreeUnits.size();
 }
-int CvCivilizationInfo::getCivilizationFreeUnitsClass(int index) const
+UnitClassTypes CvCivilizationInfo::getCivilizationFreeUnitsClass(int index) const
 {
 	FAssert(index < (int) m_aCivilizationFreeUnits.size());
 	FAssert(index > -1);
 	return m_aCivilizationFreeUnits[index].first;
 }
-int CvCivilizationInfo::getCivilizationFreeUnitsProfession(int index) const
+ProfessionTypes CvCivilizationInfo::getCivilizationFreeUnitsProfession(int index) const
 {
 	FAssert(index < (int) m_aCivilizationFreeUnits.size());
 	FAssert(index > -1);
 	return m_aCivilizationFreeUnits[index].second;
 }
-int CvCivilizationInfo::getCivilizationInitialCivics(int i) const
+CivicTypes CvCivilizationInfo::getCivilizationInitialCivics(CivicOptionTypes eCivicOption) const
 {
-	FAssertMsg(i < GC.getNumCivicOptionInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiCivilizationInitialCivics ? m_aiCivilizationInitialCivics[i] : -1;
+	FAssertMsg(eCivicOption < NUM_CIVICOPTION_TYPES, "Index out of bounds");
+	FAssertMsg(eCivicOption > NO_CIVICOPTION, "Index out of bounds");
+	return m_aiCivilizationInitialCivics ? (CivicTypes)m_aiCivilizationInitialCivics[eCivicOption] : NO_CIVIC;
 }
-int CvCivilizationInfo::getFreeYields(int i) const
+int CvCivilizationInfo::getFreeYields(YieldTypes eYield) const
 {
-	FAssert(i < NUM_YIELD_TYPES && i >= 0);
-	return m_aiFreeYields ? m_aiFreeYields[i] : -1;
+	FAssert(eYield < NUM_YIELD_TYPES && eYield >= 0);
+	return m_aiFreeYields ? m_aiFreeYields[eYield] : -1;
 }
-bool CvCivilizationInfo::isLeaders(int i) const
+bool CvCivilizationInfo::isLeaders(LeaderHeadTypes eLeaderHead) const
 {
-	FAssertMsg(i < GC.getNumLeaderHeadInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_abLeaders ? m_abLeaders[i] : false;
+	FAssertMsg(eLeaderHead < NUM_LEADER_TYPES, "Index out of bounds");
+	FAssertMsg(eLeaderHead > NO_LEADER, "Index out of bounds");
+	return m_abLeaders ? m_abLeaders[eLeaderHead] : false;
 }
-bool CvCivilizationInfo::isCivilizationFreeBuildingClass(int i) const
+bool CvCivilizationInfo::isCivilizationFreeBuildingClass(BuildingClassTypes eBuildingClass) const
 {
-	FAssertMsg(i < GC.getNumBuildingClassInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_abCivilizationFreeBuildingClass ? m_abCivilizationFreeBuildingClass[i] : false;
+	FAssertMsg(eBuildingClass < NUM_BUILDINGCLASS_TYPES, "Index out of bounds");
+	FAssertMsg(eBuildingClass > NO_BUILDINGCLASS, "Index out of bounds");
+	return m_abCivilizationFreeBuildingClass ? m_abCivilizationFreeBuildingClass[eBuildingClass] : false;
 }
-bool CvCivilizationInfo::isValidProfession(int i) const
+bool CvCivilizationInfo::isValidProfession(ProfessionTypes eProfession) const
 {
-	FAssertMsg(i < GC.getNumProfessionInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_abValidProfessions ? m_abValidProfessions[i] : false;
+	FAssertMsg(eProfession < NUM_PROFESSION_TYPES, "Index out of bounds");
+	FAssertMsg(eProfession > NO_PROFESSION, "Index out of bounds");
+	return m_abValidProfessions ? m_abValidProfessions[eProfession] : false;
 }
-bool CvCivilizationInfo::hasTrait(int i) const
+bool CvCivilizationInfo::hasTrait(TraitTypes eTrait) const
 {
-	FAssertMsg(i < GC.getNumTraitInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_abTraits ? m_abTraits[i] : false;
+	FAssertMsg(eTrait < NUM_TRAIT_TYPES, "Index out of bounds");
+	FAssertMsg(eTrait > NO_TRAIT, "Index out of bounds");
+	return m_abTraits ? m_abTraits[eTrait] : false;
 }
-int CvCivilizationInfo::getTeachUnitClassWeight(int i) const
+int CvCivilizationInfo::getTeachUnitClassWeight(UnitClassTypes eUnitClass) const
 {
-	FAssertMsg(i < GC.getNumUnitClassInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiTeachUnitClassWeights ? m_aiTeachUnitClassWeights[i] : false;
+	FAssertMsg(eUnitClass < NUM_UNITCLASS_TYPES, "Index out of bounds");
+	FAssertMsg(eUnitClass > NO_UNITCLASS, "Index out of bounds");
+	return m_aiTeachUnitClassWeights ? m_aiTeachUnitClassWeights[eUnitClass] : false;
 }
 const CvArtInfoCivilization* CvCivilizationInfo::getArtInfo() const
 {
@@ -6596,7 +6609,7 @@ void CvCivilizationInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iDefaultPlayerColor);
 	stream->Read(&m_iArtStyleType);
 	//Androrc UnitArtStyles
-	stream->Read(&m_iUnitArtStyleType);   // FlavorUnits by Impaler[WrG]
+	//stream->Read(&m_iUnitArtStyleType);   // FlavorUnits by Impaler[WrG]
 	//Androrc End
 	stream->Read(&m_iNumCityNames);
 	stream->Read(&m_iNumGeneralNames); // TAC - Great General Names - Ray - START
@@ -6683,7 +6696,7 @@ void CvCivilizationInfo::write(FDataStreamBase* stream)
 	stream->Write(uiFlag);		// flag for expansion
 	stream->Write(m_iDefaultPlayerColor);
 	stream->Write(m_iArtStyleType);
-	stream->Write(m_iUnitArtStyleType); //Androrc UnitArtStyles
+	//stream->Write(m_iUnitArtStyleType); //Androrc UnitArtStyles
 	stream->Write(m_iNumCityNames);
 	stream->Write(m_iNumGeneralNames);  // TAC - Great General Names - Ray - START
 	stream->Write(m_iNumAdmiralNames);  // R&R, ray, Great Admirals - START
@@ -6751,8 +6764,7 @@ bool CvCivilizationInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(szTextVal, "ArtStyleType");
 	m_iArtStyleType = GC.getInfoTypeForString(szTextVal);
 	//Androrc UnitArtStyles
-	pXML->GetChildXmlValByName(szTextVal, "UnitArtStyleType");
-	m_iUnitArtStyleType = pXML->FindInInfoClass(szTextVal);
+	pXML->GetEnum(getType(), m_eUnitArtStyleType, "UnitArtStyleType");
 	//Androrc End
 	pXML->GetChildXmlValByName(szTextVal, "CivilizationSelectionSound");
 	m_iSelectionSoundScriptId = (szTextVal.GetLength() > 0) ? gDLL->getAudioTagIndex( szTextVal.GetCString(), AUDIOTAG_3DSCRIPT ) : -1;
@@ -6986,11 +6998,6 @@ bool CvCivilizationInfo::readPass2(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(szTextVal, "DerivativeCiv");
 	m_iDerivativeCiv = GC.getInfoTypeForString(szTextVal);
 	return true;
-}
-
-int CvCivilizationInfo::PY_getDefaultProfession() const
-{
-	return getDefaultProfession();
 }
 
 //======================================================================================================
@@ -8139,9 +8146,9 @@ int CvGoodyInfo::getCityGoodyWeight() const
 {
 	return m_iCityGoodyWeight;
 }
-int CvGoodyInfo::getUnitClassType() const
+UnitClassTypes CvGoodyInfo::getUnitClassType() const
 {
-	return m_iUnitClassType;
+	return (UnitClassTypes)m_iUnitClassType;
 }
 int CvGoodyInfo::getTeachUnitClassType() const
 {
@@ -9756,17 +9763,17 @@ int CvFeatureInfo::getEffectProbability() const
 	return m_iEffectProbability;
 }
 // Arrays
-int CvFeatureInfo::getYieldChange(int i) const
+int CvFeatureInfo::getYieldChange(YieldTypes eYield) const
 {
-	FAssertMsg(i < NUM_YIELD_TYPES, "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiYieldChange ? m_aiYieldChange[i] : -1;
+	FAssertMsg(eYield < NUM_YIELD_TYPES, "Index out of bounds");
+	FAssertMsg(eYield > NO_YIELD, "Index out of bounds");
+	return m_aiYieldChange ? m_aiYieldChange[eYield] : -1;
 }
-int CvFeatureInfo::getRiverYieldIncrease(int i) const
+int CvFeatureInfo::getRiverYieldIncrease(YieldTypes eYield) const
 {
-	FAssertMsg(i < NUM_YIELD_TYPES, "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiRiverYieldIncrease ? m_aiRiverYieldIncrease[i] : -1;
+	FAssertMsg(eYield < NUM_YIELD_TYPES, "Index out of bounds");
+	FAssertMsg(eYield > NO_YIELD, "Index out of bounds");
+	return m_aiRiverYieldIncrease ? m_aiRiverYieldIncrease[eYield] : -1;
 }
 int CvFeatureInfo::get3DAudioScriptFootstepIndex(int i) const
 {
@@ -9774,11 +9781,11 @@ int CvFeatureInfo::get3DAudioScriptFootstepIndex(int i) const
 	FAssertMsg(i > -1, "Index out of bounds");
 	return m_ai3DAudioScriptFootstepIndex ? m_ai3DAudioScriptFootstepIndex[i] : -1;
 }
-bool CvFeatureInfo::isTerrain(int i) const
+bool CvFeatureInfo::isTerrain(TerrainTypes eTerrain) const
 {
-	FAssertMsg(i < GC.getNumTerrainInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_abTerrain ? m_abTerrain[i] : false;
+	FAssertMsg(eTerrain < NUM_TERRAIN_TYPES, "Index out of bounds");
+	FAssertMsg(eTerrain > NO_TERRAIN, "Index out of bounds");
+	return m_abTerrain ? m_abTerrain[eTerrain] : false;
 }
 int CvFeatureInfo::getNumVarieties() const
 {
@@ -9940,6 +9947,18 @@ void CvYieldInfo::setChar(int i)
 {
 	m_iChar = i;
 }
+
+CvWString CvYieldInfo::getCharLink() const
+{
+	CvWString output;
+	output.append(L"[LINK=");
+	output.append(CvWString(getType()));
+	output.append(L"]");
+	output.append(CvWString::format(L"%c", getChar()));
+	output.append(L"[\\LINK]");
+	return output;
+}
+
 const char* CvYieldInfo::getIcon() const
 {
 	return m_szIcon;
@@ -10089,9 +10108,9 @@ int CvYieldInfo::getColorType() const
 {
 	return m_iColorType;
 }
-int CvYieldInfo::getUnitClass() const
+UnitClassTypes CvYieldInfo::getUnitClass() const
 {
-	return m_iUnitClass;
+	return (UnitClassTypes)m_iUnitClass;
 }
 int CvYieldInfo::getTextureIndex() const
 {
@@ -10290,17 +10309,17 @@ int CvTerrainInfo::getWorldSoundscapeScriptId() const
 	return m_iWorldSoundscapeScriptId;
 }
 // Arrays
-int CvTerrainInfo::getYield(int i) const
+int CvTerrainInfo::getYield(YieldTypes eYield) const
 {
-	FAssertMsg(i < NUM_YIELD_TYPES, "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiYields ? m_aiYields[i] : -1;
+	FAssertMsg(eYield < NUM_YIELD_TYPES, "Index out of bounds");
+	FAssertMsg(eYield > NO_YIELD, "Index out of bounds");
+	return m_aiYields ? m_aiYields[eYield] : -1;
 }
-int CvTerrainInfo::getRiverYieldIncrease(int i) const
+int CvTerrainInfo::getRiverYieldIncrease(YieldTypes eYield) const
 {
-	FAssertMsg(i < NUM_YIELD_TYPES, "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiRiverYieldIncrease ? m_aiRiverYieldIncrease[i] : -1;
+	FAssertMsg(eYield < NUM_YIELD_TYPES, "Index out of bounds");
+	FAssertMsg(eYield > NO_YIELD, "Index out of bounds");
+	return m_aiRiverYieldIncrease ? m_aiRiverYieldIncrease[eYield] : -1;
 }
 int CvTerrainInfo::get3DAudioScriptFootstepIndex(int i) const
 {
@@ -10776,53 +10795,53 @@ void CvLeaderHeadInfo::setArtDefineTag(const char* szVal)
 	m_szArtDefineTag = szVal;
 }
 // Arrays
-bool CvLeaderHeadInfo::hasTrait(int i) const
+bool CvLeaderHeadInfo::hasTrait(TraitTypes eTrait) const
 {
-	FAssertMsg(i < GC.getNumTraitInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_abTraits ? m_abTraits[i] : false;
+	FAssertMsg(eTrait < NUM_TRAIT_TYPES, "Index out of bounds");
+	FAssertMsg(eTrait > NO_TRAIT, "Index out of bounds");
+	return m_abTraits ? m_abTraits[eTrait] : false;
 }
-int CvLeaderHeadInfo::getContactRand(int i) const
+int CvLeaderHeadInfo::getContactRand(ContactTypes eContact) const
 {
-	FAssertMsg(i < NUM_CONTACT_TYPES, "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiContactRand ? m_aiContactRand[i] : -1;
+	FAssertMsg(eContact < NUM_CONTACT_TYPES, "Index out of bounds");
+	FAssertMsg(eContact > NO_CONTACT, "Index out of bounds");
+	return m_aiContactRand ? m_aiContactRand[eContact] : -1;
 }
-int CvLeaderHeadInfo::getContactDelay(int i) const
+int CvLeaderHeadInfo::getContactDelay(ContactTypes eContact) const
 {
-	FAssertMsg(i < NUM_CONTACT_TYPES, "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiContactDelay ? m_aiContactDelay[i] : -1;
+	FAssertMsg(eContact < NUM_CONTACT_TYPES, "Index out of bounds");
+	FAssertMsg(eContact > NO_CONTACT, "Index out of bounds");
+	return m_aiContactDelay ? m_aiContactDelay[eContact] : -1;
 }
-int CvLeaderHeadInfo::getMemoryDecayRand(int i) const
+int CvLeaderHeadInfo::getMemoryDecayRand(MemoryTypes eMemory) const
 {
-	FAssertMsg(i < NUM_MEMORY_TYPES, "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiMemoryDecayRand ? m_aiMemoryDecayRand[i] : -1;
+	FAssertMsg(eMemory < NUM_MEMORY_TYPES, "Index out of bounds");
+	FAssertMsg(eMemory > NO_MEMORY, "Index out of bounds");
+	return m_aiMemoryDecayRand ? m_aiMemoryDecayRand[eMemory] : -1;
 }
-int CvLeaderHeadInfo::getMemoryAttitudePercent(int i) const
+int CvLeaderHeadInfo::getMemoryAttitudePercent(MemoryTypes eMemory) const
 {
-	FAssertMsg(i < NUM_MEMORY_TYPES, "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiMemoryAttitudePercent ? m_aiMemoryAttitudePercent[i] : -1;
+	FAssertMsg(eMemory < NUM_MEMORY_TYPES, "Index out of bounds");
+	FAssertMsg(eMemory > NO_MEMORY, "Index out of bounds");
+	return m_aiMemoryAttitudePercent ? m_aiMemoryAttitudePercent[eMemory] : -1;
 }
-int CvLeaderHeadInfo::getNoWarAttitudeProb(int i) const
+int CvLeaderHeadInfo::getNoWarAttitudeProb(AttitudeTypes eAttitude) const
 {
-	FAssertMsg(i < NUM_ATTITUDE_TYPES, "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiNoWarAttitudeProb ? m_aiNoWarAttitudeProb[i] : -1;
+	FAssertMsg(eAttitude < NUM_ATTITUDE_TYPES, "Index out of bounds");
+	FAssertMsg(eAttitude > NO_ATTITUDE, "Index out of bounds");
+	return m_aiNoWarAttitudeProb ? m_aiNoWarAttitudeProb[eAttitude] : -1;
 }
-int CvLeaderHeadInfo::getUnitAIWeightModifier(int i) const
+int CvLeaderHeadInfo::getUnitAIWeightModifier(UnitAITypes eUnitAI) const
 {
-	FAssertMsg(i < NUM_UNITAI_TYPES, "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiUnitAIWeightModifier ? m_aiUnitAIWeightModifier[i] : -1;
+	FAssertMsg(eUnitAI < NUM_UNITAI_TYPES, "Index out of bounds");
+	FAssertMsg(eUnitAI > NO_UNITAI, "Index out of bounds");
+	return m_aiUnitAIWeightModifier ? m_aiUnitAIWeightModifier[eUnitAI] : -1;
 }
-int CvLeaderHeadInfo::getImprovementWeightModifier(int i) const
+int CvLeaderHeadInfo::getImprovementWeightModifier(ImprovementTypes eImprovement) const
 {
-	FAssertMsg(i < GC.getNumImprovementInfos(), "Index out of bounds");
-	FAssertMsg(i > -1, "Index out of bounds");
-	return m_aiImprovementWeightModifier ? m_aiImprovementWeightModifier[i] : -1;
+	FAssertMsg(eImprovement < NUM_IMPROVEMENT_TYPES, "Index out of bounds");
+	FAssertMsg(eImprovement > NO_IMPROVEMENT, "Index out of bounds");
+	return m_aiImprovementWeightModifier ? m_aiImprovementWeightModifier[eImprovement] : -1;
 }
 int CvLeaderHeadInfo::getDiploPeaceMusicScriptIds(int i) const
 {
@@ -14511,7 +14530,18 @@ bool CvGameOptionInfo::getDefault() const
 }
 bool CvGameOptionInfo::getVisible() const
 {
+	if (getScenarioOnly())
+	{
+		// a bit of a hack here. When exe asks for visibility, return if the game is a scenario when it's a setting, which is scenario only.
+		// There is no clean way of doing this since the menu itself is inside the exe.
+		const GameType eType = GC.getInitCore().getType();
+		return eType == GAME_SP_SCENARIO || eType == GAME_MP_SCENARIO || eType == GAME_HOTSEAT_SCENARIO || eType == GAME_PBEM_SCENARIO;
+	}
 	return m_bVisible;
+}
+bool CvGameOptionInfo::getScenarioOnly() const
+{
+	return m_bScenarioOnly;
 }
 bool CvGameOptionInfo::read(CvXMLLoadUtility* pXML)
 {
@@ -14521,6 +14551,7 @@ bool CvGameOptionInfo::read(CvXMLLoadUtility* pXML)
 	}
 	pXML->GetChildXmlValByName(&m_bDefault, "bDefault");
 	pXML->GetChildXmlValByName(&m_bVisible, "bVisible");
+	pXML->GetChildXmlValByName(&m_bScenarioOnly, "bScenarioOnly", false);
 	return true;
 }
 //////////////////////////////////////////////////////////////////////////
@@ -14641,7 +14672,6 @@ CvEventTriggerInfo::CvEventTriggerInfo() :
 	m_iNumUnitsGlobal(0),
 	m_iNumBuildingsGlobal(0),
 	m_iNumPlotsRequired(0),
-	m_ePlotType(PLOT_PEAK),
 	m_iOtherPlayerShareBorders(0),
 	m_eCivic(NO_CIVIC),
 	m_iMinPopulation(0),
@@ -14723,13 +14753,9 @@ int CvEventTriggerInfo::getNumPlotsRequired() const
 {
 	return m_iNumPlotsRequired;
 }
-PlotTypes CvEventTriggerInfo::getPlotType() const
+const EnumMap<PlotTypes, bool> CvEventTriggerInfo::getPlotTypes() const
 {
-	return m_ePlotType;
-}
-int CvEventTriggerInfo::PY_getPlotType() const
-{
-	return m_ePlotType;
+	return m_em_PlotTypes;
 }
 int CvEventTriggerInfo::getOtherPlayerShareBorders() const
 {
@@ -14988,6 +15014,12 @@ bool CvEventTriggerInfo::isFrontPopup() const
 {
 	return m_bFrontPopup;
 }
+
+const InfoHelperVector<EventTriggerUnitCount>& CvEventTriggerInfo::getRequiredUnits() const
+{
+	return m_vector_UnitCount;
+}
+
 const char* CvEventTriggerInfo::getPythonCallback() const
 {
 	return m_szPythonCallback;
@@ -15019,7 +15051,6 @@ void CvEventTriggerInfo::read(FDataStreamBase* stream)
 	stream->Read(&m_iNumUnitsGlobal);
 	stream->Read(&m_iNumBuildingsGlobal);
 	stream->Read(&m_iNumPlotsRequired);
-	stream->Read(&m_ePlotType);
 	stream->Read(&m_iOtherPlayerShareBorders);
 	stream->Read(&m_eCivic);
 	stream->Read(&m_iMinPopulation);
@@ -15093,7 +15124,6 @@ void CvEventTriggerInfo::write(FDataStreamBase* stream)
 	stream->Write(m_iNumUnitsGlobal);
 	stream->Write(m_iNumBuildingsGlobal);
 	stream->Write(m_iNumPlotsRequired);
-	stream->Write(m_ePlotType);
 	stream->Write(m_iOtherPlayerShareBorders);
 	stream->Write(m_eCivic);
 	stream->Write(m_iMinPopulation);
@@ -15162,7 +15192,24 @@ bool CvEventTriggerInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetChildXmlValByName(&m_iNumUnitsGlobal, "iNumUnitsGlobal");
 	pXML->GetChildXmlValByName(&m_iNumBuildingsGlobal, "iNumBuildingsGlobal");
 	pXML->GetChildXmlValByName(&m_iNumPlotsRequired, "iNumPlotsRequired");
-	pXML->GetEnum(getType(), m_ePlotType, "ePlotType", false);
+
+
+	if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "PlotRequirements"))
+	{
+		InfoArray<PlotTypes> ia;
+		readXML(ia, "PlotTypes");
+		ia.addTo(m_em_PlotTypes);
+		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
+	}
+
+	{
+		PlotTypes ePlot;
+		pXML->GetEnum(getType(), ePlot, "ePlotType", false); 
+		if (ePlot != NO_PLOT)
+		{
+			m_em_PlotTypes.set(ePlot, true);
+		}
+	}
 	pXML->GetEnum(getType(), m_eCivic, "eCivic", false);
 	pXML->GetChildXmlValByName(&m_iOtherPlayerShareBorders, "iOtherPlayerShareBorders");
 	pXML->GetChildXmlValByName(&m_iMinPopulation, "iMinPopulation");
@@ -15193,8 +15240,8 @@ bool CvEventTriggerInfo::read(CvXMLLoadUtility* pXML)
 		}
 		else
 		{
-			// no civ categories set in xml. Assume European only
-			m_emAllowedCivCategories.set(CIV_CATEGORY_EUROPEAN, true);
+			// no civ categories set in xml. Assume Colonial only
+			m_emAllowedCivCategories.set(CIV_CATEGORY_COLONIAL, true);
 		}
 	}
 
@@ -15262,6 +15309,13 @@ bool CvEventTriggerInfo::read(CvXMLLoadUtility* pXML)
 		}
 		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
 	}
+
+	if (gDLL->getXMLIFace()->SetToChildByTagName(pXML->GetXML(), "RequirementLists"))
+	{
+		m_vector_UnitCount.read(pXML, getType(), "RequiredUnitList");
+		gDLL->getXMLIFace()->SetToParent(pXML->GetXML());
+	}
+
 	// Begin EmperorFool: Events with Images
 	pXML->GetChildXmlValByName(m_szEventArt, "EventArt");
 	// End EmperorFool: Events with Images
@@ -15343,7 +15397,7 @@ void CvEventTriggerInfo::verifyTriggerSettings(const InfoArray<T>& kArray) const
 
 const char* CvEventTriggerInfo::verifyTriggerSettings(FeatureTypes eFeature) const
 {
-	if (getPlotType() == PLOT_PEAK)
+	if (getPlotTypes().get(PLOT_PEAK))
 	{
 		return "TXT_KEY_EVENT_TRIGGER_ERROR_PLOT_TYPE";
 	}
@@ -15367,17 +15421,22 @@ const char* CvEventTriggerInfo::verifyTriggerSettings(FeatureTypes eFeature) con
 			return "TXT_KEY_EVENT_TRIGGER_ERROR_NO_TERRAIN";
 		}
 	}
-	else if (getPlotType() != NO_PLOT)
+	else if (getPlotTypes().hasContent())
 	{
 		bool bValid = false;
-		for (TerrainTypes eTerrain = FIRST_TERRAIN; eTerrain < NUM_TERRAIN_TYPES; ++eTerrain)
+		for (TerrainTypes eTerrain = FIRST_TERRAIN; !bValid && eTerrain < NUM_TERRAIN_TYPES; ++eTerrain)
 		{
 			if (kInfo.isTerrain(eTerrain))
 			{
-				if (GC.getTerrainInfo(eTerrain).canHavePlotType(getPlotType()))
+				const CvTerrainInfo& kTerrain = GC.getTerrainInfo(eTerrain);
+				const EnumMap<PlotTypes, bool> plotTypes = getPlotTypes();
+				for (PlotTypes ePlot = plotTypes.FIRST; ePlot <= plotTypes.LAST; ++ePlot)
 				{
-					bValid = true;
-					break;
+					if (plotTypes.get(ePlot) && kTerrain.canHavePlotType(ePlot))
+					{
+						bValid = true;
+						break;
+					}
 				}
 			}
 		}
@@ -15419,9 +15478,23 @@ const char* CvEventTriggerInfo::verifyTriggerSettings(TerrainTypes eTerrain) con
 {
 	const CvTerrainInfo& kInfo = GC.getInfo(eTerrain);
 
-	if (!kInfo.canHavePlotType(getPlotType()))
+	const EnumMap<PlotTypes, bool> plotTypes = getPlotTypes();
+
+	if (plotTypes.hasContent())
 	{
-		return "TXT_KEY_EVENT_TRIGGER_ERROR_PLOT_TYPE";
+		bool bValid = false;
+		for (PlotTypes ePlot = plotTypes.FIRST; ePlot <= plotTypes.LAST; ++ePlot)
+		{
+			if (plotTypes.get(ePlot) && kInfo.canHavePlotType(ePlot))
+			{
+				bValid = true;
+				break;
+			}
+		}
+		if (!bValid)
+		{
+			return "TXT_KEY_EVENT_TRIGGER_ERROR_PLOT_TYPE";
+		}
 	}
 
 	if (kInfo.isWater() && getRoutesRequired().getLength() > 0)
@@ -15474,19 +15547,18 @@ const char* CvEventTriggerInfo::verifyTriggerSettings(ImprovementTypes eImprovem
 {
 	const CvImprovementInfo& kInfo = GC.getInfo(eImprovement);
 
-	PlotTypes ePlot = getPlotType();
-
-	if (ePlot != NO_PLOT)
+	if (getPlotTypes().hasContent())
 	{
-		if (kInfo.isRequiresFlatlands() && ePlot != PLOT_LAND)
+		const EnumMap<PlotTypes, bool> plotTypes = getPlotTypes();
+		if (kInfo.isRequiresFlatlands() && !plotTypes.get(PLOT_LAND))
 		{
 			return "TXT_KEY_EVENT_TRIGGER_ERROR_PLOT_TYPE";
 		}
-		if (kInfo.isWater() && ePlot != PLOT_OCEAN)
+		if (kInfo.isWater() && plotTypes.get(PLOT_OCEAN))
 		{
 			return "TXT_KEY_EVENT_TRIGGER_ERROR_PLOT_TYPE";
 		}
-		if (kInfo.isHillsMakesValid() && ePlot != PLOT_HILLS && ePlot != PLOT_PEAK)
+		if (kInfo.isHillsMakesValid() && !(plotTypes.get(PLOT_HILLS) || plotTypes.get(PLOT_PEAK)))
 		{
 			return "TXT_KEY_EVENT_TRIGGER_ERROR_PLOT_TYPE";
 		}
@@ -15586,7 +15658,7 @@ const char* CvEventTriggerInfo::verifyTriggerSettings(ImprovementTypes eImprovem
 
 const char* CvEventTriggerInfo::verifyTriggerSettings(RouteTypes eRoute) const
 {
-	if (getPlotType() == PLOT_OCEAN)
+	if (getPlotTypes().get(PLOT_OCEAN))
 	{
 		return "TXT_KEY_EVENT_TRIGGER_ERROR_PLOT_TYPE";
 	}
@@ -15711,9 +15783,9 @@ int CvEventInfo::getHealth() const // R&R, ray, change for Health in Events
 {
 	return m_iHealth;
 }
-int CvEventInfo::getUnitClass() const
+UnitClassTypes CvEventInfo::getUnitClass() const
 {
-	return m_iUnitClass;
+	return (UnitClassTypes)m_iUnitClass;
 }
 int CvEventInfo::getNumUnits() const
 {
@@ -17059,14 +17131,14 @@ int CvHandicapInfo::getOppressometerGrowthHandicap() const
 }
 
 // trade screen type - start - Nightinggale
-CvTradeScreenInfo::CvTradeScreenInfo()
+CvTradeLocationInfo::CvTradeLocationInfo()
 {
 }
-CvTradeScreenInfo::~CvTradeScreenInfo()
+CvTradeLocationInfo::~CvTradeLocationInfo()
 {
 }
 
-bool CvTradeScreenInfo::read(CvXMLLoadUtility* pXML)
+bool CvTradeLocationInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
 	{

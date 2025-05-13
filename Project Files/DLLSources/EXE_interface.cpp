@@ -41,6 +41,8 @@
 
 #include "SavegameConstants.h"
 
+PlayerTypes EXE_CACHE_LAST_UNIT_OWNER = NO_PLAYER;
+
 
 class EXE_CvActionInfo : public CvActionInfo
 {
@@ -660,59 +662,108 @@ BOOST_STATIC_ASSERT(sizeof(EXE_CvCity) == sizeof(CvCity));
 class EXE_CvCivilizationInfo : public CvCivilizationInfo
 {
 public:
-	/*
-		getAdjective
-			?getAdjective@CvCivilizationInfo@@QAEPBGI@Z=?getAdjective@EXE_CvCivilizationInfo@@QAEPBGI@Z
+	#pragma comment(linker, "/EXPORT:?getAdjective@CvCivilizationInfo@@QAEPBGI@Z=?getAdjective@EXE_CvCivilizationInfo@@QAEPBGI@Z")
+	DllExport const wchar* getAdjective(uint uiForm)
+	{
+		return CvCivilizationInfo::getAdjective(uiForm);
+	}
 
-		getArtInfo
-			?getArtInfo@CvCivilizationInfo@@QBEPBVCvArtInfoCivilization@@XZ=?getArtInfo@EXE_CvCivilizationInfo@@QBEPBVCvArtInfoCivilization@@XZ
+	#pragma comment(linker, "/EXPORT:?getArtInfo@CvCivilizationInfo@@QBEPBVCvArtInfoCivilization@@XZ=?getArtInfo@EXE_CvCivilizationInfo@@QBEPBVCvArtInfoCivilization@@XZ")
+	DllExport const CvArtInfoCivilization* getArtInfo() const
+	{
+		return CvCivilizationInfo::getArtInfo();
+	}
 
-		getCivilizationBuildings
-			?getCivilizationBuildings@CvCivilizationInfo@@QBEHH@Z=?getCivilizationBuildings@EXE_CvCivilizationInfo@@QBEHH@Z
+	#pragma comment(linker, "/EXPORT:?getCivilizationBuildings@CvCivilizationInfo@@QBEHH@Z=?getCivilizationBuildings@EXE_CvCivilizationInfo@@QBEHH@Z")
+	DllExport int getCivilizationBuildings(int i) const
+	{
+		return CvCivilizationInfo::getCivilizationBuildings(static_cast<BuildingClassTypes>(i));
+	}
 
-		getCivilizationUnits
-			?getCivilizationUnits@CvCivilizationInfo@@QBEHH@Z=?getCivilizationUnits@EXE_CvCivilizationInfo@@QBEHH@Z
+	#pragma comment(linker, "/EXPORT:?getCivilizationUnits@CvCivilizationInfo@@QBEHH@Z=?getCivilizationUnits@EXE_CvCivilizationInfo@@QBEHH@Z")
+	DllExport int getCivilizationUnits(int i) const
+	{
+		return CvCivilizationInfo::getCivilizationUnits(static_cast<UnitClassTypes>(i));
+	}
 
-		getDefaultPlayerColor
-			?getDefaultPlayerColor@CvCivilizationInfo@@QBEHXZ=?getDefaultPlayerColor@EXE_CvCivilizationInfo@@QBEHXZ
+	#pragma comment(linker, "/EXPORT:?getDefaultPlayerColor@CvCivilizationInfo@@QBEHXZ=?getDefaultPlayerColor@EXE_CvCivilizationInfo@@QBEHXZ")
+	DllExport int getDefaultPlayerColor() const
+	{
+		return CvCivilizationInfo::getDefaultPlayerColor();
+	}
 
-		getDerivativeCiv
-			?getDerivativeCiv@CvCivilizationInfo@@QBEHXZ=?getDerivativeCiv@EXE_CvCivilizationInfo@@QBEHXZ
+	#pragma comment(linker, "/EXPORT:?getDerivativeCiv@CvCivilizationInfo@@QBEHXZ=?getDerivativeCiv@EXE_CvCivilizationInfo@@QBEHXZ")
+	DllExport int getDerivativeCiv() const
+	{
+		return CvCivilizationInfo::getDerivativeCiv();
+	}
+	
+	#pragma comment(linker, "/EXPORT:?getFlagTexture@CvCivilizationInfo@@QBEPBDXZ=?getFlagTexture@EXE_CvCivilizationInfo@@QBEPBDXZ")
+	DllExport const char* getFlagTexture() const
+	{
+		return CvCivilizationInfo::getFlagTexture();
+	}
 
-		getFlagTexture
-			?getFlagTexture@CvCivilizationInfo@@QBEPBDXZ=?getFlagTexture@EXE_CvCivilizationInfo@@QBEPBDXZ
+	#pragma comment(linker, "/EXPORT:?getMissionaryChar@CvCivilizationInfo@@QBEHXZ=?getMissionaryChar@EXE_CvCivilizationInfo@@QBEHXZ")
+	DllExport int getMissionaryChar() const
+	{
+		return CvCivilizationInfo::getMissionaryChar();
+	}
+	
+	#pragma comment(linker, "/EXPORT:?getSelectionSoundScriptId@CvCivilizationInfo@@QBEHXZ=?getSelectionSoundScriptId@EXE_CvCivilizationInfo@@QBEHXZ")
+	DllExport int getSelectionSoundScriptId() const
+	{
+		return CvCivilizationInfo::getSelectionSoundScriptId();
+	}
 
-		getMissionaryChar
-			?getMissionaryChar@CvCivilizationInfo@@QBEHXZ=?getMissionaryChar@EXE_CvCivilizationInfo@@QBEHXZ
+	#pragma comment(linker, "/EXPORT:?getShortDescription@CvCivilizationInfo@@QAEPBGI@Z=?getShortDescription@EXE_CvCivilizationInfo@@QAEPBGI@Z")
+	DllExport const wchar* getShortDescription(uint uiForm)
+	{
+		return CvCivilizationInfo::getShortDescription(uiForm);
+	}
 
-		getSelectionSoundScriptId
-			?getSelectionSoundScriptId@CvCivilizationInfo@@QBEHXZ=?getSelectionSoundScriptId@EXE_CvCivilizationInfo@@QBEHXZ
+	#pragma comment(linker, "/EXPORT:?isAIPlayable@CvCivilizationInfo@@QBE_NXZ=?isAIPlayable@EXE_CvCivilizationInfo@@QBE_NXZ")
+	DllExport bool isAIPlayable() const
+	{
+		return CvCivilizationInfo::isAIPlayable();
+	}
 
-		getShortDescription
-			?getShortDescription@CvCivilizationInfo@@QAEPBGI@Z=?getShortDescription@EXE_CvCivilizationInfo@@QAEPBGI@Z
+	#pragma comment(linker, "/EXPORT:?isEurope@CvCivilizationInfo@@QBE_NXZ=?isEurope@EXE_CvCivilizationInfo@@QBE_NXZ")
+	DllExport bool isEurope() const
+	{
+		return CvCivilizationInfo::isEurope();
+	}
 
-		isAIPlayable
-			?isAIPlayable@CvCivilizationInfo@@QBE_NXZ=?isAIPlayable@EXE_CvCivilizationInfo@@QBE_NXZ
+	#pragma comment(linker, "/EXPORT:?isLeaders@CvCivilizationInfo@@QBE_NH@Z=?isLeaders@EXE_CvCivilizationInfo@@QBE_NH@Z")
+	DllExport bool isLeaders(int i) const
+	{
+		return CvCivilizationInfo::isLeaders(static_cast<LeaderHeadTypes>(i));
+	}
 
-		isEurope
-			?isEurope@CvCivilizationInfo@@QBE_NXZ=?isEurope@EXE_CvCivilizationInfo@@QBE_NXZ
+	#pragma comment(linker, "/EXPORT:?isNative@CvCivilizationInfo@@QBE_NXZ=?isNative@EXE_CvCivilizationInfo@@QBE_NXZ")
+	DllExport bool isNative() const
+	{
+		return CvCivilizationInfo::isNative();
+	}
+		
+	#pragma comment(linker, "/EXPORT:?isOpenBorders@CvCivilizationInfo@@QBE_NXZ=?isOpenBorders@EXE_CvCivilizationInfo@@QBE_NXZ")
+	DllExport bool isOpenBorders() const
+	{
+		return CvCivilizationInfo::isOpenBorders();
+	}
+		
+	#pragma comment(linker, "/EXPORT:?isPlayable@CvCivilizationInfo@@QBE_NXZ=?isPlayable@EXE_CvCivilizationInfo@@QBE_NXZ")
+	DllExport bool isPlayable() const
+	{
+		return CvCivilizationInfo::isPlayable();
+	}
+		
+	#pragma comment(linker, "/EXPORT:?setMissionaryChar@CvCivilizationInfo@@QAEXH@Z=?setMissionaryChar@EXE_CvCivilizationInfo@@QAEXH@Z")
+	DllExport void setMissionaryChar(int iChar)
+	{
+		CvCivilizationInfo::setMissionaryChar(iChar);
+	}
 
-		isLeaders
-			?isLeaders@CvCivilizationInfo@@QBE_NH@Z=?isLeaders@EXE_CvCivilizationInfo@@QBE_NH@Z
-
-		isNative
-			?isNative@CvCivilizationInfo@@QBE_NXZ=?isNative@EXE_CvCivilizationInfo@@QBE_NXZ
-
-		isOpenBorders
-			?isOpenBorders@CvCivilizationInfo@@QBE_NXZ=?isOpenBorders@EXE_CvCivilizationInfo@@QBE_NXZ
-
-		isPlayable
-			?isPlayable@CvCivilizationInfo@@QBE_NXZ=?isPlayable@EXE_CvCivilizationInfo@@QBE_NXZ
-
-		setMissionaryChar
-			?setMissionaryChar@CvCivilizationInfo@@QAEXH@Z=?setMissionaryChar@EXE_CvCivilizationInfo@@QAEXH@Z
-
-	*/
 };
 BOOST_STATIC_ASSERT(sizeof(EXE_CvCivilizationInfo) == sizeof(CvCivilizationInfo));
 
@@ -786,29 +837,47 @@ BOOST_STATIC_ASSERT(sizeof(EXE_CvDLLEntity) == sizeof(CvDLLEntity));
 class EXE_CvDLLWidgetData : public CvDLLWidgetData
 {
 public:
+	#pragma comment(linker, "/EXPORT:?executeAction@CvDLLWidgetData@@QAE_NAAUCvWidgetDataStruct@@@Z=?executeAction@EXE_CvDLLWidgetData@@QAE_NAAUCvWidgetDataStruct@@@Z")
+	DllExport bool executeAction(CvWidgetDataStruct &widgetDataStruct)
+	{
+		return CvDLLWidgetData::executeAction(widgetDataStruct);
+	}
+
+	#pragma comment(linker, "/EXPORT:?executeAltAction@CvDLLWidgetData@@QAE_NAAUCvWidgetDataStruct@@@Z=?executeAltAction@EXE_CvDLLWidgetData@@QAE_NAAUCvWidgetDataStruct@@@Z")
+	DllExport bool executeAltAction(CvWidgetDataStruct &widgetDataStruct)
+	{
+		return CvDLLWidgetData::executeAltAction(widgetDataStruct);
+	}
+
+	#pragma comment(linker, "/EXPORT:?executeDoubleClick@CvDLLWidgetData@@QAE_NABUCvWidgetDataStruct@@@Z=?executeDoubleClick@EXE_CvDLLWidgetData@@QAE_NABUCvWidgetDataStruct@@@Z")
+	DllExport bool executeDoubleClick(const CvWidgetDataStruct& destinationWidgetData)
+	{
+		return CvDLLWidgetData::executeDoubleClick(destinationWidgetData);
+	}
+
+	#pragma comment(linker, "/EXPORT:?executeDropOn@CvDLLWidgetData@@QAE_NABUCvWidgetDataStruct@@0@Z=?executeDropOn@EXE_CvDLLWidgetData@@QAE_NABUCvWidgetDataStruct@@0@Z")
+	DllExport bool executeDropOn(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData)
+	{
+		return CvDLLWidgetData::executeDropOn(destinationWidgetData, sourceWidgetData);
+	}
+
+	#pragma comment(linker, "/EXPORT:?freeInstance@CvDLLWidgetData@@SAXXZ=?freeInstance@EXE_CvDLLWidgetData@@SAXXZ")
+	DllExport static void freeInstance()
+	{
+		CvDLLWidgetData::freeInstance();
+	}
+
 	/*
-		executeAction
-			?executeAction@CvDLLWidgetData@@QAE_NAAUCvWidgetDataStruct@@@Z=?executeAction@EXE_CvDLLWidgetData@@QAE_NAAUCvWidgetDataStruct@@@Z
-
-		executeAltAction
-			?executeAltAction@CvDLLWidgetData@@QAE_NAAUCvWidgetDataStruct@@@Z=?executeAltAction@EXE_CvDLLWidgetData@@QAE_NAAUCvWidgetDataStruct@@@Z
-
-		executeDoubleClick
-			?executeDoubleClick@CvDLLWidgetData@@QAE_NABUCvWidgetDataStruct@@@Z=?executeDoubleClick@EXE_CvDLLWidgetData@@QAE_NABUCvWidgetDataStruct@@@Z
-
-		executeDropOn
-			?executeDropOn@CvDLLWidgetData@@QAE_NABUCvWidgetDataStruct@@0@Z=?executeDropOn@EXE_CvDLLWidgetData@@QAE_NABUCvWidgetDataStruct@@0@Z
-
-		freeInstance
-			?freeInstance@CvDLLWidgetData@@SAXXZ=?freeInstance@EXE_CvDLLWidgetData@@SAXXZ
-
+	// this one is causing linker issues for unknown reasons. Let's just skip it as it isn't critical
 		getInstance
 			?getInstance@CvDLLWidgetData@@SAAAV1@XZ=?getInstance@EXE_CvDLLWidgetData@@SAAAV1@XZ
-
-		parseHelp
-			?parseHelp@CvDLLWidgetData@@QAEXAAVCvWStringBuffer@@AAUCvWidgetDataStruct@@@Z=?parseHelp@EXE_CvDLLWidgetData@@QAEXAAVCvWStringBuffer@@AAUCvWidgetDataStruct@@@Z
-
 	*/
+
+	#pragma comment(linker, "/EXPORT:?parseHelp@CvDLLWidgetData@@QAEXAAVCvWStringBuffer@@AAUCvWidgetDataStruct@@@Z=?parseHelp@EXE_CvDLLWidgetData@@QAEXAAVCvWStringBuffer@@AAUCvWidgetDataStruct@@@Z")
+	DllExport void parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &widgetDataStruct)
+	{
+		CvDLLWidgetData::parseHelp(szBuffer, widgetDataStruct);
+	}
 };
 BOOST_STATIC_ASSERT(sizeof(EXE_CvDLLWidgetData) == sizeof(CvDLLWidgetData));
 
@@ -3989,8 +4058,15 @@ public:
 		getUnitInfo
 			?getUnitInfo@CvUnit@@QBEAAVCvUnitInfo@@XZ=?getUnitInfo@EXE_CvUnit@@QBEAAVCvUnitInfo@@XZ
 
-		getUnitType
-			?getUnitType@CvUnit@@QBE?AW4UnitTypes@@XZ=?getUnitType@EXE_CvUnit@@QBE?AW4UnitTypes@@XZ
+		
+*/
+	#pragma comment(linker, "/EXPORT:?getUnitType@CvUnit@@QBE?AW4UnitTypes@@XZ=?getUnitType@EXE_CvUnit@@QBE?AW4UnitTypes@@XZ")
+	DllExport UnitTypes getUnitType() const
+	{
+		EXE_CACHE_LAST_UNIT_OWNER = getOwnerINLINE();
+		return CvUnit::getUnitType();
+	}
+/*
 
 		getVisualCiv
 			?getVisualCiv@CvUnit@@QBE?AW4CivilizationTypes@@W4TeamTypes@@@Z=?getVisualCiv@EXE_CvUnit@@QBE?AW4CivilizationTypes@@W4TeamTypes@@@Z
@@ -4103,7 +4179,8 @@ public:
 	#pragma comment(linker, "/EXPORT:?getArtInfo@CvUnitInfo@@QBEPBVCvArtInfoUnit@@HH@Z=?getArtInfo@EXE_CvUnitInfo@@QBEPBVCvArtInfoUnit@@HH@Z")
 	DllExport const CvArtInfoUnit* getArtInfo(int i, int iProfession) const
 	{
-		return CvUnitInfo::getArtInfo(i, iProfession);
+		// a little bit of a hack is needed here. Exe doesn't provide unit owner, so we will use owner of the last time the exe called CvUnit::getOwner()
+		return CvUnitInfo::getArtInfo(i, static_cast<ProfessionTypes>(iProfession), EXE_CACHE_LAST_UNIT_OWNER);
 	}
 
 	#pragma comment(linker, "/EXPORT:?getDefaultProfession@CvUnitInfo@@QBEHXZ=?getDefaultProfession@EXE_CvUnitInfo@@QBEHXZ")

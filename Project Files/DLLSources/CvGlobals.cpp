@@ -373,6 +373,9 @@ m_bUSE_AI_CHOOSE_PRODUCTION_CALLBACK(false),
 m_bUSE_DO_PILLAGE_GOLD_CALLBACK(false),
 m_bUSE_GET_EXPERIENCE_NEEDED_CALLBACK(false),
 m_bUSE_DO_COMBAT_CALLBACK(false),
+m_bUSE_DO_GOLD_CALLBACK(false),
+m_bUSE_UPDATE_COLORED_PLOTS_CALLBACK(false),
+m_bUSE_IS_VICTORY_TEST_CALLBACK(false),
 // K-Mod \RaR end,
 m_paHints(NULL),
 m_paMainMenus(NULL),
@@ -543,8 +546,6 @@ void CvGlobals::init()
 	memcpy(m_aaiXYCityPlot_1_plot, aaiXYCityPlot_1_plot, sizeof(aaiXYCityPlot_1_plot));
 	m_aaiXYCityPlot_2_plot = (int*)malloc(sizeof(aaiXYCityPlot_2_plot));
 	memcpy(m_aaiXYCityPlot_2_plot, aaiXYCityPlot_2_plot, sizeof(aaiXYCityPlot_2_plot));
-
-	this->setCityCatchmentRadius(0);
 }
 
 //
@@ -2309,20 +2310,20 @@ CvEventInfo& CvGlobals::getEventInfo(EventTypes eEvent)
 }
 
 // trade screen type - start - Nightinggale
-int CvGlobals::getNumTradeScreenInfos() const
+int CvGlobals::getNumTradeLocationInfos() const
 {
 	return (int)m_paTradeScreenInfo.size();
 }
 
-std::vector<CvTradeScreenInfo*>& CvGlobals::getTradeScreenInfo()
+std::vector<CvTradeLocationInfo*>& CvGlobals::getTradeLocationInfo()
 {
 	return m_paTradeScreenInfo;
 }
 
-const CvTradeScreenInfo& CvGlobals::getTradeScreenInfo(TradeScreenTypes eTradeScreen) const
+const CvTradeLocationInfo& CvGlobals::getTradeLocationInfo(TradeLocationTypes eTradeLocation) const
 {
-	FAssert(validEnumRange(eTradeScreen));
-	return *(m_paTradeScreenInfo[eTradeScreen]);
+	FAssert(validEnumRange(eTradeLocation));
+	return *(m_paTradeScreenInfo[eTradeLocation]);
 }
 // trade screen type - end - Nightinggale
 
@@ -2836,7 +2837,9 @@ void CvGlobals::cacheGlobals()
 	m_bUSE_DO_PILLAGE_GOLD_CALLBACK = getDefineINT("USE_DO_PILLAGE_GOLD_CALLBACK") != 0;
 	m_bUSE_GET_EXPERIENCE_NEEDED_CALLBACK = getDefineINT("USE_GET_EXPERIENCE_NEEDED_CALLBACK") != 0;
 	m_bUSE_DO_COMBAT_CALLBACK = getDefineINT("USE_DO_COMBAT_CALLBACK") != 0;
-	// K-Mod end \ RaR
+	m_bUSE_DO_GOLD_CALLBACK = getDefineINT("USE_DO_GOLD_CALLBACK") != 0;
+	m_bUSE_UPDATE_COLORED_PLOTS_CALLBACK = getDefineINT("USE_UPDATE_COLORED_PLOTS_CALLBACK") != 0;
+	m_bUSE_IS_VICTORY_TEST_CALLBACK = getDefineINT("USE_IS_VICTORY_TEST_CALLBACK") != 0;
 
 	m_iOPPRESSOMETER_DISCRIMINATION_MODIFIER_BASE_COLONIZERS = getDefineINT("OPPRESSOMETER_DISCRIMINATION_MODIFIER_BASE_COLONIZERS");
 	m_iOPPRESSOMETER_DISCRIMINATION_MODIFIER_BASE_NATIVES = getDefineINT("OPPRESSOMETER_DISCRIMINATION_MODIFIER_BASE_NATIVES");

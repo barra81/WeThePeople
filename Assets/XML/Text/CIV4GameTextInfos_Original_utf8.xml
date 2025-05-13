@@ -81,7 +81,7 @@
 		<German>%s1 hat das Spiel unterbrochen</German>
 		<Italian>%s1 ha messo in pausa la partita.</Italian>
 		<Spanish>%s1 ha detenido la partida.</Spanish>
-		<Russian>Игра приостановлена игроком %s1</Russian>
+		<Russian>[COLOR_SELECTED_TEXT]Игра приостановлена игроком[COLOR_REVERT] [COLOR_HIGHLIGHT_TEXT]%s1[COLOR_REVERT]</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>SYSTEM_WAITING_FOR_PLAYER</Tag>
@@ -294,6 +294,7 @@
 		<German>[COLOR_WARNING_TEXT]Wird die Modernisierung %s1_ImpName zerstören[COLOR_REVERT]</German>
 		<Italian>[COLOR_WARNING_TEXT]Il miglioramento %s1_ImpName[COLOR_REVERT] verrà distrutto.</Italian>
 		<Spanish>[COLOR_WARNING_TEXT]Destruirá [NUM1:el:la:los:las] %s1_ImpName[COLOR_REVERT]</Spanish>
+		<Russian>[COLOR_WARNING_TEXT]Уничтожит %s1_ImpName[COLOR_REVERT]</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_CONSUME_UNIT</Tag>
@@ -448,7 +449,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_FEATURE_STREAM_EFFECT</Tag>
-		<English>[ICON_BULLET]Doubles movement with stream[NEWLINE][ICON_BULLET]Halves movement against stream</English>
+		<English>[ICON_BULLET]Doubles movement with current[NEWLINE][ICON_BULLET]Halves movement against current</English>
 		<French>[ICON_BULLET]Doubles le mouvement suivant le courant[NEWLINE][ICON_BULLET]Divise le mouvement à contre-courant</French>
 		<German>[ICON_BULLET]Verdoppelt Bewegung mit Strom[NEWLINE][ICON_BULLET]Halbiert Bewegung gegen Strom</German>
 		<Russian>[ICON_BULLET]Движение по течению удваивает скорость перемещения[NEWLINE][ICON_BULLET]Движение против течения вдвое замедляет скорость перемещения</Russian>
@@ -3133,12 +3134,13 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISC_WINS_VICTORY</Tag>
+		<!-- WARNING: the exe crashes when displaying victory if this line has non-Latin characters, such as Russian. No known workaround known at this time --> 
 		<English>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] wins by %s2_VctryName Victory!!!!</English>
 		<French>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] remporte une victoire de type : %s2_VctryName !</French>
 		<German>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] trägt den Sieg in der Kategorie %s2_VctryName davon!!!!</German>
 		<Italian>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] conquista una vittoria %s2_VctryName!</Italian>
 		<Spanish>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] ha obtenido una victoria %s2_VctryName</Spanish>
-		<Russian>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] одерживает победу в категории : %s2_VctryName!!!!</Russian>
+		<!--<Russian>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] одерживает победу в категории : %s2_VctryName!!!!</Russian>-->
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISC_OUT_OF_SYNC</Tag>
@@ -3312,6 +3314,7 @@
 		<German>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] übernimmt die Staatsform [COLOR_HIGHLIGHT_TEXT]%s2_CvcName[COLOR_REVERT]!</German>
 		<Italian>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] adotta la forma di governo [COLOR_HIGHLIGHT_TEXT]%s2_CvcName[COLOR_REVERT]!</Italian>
 		<Spanish>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] ha adoptado [NUM2:el:la:los:las] [COLOR_HIGHLIGHT_TEXT]%s2_CvcName[COLOR_REVERT].</Spanish>
+		<Russian>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] принимает [COLOR_HIGHLIGHT_TEXT]%s2_CvcName[COLOR_REVERT]!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISC_ENEMY_TROOPS_SPOTTED</Tag>
@@ -4448,6 +4451,7 @@
 		<German>[COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT] hat das Spiel fortgesetzt</German>
 		<Italian>Partita ripresa da [COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT]</Italian>
 		<Spanish>Partida reanudada por [COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT]</Spanish>
+		<Russian>Игра возобновлена игроком [COLOR_HIGHLIGHT_TEXT]%s1_PlyrName[COLOR_REVERT]</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_SYSTEM_CHAT_STRING</Tag>
@@ -4655,6 +4659,7 @@
 		<German>%s1 hat den Sieg in der Kategorie %s2 erzielt!</German>
 		<Italian>%s1 ha ottenuto una vittoria %s2!</Italian>
 		<Spanish>¡%s1 ha conseguido una victoria %s2!</Spanish>
+		<Russian>%s1 одержал победу - %s2!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_ACTION_MOVEMENT_COST</Tag>
@@ -5159,6 +5164,7 @@
 		<German>Ihr seid dran, %s1_leader!</German>
 		<Italian>%s1_leader, è il tuo turno!</Italian>
 		<Spanish>¡Es vuestro turno, %s1_leader!</Spanish>
+		<Russian>%s1_leader, Ваш ход!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_SHOW_ALL_PLAYERS</Tag>
@@ -9972,7 +9978,7 @@
 		<German>[ICON_BULLET]Gebäude [COLOR_BUILDING_TEXT]%s1_building[COLOR_REVERT] erhalten</German>
 		<Italian>[ICON_BULLET]Ricevere [NUM1:un:una] [COLOR_BUILDING_TEXT]%s1_building[COLOR_REVERT]</Italian>
 		<Spanish>[ICON_BULLET]Recibir [NUM1:un:una:unos:unas] [COLOR_BUILDING_TEXT]%s1_building[COLOR_REVERT]</Spanish>
-		<Russian>[ICON_BULLET]Получена [COLOR_BUILDING_TEXT]%s1_building[COLOR_REVERT]</Russian>
+		<Russian>[ICON_BULLET]Построено здание: [COLOR_BUILDING_TEXT]%s1_building[COLOR_REVERT]</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REMOVE_BUILDING</Tag>
@@ -9999,7 +10005,7 @@
 		<German>[ICON_BULLET]Die Einheit [COLOR_UNIT_TEXT]%s2_unit[COLOR_REVERT] ist %d1 [NUM1:Runde:Runden] lang beschäftigt und für keine andere Aufgabe außer Selbstverteidigung verfügbar</German>
 		<Italian>[ICON_BULLET]L'unità [COLOR_UNIT_TEXT]%s2_unit[COLOR_REVERT] sarà occupata per %d1 [NUM1:turno:turni], e non farà altro eccetto difendersi.</Italian>
 		<Spanish>[ICON_BULLET][NUM2:El:La:Los:Las] [COLOR_UNIT_TEXT]%s2_unit[COLOR_REVERT] [NUM2:no estará disponible:no estará disponible:no estarán disponibles:no estarán disponibles] durante %d1 [NUM1:turno:turnos], para ningún cometido que no sea su propia defensa</Spanish>
-		<Russian>[ICON_BULLET][COLOR_UNIT_TEXT]%s2_unit[COLOR_REVERT] будет занят %d1 [NUM1:ход:ходов] и не сможет выполнять никаких распоряжений, кроме самообороны.</Russian>
+		<Russian>[ICON_BULLET][COLOR_UNIT_TEXT]%s2_unit[COLOR_REVERT] будет занят %d1 [NUM1:ход:хода] и не сможет выполнять никаких распоряжений, кроме самообороны.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUILDING_RIVER_PLOTS</Tag>
@@ -10630,7 +10636,7 @@
 		<English>In the recent battle a young soldier fell upon his enemies like a wolf among the lambs. He is now known everywhere as a truly brave lieutenant.</English>
 		<French>Lors des derniers combats un jeune soldat s'est distingué par sa bravoure face à l'ennemi. Il est maintenant reconnu comme un lieutenant courageux. </French>
 		<German>In der jüngsten Schlacht fiel ein junger Soldat über seine Feinde her wie der Wolf über die Lämmer. Er gilt nun allerorten als mutiger Leutnant.</German>
-		<Russian>В недавнем сражении молодой воин, бросался на своих врагов, как волк на ягнят. Теперь повсюду он известен как поистине храбрый лейтенант.</Russian>
+		<Russian>В недавнем сражении молодой воин бросался на своих врагов, как волк на ягнят. Теперь повсюду он известен как поистине храбрый лейтенант.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISC_CC_BORN</Tag>
@@ -11232,6 +11238,7 @@
 		<German>(Siedlungsangriff : %D1%%)</German>
 		<Italian>(Attacco insediamento : %D1%%)</Italian>
 		<Spanish>(Ataque del asentamiento : %D1%%)</Spanish>
+		<Russian>(Атака поселения : %D1%%)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMBAT_MESSAGE_CITY_DEFENSE</Tag>
@@ -11240,6 +11247,7 @@
 		<German>(Siedlungsverteidigung : %D1%%)</German>
 		<Italian>(Difesa insediamento : %D1%%)</Italian>
 		<Spanish>(Defensa del asentamiento : %D1%%)</Spanish>
+		<Russian>(Защита поселения : %D1%%)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMBAT_MESSAGE_HILLS_ATTACK</Tag>
@@ -11248,6 +11256,7 @@
 		<German>(Hügel-Angriff : %D1%%)</German>
 		<Italian>(Attacco in collina : %D1%%)</Italian>
 		<Spanish>(Ataque a colinas : %D1%%)</Spanish>
+		<Russian>(Атака в холмах : %D1%%)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMBAT_MESSAGE_HILLS</Tag>
@@ -11256,6 +11265,7 @@
 		<German>(Hügel-Verteidigung : %D1%%)</German>
 		<Italian>(Difesa in collina : %D1%%)</Italian>
 		<Spanish>(Defender colinas : %D1%%)</Spanish>
+		<Russian>(Защита в холмах : %D1%%)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMBAT_MESSAGE_FEATURE_ATTACK</Tag>
@@ -11280,6 +11290,7 @@
 		<German>(Geländeangriff: %D1%%)</German>
 		<Italian>(Attacco da terreno: %D1%%)</Italian>
 		<Spanish>(Ataque a terreno: %D1%%)</Spanish>
+		<Russian>(Атака на местности : %D1%%)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMBAT_MESSAGE_TERRAIN</Tag>
@@ -11288,6 +11299,7 @@
 		<German>(Gelände-Verteidigung : %d1%%)</German>
 		<Italian>(Difesa da terreno : %d1%%)</Italian>
 		<Spanish>(Defender terreno : %d1%%)</Spanish>
+		<Russian>(Защита на местности : %D1%%)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMBAT_MESSAGE_CLASS_RIVER_ATTACK</Tag>
@@ -11296,6 +11308,7 @@
 		<German>(Angriff über Fluß : %D1%%)</German>
 		<Italian>(Attacco fiume : %D1%%)</Italian>
 		<Spanish>(Ataque por río : %D1%%)</Spanish>
+		<Russian>(Речная атака : %D1%%)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMBAT_MESSAGE_CLASS_AMPHIB_ATTACK</Tag>
@@ -11304,6 +11317,7 @@
 		<German>(Landung von See : %D1%%)</German>
 		<Italian>(Attacco anfibio : %D1%%)</Italian>
 		<Spanish>(Ataque anfibio : %D1%%)</Spanish>
+		<Russian>(Атака десанта : %D1%%)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMBAT_MESSAGE_NATIVE_COMBAT</Tag>
@@ -11514,7 +11528,7 @@
 		<German>%s1_CityName : Artilleriebeschuß durch [COLOR_HIGHLIGHT_TEXT]%s3_player[COLOR_REVERT] hat den Verteidigungsbonus auf %d2_NewVal%% gesenkt!</German>
 		<Italian>Le tue difese a %s1_CityName sono state ridotte a %d2_NewVal%% ([COLOR_HIGHLIGHT_TEXT]%s3_player[COLOR_REVERT])!</Italian>
 		<Spanish>Vuestras defensas en %s1_CityName han quedado reducidas al %d2_NewVal%% ([COLOR_HIGHLIGHT_TEXT]%s3_player[COLOR_REVERT]).</Spanish>
-		<Russian>%s1_CityName : Артиллерийский обстрел [COLOR_HIGHLIGHT_TEXT]%s3_player[COLOR_REVERT] уменьшил нашу защиту до %d2_NewVal%%!</Russian>
+		<Russian>[COLOR_WARNING_TEXT]%s1_CityName[COLOR_REVERT] : Артиллерийский обстрел [COLOR_HIGHLIGHT_TEXT]%s3_player[COLOR_REVERT] уменьшил нашу защиту до %d2_NewVal%%!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISC_YOU_REDUCE_CITY_DEFENSES</Tag>

@@ -376,9 +376,7 @@ public:
 	bool getRemainingFathers(FatherPointTypes ePointType, std::vector<FatherTypes>& aFathers);
 	int getFatherCategoryPosition(FatherTypes eFather) const;
 
-	void changeYieldBoughtTotal(PlayerTypes eMainEurope, YieldTypes eYield, int iChange) const;
-	void changeYieldBoughtTotalAfrica(PlayerTypes eMainEurope, YieldTypes eYield, int iChange) const; // WTP, ray, Yields Traded Total for Africa and Port Royal - START
-	void changeYieldBoughtTotalPortRoyal(PlayerTypes eMainEurope, YieldTypes eYield, int iChange) const; // WTP, ray, Yields Traded Total for Africa and Port Royal - START
+	void changeYieldBoughtTotal(TradeLocationTypes eLocation, PlayerTypes eMainEurope, YieldTypes eYield, int iChange) const;
 
 	// < JAnimals Mod Start >
 	PlayerTypes getBarbarianPlayer();
@@ -408,6 +406,11 @@ public:
 
 	int getRemainingForcedPeaceTurns() const;
 
+	unsigned int getWorldBuilderOpeningCounter() const;
+	void increaseWorldBuilderOpeningCounter();
+
+	static const int PLOT_OCEAN_DISTANCE_IMPASSABLE_THRESHOLD = 1000;
+
 protected:
 
 	int m_iEndTurnMessagesSent;
@@ -429,6 +432,7 @@ protected:
 	int m_iBestLandUnitCombat;
 
 	unsigned int m_uiInitialTime;
+	unsigned int m_uiWorldBuilderUseCount;
 
 	bool m_bScoreDirty;
 	bool m_bDebugMode;
@@ -526,6 +530,7 @@ protected:
 	void updateOceanDistances();
 
 	void doUpdateCacheOnTurn();
+	CvPlot* getAnyEuropePlot() const;
 };
 
 #endif

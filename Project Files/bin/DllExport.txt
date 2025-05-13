@@ -119,8 +119,8 @@ CvDLLWidgetData.h
 	DllExport static CvDLLWidgetData& getInstance();
 	DllExport static void freeInstance();
 	DllExport void parseHelp(CvWStringBuffer &szBuffer, CvWidgetDataStruct &widgetDataStruct);
-	DllExport bool executeAction( CvWidgetDataStruct &widgetDataStruct );
-	DllExport bool executeAltAction( CvWidgetDataStruct &widgetDataStruct );
+	DllExport bool executeAction(CvWidgetDataStruct &widgetDataStruct);
+	DllExport bool executeAltAction(CvWidgetDataStruct &widgetDataStruct);
 	DllExport bool executeDropOn(const CvWidgetDataStruct& destinationWidgetData, const CvWidgetDataStruct& sourceWidgetData);
 	DllExport bool executeDoubleClick(const CvWidgetDataStruct& destinationWidgetData);
 	DllExport bool isLink(const CvWidgetDataStruct &widgetDataStruct) const;
@@ -621,8 +621,8 @@ CvInfos.h
 	DllExport bool isOpenBorders() const;
 	DllExport bool isEurope() const;
 	DllExport bool isNative() const;
-	DllExport const wchar* getShortDescription(uint uiForm = 0);
-	DllExport const wchar* getAdjective(uint uiForm = 0);
+	DllExport const wchar* getShortDescription(uint uiForm);
+	DllExport const wchar* getAdjective(uint uiForm);
 	DllExport const char* getFlagTexture() const;
 	DllExport int getCivilizationBuildings(int i) const;
 	DllExport int getCivilizationUnits(int i) const;

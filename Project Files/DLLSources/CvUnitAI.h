@@ -34,7 +34,7 @@ public:
 	CvUnitAI();
 	virtual ~CvUnitAI();
 
-	void AI_init();
+	void AI_init(int iBirthmark);
 	void AI_uninit();
 	void AI_reset();
 
@@ -93,6 +93,9 @@ public:
 	bool AI_moveToCity(bool bUnload, CvCity* pCity);
 	//End TAC Whaling, ray
 	bool AI_africa();
+
+	bool is(UnitAIStates) const;
+	bool is(UnitAITypes) const;
 
 protected:
 
@@ -185,7 +188,7 @@ protected:
 	bool AI_sailToAfrica(bool bMove = true); /*** TRIANGLETRADE 10/28/08 by DPII ***/
 	bool AI_sailToPortRoyal(bool bMove = true); // R&R, ray, Port Royal
 
-	CvPlot* findNearbyOceanPlot(CvPlot* pPlot);	// TAC - AI Improved Naval AI - koma13
+	CvPlot* findNearbyOceanPlot(const CvPlot& kPlot) const;	// TAC - AI Improved Naval AI - koma13
 
 	bool AI_travelToPort(int iMinPercent = 25, int iMaxPath = MAX_INT);
 
@@ -196,7 +199,7 @@ protected:
 
 	bool AI_deliverUnits(UnitAITypes eUnitAI = NO_UNITAI);
 	
-	CvPlot* AI_bestDestinationPlot(bool bIgnoreDanger = false);	// TAC - AI Improved Naval AI - koma13
+	CvPlot* AI_bestDestinationPlot(bool bIgnoreDanger = false) const;	// TAC - AI Improved Naval AI - koma13
 
 	bool AI_loadUnits(UnitAITypes eUnitAI, MissionAITypes eMissionAI);
 	
@@ -369,8 +372,8 @@ protected:
 	int AI_pillageValue(CvPlot* pPlot);
 	bool AI_canPillage(CvPlot& kPlot) const;
 
-	int AI_searchRange(int iRange);
-	bool AI_plotValid(CvPlot* pPlot);
+	int AI_searchRange(int iRange) const;
+	bool AI_plotValid(const CvPlot* pPlot) const;
 
 	int AI_finalOddsThreshold(CvPlot* pPlot, int iOddsThreshold);
 
@@ -403,13 +406,23 @@ protected:
 
 	bool AI_sailTo(const SailToHelper& sth, bool bMove, bool bIgnoreDanger = true);
 
-	void AI_sellYieldUnits(Port port);
-	void AI_unloadUnits(Port port);
+	void AI_sellYieldUnits(TradeLocationTypes eLocation);
+	void AI_unloadUnits(TradeLocationTypes eLocation);
 	void AI_automateSailTo(const SailToHelper& sth);
 
 	// added so under cheat mode we can call protected functions for testing
 	friend class CvGameTextMgr;
 
 };
+
+inline bool CvUnitAI::is(UnitAIStates eUnitAIState) const
+{
+	return m_eUnitAIState == eUnitAIState;
+}
+
+inline bool CvUnitAI::is(UnitAITypes eUnitAI) const
+{
+	return m_eUnitAIType == eUnitAI;
+}
 
 #endif

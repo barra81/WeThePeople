@@ -14,6 +14,7 @@
 #include "CvTradeRouteGroup.h" //R&R mod, vetiarvind, trade groups
 #include "PlayerHelperFunctions.h"
 
+#define	UNIT_BIRTHMARK_TEMP_UNIT	20000
 
 class CvDiploParameters;
 class CvPlayerAI;
@@ -219,7 +220,7 @@ public:
 	void getCivilizationCityName(CvWString& szBuffer, CivilizationTypes eCivilization) const;
 	bool isCityNameValid(const CvWString& szName, bool bTestDestroyed = true) const;
 	DllExport CvUnit* initUnit(UnitTypes eUnit, ProfessionTypes eProfession, int iX, int iY, UnitAITypes eUnitAI = NO_UNITAI, DirectionTypes eFacingDirection = NO_DIRECTION, int iYieldStored = 0);
-	CvUnit* initUnit(UnitTypes eUnit, ProfessionTypes eProfession, Coordinates initCoord, UnitAITypes eUnitAI = NO_UNITAI, DirectionTypes eFacingDirection = NO_DIRECTION, int iYieldStored = 0);
+	CvUnit* initUnit(UnitTypes eUnit, ProfessionTypes eProfession, Coordinates initCoord, UnitAITypes eUnitAI = NO_UNITAI, DirectionTypes eFacingDirection = NO_DIRECTION, int iYieldStored = 0, int iBirthmark = -1);
 	CvUnit* initEuropeUnit(UnitTypes eUnit, UnitAITypes eUnitAI = NO_UNITAI, DirectionTypes eFacingDirection = NO_DIRECTION);
 	bool initEuropeSettler(bool bPayEquipment);
 	bool initEuropeTransport(bool bPay);
@@ -589,13 +590,15 @@ public:
 
 	// unit iteration
 	DllExport CvUnit* firstUnit(int *pIterIdx) const;
+	CvUnit* firstUnitInternal(int* pIterIdx) const;
 	DllExport CvUnit* nextUnit(int *pIterIdx) const;
+	CvUnit* nextUnitInternal(int* pIterIdx) const;
 	DllExport int getNumUnits() const;
 	int getNumShips() const;// WTP, ray, easily counting Ships - START
 	DllExport CvUnit* getUnit(int iID) const;
 	CvUnit* addUnit();
 	void addExistingUnit(CvUnit *pUnit);
-	void deleteUnit(int iID);
+	bool deleteUnit(int iID);
 	CvUnit* getAndRemoveUnit(int iId);
 
 	int getNumEuropeUnits() const;
@@ -695,6 +698,7 @@ public:
 	void trigger(EventTriggerTypes eEventTrigger);
 	void trigger(const EventTriggeredData& kData);
 	void applyEvent(EventTypes eEvent, int iTriggeredId, bool bUpdateTrigger = true);
+	void applyEvent(EventTypes eEvent, const EventTriggeredData& kTriggeredData, bool bUpdateTrigger = true);
 	bool canDoEvent(EventTypes eEvent, const EventTriggeredData& kTriggeredData) const;
 	int getEventCost(EventTypes eEvent, PlayerTypes eOtherPlayer, bool bRandom) const;
 	bool canTrigger(EventTriggerTypes eTrigger, PlayerTypes ePlayer) const;
@@ -779,38 +783,29 @@ public:
 	// TAC - AI purchases military units - koma13 - END
 	CvUnit* buyEuropeUnit(UnitTypes eUnit, int iPriceModifier);
 	void buyUnitsFromKing();
-	int getYieldTradedTotal(YieldTypes eYield) const;
-	void setYieldTradedTotal(YieldTypes eYield, int iValue);
-	// WTP, ray, Yields Traded Total for Africa and Port Royal - START
-	int getYieldTradedTotalAfrica(YieldTypes eYield) const;
-	void setYieldTradedTotalAfrica(YieldTypes eYield, int iValue);
-	int getYieldTradedTotalPortRoyal(YieldTypes eYield) const;
-	void setYieldTradedTotalPortRoyal(YieldTypes eYield, int iValue);
-	// WTP, ray, Yields Traded Total for Africa and Port Royal - END
+	int getYieldSoldTotal(TradeLocationTypes eLocation, YieldTypes eYield) const;
 	// R&R, vetiarvind, Price dependent tax rate change - Start
-	int CvPlayer::getYieldScoreTotal(YieldTypes eYield) const;
-	void CvPlayer::setYieldScoreTotal(YieldTypes eYield, int iValue);
+	int getYieldScoreTotal(YieldTypes eYield) const;
+	void setYieldScoreTotal(YieldTypes eYield, int iValue);
+	void changeYieldCountScoreTotal(YieldTypes eYield, int iChange);
 	const int getFullYieldScore();
 	const int getTaxRaiseChance();
 	const int getTaxThresold();
 
-	void CvPlayer::changeYieldTradedTotal(YieldTypes eYield, int iChange, int iUnitPrice = -1);
-	void CvPlayer::changeYieldTradedTotalAfrica(YieldTypes eYield, int iChange, int iUnitPrice = -1); // WTP, ray, Yields Traded Total for Africa and Port Royal - START
-	void CvPlayer::changeYieldTradedTotalPortRoyal(YieldTypes eYield, int iChange, int iUnitPrice = -1); // WTP, ray, Yields Traded Total for Africa and Port Royal - START
-	//void changeYieldTradedTotal(YieldTypes eYield, int iChange);
+	// setting iAmountSold to something negative means something was bought
+	void changeYieldTradedCounters(TradeLocationTypes eScreen, YieldTypes eYield, int iAmountSold, int iUnitPrice = MIN_INT);
 	// R&R, vetiarvind, Price dependent tax rate change - End
 
-	int getYieldBoughtTotal(YieldTypes eYield) const;
-	void setYieldBoughtTotal(YieldTypes eYield, int iValue);
-	void changeYieldBoughtTotal(YieldTypes eYield, int iChange);
+	int getYieldBoughtTotal(TradeLocationTypes eLocation, YieldTypes eYield) const;
+	void changeYieldTradedTaxCounter(TradeLocationTypes eLocation, YieldTypes eYield, int iAmountSold);
 
 	// WTP, ray, Yields Traded Total for Africa and Port Royal - START
-	int getYieldBoughtTotalAfrica(YieldTypes eYield) const;
-	void setYieldBoughtTotalAfrica(YieldTypes eYield, int iValue);
-	void changeYieldBoughtTotalAfrica(YieldTypes eYield, int iChange);
-	int getYieldBoughtTotalPortRoyal(YieldTypes eYield) const;
-	void setYieldBoughtTotalPortRoyal(YieldTypes eYield, int iValue);
-	void changeYieldBoughtTotalPortRoyal(YieldTypes eYield, int iChange);
+	//int getYieldBoughtTotalAfrica(YieldTypes eYield) const;
+	//void setYieldBoughtTotalAfrica(YieldTypes eYield, int iValue);
+	//void changeYieldBoughtTotalAfrica(YieldTypes eYield, int iChange);
+	//int getYieldBoughtTotalPortRoyal(YieldTypes eYield) const;
+	//void setYieldBoughtTotalPortRoyal(YieldTypes eYield, int iValue);
+	//void changeYieldBoughtTotalPortRoyal(YieldTypes eYield, int iChange);
 	// WTP, ray, Yields Traded Total for Africa and Port Royal - END
 
 	YieldTypes getHighestTradedYield() const;
@@ -972,6 +967,12 @@ public:
 
 	void writeDesyncLog(FILE *f) const;
 
+	DirectionTypes getPreferredStartingDirection() const;
+	std::vector<CvUnit*> getPortUnitsByProfession(ProfessionTypes eProfession) const;
+	CvUnit* buyYieldUnit(YieldTypes eYield, int iAmount, CvUnit* pTransport, TradeLocationTypes eLocation);
+
+	bool is(CivCategoryTypes eCivCategory) const;
+
 protected:
 
 /** NBMOD REF **/
@@ -1122,12 +1123,8 @@ protected:
 	EnumMap<YieldTypes, int> m_em_iYieldBuyPrice;
 	EnumMap<YieldTypes, int> m_em_iYieldAfricaBuyPrice; // R&R, ray, Africa
 	EnumMap<YieldTypes, int> m_em_iYieldPortRoyalBuyPrice; // R&R, ray, Port Royal
-	EnumMap<YieldTypes, int> m_em_iYieldTradedTotal;
-	EnumMap<YieldTypes, int> m_em_iYieldTradedTotalAfrica; // WTP, ray, Yields Traded Total for Africa and Port Royal - START
-	EnumMap<YieldTypes, int> m_em_iYieldTradedTotalPortRoyal; // WTP, ray, Yields Traded Total for Africa and Port Royal - START
-	EnumMap<YieldTypes, int> m_em_iYieldBoughtTotal;
-	EnumMap<YieldTypes, int> m_em_iYieldBoughtTotalAfrica; // WTP, ray, Yields Traded Total for Africa and Port Royal - START
-	EnumMap<YieldTypes, int> m_em_iYieldBoughtTotalPortRoyal; // WTP, ray, Yields Traded Total for Africa and Port Royal - START
+	EnumMap<YieldTypes, int> m_em_iYieldSoldTotal[NUM_TRADELOCATION_TYPES];
+	EnumMap<YieldTypes, int> m_em_iYieldBoughtTotal[NUM_TRADELOCATION_TYPES];
 	EnumMap<YieldTypes, int> m_em_iTaxYieldModifierCount;
 	EnumMap<YieldTypes, int> m_em_iYieldScoreTotal; // R&R, vetiarvind, Price dependent tax rate change
 
@@ -1244,13 +1241,17 @@ protected:
 	void kill();
 
 	// WTP, jooe, functionalise the buy Unit logic. Return value is the city where the units will appear (or NULL)
-	CvCity* buyUnitFromParentPlayer(PlayerTypes eSellingPlayer, const char *szUnitClass, int iNumUnits, CvWString szIDTag = CvWString(), int iPriceToPay = 0, LocationFlags eLocationFlags = LocationFlags::LocationFlagNone, bool bReceivePrice = true, bool bMessageMentionLocation = true);
 	CvCity* buyUnitFromPlayer(PlayerTypes eSellingPlayer, UnitClassTypes eUnitClass, int iNumUnits, CvWString szIDTag = CvWString(), int iPriceToPay = 0, LocationFlags eLocationFlags = LocationFlags::LocationFlagNone, bool bReceivePrice = true, bool bMessageMentionLocation = true);
 	CvCity* buyUnitFromPlayer(PlayerTypes eSellingPlayer, UnitTypes eUnitType, int iNumUnits, CvWString szIDTag = CvWString(), int iPriceToPay = 0, LocationFlags eLocationFlags = LocationFlags::LocationFlagNone, bool bReceivePrice = true, bool bMessageMentionLocation = true);
 
 	void testOOSanDoEvent(EventTypes eEvent, bool bSuccess) const;
 	void testOOSanDoGoody(GoodyTypes eGoody, int iUnitID, bool bSuccess) const;
 
+	// Temp unit which is used to generate paths for hypothetical units.
+	// Kept around rather than created each usage to avoid chewing through the ID space.
+	CvUnit* m_pTempUnit;
+
+	// transport feeder - start - Nightinggale
 public:
 	int getIDSecondPlayerFrenchNativeWar() const;//WTP, ray, Colonial Intervention In Native War - START
 	// transport feeder - start - Nightinggale
@@ -1285,6 +1286,13 @@ public:
 	{
 		return m_lPlayerOppressometer;
 	}
+	CvUnit* getOrCreateTempUnit(UnitTypes eUnit, int iX, int iY);
+	void releaseTempUnit();
+
+	inline bool isTempUnit(const CvUnit* pUnit) const
+	{
+		return (pUnit == m_pTempUnit || pUnit->AI_getBirthmark() == UNIT_BIRTHMARK_TEMP_UNIT);
+	}
 };
 
 // cache CvPlayer::getYieldEquipmentAmount - start - Nightinggale
@@ -1316,4 +1324,10 @@ inline bool CvPlayer::hasContentsYieldEquipmentAmountSecure(ProfessionTypes ePro
 	return eProfession > NO_PROFESSION ? hasContentsYieldEquipmentAmount(eProfession) : false;
 }
 // cache CvPlayer::getYieldEquipmentAmount - end - Nightinggale
+
+inline bool CvPlayer::is(CivCategoryTypes eCivCategory) const
+{
+	return getCivCategoryTypes() == eCivCategory;
+}
+
 #endif

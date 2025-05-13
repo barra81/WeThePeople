@@ -427,7 +427,7 @@
 		<German>[COLOR_REVERT]Ein [COLOR_UNIT_TEXT]%s2[COLOR_REVERT] wünscht, in die Kolonien auszuwandern.</German>
 		<Italian>[COLOR_REVERT][COLOR_UNIT_TEXT]%s2[COLOR_REVERT] attende in Europa.</Italian>
 		<Spanish>[COLOR_REVERT][NUM2:Un:Una] [COLOR_UNIT_TEXT]%s2[COLOR_REVERT] aguarda en Europa.</Spanish>
-		<Russian>[COLOR_REVERT][COLOR_UNIT_TEXT]%s2[COLOR_REVERT] хочет эмигрировать в колонии.</Russian>
+		<Russian>[COLOR_REVERT][COLOR_UNIT_TEXT]%s2[COLOR_REVERT] готов к переезду в колонии.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_IMMIGRATION_BAR</Tag>
@@ -440,11 +440,12 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EUROPE_UNIT_BUY_PRICE</Tag>
-		<English>	   %d2[ICON_GOLD][TAB]  %s1_unit</English>
-		<French>	   %d2[ICON_GOLD][TAB]  %s1_unit</French>
-		<German>	   %d2[ICON_GOLD][TAB]  %s1_unit</German>
-		<Italian>	   %d2[ICON_GOLD][TAB]  %s1_unit</Italian>
-		<Spanish>	   %d2[ICON_GOLD][TAB]  %s1_unit</Spanish>
+		<English>%d2[ICON_GOLD][TAB] %s1_unit</English>
+		<French>%d2[ICON_GOLD][TAB] %s1_unit</French>
+		<German>%d2[ICON_GOLD][TAB] %s1_unit</German>
+		<Italian>%d2[ICON_GOLD][TAB] %s1_unit</Italian>
+		<Spanish>%d2[ICON_GOLD][TAB] %s1_unit</Spanish>
+		<Russian>%d2[ICON_GOLD][TAB] %s1_unit</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_COMMAND_LEARN_HELP_1</Tag>
@@ -530,12 +531,12 @@
 <!-- ZorG. colopedia. unit equipment. START -->
 	<TEXT>
 		<Tag>TXT_KEY_UNIT_REQUIRES_YIELD_QUANTITY_STRING</Tag>
-		<English>[ICON_BULLET]Requires %d1_Quantity %F2_Icon</English>
-		<French>[ICON_BULLET]Requiert %d1_Quantity %F2_Icon</French>
-		<German>[ICON_BULLET]Benötigt %d1_Quantity %F2_Icon</German>
-		<Italian>[ICON_BULLET]Richiede %d1_Quantity %F2_Icon</Italian>
-		<Spanish>[ICON_BULLET]Requiere %d1_Quantity de %F2_Icon</Spanish>
-		<Russian>[ICON_BULLET]Требуется : %d1_Quantity %F2_Icon</Russian>
+		<English>[ICON_BULLET]Requires %d1_Quantity %F2_Icon %s3_yield_name</English>
+		<French>[ICON_BULLET]Requiert %d1_Quantity %F2_Icon %s3_yield_name</French>
+		<German>[ICON_BULLET]Benötigt %d1_Quantity %F2_Icon %s3_yield_name</German>
+		<Italian>[ICON_BULLET]Richiede %d1_Quantity %F2_Icon %s3_yield_name</Italian>
+		<Spanish>[ICON_BULLET]Requiere %d1_Quantity de %F2_Icon %s3_yield_name</Spanish>
+		<Russian>[ICON_BULLET]Требуется : %d1_Quantity %F2_Icon %s3_yield_name</Russian>
 	</TEXT>
 <!-- ZorG. colopedia. unit equipment. END -->
 	<TEXT>
@@ -906,7 +907,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MISSION_REMOVED</Tag>
-		<English>In [COLOR_SELECTED_TEXT]%s1_city[COLOR_REVERT] the natives burnt down the [COLOR_HIGHLIGHT_TEXT]%s2_civ_adjective[COLOR_REVERT] mission and threw the missionary into the flames. He had incurred their hatred because he had smashed an ancient idol statue.</English>
+		<English>In [COLOR_SELECTED_TEXT]%s1_city[COLOR_REVERT] the Natives burnt down the [COLOR_HIGHLIGHT_TEXT]%s2_civ_adjective[COLOR_REVERT] mission and threw the missionary into the flames. He incurred their hatred by smashing an ancient statue of their beloved idol.</English>
 		<French>Dans la ville: [COLOR_SELECTED_TEXT]%s1_city[COLOR_REVERT], les indigènes ont repoussé la mission [COLOR_HIGHLIGHT_TEXT]%s2:2_civ_adjective[COLOR_REVERT]</French>
 		<German>In [COLOR_SELECTED_TEXT]%s1_city[COLOR_REVERT] haben die Ureinwohner die [COLOR_HIGHLIGHT_TEXT]%s2:3_civ_adjective[COLOR_REVERT] Mission niedergebrannt und den Missionar in die Flammen geworfen. Er hatte sich ihren Hass zugezogen, weil er eine alte Götzenstatue zerschlagen hatte.</German>
 		<Italian>I nativi a [COLOR_SELECTED_TEXT]%s1_city[COLOR_REVERT] hanno rinnegato la missione [COLOR_HIGHLIGHT_TEXT]%s2_civ_adjective[COLOR_REVERT]</Italian>
@@ -1334,7 +1335,6 @@
 		<German>[ICON_BULLET]%D1%% Ureinwohner-Bekehrungsrate durch Missionen</German>
 		<Italian>[ICON_BULLET]%D1%% percentuale di conversione nativi dalle missioni</Italian>
 		<Spanish>[ICON_BULLET]%D1%% al ritmo de conversión de Nativos en las misiones</Spanish>
-		<Russian>[ICON_BULLET]%D1%% к скорости крещения индейцев в миссиях</Russian>
 		<Russian>[ICON_BULLET]%D1%% к скорости крещения индейцев миссиями</Russian>
 	</TEXT>
 	<TEXT>
@@ -1808,6 +1808,7 @@
 		<German>Das Ende von Colonization</German>
 		<Italian>La fine di Colonization</Italian>
 		<Spanish>El final de Colonization</Spanish>
+		<Russian>Колонизация завершена</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_BUILDING_YIELD_CONVERSION</Tag>
@@ -3182,6 +3183,21 @@
 		<Russian>Торговые маршруты</Russian>
 	</TEXT>
 	<TEXT>
+		<Tag>TXT_KEY_DOMESTIC_ADVISOR_STATE_TRADE_COUNT</Tag>
+		<English>Exported goods</English>
+		<Russian>Экспортированные товары</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_DOMESTIC_ADVISOR_STATE_CITIZEN</Tag>
+		<English>Citizens</English>
+		<Russian>Граждане</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_DOMESTIC_ADVISOR_TRADE_STATE_HELP</Tag>
+		<English>Sold: %d1[NEWLINE]Bought: %d2</English>
+		<Russian>Продано: %d1[NEWLINE]Куплено: %d2</Russian>
+	</TEXT>
+	<TEXT>
 		<Tag>TXT_KEY_GO_TO_CITY</Tag>
 		<English>Click to Go to [COLOR_SELECTED_TEXT]%s1_city[COLOR_REVERT]</English>
 		<French>Cliquez pour aller à : [COLOR_SELECTED_TEXT]%s1_city[COLOR_REVERT]</French>
@@ -3331,7 +3347,7 @@
 		<German>Schwerpunkt setzen</German>
 		<Italian>Accentua</Italian>
 		<Spanish>Favorecer</Spanish>
-		<Russian>Акценты</Russian>
+		<Russian>Акценты авто-производства</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EMPHASIZED</Tag>

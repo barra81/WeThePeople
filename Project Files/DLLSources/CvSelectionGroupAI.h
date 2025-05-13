@@ -38,7 +38,7 @@ public:
 	void AI_cancelGroupAttack();
 	bool AI_isGroupAttack();
 
-	bool AI_isControlled();
+	bool AI_isControlled() const;
 	bool AI_isDeclareWar(const CvPlot* pPlot = NULL);
 
 	CvPlot* AI_getMissionAIPlot();
@@ -66,6 +66,9 @@ public:
 
 	void AI_resetSavedData();
 
+	bool AI_isControlled() { return AI_isControlledInternal(); }
+	bool AI_isControlledInternal() const { return (!isHuman() || isAutomated()); }
+
 	enum UnloadMode
 	{
 		NoForce,
@@ -90,9 +93,10 @@ protected:
 	// R&R mod, vetiarvind, max yield import limit - start	
 	bool getIgnoreDangerStatus() const;
 	// R&R mod, vetiarvind, max yield import limit - end
+
 private:
 	// R&R mod, vetiarvind, max yield import limit - start
-	int estimateYieldsToLoad(CvCity* pDestinationCity, int maxYieldsToLoad, YieldTypes eYield, int turnsToReach, int alreadyLoaded) const;
+	int estimateYieldsToLoad(const CvCity* pDestinationCity, int maxYieldsToLoad, YieldTypes eYield, int turnsToReach, int alreadyLoaded) const;
 	void unloadToCity(CvCity* pCity, CvUnit* unit, UnloadMode um = NoForce);
 	// R&R mod, vetiarvind, max yield import limit - end
 

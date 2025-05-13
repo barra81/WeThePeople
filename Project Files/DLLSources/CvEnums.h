@@ -502,7 +502,7 @@ enum CivCategoryTypes
 {
 	NO_CIV_CATEGORY = -1,
 
-	CIV_CATEGORY_EUROPEAN,
+	CIV_CATEGORY_COLONIAL,
 	CIV_CATEGORY_NATIVE,
 	CIV_CATEGORY_KING,
 	CIV_CATEGORY_BARBARIAN,
@@ -1352,6 +1352,8 @@ enum NetContactTypes
 
 enum ContactTypes
 {
+	NO_CONTACT = -1,
+
 	CONTACT_JOIN_WAR,
 	CONTACT_STOP_TRADING,
 	CONTACT_GIVE_HELP,
@@ -1368,6 +1370,8 @@ enum ContactTypes
 	// R&R, ray, Natives raiding party - END
 
 	NUM_CONTACT_TYPES,
+
+	FIRST_CONTACT = 0,
 
 	COMPILE_TIME_NUM_CONTACT_TYPES = NUM_CONTACT_TYPES,
 
@@ -2069,6 +2073,12 @@ enum UnitTravelStates
 
 enum UnitAIStates
 {
+	// WARNING: values are hardcoded in savegames
+	// For this reason, once a value has been added, it has to stay at that value even if it's no longer used
+	// Adding new values can only be done at the end because adding in the middle will change values of other entires
+	// The savegame enum autoadjust is not implemented for this enum
+	//    Nightinggale
+
 	NO_UNITAI_STATE = -1,
 
 	UNITAI_STATE_DEFAULT,
@@ -2089,6 +2099,7 @@ enum UnitAIStates
 	UNITAI_STATE_PURCHASED,
 	UNITAI_STATE_SELL_TO_NATIVES,
 	UNITAI_STATE_SAIL,
+	UNITAI_STATE_YIELD_BOUGHT_OFFMAP,
 
 	NUM_UNITAI_STATES,
 };
@@ -2160,7 +2171,7 @@ enum JITarrayTypes
 	JIT_ARRAY_WORLD_SIZE,
 	JIT_ARRAY_YIELD,
 
-	JIT_ARRAY_TRADE_SCREEN,
+	JIT_ARRAY_TRADE_LOCATION,
 
 
 	NUM_JITarrayTypes,

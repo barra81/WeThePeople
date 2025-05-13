@@ -314,7 +314,7 @@ void CvGame::setInitialItems(bool bScenario)
 				for (LeaderHeadTypes eLeader = FIRST_LEADER; eLeader < NUM_LEADER_TYPES; ++eLeader)
 				{
 					if (kCiv.isLeaders(eLeader)) {
-						GC.getInitCore().setColor(ePlayer, static_cast<PlayerColorTypes>(kCiv.getDefaultPlayerColor()));
+						GC.getInitCore().setColor(ePlayer, kCiv.getDefaultPlayerColor());
 						GC.getInitCore().setLeader(ePlayer, eLeader);
 						GC.getInitCore().setCiv(ePlayer, eCiv);
 						GC.getInitCore().setSlotStatus(ePlayer, SS_COMPUTER);
@@ -562,27 +562,27 @@ void CvGame::initDiplomacy()
 
 	//ray, fixing bug of player initialization braking traits impacting relations - START
 	//code for initialization of Traits has been moved here
-	for (int iPlayerX = 0; iPlayerX < MAX_PLAYERS; ++iPlayerX)
+	for (PlayerTypes ePlayerX = FIRST_PLAYER; ePlayerX < NUM_PLAYER_TYPES; ++ePlayerX)
 	{
-		CvPlayer& kLoopPlayer2 = GET_PLAYER((PlayerTypes)iPlayerX);
+		CvPlayer& kLoopPlayer2 = GET_PLAYER(ePlayerX);
 		if (kLoopPlayer2.isAlive())
 		{
-			for (int iI = 0; iI < GC.getNumTraitInfos(); iI++)
+			for (TraitTypes eTrait = FIRST_TRAIT; eTrait < NUM_TRAIT_TYPES; ++eTrait)
 			{
-				if (GC.getCivilizationInfo(kLoopPlayer2.getCivilizationType()).hasTrait(iI))
+				if (GC.getCivilizationInfo(kLoopPlayer2.getCivilizationType()).hasTrait(eTrait))
 				{
-					kLoopPlayer2.processTrait((TraitTypes) iI, 1);
+					kLoopPlayer2.processTrait(eTrait, 1);
 				}
 
-				if (GC.getLeaderHeadInfo(kLoopPlayer2.getLeaderType()).hasTrait(iI))
+				if (GC.getLeaderHeadInfo(kLoopPlayer2.getLeaderType()).hasTrait(eTrait))
 				{
-					kLoopPlayer2.processTrait((TraitTypes) iI, 1);
+					kLoopPlayer2.processTrait(eTrait, 1);
 				}
 			}
-			for (int iI = 0; iI < NUM_YIELD_TYPES; iI++)
+			for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_YIELD_TYPES; ++eYield)
 			{
-				kLoopPlayer2.updateExtraYieldThreshold((YieldTypes)iI);
-				kLoopPlayer2.updateCityExtraYield((YieldTypes) iI);
+				kLoopPlayer2.updateExtraYieldThreshold(eYield);
+				kLoopPlayer2.updateCityExtraYield(eYield);
 			}
 		}
 	}
@@ -592,11 +592,12 @@ void CvGame::initDiplomacy()
 
 void CvGame::initFreeState()
 {
-	for (int iI = 0; iI < MAX_PLAYERS; iI++)
+	for (PlayerTypes ePlayer = FIRST_PLAYER; ePlayer < NUM_PLAYER_TYPES; ++ePlayer)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		CvPlayerAI& kPlayer = GET_PLAYER(ePlayer);
+		if (kPlayer.isAlive())
 		{
-			GET_PLAYER((PlayerTypes)iI).initFreeState();
+			kPlayer.initFreeState();
 		}
 	}
 }
@@ -1394,11 +1395,14 @@ void CvGame::updateColoredPlots()
 		gDLL->getEngineIFace()->clearColoredPlots(PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
 	}
 
-	lResult = 0;
-	gDLL->getPythonIFace()->callFunction(PYGameModule, "updateColoredPlots", NULL, &lResult);
-	if (lResult == 1)
-	{
-		return;
+	if (GC.getUSE_UPDATE_COLORED_PLOTS_CALLBACK())
+	{ 
+		lResult = 0;
+		gDLL->getPythonIFace()->callFunction(PYGameModule, "updateColoredPlots", NULL, &lResult);
+		if (lResult == 1)
+		{
+			return;
+		}
 	}
 
 	// City circles when in Advanced Start
@@ -1427,12 +1431,12 @@ void CvGame::updateColoredPlots()
 					}
 					if (bStartingPlot)
 					{
-						gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+						gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo(COLOR_WARNING_TEXT).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
 					}
 
 					if (pLoopPlot->isRevealed(getActiveTeam(), false))
 					{
-						NiColorA color(GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_WHITE")).getColor());
+						NiColorA color(GC.getColorInfo(COLOR_WHITE).getColor());
 						color.a = 0.4f;
 						gDLL->getEngineIFace()->fillAreaBorderPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), color, AREA_BORDER_LAYER_CITY_RADIUS);
 					}
@@ -1456,7 +1460,7 @@ void CvGame::updateColoredPlots()
 						CvPlayer& kPlayer = GET_PLAYER((PlayerTypes) iPlayer);
 						if (kPlayer.isAlive() && getActiveTeam() == kPlayer.getTeam())
 						{
-							gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_GREEN")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+							gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo(COLOR_GREEN).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
 						}
 					}
 				}
@@ -1499,14 +1503,14 @@ void CvGame::updateColoredPlots()
 					CvUnit* pWorkingUnit = pHeadSelectedCity->getUnitWorkingPlot(eLoopCityPlot);
 					if (pWorkingUnit != NULL)
 					{
-						NiColorA color(GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_WHITE")).getColor());
+						NiColorA color(GC.getColorInfo(COLOR_WHITE).getColor());
 						color.a = 0.7f;
 						gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), color, PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_BASE);
 					}
 
 					if (pLoopPlot->getWorkingCity() != pHeadSelectedCity)
 					{
-						NiColorA color(GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_WARNING_TEXT")).getColor());
+						NiColorA color(GC.getColorInfo(COLOR_WARNING_TEXT).getColor());
 						color.a = 0.7f;
 						gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), color, PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_BASE);
 					}
@@ -1528,7 +1532,7 @@ void CvGame::updateColoredPlots()
 
 					if (pRallyPlot != NULL)
 					{
-						gDLL->getEngineIFace()->addColoredPlot(pRallyPlot->getX_INLINE(), pRallyPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_YELLOW")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_BASE);
+						gDLL->getEngineIFace()->addColoredPlot(pRallyPlot->getX_INLINE(), pRallyPlot->getY_INLINE(), GC.getColorInfo(COLOR_YELLOW).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_BASE);
 					}
 				}
 			}
@@ -1551,12 +1555,12 @@ void CvGame::updateColoredPlots()
 						if (pHeadSelectedUnit->AI_bestCityBuild(pCity, &pBestPlot))
 						{
 							FAssert(pBestPlot != NULL);
-							gDLL->getEngineIFace()->addColoredPlot(pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+							gDLL->getEngineIFace()->addColoredPlot(pBestPlot->getX_INLINE(), pBestPlot->getY_INLINE(), GC.getColorInfo(COLOR_HIGHLIGHT_TEXT).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
 
 							if (pHeadSelectedUnit->AI_bestCityBuild(pCity, &pNextBestPlot, NULL, pBestPlot))
 							{
 								FAssert(pNextBestPlot != NULL);
-								gDLL->getEngineIFace()->addColoredPlot(pNextBestPlot->getX_INLINE(), pNextBestPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+								gDLL->getEngineIFace()->addColoredPlot(pNextBestPlot->getX_INLINE(), pNextBestPlot->getY_INLINE(), GC.getColorInfo(COLOR_HIGHLIGHT_TEXT).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
 							}
 						}
 					}
@@ -1581,7 +1585,7 @@ void CvGame::updateColoredPlots()
 								{
 									if (pLoopPlot->isBestAdjacentFound(pHeadSelectedUnit->getOwnerINLINE()))
 									{
-										gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+										gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo(COLOR_HIGHLIGHT_TEXT).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
 									}
 								}
 								if (plotDistance(pHeadSelectedUnit->getX_INLINE(), pHeadSelectedUnit->getY_INLINE(), pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE()) <= iRange)
@@ -1593,7 +1597,7 @@ void CvGame::updateColoredPlots()
 										{
 											if (pLoopPlot->isRevealedGoody(pHeadSelectedUnit->getTeam()) && (pHeadSelectedUnit->canMoveInto(*pLoopPlot)))
 											{
-												gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo((ColorTypes)GC.getInfoTypeForString("COLOR_GREEN")).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
+												gDLL->getEngineIFace()->addColoredPlot(pLoopPlot->getX_INLINE(), pLoopPlot->getY_INLINE(), GC.getColorInfo(COLOR_GREEN).getColor(), PLOT_STYLE_CIRCLE, PLOT_LANDSCAPE_LAYER_RECOMMENDED_PLOTS);
 											}
 										}
 									}
@@ -2127,13 +2131,17 @@ void CvGame::selectionListMove(CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl
 	while (pSelectedUnitNode != NULL)
 	{
 		pSelectedUnit = ::getUnit(pSelectedUnitNode->m_data);
+		pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
+
+		if (pSelectedUnit == NULL)
+			continue;
 
 		eRivalTeam = pSelectedUnit->getDeclareWarUnitMove(pPlot);
 
 		// Erik: No annoying popup for transport units
 		// WTP, ray, unless it is a "Troop only" ship
 		//if (pSelectedUnit->cargoSpace() == 0 && eRivalTeam != NO_TEAM)
-		if (pSelectedUnit != NULL && eRivalTeam != NO_TEAM && (pSelectedUnit->cargoSpace() == 0 || pSelectedUnit->getUnitInfo().isTroopShip()))
+		if (eRivalTeam != NO_TEAM && (pSelectedUnit->cargoSpace() == 0 || pSelectedUnit->getUnitInfo().isTroopShip()))
 		{
 			CvPopupInfo* pInfo = new CvPopupInfo(BUTTONPOPUP_DECLAREWARMOVE);
 			if (NULL != pInfo)
@@ -2154,8 +2162,6 @@ void CvGame::selectionListMove(CvPlot* pPlot, bool bAlt, bool bShift, bool bCtrl
 			}
 			return;
 		}
-
-		pSelectedUnitNode = gDLL->getInterfaceIFace()->nextSelectionListNode(pSelectedUnitNode);
 	}
 
 	selectionListGameNetMessage(GAMEMESSAGE_PUSH_MISSION, MISSION_MOVE_TO, pPlot->getX(), pPlot->getY(), 0, false, bShift);
@@ -3580,7 +3586,7 @@ int CvGame::countCivPlayerEuropeanAI()
 		const CvPlayer& kPlayer = GET_PLAYER(ePlayer);
 		if (kPlayer.isEverAlive())
 		{
-			if (!kPlayer.isHuman() && kPlayer.getCivCategoryTypes() == CIV_CATEGORY_EUROPEAN)
+			if (!kPlayer.isHuman() && kPlayer.getCivCategoryTypes() == CIV_CATEGORY_COLONIAL)
 			{
 				iCount++;
 			}
@@ -4654,7 +4660,7 @@ void CvGame::setWinner(TeamTypes eNewWinner, VictoryTypes eNewVictory)
 			if (getWinner() != NO_TEAM)
 			{
 				szBuffer = gDLL->getText("TXT_KEY_GAME_WON", GET_TEAM(getWinner()).getName().GetCString(), GC.getVictoryInfo(getVictory()).getTextKeyWide());
-				addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, GET_TEAM(getWinner()).getLeaderID(), szBuffer, -1, -1, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+				addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, GET_TEAM(getWinner()).getLeaderID(), szBuffer, -1, -1, COLOR_HIGHLIGHT_TEXT);
 			}
 
 			if ((getAIAutoPlay() > 0) || gDLL->GetAutorun())
@@ -4991,7 +4997,7 @@ void CvGame::makeSpecialBuildingValid(SpecialBuildingTypes eIndex, bool bAnnounc
 			{
 				if (GET_PLAYER((PlayerTypes)iI).isAlive())
 				{
-					gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_BUILDING_COMPLETED", MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+					gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_BUILDING_COMPLETED", MESSAGE_TYPE_MAJOR_EVENT, NULL, COLOR_HIGHLIGHT_TEXT);
 				}
 			}
 		}
@@ -5603,15 +5609,15 @@ void CvGame::createAnimalsSea()
 		return;
 	}
 
-	CvArea* pLoopArea;
-	CvPlot* pPlot;
 	UnitTypes eLastUnit, eBestUnit, eLoopUnit;
 	int iNeededAnimals;
 	int iValue, iBestValue, iRand;
-	int iLoop, iI, iJ;
 	int iStartDist = 0;
 
-	for(pLoopArea = GC.getMap().firstArea(&iLoop); pLoopArea != NULL; pLoopArea = GC.getMap().nextArea(&iLoop))
+	CvPlot* const pEuropePlot = getAnyEuropePlot();
+
+	int iLoop;
+	for(CvArea* pLoopArea = GC.getMap().firstArea(&iLoop); pLoopArea != NULL; pLoopArea = GC.getMap().nextArea(&iLoop))
 	{
 		iNeededAnimals = (pLoopArea->getNumTiles() * GC.getHandicapInfo(getHandicapType()).getAIAnimalSeaMaxPercent()) / 100;
 		//iNeededAnimals = std::min(100, iNeededAnimals);
@@ -5622,7 +5628,7 @@ void CvGame::createAnimalsSea()
 		}
 
 		// Another random to create less wild Animals in Water
-		int lessrandom = getSorenRandNum(5, "Less Animal Sea Unit Random");
+		const int lessrandom = getSorenRandNum(5, "Less Animal Sea Unit Random");
 
 		if (lessrandom <= 1 && iNeededAnimals > pLoopArea->getUnitsPerPlayer(getBarbarianPlayer()))
 		{
@@ -5630,28 +5636,24 @@ void CvGame::createAnimalsSea()
 
 			if (pLoopArea->isWater())
 			{
-				for (iI = 0; iI < iNeededAnimals; iI++)
+				for (int iI = 0; iI < iNeededAnimals; iI++)
 				{
-				    pPlot = GC.getMap().syncRandPlot((RANDPLOT_NOT_CITY), pLoopArea->getID(), iStartDist);
-
 					// WTP, ray, Do not spawn in impassable Terrain - owner is checked below
-					if (pPlot != NULL && !pPlot->isImpassable())
+					CvPlot* const pPlot = GC.getMap().syncRandPlot((RANDPLOT_NOT_VISIBLE_TO_CIV | RANDPLOT_PASSIBLE), pLoopArea->getID(), iStartDist);
+
+					if (pPlot != NULL)
 					{
-					    /*
-					    // May Cause OOS Errors as Active Player is different on each Computer
-					    if (pPlot->isActiveVisible(false))
-					    {
-					        continue
-					    }
-					    */
-						eBestUnit = NO_UNIT;
+					    eBestUnit = NO_UNIT;
 						iBestValue = 0;
 
 						CivilizationTypes eBarbCiv = GET_PLAYER(getBarbarianPlayer()).getCivilizationType();
-						for (iJ = 0; iJ < GC.getNumUnitInfos(); iJ++)
+						for (int iJ = 0; iJ < GC.getNumUnitInfos(); iJ++)
 						{
-							//eLoopUnit = (UnitTypes) GC.getCivilizationInfo(eBarbCiv).getCivilizationUnits(iJ);
 							eLoopUnit = (UnitTypes) iJ;
+
+							// Check if the plot is connected to any Europe plot
+							if (pPlot->getDistanceToOcean() >= PLOT_OCEAN_DISTANCE_IMPASSABLE_THRESHOLD)
+								continue;
 
 							if (eLoopUnit == NO_UNIT)
 							{
@@ -5664,7 +5666,7 @@ void CvGame::createAnimalsSea()
 							iValue = 0;
 							if (pPlot->getTerrainType() != NO_TERRAIN)
 							{
-								// WTP, ray, for spawing we now als check that the Owern of the Plot is either NO_Player or Native, thus it will not spawn in cultural radius of Europeans and Kings
+								// WTP, ray, for spawing we now also check that the Owner of the Plot is either NO_Player or Native, thus it will not spawn in cultural radius of Europeans and Kings
 								if (GC.getUnitInfo(eLoopUnit).getTerrainNative(pPlot->getTerrainType()) && (pPlot->getOwnerINLINE() == NO_PLAYER || GET_PLAYER(pPlot->getOwnerINLINE()).isNative()))
 								{
 									iRand = GC.getWILD_ANIMAL_SEA_TERRAIN_NATIVE_WEIGHT();
@@ -5685,8 +5687,7 @@ void CvGame::createAnimalsSea()
 
 						if (eBestUnit != NO_UNIT)
 						{
-						    CvUnit* pNewUnit;
-							pNewUnit = GET_PLAYER(getBarbarianPlayer()).initUnit(eBestUnit, NO_PROFESSION, pPlot->getX_INLINE(), pPlot->getY_INLINE(), UNITAI_ANIMAL_SEA);
+							CvUnit* const pNewUnit = GET_PLAYER(getBarbarianPlayer()).initUnit(eBestUnit, NO_PROFESSION, pPlot->getX_INLINE(), pPlot->getY_INLINE(), UNITAI_ANIMAL_SEA);
 							pNewUnit->setBarbarian(true);
 							eLastUnit = eBestUnit;
 						}
@@ -6276,11 +6277,14 @@ void CvGame::testVictory()
 
 	updateScore();
 
-	long lResult = 1;
-	gDLL->getPythonIFace()->callFunction(PYGameModule, "isVictoryTest", NULL, &lResult);
-	if (lResult == 0)
-	{
-		return;
+	if (GC.getUSE_IS_VICTORY_TEST_CALLBACK())
+	{ 
+		long lResult = 1;
+		gDLL->getPythonIFace()->callFunction(PYGameModule, "isVictoryTest", NULL, &lResult);
+		if (lResult == 0)
+		{
+			return;
+		}
 	}
 
 	std::vector<CvWinner> aaiWinners;
@@ -6621,7 +6625,7 @@ void CvGame::addReplayMessage(ReplayMessageTypes eType, PlayerTypes ePlayer, CvW
 		pMessage->setText(pszText);
 		if (NO_COLOR == eColor)
 		{
-			eColor = (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE");
+			eColor = COLOR_WHITE;
 		}
 		pMessage->setColor(eColor);
 		m_listReplayMessages.push_back(pMessage);
@@ -6850,7 +6854,7 @@ void CvGame::setReplayInfo(CvReplayInfo* pReplay)
 
 void CvGame::addPlayer(PlayerTypes eNewPlayer, LeaderHeadTypes eLeader, CivilizationTypes eCiv)
 {
-	PlayerColorTypes eColor = (PlayerColorTypes)GC.getCivilizationInfo(eCiv).getDefaultPlayerColor();
+	PlayerColorTypes eColor = GC.getCivilizationInfo(eCiv).getDefaultPlayerColor();
 
 	for (int iI = 0; iI < MAX_PLAYERS; iI++)
 	{
@@ -6858,7 +6862,7 @@ void CvGame::addPlayer(PlayerTypes eNewPlayer, LeaderHeadTypes eLeader, Civiliza
 		{
 			for (int iK = 0; iK < GC.getNumPlayerColorInfos(); iK++)
 			{
-				if (iK != GC.getCivilizationInfo((CivilizationTypes)GC.getDefineINT("BARBARIAN_CIVILIZATION")).getDefaultPlayerColor())
+				if (iK != GC.getCivilizationInfo(GLOBAL_DEFINE_BARBARIAN_CIVILIZATION).getDefaultPlayerColor())
 				{
 					bool bValid = true;
 
@@ -7088,11 +7092,11 @@ bool CvGame::isUnitEverActive(UnitTypes eUnit) const
 
 bool CvGame::isBuildingEverActive(BuildingTypes eBuilding) const
 {
-	for (int iCiv = 0; iCiv < GC.getNumCivilizationInfos(); ++iCiv)
+	for (CivilizationTypes eCiv = FIRST_CIVILIZATION; eCiv < NUM_CIVILIZATION_TYPES; ++eCiv)
 	{
-		if (isCivEverActive((CivilizationTypes)iCiv))
+		if (isCivEverActive(eCiv))
 		{
-			if (eBuilding == GC.getCivilizationInfo((CivilizationTypes)iCiv).getCivilizationBuildings(GC.getBuildingInfo(eBuilding).getBuildingClassType()))
+			if (eBuilding == GC.getCivilizationInfo(eCiv).getCivilizationBuildings((BuildingClassTypes)GC.getBuildingInfo(eBuilding).getBuildingClassType()))
 			{
 				return true;
 			}
@@ -7118,7 +7122,8 @@ void CvGame::setFatherTeam(AssertCallerData assertData, FatherTypes eFather, Tea
 {
 	FAssertWithCaller(assertData, eFather >= 0);
 	FAssertWithCaller(assertData, eFather < NUM_FATHER_TYPES);
-	FAssertWithCaller(assertData, eTeam >= 0);
+	// NO_TEAM is now a valid argument for freeing a father from a dead team
+	FAssertWithCaller(assertData, eTeam >= 0 || eTeam == NO_TEAM);
 	FAssertWithCaller(assertData, eTeam < NUM_TEAM_TYPES);
 
 	if (getFatherTeam(eFather) != eTeam)
@@ -7167,11 +7172,11 @@ void CvGame::setFatherTeam(AssertCallerData assertData, FatherTypes eFather, Tea
 							szBuffer = gDLL->getText("TXT_KEY_FATHER_JOINED_UNKNOWN", GC.getFatherInfo(eFather).getTextKeyWide());
 						}
 
-						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_GLOBECIRCUMNAVIGATED", MESSAGE_TYPE_MAJOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+						gDLL->UI().addPlayerMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_GLOBECIRCUMNAVIGATED", MESSAGE_TYPE_MAJOR_EVENT, NULL, COLOR_HIGHLIGHT_TEXT);
 					}
 				}
 				szBuffer = gDLL->getText("TXT_KEY_FATHER_JOINED_TEAM", GC.getFatherInfo(eFather).getTextKeyWide(), GET_TEAM(getFatherTeam(eFather)).getName().GetCString());
-				addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, NO_PLAYER, szBuffer, -1, -1, (ColorTypes)GC.getInfoTypeForString("COLOR_HIGHLIGHT_TEXT"));
+				addReplayMessage(REPLAY_MESSAGE_MAJOR_EVENT, NO_PLAYER, szBuffer, -1, -1, COLOR_HIGHLIGHT_TEXT);
 			}
 		}
 	}
@@ -7226,85 +7231,30 @@ int CvGame::getFatherCategoryPosition(FatherTypes eFather) const
 	return iPosition;
 }
 
-void CvGame::changeYieldBoughtTotal(PlayerTypes eMainEurope, YieldTypes eYield, int iChange) const
+void CvGame::changeYieldBoughtTotal(TradeLocationTypes eLocation, PlayerTypes eMainEurope, YieldTypes eYield, int iChange) const
 {
 	//change non-mercantile Europes by partial amount
-	for(int iEurope=0;iEurope<MAX_PLAYERS;iEurope++)
+	for (PlayerTypes eEurope = FIRST_PLAYER; eEurope < NUM_PLAYER_TYPES; ++eEurope)
 	{
-		CvPlayer& kEuropePlayer = GET_PLAYER((PlayerTypes) iEurope);
-		if(kEuropePlayer.isAlive() && kEuropePlayer.isEurope())
+		CvPlayer& kEuropePlayer = GET_PLAYER(eEurope);
+		if (kEuropePlayer.isAlive() && kEuropePlayer.isEurope())
 		{
 			//check if any children are mercantile
-			int iMercantilePercent = (iEurope == eMainEurope) ? 100 : GC.getDefineINT("EUROPE_MARKET_CORRELATION_PERCENT");
-			for(int iPlayer=0;iPlayer<MAX_PLAYERS;iPlayer++)
+			int iMercantilePercent = (eEurope == eMainEurope) ? 100 : GLOBAL_DEFINE_EUROPE_MARKET_CORRELATION_PERCENT;
+			CvPlayer* pColonyPlayer = kEuropePlayer.getColonyPlayer();
+			FAssert(pColonyPlayer != NULL);
+
+			if (pColonyPlayer->isAlive())
 			{
-				CvPlayer& kChildPlayer = GET_PLAYER((PlayerTypes) iPlayer);
-				if(kChildPlayer.isAlive() && (kChildPlayer.getParent() == iEurope))
-				{
-					iMercantilePercent *= 100 + kChildPlayer.getMercantileFactor();
-					iMercantilePercent /= 100;
-				}
+				iMercantilePercent *= 100 + pColonyPlayer->getMercantileFactor();
+				iMercantilePercent /= 100;
 			}
 
 			//affect non-mercantile amounts
-			kEuropePlayer.changeYieldBoughtTotal(eYield, iChange * iMercantilePercent / 100);
+			kEuropePlayer.changeYieldTradedTaxCounter(eLocation, eYield, iChange * iMercantilePercent / 100);
 		}
 	}
 }
-
-// WTP, ray, Yields Traded Total for Africa and Port Royal - START
-void CvGame::changeYieldBoughtTotalAfrica(PlayerTypes eMainEurope, YieldTypes eYield, int iChange) const
-{
-	//change non-mercantile Europes by partial amount
-	for(int iEurope=0;iEurope<MAX_PLAYERS;iEurope++)
-	{
-		CvPlayer& kEuropePlayer = GET_PLAYER((PlayerTypes) iEurope);
-		if(kEuropePlayer.isAlive() && kEuropePlayer.isEurope())
-		{
-			//check if any children are mercantile
-			int iMercantilePercent = (iEurope == eMainEurope) ? 100 : GC.getDefineINT("EUROPE_MARKET_CORRELATION_PERCENT");
-			for(int iPlayer=0;iPlayer<MAX_PLAYERS;iPlayer++)
-			{
-				CvPlayer& kChildPlayer = GET_PLAYER((PlayerTypes) iPlayer);
-				if(kChildPlayer.isAlive() && (kChildPlayer.getParent() == iEurope))
-				{
-					iMercantilePercent *= 100 + kChildPlayer.getMercantileFactor();
-					iMercantilePercent /= 100;
-				}
-			}
-
-			//affect non-mercantile amounts
-			kEuropePlayer.changeYieldBoughtTotalAfrica(eYield, iChange * iMercantilePercent / 100);
-		}
-	}
-}
-
-void CvGame::changeYieldBoughtTotalPortRoyal(PlayerTypes eMainEurope, YieldTypes eYield, int iChange) const
-{
-	//change non-mercantile Europes by partial amount
-	for(int iEurope=0;iEurope<MAX_PLAYERS;iEurope++)
-	{
-		CvPlayer& kEuropePlayer = GET_PLAYER((PlayerTypes) iEurope);
-		if(kEuropePlayer.isAlive() && kEuropePlayer.isEurope())
-		{
-			//check if any children are mercantile
-			int iMercantilePercent = (iEurope == eMainEurope) ? 100 : GC.getDefineINT("EUROPE_MARKET_CORRELATION_PERCENT");
-			for(int iPlayer=0;iPlayer<MAX_PLAYERS;iPlayer++)
-			{
-				CvPlayer& kChildPlayer = GET_PLAYER((PlayerTypes) iPlayer);
-				if(kChildPlayer.isAlive() && (kChildPlayer.getParent() == iEurope))
-				{
-					iMercantilePercent *= 100 + kChildPlayer.getMercantileFactor();
-					iMercantilePercent /= 100;
-				}
-			}
-
-			//affect non-mercantile amounts
-			kEuropePlayer.changeYieldBoughtTotalPortRoyal(eYield, iChange * iMercantilePercent / 100);
-		}
-	}
-}
-// WTP, ray, Yields Traded Total for Africa and Port Royal - END
 
 void CvGame::updateOceanDistances()
 {
@@ -7341,8 +7291,9 @@ void CvGame::updateOceanDistances()
 		}
 
 		if (pPlot->isImpassable())
-		{
-			iDistance += 50;
+		{	
+			// Non-impassable plots with a number higher than this threshold are considered ice-locked.
+			iDistance += PLOT_OCEAN_DISTANCE_IMPASSABLE_THRESHOLD;
 		}
 
 		for (int iDirection = 0; iDirection < NUM_DIRECTION_TYPES; iDirection++)
@@ -7456,4 +7407,37 @@ int CvGame::getRemainingForcedPeaceTurns() const
 	const int forcedPeaceTurns = GC.getDefineINT("COLONIAL_FORCED_PEACE_TURNS") * gamespeedMod / 100;
 	const int diff = forcedPeaceTurns - GC.getGameINLINE().getElapsedGameTurns();
 	return std::max(0, diff);
+}
+
+CvPlot* CvGame::getAnyEuropePlot() const
+{
+	for (PlayerTypes ePlayer = FIRST_PLAYER; ePlayer < NUM_PLAYER_TYPES; ePlayer++)
+	{
+		CvPlayer& kPlayer = GET_PLAYER(ePlayer);
+		
+		if (kPlayer.isEverAlive() && kPlayer.getCivCategoryTypes() == CIV_CATEGORY_COLONIAL)
+		{
+			 CvPlot* const pStartingPlot = kPlayer.getStartingPlot();
+			 if (pStartingPlot != NULL)
+			 {
+				 return pStartingPlot;
+			 }
+		}
+	}
+	
+	return NULL;
+}
+
+unsigned int CvGame::getWorldBuilderOpeningCounter() const
+{
+	return m_uiWorldBuilderUseCount;
+}
+
+void CvGame::increaseWorldBuilderOpeningCounter()
+{
+	// overflow seems unrealistic, but protect against it just in case. You never know what some people might do
+	if (m_uiWorldBuilderUseCount != MAX_UNSIGNED_INT)
+	{
+		++m_uiWorldBuilderUseCount;
+	}
 }

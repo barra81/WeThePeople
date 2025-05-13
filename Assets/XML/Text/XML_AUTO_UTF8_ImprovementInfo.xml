@@ -1246,22 +1246,6 @@
 		<German>[ICON_BULLET]Kann nur angrenzend an [COLOR_UNIT_TEXT]Wassergeländefelder[COLOR_REVERT], wie z.B. Küsten, flache Küsten, große Flüsse, Seen oder Eisseen gebaut werden [NEWLINE][ICON_BULLET]Erlaubt [COLOR_UNIT_TEXT]Küstenschiffen [COLOR_REVERT] und [COLOR_UNIT_TEXT]Fischerbooten[COLOR_REVERT] die Durchfahrt über [COLOR_HIGHLIGHT_TEXT]Land[COLOR_REVERT]</German>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_IMPROVEMENT_FISHING_NETS_RIVER</Tag>
-		<English>River Fishing Nets</English>
-		<French>Filet de Pêche en Rivière</French>
-		<German>
-			<Text>Fischernetz am Fluss</Text>
-			<Gender>Neuter</Gender>
-			<Plural>1</Plural>
-		</German>
-		<Russian>Сеть для речной рыбалки</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_IMPROVEMENT_FISHING_NETS_RIVER_PEDIA</Tag>
-		<English>[COLOR_HIGHLIGHT_TEXT]Fishing nets[COLOR_REVERT] can be woven to scoop up a shoal of fish or, with gill nets, to trap fish of the desired size. It's one of the two main systems used by fishing boats, the other being trawling with hooks.</English>
-		<German>[COLOR_HIGHLIGHT_TEXT]Fischernetze[COLOR_REVERT] werden genutzt um einen Fischschwarm zu fangen, oder mit sogenannten Kiemennetzen auch nur Fische einer bestimmten Größe. Daneben gibt es noch ein anderes Hauptsystem, das von Fischern verwendet wird: das Schleppnetz, welches mit einem Haken hinter dem Schiff hergezogen wird.</German>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_IMPROVEMENT_FISHING_NETS</Tag>
 		<English>Fishing Nets</English>
 		<French>Filets de pêche</French>
@@ -1306,7 +1290,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_IMPROVEMENT_SALINA_PEDIA</Tag>
-		<English>[COLOR_HIGHLIGHT_TEXT]Salt works[COLOR_REVERT] are where salt is purified either after being mined, which produces rock salt, or extracted by pumping water into a salt deposit. In either case, the salt may be purified by mechanical evaporation of brine. Purification is done using shallow open pans heated to accelerate evaporation.</English>
+		<English>UNIMPLEMENTED [COLOR_HIGHLIGHT_TEXT]Salt works[COLOR_REVERT] are where salt is purified either after being mined, which produces rock salt, or extracted by pumping water into a salt deposit. In either case, the salt may be purified by mechanical evaporation of brine. Purification is done using shallow open pans heated to accelerate evaporation.</English>
 		<French>[COLOR_HIGHLIGHT_TEXT]Les salines[COLOR_REVERT] sont les endroits où le sel est purifié soit après avoir été extrait, ce qui produit du sel gemme, soit en pompant de l'eau dans un gisement de sel. Dans les deux cas, le sel peut être purifié par évaporation mécanique de la saumure. La purification se fait à l'aide de bacs ouverts peu profonds, chauffés pour accélérer l'évaporation.</French>
 		<German>[COLOR_HIGHLIGHT_TEXT]Saline[COLOR_REVERT] sind Orte, an denen Salz gereinigt wird, entweder nach dem Abbau, bei dem Steinsalz entsteht, oder durch das Pumpen von Wasser in eine Salzlagerstätte gewonnen wird. In beiden Fällen kann das Salz durch mechanische Verdampfung der Sole gereinigt werden. Die Reinigung erfolgt in flachen, offenen Pfannen, die zur Beschleunigung der Verdunstung erhitzt werden.</German>
 	</TEXT>
@@ -1323,7 +1307,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_IMPROVEMENT_LARGE_SALINA_PEDIA</Tag>
-		<English>[COLOR_HIGHLIGHT_TEXT]Large salt works[COLOR_REVERT] are where salt is purified either after being mined, which produces rock salt, or extracted by pumping water into a salt deposit. In either case, the salt may be purified by mechanical evaporation of brine. Purification is done using shallow open pans heated to accelerate evaporation.</English>
+		<English>UNIMPLEMENTED [COLOR_HIGHLIGHT_TEXT]Large salt works[COLOR_REVERT] are where salt is purified either after being mined, which produces rock salt, or extracted by pumping water into a salt deposit. In either case, the salt may be purified by mechanical evaporation of brine. Purification is done using shallow open pans heated to accelerate evaporation.</English>
 		<French>[COLOR_HIGHLIGHT_TEXT]Les grandes salines[COLOR_REVERT] sont les endroits où le sel est purifié soit après avoir été extrait, ce qui produit du sel gemme, soit en pompant de l'eau dans un gisement de sel. Dans les deux cas, le sel peut être purifié par évaporation mécanique de la saumure. La purification se fait à l'aide de bacs ouverts peu profonds et chauffés pour accélérer l'évaporation.</French>
 		<German>[COLOR_HIGHLIGHT_TEXT]Große Saline[COLOR_REVERT] sind Orte, an denen Salz gereinigt wird, entweder nach dem Abbau, bei dem Steinsalz entsteht, oder durch das Pumpen von Wasser in eine Salzlagerstätte gewonnen wird. In beiden Fällen kann das Salz durch mechanische Verdampfung der Sole gereinigt werden. Die Reinigung erfolgt in flachen, offenen Pfannen, die zur Beschleunigung der Verdunstung beheizt werden.</German>
 	</TEXT>
@@ -1336,10 +1320,20 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_IMPROVEMENT_BUILD_ONLY_LAKE</Tag>
-		<English>[ICON_BULLET]Can only be built on [LINK=TERRAIN_LAKE]fresh water lakes[\LINK], [LINK=TERRAIN_ICE_LAKE]ice lakes[\LINK], [LINK=TERRAIN_ICE_LAKE]coasts[\LINK] or [LINK=TERRAIN_ICE_LAKE]shallow coasts[\LINK]</English>
+		<English>[ICON_BULLET]Can only be built on [LINK=TERRAIN_LAKE]fresh water lakes[\LINK] or [LINK=TERRAIN_ICE_LAKE]ice lakes[\LINK].</English>
 		<French>[ICON_BULLET]Ne peut être construit que sur les [LINK=TERRAIN_LAKE]lacs d'eau douce[\LINK], les [LINK=TERRAIN_ICE_LAKE]lacs de glace[\LINK], les [LINK=TERRAIN_ICE_LAKE]côtes[\LINK] ou les [LINK=TERRAIN_ICE_LAKE]côtes peu profondes[\LINK].</French>
 		<German>[ICON_BULLET]Kann nur auf [LINK=TERRAIN_LAKE]Süßwassersee[\LINK], [LINK=TERRAIN_ICE_LAKE]Eisseen[\LINK], [LINK=TERRAIN_ICE_LAKE]Küsten[\LINK] oderr [LINK=TERRAIN_ICE_LAKE]flachen Küsten[\LINK] gebaut werden.</German>
-		<Russian>[ICON_BULLET]Можно строить только на [LINK=TERRAIN_LAKE]пресноводном озере[\LINK], [LINK=TERRAIN_ICE_LAKE]замерзшем озере[\LINK], [LINK=TERRAIN_ICE_LAKE]побережье[\LINK] или [LINK=TERRAIN_ICE_LAKE]мелководье[\LINK]</Russian>
+		<Russian>[ICON_BULLET]Можно строить только на [LINK=TERRAIN_LAKE]пресноводном[\LINK] или [LINK=TERRAIN_ICE_LAKE]замёрзшем[\LINK] озёрах.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_IMPROVEMENT_BUILD_ONLY_SALTWATER</Tag>
+		<English>[ICON_BULLET]Can only be built on [LINK=TERRAIN_SHALLOW_COAST]shallow coasts[\LINK], [LINK=TERRAIN_COAST]coasts[\LINK], or [LINK=TERRAIN_OCEAN]ocean[\LINK].</English>
+		<Russian>[ICON_BULLET]Можно строить только на [LINK=TERRAIN_COAST]побережье[\LINK], [LINK=TERRAIN_SHALLOW_COAST]мелководье[\LINK] или в [LINK=TERRAIN_OCEAN]океане[\LINK].</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_IMPROVEMENT_BUILD_ONLY_FRESHWATER</Tag>
+		<English>[ICON_BULLET]Can only be built on [LINK=TERRAIN_LAKE]fresh water lakes[\LINK], [LINK=TERRAIN_ICE_LAKE]ice lakes[\LINK], or [LINK=TERRAIN_LARGE_RIVERS]large rivers[\LINK].</English>
+		<Russian>[ICON_BULLET]Можно строить только на [LINK=TERRAIN_LAKE]пресноводном[\LINK] и [LINK=TERRAIN_ICE_LAKE]замёрзшем[\LINK] озёрах или на [LINK=TERRAIN_LARGE_RIVERS]больших реках[\LINK].</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_GOODY_FOR_SPAWNING_UNITS</Tag>

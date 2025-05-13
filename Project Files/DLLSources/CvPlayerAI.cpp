@@ -121,8 +121,6 @@ void CvPlayerAI::AI_doTurnPre()
 	FAssertMsg(getLeaderType() != NO_LEADER, "getLeaderType() is not expected to be equal with NO_LEADER");
 	FAssertMsg(getCivilizationType() != NO_CIVILIZATION, "getCivilizationType() is not expected to be equal with NO_CIVILIZATION");
 
-	int m_estimatedUnemploymentCount = AI_estimateUnemploymentCount();
-
 	AI_invalidateCloseBordersAttitudeCache();
 
 	AI_doCounter();
@@ -824,6 +822,7 @@ void CvPlayerAI::AI_unitUpdate()
 						{
 							if (!pUnit->getGroup()->isBusy() && !pUnit->getGroup()->isCargoBusy())
 							{
+								FAssert(!isTempUnit(pUnit));
 								pUnit->AI_update();
 							}
 							else
@@ -3490,9 +3489,9 @@ int CvPlayerAI::AI_militaryHelp(PlayerTypes ePlayer, int& iNumUnits, UnitTypes& 
 
 	CvPlayer& kPlayer = GET_PLAYER(ePlayer);
 	int iBestValue = MAX_INT;
-	for (int i = 0; i < GC.getNumUnitClassInfos(); ++i)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		UnitTypes eLoopUnit = (UnitTypes) GC.getCivilizationInfo(kPlayer.getCivilizationType()).getCivilizationUnits(i);
+		UnitTypes eLoopUnit = GC.getCivilizationInfo(kPlayer.getCivilizationType()).getCivilizationUnits(eUnitClass);
 		if (eLoopUnit != NO_UNIT)
 		{
 
@@ -3528,7 +3527,7 @@ int CvPlayerAI::AI_militaryHelp(PlayerTypes ePlayer, int& iNumUnits, UnitTypes& 
 
 				if (bValid)
 				{
-					int iValue = kPlayer.getUnitClassCount((UnitClassTypes) i);
+					int iValue = kPlayer.getUnitClassCount(eUnitClass);
 					if (iValue < iBestValue)
 					{
 						iBestValue = iValue;
@@ -4514,11 +4513,11 @@ int CvPlayerAI::AI_unitEconomicValue(UnitTypes eUnit, UnitAITypes* peUnitAI, CvC
 
 				if (kUnitInfo.getYieldModifier(eYield) > 0)
 				{
-					for (int iJ = 0; iJ < GC.getNumProfessionInfos(); iJ++)
+					for(ProfessionTypes eProfession = FIRST_PROFESSION; eProfession < NUM_PROFESSION_TYPES; ++eProfession)
 					{
-						if (GC.getCivilizationInfo(getCivilizationType()).isValidProfession(iJ))
+						if (GC.getCivilizationInfo(getCivilizationType()).isValidProfession(eProfession))
 						{
-							CvProfessionInfo& kProfessionInfo = GC.getProfessionInfo((ProfessionTypes)iJ);
+							const CvProfessionInfo& kProfessionInfo = GC.getProfessionInfo(eProfession);
 							// R&R, ray , MYCP partially based on code of Aymerick - START
 							if (kProfessionInfo.getNumYieldsProduced() >0 && kProfessionInfo.getYieldsProduced(0) == eYield)
 							{
@@ -5753,7 +5752,7 @@ int CvPlayerAI::AI_unitTargetMissionAIs(CvUnit* pUnit, MissionAITypes* aeMission
 
 				if( iMaxPathTurns >= 0 && (pUnit->plot() != NULL) && (pLoopSelectionGroup->plot() != NULL))
 				{
-					pLoopSelectionGroup->generatePath(pLoopSelectionGroup->plot(), pUnit->plot(), 0, false, &iPathTurns);
+					pLoopSelectionGroup->generatePath(pUnit->plot(), pLoopSelectionGroup->plot(), 0, false, &iPathTurns);
 					if( !(pLoopSelectionGroup->canAllMove()) )
 					{
 						iPathTurns++;
@@ -6628,30 +6627,31 @@ void CvPlayerAI::AI_doTradeRoutes()
 
 void CvPlayerAI::AI_doCounter()
 {
-	int iI, iJ;
+	const CvLeaderHeadInfo& kLeaderHeadInfo = GC.getLeaderHeadInfo(getPersonalityType());
 
 	// R&R, ray, small code change from Commander Bello, united 2 for loops - START
-	for (iI = 0; iI < MAX_PLAYERS; iI++)
+	for (PlayerTypes ePlayer = FIRST_PLAYER; ePlayer < NUM_PLAYER_TYPES; ++ePlayer)
 	{
-		if (GET_PLAYER((PlayerTypes)iI).isAlive())
+		if (GET_PLAYER(ePlayer).isAlive())
 		{
-			for (iJ = 0; iJ < NUM_CONTACT_TYPES; iJ++)
+			for (ContactTypes eContact = FIRST_CONTACT; eContact < NUM_CONTACT_TYPES; ++eContact)
 			{
-				if (AI_getContactTimer(((PlayerTypes)iI), ((ContactTypes)iJ)) > 0)
+				if (AI_getContactTimer(ePlayer, eContact) > 0)
 				{
-					AI_changeContactTimer(((PlayerTypes)iI), ((ContactTypes)iJ), -1);
+					AI_changeContactTimer(ePlayer, eContact, -1);
 				}
 			}
 
-			for (iJ = 0; iJ < NUM_MEMORY_TYPES; iJ++)
+			for (MemoryTypes eMemory = FIRST_MEMORY; eMemory < NUM_MEMORY_TYPES; ++eMemory)
 			{
-				if (AI_getMemoryCount(((PlayerTypes)iI), ((MemoryTypes)iJ)) > 0)
+				if (AI_getMemoryCount(ePlayer, eMemory) > 0)
 				{
-					if (GC.getLeaderHeadInfo(getPersonalityType()).getMemoryDecayRand(iJ) > 0)
+					const int iMemoryDecayRand = kLeaderHeadInfo.getMemoryDecayRand(eMemory);
+					if (iMemoryDecayRand > 0)
 					{
-						if (GC.getGameINLINE().getSorenRandNum(GC.getLeaderHeadInfo(getPersonalityType()).getMemoryDecayRand(iJ), "Memory Decay") == 0)
+						if (GC.getGameINLINE().getSorenRandNum(iMemoryDecayRand, "Memory Decay") == 0)
 						{
-							AI_changeMemoryCount(((PlayerTypes)iI), ((MemoryTypes)iJ), -1);
+							AI_changeMemoryCount(ePlayer, eMemory, -1);
 						}
 					}
 				}
@@ -10574,9 +10574,9 @@ UnitTypes CvPlayerAI::AI_bestUnit(UnitAITypes eUnitAI, CvArea* pArea)
 	int iBestValue = 0;
 	UnitTypes eBestUnit = NO_UNIT;
 
-	for (int iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		UnitTypes eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+		UnitTypes eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 
 		if (eLoopUnit != NO_UNIT)
 		{
@@ -10591,7 +10591,7 @@ UnitTypes CvPlayerAI::AI_bestUnit(UnitAITypes eUnitAI, CvArea* pArea)
 					iValue /= 100;
 
 					iValue *= (getNumCities() + 2);
-					iValue /= (getUnitClassCountPlusMaking((UnitClassTypes)iI) + getNumCities() + 2);
+					iValue /= (getUnitClassCountPlusMaking(eUnitClass) + getNumCities() + 2);
 
 					FAssert((MAX_INT / 1000) > iValue);
 					iValue *= 1000;
@@ -12200,7 +12200,7 @@ int CvPlayerAI::AI_eventValue(EventTypes eEvent, const EventTriggeredData& kTrig
 
 	if (kEvent.getBuildingClass() != NO_BUILDINGCLASS)
 	{
-		BuildingTypes eBuilding = (BuildingTypes)GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings(kEvent.getBuildingClass());
+		BuildingTypes eBuilding = GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings((BuildingClassTypes)kEvent.getBuildingClass());
 		if (eBuilding != NO_BUILDING)
 		{
 			if (pCity)
@@ -13693,10 +13693,9 @@ int CvPlayerAI::AI_goldToUpgradeAllUnits(int iExpThreshold)
 		CvArea* pUnitArea = pLoopUnit->area();
 		int iUnitValue = AI_unitValue(eUnitType, eUnitAIType, pUnitArea);
 
-		for (int iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+		for (UnitClassTypes eUpgradeUnitClassType = FIRST_UNITCLASS; eUpgradeUnitClassType < NUM_UNITCLASS_TYPES; ++eUpgradeUnitClassType)
 		{
-			UnitClassTypes eUpgradeUnitClassType = (UnitClassTypes) iI;
-			UnitTypes eUpgradeUnitType = (UnitTypes)(kCivilizationInfo.getCivilizationUnits(iI));
+			UnitTypes eUpgradeUnitType = (UnitTypes)(kCivilizationInfo.getCivilizationUnits(eUpgradeUnitClassType));
 
 			if (NO_UNIT != eUpgradeUnitType)
 			{
@@ -14057,16 +14056,16 @@ UnitTypes CvPlayerAI::AI_bestAdvancedStartUnitAI(CvPlot* pPlot, UnitAITypes eUni
 	UnitTypes eBestUnit;
 	int iValue;
 	int iBestValue;
-	int iI, iJ, iK;
+	int iJ, iK;
 
 	FAssertMsg(eUnitAI != NO_UNITAI, "UnitAI is not assigned a valid value");
 
 	iBestValue = 0;
 	eBestUnit = NO_UNIT;
 
-	for (iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+		eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 
 		if (eLoopUnit != NO_UNIT)
 		{
@@ -14134,7 +14133,7 @@ UnitTypes CvPlayerAI::AI_bestAdvancedStartUnitAI(CvPlot* pPlot, UnitAITypes eUni
 						iValue /= 100;
 
 						iValue *= (getNumCities() + 2);
-						iValue /= (getUnitClassCountPlusMaking((UnitClassTypes)iI) + getNumCities() + 2);
+						iValue /= (getUnitClassCountPlusMaking(eUnitClass) + getNumCities() + 2);
 
 						FAssert((MAX_INT / 1000) > iValue);
 						iValue *= 1000;
@@ -14933,15 +14932,14 @@ int CvPlayerAI::AI_bestCityUnitAIValue(UnitAITypes eUnitAI, CvCity* pCity, UnitT
 	UnitTypes eLoopUnit;
 	int iValue;
 	int iBestValue;
-	int iI;
 
 	FAssertMsg(eUnitAI != NO_UNITAI, "UnitAI is not assigned a valid value");
 
 	iBestValue = 0;
 
-	for (iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+		eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 
 		if (eLoopUnit != NO_UNIT)
 		{
@@ -14968,12 +14966,11 @@ int CvPlayerAI::AI_bestCityUnitAIValue(UnitAITypes eUnitAI, CvCity* pCity, UnitT
 
 int CvPlayerAI::AI_calculateTotalBombard(DomainTypes eDomain)
 {
-	int iI;
 	int iTotalBombard = 0;
 
-	for (iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		UnitTypes eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+		UnitTypes eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 		if (eLoopUnit != NO_UNIT)
 		{
 			if (GC.getUnitInfo(eLoopUnit).getDomainType() == eDomain)
@@ -14982,7 +14979,7 @@ int CvPlayerAI::AI_calculateTotalBombard(DomainTypes eDomain)
 
 				if (iBombardRate > 0)
 				{
-					iTotalBombard += iBombardRate * getUnitClassCount((UnitClassTypes)iI);
+					iTotalBombard += iBombardRate * getUnitClassCount(eUnitClass);
 				}
 			}
 		}
@@ -15436,9 +15433,9 @@ void CvPlayerAI::AI_updateNextBuyUnit(bool bPriceLimit)
 		}
 		// TAC - AI Assault Sea - koma13 - END
 
-		for (int iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+		for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 		{
-			UnitTypes eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+			UnitTypes eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 			if (eLoopUnit != NO_UNIT)
 			{
 				// Only consider units that default to this unit ai
@@ -15531,9 +15528,9 @@ void CvPlayerAI::AI_updateNextBuyProfession()
 		ProfessionTypes eDefaultProfession = GC.getCivilizationInfo(getCivilizationType()).getDefaultProfession();
 		int iColMultiplier = AI_unitAIValueMultipler(UNITAI_COLONIST);
 		//Professions which work in cities.
-		for (int iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+		for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 		{
-			UnitTypes eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+			UnitTypes eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 			if (eLoopUnit != NO_UNIT)
 			{
 				CvUnitInfo& kUnitInfo = GC.getUnitInfo(eLoopUnit);
@@ -15560,7 +15557,7 @@ void CvPlayerAI::AI_updateNextBuyProfession()
 									int iValue = 50 + 3 * AI_professionUpgradeValue(eProfession, eLoopUnit);
 									iValue *= iColMultiplier;
 									iValue /= 100;
-									int iExisting = getUnitClassCountPlusMaking((UnitClassTypes)iI);
+									int iExisting = getUnitClassCountPlusMaking(eUnitClass);
 									if (iExisting < 3)
 									{
 										iValue *= 100 + (5 + getTotalPopulation()) * kUnitInfo.getYieldModifier(YIELD_LUMBER) / (5 * (1 + iExisting));
@@ -16426,9 +16423,9 @@ bool CvPlayerAI::AI_shouldHurryUnit() const
 	// Hurrying is also preferable until the cost of hurrying approaches the cost of a free colonist
 	int iEuropeMinBuyCost = INT_MAX;
 
-	for (int iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		const UnitTypes eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+		const UnitTypes eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 		if (eLoopUnit != NO_UNIT)
 		{
 			const CvUnitInfo& kUnitInfo = GC.getUnitInfo(eLoopUnit);
@@ -16450,9 +16447,9 @@ bool CvPlayerAI::AI_shouldHurryUnit() const
 	int iEuropeMinHurryCost = INT_MAX;
 
 	// Find the cost of hurrying the cheapest unit suitable for any profession that cannot escape
-	for (int iIndex = 0; iIndex < GC.getDefineINT("DOCKS_NEXT_UNITS"); ++iIndex)
+	for (unsigned int iIndex = 0; iIndex < CivEffect().getNumUnitsOnDock(); ++iIndex)
 	{
-		const int iHurryCost = getHurryGold((HurryTypes)1, iIndex);
+		const int iHurryCost = getHurryGold(HURRY_IMMIGRANT, iIndex);
 		if (iHurryCost < iEuropeMinHurryCost)
 		{
 			iEuropeMinHurryCost = iHurryCost;
@@ -16468,17 +16465,17 @@ int CvPlayerAI::AI_getBestDockUnit() const
 {
 	int iBestIndex = 0;
 	int iBestAdvantage = 0;
-	const int iDockCount = GC.getDefineINT("DOCKS_NEXT_UNITS");
+	const int iDockCount = CivEffect().getNumUnitsOnDock();
 
 	// TODO: This needs to be a while loop since the indices are not stable
 	for (int iIndex = 0; iIndex < iDockCount; ++iIndex)
 	{
-		const UnitTypes eLoopUnit = (UnitTypes)getDocksNextUnit(iIndex);
+		const UnitTypes eLoopUnit = getDocksNextUnit(iIndex);
 
 		// At this point there should always be a unit available
 		FAssert(eLoopUnit != NO_UNIT);
 
-		const int iHurryCost = getHurryGold((HurryTypes)1, iIndex);
+		const int iHurryCost = getHurryGold(HURRY_IMMIGRANT, iIndex);
 
 		const int iUnitCost = getEuropeUnitBuyPrice(eLoopUnit);
 
@@ -16507,11 +16504,11 @@ void CvPlayerAI::AI_hurryBestDockUnits(int iHurryCount)
 			const int index = AI_getBestDockUnit();
 
 			// Note: Will be false if we can't afford it
-			const bool bCanHurry = canHurry((HurryTypes)1, iIndex);
+			const bool bCanHurry = canHurry(HURRY_IMMIGRANT, iIndex);
 
 			if (bCanHurry)
 			{
-				hurry((HurryTypes)1, iIndex);
+				hurry(HURRY_IMMIGRANT, iIndex);
 			}
 			else
 			{
@@ -16574,6 +16571,9 @@ int CvPlayerAI::AI_estimateUnemploymentCount() const
 			cnt++;
 		}
 	}
+
+	logBBAI("CvPlayerAI::AI_estimateUnemploymentCount for Player %S: %d", getCivilizationDescription(),
+		cnt);
 
 	return cnt;
 }

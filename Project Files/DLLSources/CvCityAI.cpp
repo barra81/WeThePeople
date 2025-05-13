@@ -85,6 +85,9 @@ void CvCityAI::AI_doTurn()
 {
 	PROFILE_FUNC();
 
+	UnitTypes eUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(GLOBAL_DEFINE_DEFAULT_POPULATION_UNIT);
+	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+
 	AI_doTradedYields();
 
 	if (!isHuman())
@@ -196,6 +199,9 @@ void CvCityAI::AI_assignWorkingPlots()
 	it's kind of expensive, but not THAT expensive with only 8 plots per colony
 	and the population numbers being low.
 	*/
+
+	const int iMaxAttemptsPerCitizen = 2;
+	stdext::hash_map<CvUnit*, int> attempts;
 	std::deque<CvUnit*> citizens;
 
 	for (int iPass = 0; iPass < 3; ++iPass)
@@ -260,20 +266,28 @@ void CvCityAI::AI_assignWorkingPlots()
 			jobMutex.unlock();
 		}
 
-		CvUnit* pOldUnit = AI_parallelAssignToBestJob(*pUnit);
+		CvUnit* const pOldUnit = AI_parallelAssignToBestJob(*pUnit);
+		attempts[pUnit]++;
 
-		if (pOldUnit != NULL)
+		// Limit the number of attempt for this citizen
+		if (pOldUnit != NULL && attempts[pUnit] > iMaxAttemptsPerCitizen)
 		{
 			if (std::find(citizens.begin(), citizens.end(), pOldUnit) == citizens.end())
 			{
 				citizens.push_front(pOldUnit);
 			}
 		}
+
 		iCount++;
 		if (iCount > iMaxIterations)
 		{
+			// Check if there's a sensible reason why we failed to employ the citizen
+			const int iNetFood = foodDifference();
+			const int iStoredFood = getYieldStored(YIELD_FOOD);
 			CvWString szTempBuffer;
-			szTempBuffer.Format(L"AI plot assignment confusion. Unit: %s in city: %s could not be assigned to a job!", pUnit->getNameAndProfession().GetCString(), getName().GetCString());
+			szTempBuffer.Format(L"AI plot assignment confusion. Unit: %s in city: %s could not be assigned to a job!. \
+				Food difference: %d Food Stored: %d", pUnit->getNameAndProfession().GetCString(), getName().GetCString(),
+				iNetFood, iStoredFood);
 			std::string s(szTempBuffer.begin(), szTempBuffer.end());
 			FAssertMsg(false, s.c_str());
 			break;
@@ -535,57 +549,56 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPi
 	UnitTypes eBestUnit = NO_UNIT;
 
 	int iBestValue = 0;
-	int iI;
 
 	if (peBestUnitAI != NULL)
 	{
 		*peBestUnitAI = NO_UNITAI;
 	}
 
-	for (iI = 0; iI < NUM_UNITAI_TYPES; iI++)
+	for (UnitAITypes eUnitAI = FIRST_UNITAI; eUnitAI < NUM_UNITAI_TYPES; ++eUnitAI)
 	{
 		if (bAsync)
 		{
-			aiUnitAIVal[iI] += GC.getASyncRand().get(25, "AI Best UnitAI ASYNC");
+			aiUnitAIVal[eUnitAI] += GC.getASyncRand().get(25, "AI Best UnitAI ASYNC");
 		}
 		else
 		{
 			//aiUnitAIVal[iI] += GC.getGameINLINE().getSorenRandNum(100, "AI Best UnitAI");
 			//Erik: Less initial randomness for unit selection
-			aiUnitAIVal[iI] += GC.getGameINLINE().getSorenRandNum(25, "AI Best UnitAI");
+			aiUnitAIVal[eUnitAI] += GC.getGameINLINE().getSorenRandNum(25, "AI Best UnitAI");
 		}
 	}
 
-	for (iI = 0; iI < NUM_UNITAI_TYPES; iI++)
+	for (UnitAITypes eUnitAI = FIRST_UNITAI; eUnitAI < NUM_UNITAI_TYPES; ++eUnitAI)
 	{
 		// Erik: Note that no leader is currently making use of this
-		aiUnitAIVal[iI] *= std::max(0, (GC.getLeaderHeadInfo(getPersonalityType()).getUnitAIWeightModifier(iI) + 100));
-		aiUnitAIVal[iI] /= 100;
+		aiUnitAIVal[eUnitAI] *= std::max(0, (GC.getLeaderHeadInfo(getPersonalityType()).getUnitAIWeightModifier(eUnitAI) + 100));
+		aiUnitAIVal[eUnitAI] /= 100;
 
 		if (!bPickAny)
 		{
-			aiUnitAIVal[iI] *= GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
-			aiUnitAIVal[iI] /= 100;
+			aiUnitAIVal[eUnitAI] *= GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler(eUnitAI);
+			aiUnitAIVal[eUnitAI] /= 100;
 		}
 	}
 
 	// TAC - AI Training - koma13 - START
 	if (GET_PLAYER(getOwnerINLINE()).getParent() != NO_PLAYER)
 	{
-		for (iI = 0; iI < NUM_UNITAI_TYPES; iI++)
+		for (UnitAITypes eUnitAI = FIRST_UNITAI; eUnitAI < NUM_UNITAI_TYPES; ++eUnitAI)
 		{
-			switch((UnitAITypes)iI)
+			switch(eUnitAI)
 			{
 			case UNITAI_WAGON:
 				{
 					const int iAreaCities = area()->getCitiesPerPlayer(getOwnerINLINE());
 					if ((iAreaCities <= 1) || ((area()->getNumAIUnits(getOwnerINLINE(), UNITAI_WAGON) + area()->getNumTrainAIUnits(getOwnerINLINE(), UNITAI_WAGON)) > (iAreaCities*(iAreaCities - 1)) / 2))
 					{
-						aiUnitAIVal[iI] = 0;
+						aiUnitAIVal[eUnitAI] = 0;
 					}
 					else
 					{
-						aiUnitAIVal[iI] = GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
+						aiUnitAIVal[eUnitAI] = GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler(eUnitAI);
 					}
 				}
 				break;
@@ -601,17 +614,17 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPi
 						const int iAreaCities = area()->getCitiesPerPlayer(getOwnerINLINE());
 						if (GET_PLAYER(getOwnerINLINE()).AI_totalWaterAreaUnitAIs(pWaterArea, UNITAI_TRANSPORT_COAST) <= iAreaCities / 2)
 						{
-							iValue = GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI);
+							iValue = GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler(eUnitAI);
 						}
 					}
-					aiUnitAIVal[iI] = iValue;
+					aiUnitAIVal[eUnitAI] = iValue;
 				}
 				break;
 
 			case UNITAI_DEFENSIVE:
 				if (GET_PLAYER(getOwnerINLINE()).AI_totalDefendersNeeded(NULL, area(), true) <= 0)
 				{
-					aiUnitAIVal[iI] = 0;
+					aiUnitAIVal[eUnitAI] = 0;
 				}
 				break;
 
@@ -619,16 +632,16 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPi
 			case UNITAI_ESCORT_SEA:
 				if (!GET_PLAYER(getOwnerINLINE()).AI_prepareAssaultSea())
 				{
-					aiUnitAIVal[iI] = 0;
+					aiUnitAIVal[eUnitAI] = 0;
 				}
 				break;
 
 			case UNITAI_WORKER_SEA:
 			case UNITAI_TRANSPORT_SEA:
 			case UNITAI_PIRATE_SEA:
-				if (GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler((UnitAITypes)iI) == 0)
+				if (GET_PLAYER(getOwnerINLINE()).AI_unitAIValueMultipler(eUnitAI) == 0)
 				{
-					aiUnitAIVal[iI] = 0;
+					aiUnitAIVal[eUnitAI] = 0;
 				}
 				break;
 
@@ -639,19 +652,19 @@ UnitTypes CvCityAI::AI_bestUnit(bool bAsync, UnitAITypes* peBestUnitAI, bool bPi
 	}
 	// TAC - AI Training - koma13 - END
 
-	for (iI = 0; iI < NUM_UNITAI_TYPES; iI++)
+	for (UnitAITypes eUnitAI = FIRST_UNITAI; eUnitAI < NUM_UNITAI_TYPES; ++eUnitAI)
 	{
-		if (aiUnitAIVal[iI] > iBestValue)
+		if (aiUnitAIVal[eUnitAI] > iBestValue)
 		{
-			eUnit = AI_bestUnitAI(((UnitAITypes)iI), bAsync);
+			eUnit = AI_bestUnitAI(eUnitAI, bAsync);
 
 			if (eUnit != NO_UNIT)
 			{
-				iBestValue = aiUnitAIVal[iI];
+				iBestValue = aiUnitAIVal[eUnitAI];
 				eBestUnit = eUnit;
 				if (peBestUnitAI != NULL)
 				{
-					*peBestUnitAI = ((UnitAITypes)iI);
+					*peBestUnitAI = eUnitAI;
 				}
 			}
 		}
@@ -669,16 +682,16 @@ UnitTypes CvCityAI::AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync) const
 	int iBestValue;
 	int iOriginalValue;
 	int iBestOriginalValue;
-	int iI, iJ, iK;
+	int iJ, iK;
 
 
 	FAssertMsg(eUnitAI != NO_UNITAI, "UnitAI is not assigned a valid value");
 
 	iBestOriginalValue = 0;
 
-	for (iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+		eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 
 		if (eLoopUnit != NO_UNIT)
 		{
@@ -706,9 +719,9 @@ UnitTypes CvCityAI::AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync) const
 	iBestValue = 0;
 	eBestUnit = NO_UNIT;
 
-	for (iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+		eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 
 		if (eLoopUnit != NO_UNIT)
 		{
@@ -790,7 +803,7 @@ UnitTypes CvCityAI::AI_bestUnitAI(UnitAITypes eUnitAI, bool bAsync) const
 
 
 						iValue *= (GET_PLAYER(getOwnerINLINE()).getNumCities() * 2);
-						iValue /= (GET_PLAYER(getOwnerINLINE()).getUnitClassCountPlusMaking((UnitClassTypes)iI) + GET_PLAYER(getOwnerINLINE()).getNumCities() + 1);
+						iValue /= (GET_PLAYER(getOwnerINLINE()).getUnitClassCountPlusMaking(eUnitClass) + GET_PLAYER(getOwnerINLINE()).getNumCities() + 1);
 
 						FAssert((MAX_INT / 1000) > iValue);
 						iValue *= 1000;
@@ -822,10 +835,7 @@ BuildingTypes CvCityAI::AI_bestBuilding(int iFocusFlags, int iMaxTurns, bool bAs
 /// <summary>Determine if there's a coastal route to another city. Both cities must be in different areas (cannot share continent/island)</summary>
 bool CvCityAI::AI_hasCoastalRoute() const
 {
-	gDLL->getFAStarIFace()->ForceReset(&GC.getCoastalRouteFinder());
-
-	// Erik: determine if it makes sense to build a coastal transport
-	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
+	const CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
 
 	int iLoop;
 	for (CvCity* pLoopCity = kOwner.firstCity(&iLoop); pLoopCity != NULL; pLoopCity = kOwner.nextCity(&iLoop))
@@ -835,12 +845,13 @@ bool CvCityAI::AI_hasCoastalRoute() const
 			// Determine if these cities share a common water area
 			if (waterArea() == pLoopCity->waterArea())
 			{
+				static const UnitTypes eShipUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(UNITCLASS_SMALL_COASTAL_SHIP);
+				FAssert(eShipUnit != NO_UNIT);
+
 				// Check if there's a coastal / cultural route between the cities
-				if (gDLL->getFAStarIFace()->GeneratePath(&GC.getCoastalRouteFinder(), getX_INLINE(), getY_INLINE(), pLoopCity->getX_INLINE(), pLoopCity->getY_INLINE(), false, getOwnerINLINE(), true))
-				{
-					// We found a valid path
+				const bool found = generatePathForHypotheticalUnit(plot(), pLoopCity->plot(), getOwner(), eShipUnit);
+				if (found)
 					return true;
-				}
 			}
 		}
 	}
@@ -858,9 +869,9 @@ BuildingTypes CvCityAI::AI_bestBuildingThreshold(int iFocusFlags, int iMaxTurns,
 	int iBestValue = 0;
 	BuildingTypes eBestBuilding = NO_BUILDING;
 
-	for (int iI = 0; iI < GC.getNumBuildingClassInfos(); iI++)
+	for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 	{
-		const BuildingTypes eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings(iI)));
+		const BuildingTypes eLoopBuilding = GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 
 		if ((eLoopBuilding != NO_BUILDING) && (!isHasConceptualBuilding(eLoopBuilding)))
 		{
@@ -926,9 +937,9 @@ BuildingTypes CvCityAI::AI_bestBuildingIgnoreRequirements(int iFocusFlags, int i
 	int iBestValue = 0;
 	BuildingTypes eBestBuilding = NO_BUILDING;
 
-	for (int iI = 0; iI < GC.getNumBuildingClassInfos(); iI++)
+	for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 	{
-		BuildingTypes eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings(iI)));
+		BuildingTypes eLoopBuilding = GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 
 		if ((eLoopBuilding != NO_BUILDING) && (!isHasConceptualBuilding(eLoopBuilding)))
 		{
@@ -965,9 +976,9 @@ bool CvCityAI::AI_isProductionBuilding(BuildingTypes eBuilding, bool bMajorCity)
 	int iBestValue = -1;
 	BuildingTypes eBestExisting = NO_BUILDING;
 
-	for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
+	for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 	{
-		BuildingTypes eLoopBuilding = (BuildingTypes) GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
+		BuildingTypes eLoopBuilding = GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 		if ((NO_BUILDING != eLoopBuilding) && (eLoopBuilding != eBuilding))
 		{
 			CvBuildingInfo& kLoopBuilding = GC.getBuildingInfo(eLoopBuilding);
@@ -992,11 +1003,11 @@ bool CvCityAI::AI_isProductionBuilding(BuildingTypes eBuilding, bool bMajorCity)
 	ProfessionTypes eProfessionConsumed = NO_PROFESSION;
 	ProfessionTypes eProfessionProduced = NO_PROFESSION;
 
-	for (int i = 0; i < GC.getNumProfessionInfos(); ++i)
+	for (ProfessionTypes eLoopProfessionProduced = FIRST_PROFESSION; eLoopProfessionProduced < NUM_PROFESSION_TYPES; ++eLoopProfessionProduced)
 	{
-		CvProfessionInfo& kProfession = GC.getProfessionInfo((ProfessionTypes)i);
+		CvProfessionInfo& kProfession = GC.getProfessionInfo(eLoopProfessionProduced);
 
-		if (GC.getCivilizationInfo(kOwner.getCivilizationType()).isValidProfession(i))
+		if (GC.getCivilizationInfo(kOwner.getCivilizationType()).isValidProfession(eLoopProfessionProduced))
 		{
 			if (kProfession.getSpecialBuilding() == kBuildingInfo.getSpecialBuildingType())
 			{
@@ -1005,21 +1016,21 @@ bool CvCityAI::AI_isProductionBuilding(BuildingTypes eBuilding, bool bMajorCity)
 				eYieldConsumed = (YieldTypes)kProfession.getYieldsConsumed(0);
 				// R&R, ray , MYCP partially based on code of Aymerick - END
 
-				eProfessionProduced = (ProfessionTypes)i;
+				eProfessionProduced = eLoopProfessionProduced;
 
 				if (eYieldProduced != NO_YIELD && eYieldConsumed != NO_YIELD)
 				{
-					for (int k = 0; k < GC.getNumProfessionInfos(); ++k)
+					for (ProfessionTypes eLoopProfessionConsumed = FIRST_PROFESSION; eLoopProfessionConsumed < NUM_PROFESSION_TYPES; ++eLoopProfessionConsumed)
 					{
-						CvProfessionInfo& kProfessionConsumed = GC.getProfessionInfo((ProfessionTypes)k);
+						CvProfessionInfo& kProfessionConsumed = GC.getProfessionInfo(eLoopProfessionConsumed);
 
-						if (GC.getCivilizationInfo(kOwner.getCivilizationType()).isValidProfession(k))
+						if (GC.getCivilizationInfo(kOwner.getCivilizationType()).isValidProfession(eLoopProfessionConsumed))
 						{
 							// R&R, ray , MYCP partially based on code of Aymerick - START
 							if ((YieldTypes)kProfessionConsumed.getYieldsProduced(0) == (YieldTypes)kProfession.getYieldsConsumed(0))
 							// R&R, ray , MYCP partially based on code of Aymerick - END
 							{
-								eProfessionConsumed = (ProfessionTypes)k;
+								eProfessionConsumed = eLoopProfessionConsumed;
 								break;
 							}
 						}
@@ -1052,9 +1063,9 @@ bool CvCityAI::AI_isProductionBuilding(BuildingTypes eBuilding, bool bMajorCity)
 					}
 				}
 
-				for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
+				for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 				{
-					BuildingTypes eLoopBuilding = (BuildingTypes) GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
+					BuildingTypes eLoopBuilding = GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 					if (NO_BUILDING != eLoopBuilding)
 					{
 						CvBuildingInfo& kLoopBuilding = GC.getBuildingInfo(eLoopBuilding);
@@ -1612,9 +1623,9 @@ int CvCityAI::AI_buildingValue(BuildingTypes eBuilding, int iFocusFlags) const
 		{
 			int iBestValue = -1;
 			BuildingTypes eBestExisting = NO_BUILDING;
-			for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
+			for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 			{
-				BuildingTypes eLoopBuilding = (BuildingTypes) GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
+				BuildingTypes eLoopBuilding = GC.getCivilizationInfo(GET_PLAYER(getOwnerINLINE()).getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 				if ((NO_BUILDING != eLoopBuilding) && (eLoopBuilding != eBuilding))
 				{
 					CvBuildingInfo& kLoopBuilding = GC.getBuildingInfo(eLoopBuilding);
@@ -2264,9 +2275,9 @@ void CvCityAI::AI_doHurry(bool bForce)
 	typedef std::pair<int, BuildingTypes> BuildingHurryCost;
 	std::vector<BuildingHurryCost> buildingHurryCostList;
 
-	for (BuildingTypes iI = FIRST_BUILDING; iI < GC.getNumBuildingClassInfos(); iI++)
+	for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 	{
-		const BuildingTypes eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings(iI)));
+		const BuildingTypes eLoopBuilding = GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 
 		if (!canConstruct(eLoopBuilding))
 			continue;
@@ -2321,9 +2332,9 @@ void CvCityAI::AI_doHurry(bool bForce)
 	typedef std::pair<int, UnitTypes> UnitHurryCost;
 	std::vector<UnitHurryCost> unitHurryCostList;
 
-	for (UnitTypes iI = FIRST_UNIT; iI < GC.getNumUnitClassInfos(); iI++)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		const UnitTypes eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+		const UnitTypes eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 
 		if (!canTrain(eLoopUnit))
 			continue;
@@ -2631,9 +2642,9 @@ bool CvCityAI::AI_chooseBuild()
 	int iFocusFlags = 0;
 
 	CvPlayer& kOwner = GET_PLAYER(getOwnerINLINE());
-	for (int iI = 0; iI < GC.getNumBuildingClassInfos(); iI++)
+	for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 	{
-		BuildingTypes eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings(iI)));
+		BuildingTypes eLoopBuilding = GC.getCivilizationInfo(getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 
 		if ((eLoopBuilding != NO_BUILDING) && (!isHasConceptualBuilding(eLoopBuilding)))
 		{
@@ -2668,9 +2679,9 @@ bool CvCityAI::AI_chooseBuild()
 		}
 	}
 
-	for (int iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		UnitTypes eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+		UnitTypes eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 
 		if (eLoopUnit != NO_UNIT)
 		{
@@ -5073,17 +5084,18 @@ void CvCityAI::AI_assignDesiredYield()
 
 	if (isNative())
 	{
+		CvGame& kGame = GC.getGameINLINE();
 		int iBestValue = 0;
-		for (int i = 0; i < NUM_YIELD_TYPES; ++i)
+		for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_CARGO_YIELD_TYPES; ++eYield)
 		{
-			YieldTypes eYield = (YieldTypes) i;
-			int iValue = GC.getYieldInfo(eYield).getNativeBuyPrice();
+			const CvYieldInfo& kInfo = GC.getYieldInfo(eYield);
+			int iValue = kInfo.getNativeBuyPrice();
 			if (iValue > 0)
 			{
 				if ((getYieldStored(eYield) == 0) && !canProduceYield(eYield))
 				{
-					iValue += 10 + GC.getYieldInfo(eYield).getNativeHappy();
-					iValue *= 1 + GC.getGameINLINE().getSorenRandNum(100, "City Desired Yield");
+					iValue += 10 + kInfo.getNativeHappy();
+					iValue *= 1 + kGame.getSorenRandNum(100, "City Desired Yield");
 					if (iValue > iBestValue)
 					{
 						iBestValue = iValue;
@@ -5102,14 +5114,14 @@ void CvCityAI::AI_assignDesiredYield()
 		if (eBestYield != NO_YIELD)
 		{
 			CvWString szMessage = gDLL->getText("TXT_KEY_DESIRED_YIELD_CHANGE", GET_PLAYER(getOwnerINLINE()).getCivilizationAdjectiveKey(), getNameKey(), GC.getYieldInfo(eBestYield).getTextKeyWide());
-			for (int iPlayer = 0; iPlayer < MAX_PLAYERS; ++iPlayer)
+			for (PlayerTypes ePlayer = FIRST_PLAYER; ePlayer < NUM_PLAYER_TYPES; ++ePlayer)
 			{
-				CvPlayer& kPlayer = GET_PLAYER((PlayerTypes) iPlayer);
+				CvPlayer& kPlayer = GET_PLAYER(ePlayer);
 				if (kPlayer.isAlive() && kPlayer.getID() != getOwnerINLINE())
 				{
 					if (isScoutVisited(kPlayer.getTeam()))
 					{
-						gDLL->UI().addPlayerMessage((PlayerTypes) iPlayer, false, GC.getEVENT_MESSAGE_TIME(), szMessage, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_MINOR_EVENT, GC.getYieldInfo(eBestYield).getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), getX_INLINE(), getY_INLINE(), true, true);
+						gDLL->UI().addPlayerMessage(ePlayer, false, GC.getEVENT_MESSAGE_TIME(), szMessage, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_MINOR_EVENT, GC.getYieldInfo(eBestYield).getButton(), COLOR_WHITE, getX_INLINE(), getY_INLINE(), true, true);
 					}
 				}
 			}

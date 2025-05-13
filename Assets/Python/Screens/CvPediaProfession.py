@@ -119,12 +119,26 @@ class CvPediaProfession:
 		screen.addDDSGFC(self.top.getNextWidgetName(), gc.getProfessionInfo(self.iProfession).getButton(), self.X_ICON + self.W_ICON / 2 - self.ICON_SIZE / 2, self.Y_ICON + self.H_ICON / 2 - self.ICON_SIZE / 2, self.ICON_SIZE, self.ICON_SIZE, WidgetTypes.WIDGET_GENERAL, -1, -1 )
 
 		#Find the Best Unit fit for this Profession
-		iExpertUnit = -1
 		Profession = gc.getProfessionInfo(iProfession)
-		for iUnit in range(gc.getNumUnitInfos()):
-			if (gc.getUnitInfo(iUnit).getDefaultProfession() == iProfession):
-				iExpertUnit = iUnit
-				break
+		
+		# First priority, whatever is set in PediaUnitGraphics in xml (if anything)
+		iExpertUnit = Profession.getPediaUnitGraphics()
+		
+		# Use whatever LbD results in
+		if iExpertUnit == -1:
+			UnitClass = Profession.LbD_getExpert()
+			if UnitClass != -1:
+				Civilization = gc.getCivilizationInfo(0)
+				# test if the profession is valid for the first civ as the alternative is likely native only and those units will otherwise show up incorrectly
+				if Civilization.isValidProfession(iProfession):
+					iExpertUnit = Civilization.getCivilizationUnits(UnitClass)
+
+		# rely on default profession if it's useful 
+		if iExpertUnit == -1:
+			for iUnit in range(gc.getNumUnitInfos()):
+				if (gc.getUnitInfo(iUnit).getDefaultProfession() == iProfession):
+					iExpertUnit = iUnit
+					break
 ##MultipleYieldsProduced Start
 		if (iExpertUnit == -1 and Profession.getYieldsProduced(0) != YieldTypes.NO_YIELD):
 			HighestBonus = 0
