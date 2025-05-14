@@ -4434,7 +4434,7 @@ public:
 	int getNumUnitsGlobal() const;
 	int getNumBuildingsGlobal() const;
 	int getNumPlotsRequired() const;
-	PlotTypes getPlotType() const;
+	const EnumMap<PlotTypes, bool> getPlotTypes() const;
 	int getOtherPlayerShareBorders() const;
 	int getCityFoodWeight() const;
 	CivicTypes getCivic() const;
@@ -4513,7 +4513,7 @@ private:
 	int m_iNumUnitsGlobal;
 	int m_iNumBuildingsGlobal;
 	int m_iNumPlotsRequired;
-	PlotTypes m_ePlotType;
+	EnumMap<PlotTypes, bool> m_em_PlotTypes;
 	int m_iOtherPlayerShareBorders;
 	int m_iCityFoodWeight;
 	CivicTypes m_eCivic;
@@ -4568,7 +4568,6 @@ private:
 
 public:
 	// functions purely for the python interface
-	int PY_getPlotType() const;
 	int PY_getCivic() const;
 	int PY_getMinDifficulty() const;
 	int PY_getBuildingRequired(int i) const;

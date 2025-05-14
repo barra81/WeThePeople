@@ -53,6 +53,8 @@ bool KmodPathFinder::OpenList_sortPred::operator()(const FAStarNode* &left, cons
 
 //
 KmodPathFinder::KmodPathFinder() :
+	start_x(0),
+	start_y(0),
 	end_node(0),
 	map_width(0),
 	map_height(0),
@@ -132,9 +134,7 @@ bool KmodPathFinder::GeneratePath(int x1, int y1, int x2, int y2)
 
 	if (GetNode(x1, y1).m_bOnStack)
 	{
-		// WTP: MOVE_MAX_MOVES not supported yet
-		//int iMoves = (settings.iFlags & MOVE_MAX_MOVES) ? settings.pGroup->maxMoves() : settings.pGroup->movesLeft();
-		int iMoves = settings.pGroup->movesLeft();
+		const int iMoves = (settings.iFlags & MOVE_MAX_MOVES) ? settings.pGroup->maxMoves() : settings.pGroup->movesLeft();
 		if (iMoves != GetNode(x1, y1).m_iData1)
 		{
 			Reset();
@@ -283,10 +283,15 @@ void KmodPathFinder::SetSettings(const CvPathSettings& new_settings)
 		{
 			if (settings.pGroup->getDomainType() == DOMAIN_SEA)
 			{
-				// Not accurate anymore due to the introduction of streams:
-				// K-Mod "this assume there are no sea-roads, or promotions to reduce sea movement cost."
-				//settings.iHeuristicWeight = GC.getMOVE_DENOMINATOR();
-				settings.iHeuristicWeight = MinimumStepCost(settings.pGroup->baseMoves());
+				if (GC.getMap().hasStream())
+					// If the map contains any streams then we have to accomodate the possibility
+					// of what is essentially a sea-road that cuts movement cost in half 
+					settings.iHeuristicWeight = GLOBAL_DEFINE_MOVE_DENOMINATOR / 2;
+				else
+					// K-Mod "this assume there are no sea-roads, or promotions to reduce sea movement cost."
+					// Note that WTP does have such promotions but they cannot presently reduce movement below
+					// the move denominator
+					settings.iHeuristicWeight = GLOBAL_DEFINE_MOVE_DENOMINATOR;
 			}
 			else
 			{

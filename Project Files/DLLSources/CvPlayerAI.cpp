@@ -824,6 +824,7 @@ void CvPlayerAI::AI_unitUpdate()
 						{
 							if (!pUnit->getGroup()->isBusy() && !pUnit->getGroup()->isCargoBusy())
 							{
+								FAssert(!isTempUnit(pUnit));
 								pUnit->AI_update();
 							}
 							else
@@ -5753,7 +5754,7 @@ int CvPlayerAI::AI_unitTargetMissionAIs(CvUnit* pUnit, MissionAITypes* aeMission
 
 				if( iMaxPathTurns >= 0 && (pUnit->plot() != NULL) && (pLoopSelectionGroup->plot() != NULL))
 				{
-					pLoopSelectionGroup->generatePath(pLoopSelectionGroup->plot(), pUnit->plot(), 0, false, &iPathTurns);
+					pLoopSelectionGroup->generatePath(pUnit->plot(), pLoopSelectionGroup->plot(), 0, false, &iPathTurns);
 					if( !(pLoopSelectionGroup->canAllMove()) )
 					{
 						iPathTurns++;
