@@ -699,6 +699,7 @@ enum TaskTypes
 	TASK_IMPORT_CHANGES, //bobisback import changes
 	TASK_IMPORT_CHANGES_GRP2, //bobisback import changes
 	TASK_CHOOSE_CITY_PLOT_YIELD,
+	TASK_PURCHASE_PROFESSION,
 
 	NUM_TASK_TYPES
 };
