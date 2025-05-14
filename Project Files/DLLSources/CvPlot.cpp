@@ -4281,7 +4281,16 @@ bool CvPlot::isVisibleEnemyUnit(PlayerTypes ePlayer) const
 // R&R, ray, Natives raiding party - START
 bool CvPlot::isVisibleEnemyUnit(const CvUnit* pUnit) const
 {
-	return (plotCheck(PUF_isEnemy, pUnit->getOwnerINLINE(), (pUnit->isAlwaysHostile(this) || (pUnit->AI_getUnitAIState() == UNITAI_STATE_RAIDING_PARTY)), NO_PLAYER, NO_TEAM, PUF_isVisible, pUnit->getOwnerINLINE()) != NULL);
+	// for some reason this can be called on units in Europe, which then causes a crash on NULL plots - Nightinggale
+	FAssert(this != NULL);
+	FAssert(pUnit != NULL);
+	FAssert(pUnit->plot() != NULL);
+	if (this != NULL && pUnit != NULL && pUnit->plot() != NULL)
+	{
+		return (plotCheck(PUF_isEnemy, pUnit->getOwnerINLINE(), (pUnit->isAlwaysHostile(this) || (pUnit->AI_getUnitAIState() == UNITAI_STATE_RAIDING_PARTY)), NO_PLAYER, NO_TEAM, PUF_isVisible, pUnit->getOwnerINLINE()) != NULL);
+	}
+	// NULL units and units not on the map reports that they can't see any enemies
+	return false;
 }
 // R&R, ray, Natives raiding party - END
 
@@ -6393,7 +6402,10 @@ void CvPlot::setPlotCity(CvCity* pNewValue)
 
 CvCity* CvPlot::getWorkingCity() const
 {
-	return getCity(m_workingCity);
+	CvCity* pCity = getCity(m_workingCity);
+	FAssertMsg(SAVEGAME_IS_LOADING || pCity == NULL || pCity->coord().distance(coord()) <= CITY_PLOTS_RADIUS, "Plot has a working city, which is out of range");
+	FAssertMsg(SAVEGAME_IS_LOADING || pCity != NULL || m_workingCity.iID == -1, "Plot has m_workingCity with a city ID, which doesn't exist");
+	return pCity;
 }
 
 
@@ -6412,6 +6424,11 @@ void CvPlot::updateWorkingCity()
 	{
 		pBestCity = getWorkingCityOverride();
 		FAssertMsg((pBestCity == NULL) || (pBestCity->getOwnerINLINE() == getOwnerINLINE()), "pBest city is expected to either be NULL or the current plot instance's");
+	}
+
+	if (pBestCity != NULL && pBestCity->coord().distance(coord()) > CITY_PLOTS_RADIUS)
+	{
+		pBestCity = NULL;
 	}
 
 	if ((pBestCity == NULL) && isOwned())
@@ -6450,7 +6467,7 @@ void CvPlot::updateWorkingCity()
 
 	pOldWorkingCity = getWorkingCity();
 
-	if (pOldWorkingCity != pBestCity)
+	if (pOldWorkingCity != pBestCity || (pOldWorkingCity == NULL && m_workingCity.iID != -1))
 	{
 		if (pOldWorkingCity != NULL)
 		{
@@ -10342,6 +10359,16 @@ void CvPlot::postLoadFixes()
 	// Surprisingly CPU heavy, hence cached
 	setYieldCache();
 	updateYield(false);
+
+	// A vanilla bug could leave deleted cities in m_workingCity after the city was deleted.
+	// This caused issues if a new city managed to get the same ID.
+	// The bug has been fixed and this code is to correct invalid cache in savegames from before the fix.
+	CvCity* pCity = getCity(m_workingCity);
+	if ((pCity == NULL && m_workingCity.iID != -1) ||
+		(pCity && pCity->coord().distance(coord()) > CITY_PLOTS_RADIUS))
+	{
+		m_workingCity.reset();
+	}
 }
 
 void CvPlot::writeDesyncLog(FILE *f)
