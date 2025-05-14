@@ -275,13 +275,13 @@ int InfoArrayBase::getWithTypeWithConversion(JITarrayTypes eType, int iIndex, in
 		int iValue = getInternal(iIndex, iTokenIndex);
 		if (iValue >= 0 && iValue < GC.getNumBuildingClassInfos())
 		{
-			return pCivInfo->getCivilizationBuildings(iValue);
+			return pCivInfo->getCivilizationBuildings((BuildingClassTypes)iValue);
 		}
 	}
 	else if (eType == JIT_ARRAY_UNIT && getType(iTokenIndex) == JIT_ARRAY_UNITCLASS)
 	{
 		FAssertMsg(pCivInfo != NULL, "InfoArray::getWithType called without pCivInfo argument when in index conversion mode");
-		int iValue = getInternal(iIndex, iTokenIndex);
+		UnitClassTypes iValue = (UnitClassTypes)getInternal(iIndex, iTokenIndex);
 		if (iValue >= 0 && iValue < GC.getNumUnitClassInfos())
 		{
 			return pCivInfo->getCivilizationUnits(iValue);

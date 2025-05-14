@@ -9,6 +9,7 @@
 #
 # No other modules should import this
 #
+import sys
 import CvUtil
 import CvScreensInterface
 from CvPythonExtensions import *
@@ -336,6 +337,8 @@ def applySecondCity2(argsList):
 	Speed = gc.getGameSpeedInfo(CyGame().getGameSpeedType())
 	iYield1 = gc.getInfoTypeForString("YIELD_BLADES")
 	city.changeYieldStored(iYield1, event.getGenericParameter(1)*Speed.getTrainPercent()/100)
+	iYield2 = gc.getInfoTypeForString("YIELD_BAKERY_GOODS")
+	city.changeYieldStored(iYield2, event.getGenericParameter(2)*Speed.getTrainPercent()/100)
 
 def getHelpSecondCity2(argsList):
 	eEvent = argsList[0]
@@ -347,14 +350,21 @@ def getHelpSecondCity2(argsList):
 	city = player.getCity(kTriggeredData.iCityId)
 	Speed = gc.getGameSpeedInfo(CyGame().getGameSpeedType())
 	iYield1 = gc.getInfoTypeForString("YIELD_BLADES")
+	iYield2 = gc.getInfoTypeForString("YIELD_BAKERY_GOODS")
 	szHelp = localText.getText("TXT_KEY_EVENT_SECONDCOLONY_2_HELP", (king.getCivilizationAdjectiveKey(), ))
 	if event.getGenericParameter(1) <> 0 :
 		szHelp += "\n" + localText.getText("TXT_KEY_EVENT_YIELD_GAIN", (event.getGenericParameter(1)*Speed.getTrainPercent()/100,  gc.getYieldInfo(iYield1).getChar(), city.getNameKey()))
+	if event.getGenericParameter(2) <> 0 :
+		szHelp += "\n" + localText.getText("TXT_KEY_EVENT_YIELD_GAIN", (event.getGenericParameter(2)*Speed.getTrainPercent()/100,  gc.getYieldInfo(iYield2).getChar(), city.getNameKey()))
+	if event.getGenericParameter(1) <> 0 :
 		overflow = event.getGenericParameter(1)*Speed.getTrainPercent()/100 + city.getYieldStored(iYield1) - city.getMaxYieldCapacity()
 		if overflow > 0:
 			szHelp += "\n" + localText.getText("TXT_KEY_EVENT_YIELD_OVERFLOW", (overflow,  gc.getYieldInfo(iYield1).getChar(), city.getNameKey()))
+	if event.getGenericParameter(2) <> 0 :
+		overflow = event.getGenericParameter(2)*Speed.getTrainPercent()/100 + city.getYieldStored(iYield2) - city.getMaxYieldCapacity()
+		if overflow > 0:
+			szHelp += "\n" + localText.getText("TXT_KEY_EVENT_YIELD_OVERFLOW", (overflow,  gc.getYieldInfo(iYield2).getChar(), city.getNameKey()))
 	return szHelp
-
 
 ######## THIRD CITY ###########
 
@@ -2336,7 +2346,10 @@ def getHelpKingPleased(argsList):
 		szHelp += "\n" + localText.getText("TXT_KEY_EVENT_RELATION_KING_INCREASE", (event.getGenericParameter(3), king.getCivilizationAdjectiveKey()))
 	if event.getGenericParameter(3) < 0 :
 		szHelp += "\n" + localText.getText("TXT_KEY_EVENT_RELATION_KING_DECREASE", (event.getGenericParameter(3), king.getCivilizationAdjectiveKey()))
-	return szHelp
+	if 'szHelp' in locals():
+		return szHelp
+	else:
+		sys.stderr.write(event.getType() + " has PythonHelp getHelpKingPleased without setting generic parameters 3/4 to use it to generate output")
 
 def applyKingAngry(argsList):
 	eEvent = argsList[0]
@@ -3378,7 +3391,7 @@ def CanDoEuropeTrade(argsList, iYieldID, iQuantity):
 		quantity = quantity * Handicap.getAITrainPercent()/100
 	
 	# now we check if enough of the Yield has been traded with Europe using function argument iYieldID
-	if player.getYieldTradedTotalINT(iYieldID) < quantity:
+	if player.getYieldSoldTotal(TradeLocationTypes.TRADE_LOCATION_EUROPE, iYieldID) < quantity:
 		return False
 	return True
 
@@ -6138,7 +6151,7 @@ def CanDoAfricaTrade(argsList, iYieldID, iQuantity):
 		quantity = quantity * Handicap.getAITrainPercent()/100
 	
 	# now we check if enough of the Yield has been traded with Africa using function argument iYieldID
-	if player.getYieldTradedTotalINTAfrica(iYieldID) < quantity:
+	if player.getYieldSoldTotal(TradeLocationTypes.TRADE_LOCATION_AFRICA, iYieldID) < quantity:
 		return False
 	return True
 
@@ -6289,7 +6302,7 @@ def CanDoPortRoyalTrade(argsList, iYieldID, iQuantity):
 		quantity = quantity * Handicap.getAITrainPercent()/100
 	
 	# now we check if enough of the Yield has been traded with Port Royal using function argument iYieldID
-	if player.getYieldTradedTotalINTPortRoyal(iYieldID) < quantity:
+	if player.getYieldSoldTotal(TradeLocationTypes.TRADE_LOCATION_PORT_ROYAL, iYieldID) < quantity:
 		return False
 	return True
 
@@ -8308,6 +8321,11 @@ getHelpDiscoveryFailedTraderChange = get_simple_help("TXT_KEY_EVENT_DISCOVERY_EV
 
 getHelpDiscoveryFailedMissionaryChange = get_simple_help("TXT_KEY_EVENT_DISCOVERY_EVENTS_FALIED_MISSIONARY_CHANGE_HELP")
 
+######## Treasure Protection Event  ###########
+
+getHelpNewMountedConquistador = get_simple_help("TXT_KEY_EVENT_TREASURE_PROTECTION_NEW_MOUNTED_CONQUISTADOR_HELP")
+
+getHelpNewMilitia = get_simple_help("TXT_KEY_EVENT_TREASURE_PROTECTION_NEW_MILITIA_HELP")
 
 ######## Slave Hunter Offers Service ###########
 
@@ -8615,3 +8633,70 @@ def isExpiredWhalingTrip(argsList):
 
 getHelpWhalingTripDone  = get_simple_help("TXT_KEY_EVENT_WHALING_TRIP_HELP")
 getHelpWhalingTripDone2  = get_simple_help("TXT_KEY_EVENT_WHALING_TRIP_DONE_PYTHON")
+
+######## Build Monastery Quest ###########
+
+def isNoCity(argsList):
+	pTriggeredData = argsList[0]
+	plot = gc.getMap().plot(pTriggeredData.iPlotX, pTriggeredData.iPlotY)
+	player = gc.getPlayer(pTriggeredData.ePlayer)
+	if not player.isPlayable():
+		return False
+	if plot.isCity():
+		return False
+	if gc.getPlayer(plot.getOwner()).isNative():
+		return False
+	return True
+
+def isExpiredBuildMonastery(argsList):
+	eEvent = argsList[0]
+	event = gc.getEventInfo(eEvent)
+	kTriggeredData = argsList[1]
+	player = gc.getPlayer(kTriggeredData.ePlayer)
+	if gc.getGame().getGameTurn() >= kTriggeredData.iTurn + event.getGenericParameter(1):
+		return True
+	if not player.isPlayable():
+		return True
+	return False
+
+getHelpBuildMonasteryDone  = get_simple_help("TXT_KEY_EVENT_BUILD_MONASTERY_HELP")
+
+######## Send Dragoons to Frontier Quest ###########
+
+def CheckAfricanSlaveInCity(argsList):
+	ePlayer = argsList[1]
+	player = gc.getPlayer(ePlayer)
+
+	if not player.isPlayable():
+		return False
+
+	# you could add checks for several Units like this
+	iUnitType = CvUtil.findInfoTypeNum('UNIT_AFRICAN_SLAVE')
+	iUnitsCurrent = countUnitsInCityForCityTrigger(argsList, iUnitType)
+	if not iUnitsCurrent > 3:
+		return False
+        
+	iUnitType = CvUtil.findInfoTypeNum('UNIT_VETERAN_DRAGOON')
+	iUnitsCurrent = countUnitsInCityForCityTrigger(argsList, iUnitType)
+	if not iUnitsCurrent == 0:
+		return False
+
+	iUnitType = CvUtil.findInfoTypeNum('UNIT_VETERAN_CAVALRY')
+	iUnitsCurrent = countUnitsInCityForCityTrigger(argsList, iUnitType)
+	if not iUnitsCurrent == 0:
+		return False
+
+	return True
+
+def isExpiredDragoonstoFrontier(argsList):
+	eEvent = argsList[0]
+	event = gc.getEventInfo(eEvent)
+	kTriggeredData = argsList[1]
+	player = gc.getPlayer(kTriggeredData.ePlayer)
+	if gc.getGame().getGameTurn() >= kTriggeredData.iTurn + event.getGenericParameter(1):
+		return True
+	if not player.isPlayable():
+		return True
+	return False
+
+getHelpDragoonstoFrontierDone  = get_simple_help("TXT_KEY_EVENT_DRAGOONS_TO_FRONTIER_HELP")

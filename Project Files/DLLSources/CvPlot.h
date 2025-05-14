@@ -69,6 +69,11 @@ public:
 
 	void verifyUnitValidPlot();
 
+	int getDistance(const CvPlot* pOtherPlot) const;
+	int getDistance(const CvPlot& kOtherPlot) const;
+	int getDistanceManhattan(const CvPlot* pOtherPlot) const;
+	int getDistanceManhattan(const CvPlot& kOtherPlot) const;
+
     bool isAdjacentToPlot(CvPlot* pPlot) const;
 	bool isAdjacentToArea(int iAreaID) const;
 	bool isAdjacentToArea(const CvArea* pArea) const;
@@ -76,6 +81,7 @@ public:
 	bool isAdjacentToLand() const;
 	bool isCoastalLand(int iMinWaterSize = -1) const;
 	bool hasDeepWaterCoast() const;
+	bool isNextTo(TerrainTypes eTerrain) const;
 	bool hasOtherAdjacentOceanOrDeepWaterCoast() const; //WTP, ray, Safety Check for Deep Water Coast if there is Ocean or Deep Coast adjacent - START
 	bool isAdjacentWaterPassable(CvPlot* pPlot) const;
 
@@ -636,11 +642,11 @@ public:
 	// WTP, ray, helper methods for Python Event System - Spawning Units and Barbarians on Plots - START
 	void spawnPlayerUnitOnPlot(int /*PlayerTypes*/ iPlayer, int /*UnitClassTypes*/ iIndex) const;
 	void spawnBarbarianUnitOnPlot(int /*UnitClassTypes*/ iIndex) const; // careful with this, because will take over City for Barbarians
-	void spawnPlayerUnitOnAdjacentPlot(int /*PlayerTypes*/ iPlayer, int /*UnitClassTypes*/ iIndex) const;
-	void spawnBarbarianUnitOnAdjacentPlot(int /*UnitClassTypes*/ iIndex) const;
+	void spawnPlayerUnitOnAdjacentPlot(PlayerTypes ePlayer, UnitClassTypes eUnitClass) const;
+	void spawnBarbarianUnitOnAdjacentPlot(UnitClassTypes eUnitClass) const;
 
-	bool isPlayerUnitOnAdjacentPlot(int /*PlayerTypes*/ iPlayer, int /*UnitClassTypes*/ iIndex) const;
-	bool isBarbarianUnitOnAdjacentPlot(int /*UnitClassTypes*/ iIndex) const;
+	bool isPlayerUnitOnAdjacentPlot(PlayerTypes ePlayer, UnitClassTypes eUnitClass) const;
+	bool isBarbarianUnitOnAdjacentPlot(UnitClassTypes eUnitClass) const;
 	// WTP, ray, helper methods for Python Event System - Spawning Units and Barbarians on Plots - END
 
 protected:

@@ -365,6 +365,7 @@ public:
 	DllExport CvProfessionInfo();
 	virtual ~CvProfessionInfo();
 	ProfessionTypes getIndex() const { return m_eIndex; }
+	UnitTypes getPediaUnitGraphics() const;
 	int getUnitCombatType() const;
 	// TAC - LbD - Ray - START
 	bool LbD_isUsed() const;
@@ -421,6 +422,7 @@ public:
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
 	ProfessionTypes m_eIndex;
+	UnitTypes m_ePediaUnitGraphics;
 	int m_iUnitCombatType;
 	int m_iDefaultUnitAIType;
 	// R&R, ray , MYCP partially based on code of Aymerick - START
@@ -872,9 +874,9 @@ public:
 	DllExport const char* getFormationType() const;
 	const char* getButton() const;
 	void updateArtDefineButton();
-	const CvArtInfoUnit* getArtInfo(int i, int iProfession) const;
+	const CvArtInfoUnit* getArtInfo(int i, ProfessionTypes eProfession, PlayerTypes ePlayer) const;
 	//Androrc UnitArtStyles
-	const CvArtInfoUnit* getUnitArtStylesArtInfo(int i, int iProfession, int iStyle = -1) const;
+	const CvArtInfoUnit* getUnitArtStylesArtInfo(int i, ProfessionTypes eProfession, UnitArtStyleTypes eStyle = NO_UNIT_ARTSTYLE) const;
 	//Androrc End
 	const CvUnitMeshGroups& getProfessionMeshGroup(int iProfession) const;
 	void read(FDataStreamBase* );
@@ -1626,13 +1628,18 @@ class CvCivilizationInfo :
 {
 	//---------------------------------------PUBLIC INTERFACE---------------------------------
 public:
+	//
+	// EXE and python can't reach this class directly
+	// Argument compatibility issues with those two should now trigger compile time errors rather than runtime crashes
+	//
+
 	DllExport CvCivilizationInfo();
 	virtual ~CvCivilizationInfo();
 	virtual void reset();
-	DllExport int getDefaultPlayerColor() const;
-	int getArtStyleType() const;
+	PlayerColorTypes getDefaultPlayerColor() const;
+	ArtStyleTypes getArtStyleType() const;
 	//Androrc UnitArtStyles
-	int getUnitArtStyleType() const;         // Expose to Python
+	UnitArtStyleTypes getUnitArtStyleType() const;
 	//Androrc End
 	int getNumCityNames() const;
 	// TAC - Great General Names - Ray - START
@@ -1645,28 +1652,28 @@ public:
 	int getNumShipNames() const;
 	// TAC - Ship Names - Ray - END
 	int getNumLeaders() const;				 // the number of leaders the Civ has, this is needed so that random leaders can be generated easily
-	DllExport int getSelectionSoundScriptId() const;
+	int getSelectionSoundScriptId() const;
 	int getActionSoundScriptId() const;
 	int getAdvancedStartPoints() const;
 	int getAreaMultiplier() const;
 	int getDensityMultiplier() const;
 	int getTreasure() const;
 	int getFavoredTerrain() const;
-	int getCapturedCityUnitClass() const;
+	UnitClassTypes getCapturedCityUnitClass() const;
 	ProfessionTypes getDefaultProfession() const;
-	DllExport int getMissionaryChar() const;
-	DllExport void setMissionaryChar(int iChar);
+	int getMissionaryChar() const;
+	void setMissionaryChar(int iChar);
 	int getChar() const;
 	int getTradingPostChar() const;
 	void setChar(int iChar);
 
-	DllExport bool isAIPlayable() const;
-	DllExport bool isPlayable() const;
+	bool isAIPlayable() const;
+	bool isPlayable() const;
 	bool isWaterStart() const;
-	DllExport bool isOpenBorders() const;
+	bool isOpenBorders() const;
 	bool isWaterWorks() const;
-	DllExport bool isEurope() const;
-	DllExport bool isNative() const;
+	bool isEurope() const;
+	bool isNative() const;
 
 	// R&R, ray, Correct Geographical Placement of Natives - START
 	bool isNorthAmericanNative() const;
@@ -1679,35 +1686,34 @@ public:
 	inline CivEffectTypes getCivEffect() const { return m_eCivEffect; }
 
 	std::wstring pyGetShortDescription(uint uiForm) { return getShortDescription(uiForm); }
-	DllExport const wchar* getShortDescription(uint uiForm = 0);
+	const wchar* getShortDescription(uint uiForm = 0);
 	const wchar* getShortDescriptionKey() const;
 	std::wstring pyGetShortDescriptionKey() { return getShortDescriptionKey(); }
 
 	std::wstring pyGetAdjective(uint uiForm) { return getAdjective(uiForm);  }
-	DllExport const wchar* getAdjective(uint uiForm = 0);
+	const wchar* getAdjective(uint uiForm = 0);
 	const wchar* getAdjectiveKey() const;
 	std::wstring pyGetAdjectiveKey() { return getAdjectiveKey(); }
 
-	DllExport const char* getFlagTexture() const;
+	const char* getFlagTexture() const;
 	const char* getArtDefineTag() const;
 	void setArtDefineTag(const char* szVal);
 	// Arrays
-	DllExport int getCivilizationBuildings(int i) const;
-	DllExport int getCivilizationUnits(int i) const;
-	int getCivilizationProfessions(int i) const;
+	BuildingTypes getCivilizationBuildings(BuildingClassTypes eBuildingClass) const;
+	UnitTypes getCivilizationUnits(UnitClassTypes eUnitClass) const;
 	int getNumCivilizationFreeUnits() const;
-	int getCivilizationFreeUnitsClass(int index) const;
-	int getCivilizationFreeUnitsProfession(int index) const;
-	int getCivilizationInitialCivics(int i) const;
-	int getFreeYields(int i) const;
-	int getTeachUnitClassWeight(int i) const;
+	UnitClassTypes getCivilizationFreeUnitsClass(int index) const;
+	ProfessionTypes getCivilizationFreeUnitsProfession(int index) const;
+	CivicTypes getCivilizationInitialCivics(CivicOptionTypes eCivicOption) const;
+	int getFreeYields(YieldTypes eYield) const;
+	int getTeachUnitClassWeight(UnitClassTypes eUnitClass) const;
 
 	template<typename Ta, typename Tb> Ta getCivSpecificForClass(Tb eVar) const;
 
-	DllExport bool isLeaders(int i) const;
-	bool isCivilizationFreeBuildingClass(int i) const;
-	bool isValidProfession(int i) const;
-	bool hasTrait(int i) const;
+	bool isLeaders(LeaderHeadTypes eLeaderHead) const;
+	bool isCivilizationFreeBuildingClass(BuildingClassTypes eBuildingClass) const;
+	bool isValidProfession(ProfessionTypes eProfession) const;
+	bool hasTrait(TraitTypes eTrait) const;
 
 	CvWString getCityNames(int i) const;
 
@@ -1723,9 +1729,9 @@ public:
 	CvWString getShipNames(int i) const;
 	// TAC - Ship Names - Ray - END
 
-	DllExport const CvArtInfoCivilization* getArtInfo() const;
+	const CvArtInfoCivilization* getArtInfo() const;
 	const char* getButton() const;
-	DllExport int getDerivativeCiv() const;
+	int getDerivativeCiv() const;
 	void setDerivativeCiv(int iCiv);
 	bool read(CvXMLLoadUtility* pXML);
 	bool readPass2(CvXMLLoadUtility* pXML);
@@ -1734,16 +1740,13 @@ public:
 
 	bool postLoadSetup();
 
-	// EXE/python access functions
-	int PY_getDefaultProfession() const;
-
 	//---------------------------------------PROTECTED MEMBER VARIABLES---------------------------------
 protected:
 	int m_iDefaultPlayerColor;
 	int m_iArtStyleType;
 
 	//Androrc UnitArtStyles
-	int m_iUnitArtStyleType;  // FlavorUnits by Impaler[WrG]
+	UnitArtStyleTypes m_eUnitArtStyleType;  // FlavorUnits by Impaler[WrG]
 	//Androrc End
 
 	// TAC - Great General Names - Ray - START
@@ -1883,14 +1886,14 @@ template<>
 inline BuildingTypes CvCivilizationInfo::getCivSpecificForClass(BuildingClassTypes eVar) const
 {
 	FAssertMsg(this != NULL, "InfoArray: BuildingClass->Unit conversion done on a NULL civ pointer");
-	return (BuildingTypes)getCivilizationBuildings(eVar);
+	return getCivilizationBuildings(eVar);
 }
 
 template<>
 inline UnitTypes CvCivilizationInfo::getCivSpecificForClass(UnitClassTypes eVar) const
 {
 	FAssertMsg(this != NULL, "InfoArray: UnitClass->Unit conversion done on a NULL civ pointer");
-	return (UnitTypes)getCivilizationUnits(eVar);
+	return getCivilizationUnits(eVar);
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2249,7 +2252,7 @@ public:
 	int getHealing() const;
 	int getDamagePrereq() const;
 	int getCityGoodyWeight() const;
-	int getUnitClassType() const;
+	UnitClassTypes getUnitClassType() const;
 	int getTeachUnitClassType() const;
 
 	bool isBad() const;
@@ -2703,10 +2706,10 @@ public:
 	EffectTypes getEffectType() const;
 	int getEffectProbability() const;
 	// Arrays
-	int getYieldChange(int i) const;
-	int getRiverYieldIncrease(int i) const;
+	int getYieldChange(YieldTypes eYield) const;
+	int getRiverYieldIncrease(YieldTypes eYield) const;
 	DllExport int get3DAudioScriptFootstepIndex(int i) const;
-	bool isTerrain(int i) const;
+	bool isTerrain(TerrainTypes eTerrain) const;
 	int getNumVarieties() const;
 	// Other
 	DllExport const CvArtInfoFeature* getArtInfo() const;
@@ -2779,6 +2782,7 @@ public:
 	YieldTypes getIndex() const { return m_eIndex; }
 	DllExport int getChar() const;
 	DllExport void setChar(int i);
+	CvWString getCharLink() const;
 	const char* getIcon() const;
 	WidgetTypes getWikiWidget() const;
 	YieldTypes getID() const;
@@ -2820,7 +2824,7 @@ public:
 	int getAIBaseValue() const;
 	int getNativeBaseValue() const;
 	DllExport int getColorType() const;
-	int getUnitClass() const;
+	UnitClassTypes getUnitClass() const;
 	DllExport int getTextureIndex() const;
 	DllExport int getWaterTextureIndex() const;
 	int getPowerValue() const;
@@ -2927,8 +2931,8 @@ public:
 
 	DllExport int getWorldSoundscapeScriptId() const;
 	// Arrays
-	int getYield(int i) const;
-	int getRiverYieldIncrease(int i) const;
+	int getYield(YieldTypes eYield) const;
+	int getRiverYieldIncrease(YieldTypes eYield) const;
 	DllExport int get3DAudioScriptFootstepIndex(int i) const;
 	// Other
 	DllExport const CvArtInfoTerrain* getArtInfo() const;
@@ -3066,15 +3070,15 @@ public:
 	const char* getArtDefineTag() const;
 	void setArtDefineTag(const char* szVal);
 	// Arrays
-	bool hasTrait(int i) const;
+	bool hasTrait(TraitTypes eTrait) const;
 
-	int getContactRand(int i) const;
-	int getContactDelay(int i) const;
-	int getMemoryDecayRand(int i) const;
-	int getMemoryAttitudePercent(int i) const;
-	int getNoWarAttitudeProb(int i) const;
-	int getUnitAIWeightModifier(int i) const;
-	int getImprovementWeightModifier(int i) const;
+	int getContactRand(ContactTypes eContact) const;
+	int getContactDelay(ContactTypes eContact) const;
+	int getMemoryDecayRand(MemoryTypes eMemory) const;
+	int getMemoryAttitudePercent(MemoryTypes eMemory) const;
+	int getNoWarAttitudeProb(AttitudeTypes eAttitude) const;
+	int getUnitAIWeightModifier(UnitAITypes eUnitAI) const;
+	int getImprovementWeightModifier(ImprovementTypes eImprovement) const;
 	DllExport int getDiploPeaceMusicScriptIds(int i) const;
 	DllExport int getDiploWarMusicScriptIds(int i) const;
 	// Other
@@ -4332,11 +4336,13 @@ public:
 	virtual ~CvGameOptionInfo();
 	DllExport bool getDefault() const;
 	DllExport bool getVisible() const;
+	bool getScenarioOnly() const;
 	bool read(CvXMLLoadUtility* pXML);
 
 private:
 	bool m_bDefault;
 	bool m_bVisible;
+	bool m_bScenarioOnly;
 };
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -4421,6 +4427,10 @@ private:
 //
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#include "Info\EventTriggerInfo.h"
+#include "Info\InfoHelpers.h"
+
 class CvEventTriggerInfo : public CvInfoBase
 {
 	friend class CvXMLLoadUtility;
@@ -4488,6 +4498,8 @@ public:
 	bool isPrereqEventCity() const;
 	bool isFrontPopup() const;
 
+	const InfoHelperVector<EventTriggerUnitCount>& getRequiredUnits() const;
+
 	const char* getPythonCallback() const;
 	const char* getPythonCanDo() const;
 	const char* getPythonCanDoCity() const;
@@ -4539,6 +4551,9 @@ private:
 	std::vector<int> m_aiTextEra;
 	std::vector<CvWString> m_aszText;
 	std::vector<CvWString> m_aszWorldNews;
+
+	InfoHelperVector<EventTriggerUnitCount> m_vector_UnitCount;
+
 	// Start EmperorFool: Events with Images
 	CvString m_szEventArt;
 	// End EmperorFool: Events with Images
@@ -4613,7 +4628,7 @@ public:
 	int getRandomGold() const;
 	int getCulture() const;
 	int getHealth() const; // R&R, ray, change for Health in Events
-	int getUnitClass() const;
+	UnitClassTypes getUnitClass() const;
 	int getNumUnits() const;
 	int getBuildingClass() const;
 	int getBuildingChange() const;
@@ -4974,12 +4989,12 @@ protected:
 // PatchMod: Achievements END
 
 // trade screen type - start - Nightinggale
-class CvTradeScreenInfo :
+class CvTradeLocationInfo :
 	public CvInfoBase
 {
 public:
-	CvTradeScreenInfo();
-	~CvTradeScreenInfo();
+	CvTradeLocationInfo();
+	~CvTradeLocationInfo();
 
 	bool read(CvXMLLoadUtility* pXML);
 

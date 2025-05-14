@@ -413,7 +413,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 
 		int iCurrMoves;
 
-		if (GLOBAL_DEFINE_USE_CLASSIC_MOVEMENT_SYSTEM)
+		if (USE_CLASSIC_MOVEMENT_SYSTEM)
 		{
 			iCurrMoves = ((pUnit->movesLeft() / GLOBAL_DEFINE_MOVE_DENOMINATOR) + (((pUnit->movesLeft() % GLOBAL_DEFINE_MOVE_DENOMINATOR) > 0) ? 1 : 0));
 		}
@@ -522,8 +522,8 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 		// Display for become Expert - with turns worked and Expert Unit in Text
 		if(bCanBecomeExpert && lastProfession != NO_PROFESSION && GC.getProfessionInfo(lastProfession).LbD_isUsed() && iLbDRoundsWorked >0)
 		{
-			const int expert = GC.getProfessionInfo(lastProfession).LbD_getExpert();
-			const UnitTypes expertUnitType = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expert);
+			const UnitClassTypes expert = (UnitClassTypes)GC.getProfessionInfo(lastProfession).LbD_getExpert();
+			const UnitTypes expertUnitType = GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expert);
 			// We need this check Since the current player (e.g. natives) may not have this expert type. (I observed that expertUnitType was -1 when changing to a native player in debug mode 
 			// which caused an AV)
 			if (expertUnitType != NO_UNIT)
@@ -546,7 +546,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 		// Display Profession before Last for become Expert - with turns worked and Expert Unit in Text
 		if(bCanBecomeExpert && lastProfessionBefore != NO_PROFESSION && GC.getProfessionInfo(lastProfessionBefore).LbD_isUsed() && iLbDRoundsWorkedBefore >0)
 		{
-			const int expertBefore = GC.getProfessionInfo(lastProfessionBefore).LbD_getExpert();
+			const UnitClassTypes expertBefore = (UnitClassTypes)GC.getProfessionInfo(lastProfessionBefore).LbD_getExpert();
 			const UnitTypes expertUnitTypeBefore = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expertBefore);
 			if (expertUnitTypeBefore != NO_UNIT)
 			{ 
@@ -674,7 +674,15 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szString, const CvUnit* pUnit, 
 				szString.append(gDLL->getText("TXT_KEY_UNIT_CARRIES", GC.getSpecialUnitInfo(pUnit->specialCargo()).getTextKeyWide()));
 			}
 			//End TAC Whaling, ray
+
+			if (pUnit->getUnitInfo().isOnlyDefensive())
+			{
+				szString.append(NEWLINE);
+				szString.append(gDLL->getText("TXT_KEY_UNIT_ONLY_DEFENSIVE"));
+			}
 		}
+
+		
 
 		// WTP, ray, new Harbour System - START
 		if (GLOBAL_DEFINE_ENABLE_NEW_HARBOUR_SYSTEM && pUnit->getUnitInfo().getHarbourSpaceNeeded() > 0)
@@ -1453,22 +1461,22 @@ void CvGameTextMgr::setProfessionHelp(CvWStringBuffer &szBuffer, ProfessionTypes
 		szBuffer.append(gDLL->getText("TXT_KEY_UNIT_ONLY_DEFENSIVE"));
 	}
 
-	for (int iYield = 0; iYield < NUM_YIELD_TYPES; iYield++)
+	for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_YIELD_TYPES; ++eYield)
 	{
-		int iYieldAmount = GC.getGameINLINE().getActivePlayer() != NO_PLAYER ? GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getYieldEquipmentAmount(eProfession, (YieldTypes) iYield) : kProfession.getYieldEquipmentAmount((YieldTypes) iYield);
+		int iYieldAmount = GC.getGameINLINE().getActivePlayer() != NO_PLAYER ? GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getYieldEquipmentAmount(eProfession, eYield) : kProfession.getYieldEquipmentAmount(eYield);
 		if (iYieldAmount != 0)
 		{
-			szTempBuffer.Format(gDLL->getText("TXT_KEY_UNIT_REQUIRES_YIELD_QUANTITY_STRING", iYieldAmount, GC.getYieldInfo((YieldTypes) iYield).getChar()));
+			szTempBuffer.Format(gDLL->getText("TXT_KEY_UNIT_REQUIRES_YIELD_QUANTITY_STRING", iYieldAmount, GC.getYieldInfo(eYield).getChar(), GC.getYieldInfo(eYield).getDescription()));
 			szBuffer.append(NEWLINE);
 			szBuffer.append(szTempBuffer);
 		}
 	}
 
-	for (int iPromotion = 0; iPromotion < GC.getNumPromotionInfos(); ++iPromotion)
+	for (PromotionTypes ePromotion = FIRST_PROMOTION; ePromotion < NUM_PROMOTION_TYPES; ++ePromotion)
 	{
-		if (kProfession.isFreePromotion(iPromotion))
+		if (kProfession.isFreePromotion(ePromotion))
 		{
-			setPromotionHelp(szBuffer, (PromotionTypes) iPromotion, true);
+			setPromotionHelp(szBuffer, ePromotion, true);
 		}
 	}
 }
@@ -3960,16 +3968,16 @@ void CvGameTextMgr::parseTraits(CvWStringBuffer &szHelpString, TraitTypes eTrait
 
 		// Unit Classes
 		iLast = 0;
-		for (int iI = 0; iI < GC.getNumUnitClassInfos();++iI)
+		for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 		{
 			UnitTypes eLoopUnit;
 			if (eCivilization == NO_CIVILIZATION)
 			{
-				eLoopUnit = ((UnitTypes)(GC.getUnitClassInfo((UnitClassTypes)iI).getDefaultUnitIndex()));
+				eLoopUnit = (UnitTypes)GC.getUnitClassInfo(eUnitClass).getDefaultUnitIndex();
 			}
 			else
 			{
-				eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(eCivilization).getCivilizationUnits(iI)));
+				eLoopUnit = GC.getCivilizationInfo(eCivilization).getCivilizationUnits(eUnitClass);
 			}
 
 			if (eLoopUnit != NO_UNIT)
@@ -4024,16 +4032,16 @@ void CvGameTextMgr::parseTraits(CvWStringBuffer &szHelpString, TraitTypes eTrait
 
 		// Buildings
 		iLast = 0;
-		for (int iI = 0; iI < GC.getNumBuildingClassInfos(); ++iI)
+		for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 		{
 			BuildingTypes eLoopBuilding;
 			if (eCivilization == NO_CIVILIZATION)
 			{
-				eLoopBuilding = ((BuildingTypes)(GC.getBuildingClassInfo((BuildingClassTypes)iI).getDefaultBuildingIndex()));
+				eLoopBuilding = (BuildingTypes)GC.getBuildingClassInfo(eBuildingClass).getDefaultBuildingIndex();
 			}
 			else
 			{
-				eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(eCivilization).getCivilizationBuildings(iI)));
+				eLoopBuilding = GC.getCivilizationInfo(eCivilization).getCivilizationBuildings(eBuildingClass);
 			}
 
 			if (eLoopBuilding != NO_BUILDING)
@@ -4090,22 +4098,22 @@ void CvGameTextMgr::parseTraits(CvWStringBuffer &szHelpString, TraitTypes eTrait
 			}
 		}
 
-		for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
+		for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 		{
-			BuildingTypes eBuilding = (BuildingTypes) GC.getBuildingClassInfo((BuildingClassTypes) iBuildingClass).getDefaultBuildingIndex();
+			BuildingTypes eBuilding = (BuildingTypes) GC.getBuildingClassInfo(eBuildingClass).getDefaultBuildingIndex();
 
 			if (eCivilization != NO_CIVILIZATION)
 			{
-				eBuilding = (BuildingTypes) GC.getCivilizationInfo(eCivilization).getCivilizationBuildings(iBuildingClass);
+				eBuilding = GC.getCivilizationInfo(eCivilization).getCivilizationBuildings(eBuildingClass);
 			}
 
 			if (eBuilding != NO_BUILDING)
 			{
 				for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
 				{
-					if (kTrait.getBuildingYieldChange(iBuildingClass, iYield) != 0)
+					if (kTrait.getBuildingYieldChange(eBuildingClass, iYield) != 0)
 					{
-						szTempBuffer = gDLL->getText("TXT_KEY_BUILDING_YIELD_INCREASE", kTrait.getBuildingYieldChange(iBuildingClass, iYield), GC.getYieldInfo((YieldTypes)iYield).getChar(), GC.getBuildingInfo(eBuilding).getTextKeyWide());
+						szTempBuffer = gDLL->getText("TXT_KEY_BUILDING_YIELD_INCREASE", kTrait.getBuildingYieldChange(eBuildingClass, iYield), GC.getYieldInfo((YieldTypes)iYield).getChar(), GC.getBuildingInfo(eBuilding).getTextKeyWide());
 						szHelpString.append(NEWLINE);
 						if (bIndent)
 						{
@@ -4117,20 +4125,20 @@ void CvGameTextMgr::parseTraits(CvWStringBuffer &szHelpString, TraitTypes eTrait
 			}
 		}
 
-		for (int iUnitClass = 0; iUnitClass < GC.getNumUnitClassInfos(); ++iUnitClass)
+		for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 		{
-			UnitTypes eUnit = (UnitTypes) GC.getUnitClassInfo((UnitClassTypes) iUnitClass).getDefaultUnitIndex();
+			UnitTypes eUnit = (UnitTypes) GC.getUnitClassInfo(eUnitClass).getDefaultUnitIndex();
 
 			if (eCivilization != NO_CIVILIZATION)
 			{
-				eUnit = (UnitTypes) GC.getCivilizationInfo(eCivilization).getCivilizationUnits(iUnitClass);
+				eUnit = GC.getCivilizationInfo(eCivilization).getCivilizationUnits(eUnitClass);
 			}
 
 			if (eUnit != NO_UNIT)
 			{
-				if (kTrait.getUnitMoveChange(iUnitClass) != 0)
+				if (kTrait.getUnitMoveChange(eUnitClass) != 0)
 				{
-					szTempBuffer = gDLL->getText("TXT_KEY_UNIT_MOVES_INCREASE", kTrait.getUnitMoveChange(iUnitClass), GC.getUnitInfo(eUnit).getTextKeyWide());
+					szTempBuffer = gDLL->getText("TXT_KEY_UNIT_MOVES_INCREASE", kTrait.getUnitMoveChange(eUnitClass), GC.getUnitInfo(eUnit).getTextKeyWide());
 					szHelpString.append(NEWLINE);
 					if (bIndent)
 					{
@@ -4139,9 +4147,9 @@ void CvGameTextMgr::parseTraits(CvWStringBuffer &szHelpString, TraitTypes eTrait
 					szHelpString.append(szTempBuffer);
 				}
 
-				if (kTrait.getUnitStrengthModifier(iUnitClass) != 0)
+				if (kTrait.getUnitStrengthModifier(eUnitClass) != 0)
 				{
-					szTempBuffer = gDLL->getText("TXT_KEY_UNIT_STRENGTH_INCREASE", kTrait.getUnitStrengthModifier(iUnitClass), GC.getUnitInfo(eUnit).getTextKeyWide());
+					szTempBuffer = gDLL->getText("TXT_KEY_UNIT_STRENGTH_INCREASE", kTrait.getUnitStrengthModifier(eUnitClass), GC.getUnitInfo(eUnit).getTextKeyWide());
 					szHelpString.append(NEWLINE);
 					if (bIndent)
 					{
@@ -4152,13 +4160,13 @@ void CvGameTextMgr::parseTraits(CvWStringBuffer &szHelpString, TraitTypes eTrait
 			}
 		}
 
-		for (int iProfession = 0; iProfession < GC.getNumProfessionInfos(); ++iProfession)
+		for (ProfessionTypes eProfession = FIRST_PROFESSION; eProfession < NUM_PROFESSION_TYPES; ++eProfession)
 		{
-			if (eCivilization == NO_CIVILIZATION || GC.getCivilizationInfo(eCivilization).isValidProfession(iProfession))
+			if (eCivilization == NO_CIVILIZATION || GC.getCivilizationInfo(eCivilization).isValidProfession(eProfession))
 			{
-				if (kTrait.getProfessionMoveChange(iProfession) != 0)
+				if (kTrait.getProfessionMoveChange(eProfession) != 0)
 				{
-					szTempBuffer = gDLL->getText("TXT_KEY_UNIT_MOVES_INCREASE", kTrait.getProfessionMoveChange(iProfession), GC.getProfessionInfo((ProfessionTypes)iProfession).getTextKeyWide());
+					szTempBuffer = gDLL->getText("TXT_KEY_UNIT_MOVES_INCREASE", kTrait.getProfessionMoveChange(eProfession), GC.getProfessionInfo(eProfession).getTextKeyWide());
 					szHelpString.append(NEWLINE);
 					if (bIndent)
 					{
@@ -4169,18 +4177,18 @@ void CvGameTextMgr::parseTraits(CvWStringBuffer &szHelpString, TraitTypes eTrait
 			}
 		}
 
-		for (int iI = 0; iI < GC.getNumBuildingClassInfos(); ++iI)
+		for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 		{
-			if (kTrait.isFreeBuildingClass(iI))
+			if (kTrait.isFreeBuildingClass(eBuildingClass))
 			{
 				BuildingTypes eFreeBuilding;
 				if (eCivilization != NO_CIVILIZATION)
 				{
-					eFreeBuilding = ((BuildingTypes)(GC.getCivilizationInfo(eCivilization).getCivilizationBuildings(iI)));
+					eFreeBuilding = GC.getCivilizationInfo(eCivilization).getCivilizationBuildings(eBuildingClass);
 				}
 				else
 				{
-					eFreeBuilding = (BuildingTypes)GC.getBuildingClassInfo((BuildingClassTypes)iI).getDefaultBuildingIndex();
+					eFreeBuilding = (BuildingTypes)GC.getBuildingClassInfo(eBuildingClass).getDefaultBuildingIndex();
 				}
 
 				if (NO_BUILDING != eFreeBuilding)
@@ -4196,18 +4204,18 @@ void CvGameTextMgr::parseTraits(CvWStringBuffer &szHelpString, TraitTypes eTrait
 		}
 
 		iLast = 0;
-		for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
+		for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 		{
-			BuildingTypes eBuilding = (BuildingTypes) GC.getBuildingClassInfo((BuildingClassTypes) iBuildingClass).getDefaultBuildingIndex();
+			BuildingTypes eBuilding = (BuildingTypes) GC.getBuildingClassInfo(eBuildingClass).getDefaultBuildingIndex();
 
 			if (eCivilization != NO_CIVILIZATION)
 			{
-				eBuilding = (BuildingTypes) GC.getCivilizationInfo(eCivilization).getCivilizationBuildings(iBuildingClass);
+				eBuilding = GC.getCivilizationInfo(eCivilization).getCivilizationBuildings(eBuildingClass);
 			}
 
 			if (eBuilding != NO_BUILDING)
 			{
-				int iModifier = kTrait.getBuildingProductionModifier(iBuildingClass);
+				int iModifier = kTrait.getBuildingProductionModifier(eBuildingClass);
 				if (iModifier != 0)
 				{
 					CvWString szText = NEWLINE;
@@ -4524,7 +4532,6 @@ void CvGameTextMgr::parseLeaderTraits(CvWStringBuffer &szHelpString, LeaderHeadT
 	PROFILE_FUNC();
 
 	CvWString szTempBuffer;	// Formatting
-	int iI;
 
 	//	Build help string
 	if (eLeader != NO_LEADER)
@@ -4564,9 +4571,9 @@ void CvGameTextMgr::parseLeaderTraits(CvWStringBuffer &szHelpString, LeaderHeadT
 		bool bFirst = true;
 		bool bFirstCivilizationTrait = true;
 		bool bFirstLeaderTrait = true;
-		for (iI = 0; iI < GC.getNumTraitInfos(); ++iI)
+		for (TraitTypes eTrait = FIRST_TRAIT; eTrait < NUM_TRAIT_TYPES; ++eTrait)
 		{
-			if (eCivilization != NO_CIVILIZATION && GC.getCivilizationInfo(eCivilization).hasTrait(iI))
+			if (eCivilization != NO_CIVILIZATION && GC.getCivilizationInfo(eCivilization).hasTrait(eTrait))
 			{
 				if (bFirstCivilizationTrait)
 				{
@@ -4598,12 +4605,12 @@ void CvGameTextMgr::parseLeaderTraits(CvWStringBuffer &szHelpString, LeaderHeadT
 					bFirst = false;
 				}
 
-				parseTraits(szHelpString, ((TraitTypes)iI), eCivilization, bDawnOfMan);
+				parseTraits(szHelpString, eTrait, eCivilization, bDawnOfMan);
 			}
 		}
-		for (iI = 0; iI < GC.getNumTraitInfos(); ++iI)
+		for (TraitTypes eTrait = FIRST_TRAIT; eTrait < NUM_TRAIT_TYPES; ++eTrait)
 		{
-			if (GC.getLeaderHeadInfo(eLeader).hasTrait(iI))
+			if (GC.getLeaderHeadInfo(eLeader).hasTrait(eTrait))
 			{
 				if (bFirstLeaderTrait)
 				{
@@ -4635,7 +4642,7 @@ void CvGameTextMgr::parseLeaderTraits(CvWStringBuffer &szHelpString, LeaderHeadT
 					bFirst = false;
 				}
 
-				parseTraits(szHelpString, ((TraitTypes)iI), eCivilization, bDawnOfMan);
+				parseTraits(szHelpString, eTrait, eCivilization, bDawnOfMan);
 			}
 		}
 		// R&R Androrc End
@@ -4657,9 +4664,9 @@ void CvGameTextMgr::parseLeaderShortTraits(CvWStringBuffer &szHelpString, Leader
 		FAssert((GC.getNumTraitInfos() > 0) && "GC.getNumTraitInfos() is less than or equal to zero but is expected to be larger than zero in CvSimpleCivPicker::setLeaderText");
 
 		bool bFirst = true;
-		for (int iI = 0; iI < GC.getNumTraitInfos(); ++iI)
+		for (TraitTypes eTrait = FIRST_TRAIT; eTrait < NUM_TRAIT_TYPES; ++eTrait)
 		{
-			if (GC.getLeaderHeadInfo(eLeader).hasTrait(iI))
+			if (GC.getLeaderHeadInfo(eLeader).hasTrait(eTrait))
 			{
 				if (!bFirst)
 				{
@@ -4669,7 +4676,7 @@ void CvGameTextMgr::parseLeaderShortTraits(CvWStringBuffer &szHelpString, Leader
 				{
 					szHelpString.append(L"[");
 				}
-				szHelpString.append(gDLL->getText(GC.getTraitInfo((TraitTypes)iI).getShortDescription()));
+				szHelpString.append(gDLL->getText(GC.getTraitInfo(eTrait).getShortDescription()));
 				bFirst = false;
 			}
 		}
@@ -4693,9 +4700,9 @@ void CvGameTextMgr::parseCivShortTraits(CvWStringBuffer &szHelpString, Civilizat
 		FAssert((GC.getNumTraitInfos() > 0) && "GC.getNumTraitInfos() is less than or equal to zero but is expected to be larger than zero in CvSimpleCivPicker::setLeaderText");
 
 		bool bFirst = true;
-		for (int iI = 0; iI < GC.getNumTraitInfos(); ++iI)
+		for (TraitTypes eTrait = FIRST_TRAIT; eTrait < NUM_TRAIT_TYPES; ++eTrait)
 		{
-			if (GC.getCivilizationInfo(eCiv).hasTrait(iI))
+			if (GC.getCivilizationInfo(eCiv).hasTrait(eTrait))
 			{
 				if (!bFirst)
 				{
@@ -4705,7 +4712,7 @@ void CvGameTextMgr::parseCivShortTraits(CvWStringBuffer &szHelpString, Civilizat
 				{
 					szHelpString.append(L"[");
 				}
-				szHelpString.append(gDLL->getText(GC.getTraitInfo((TraitTypes)iI).getShortDescription()));
+				szHelpString.append(gDLL->getText(GC.getTraitInfo(eTrait).getShortDescription()));
 				bFirst = false;
 			}
 		}
@@ -4732,8 +4739,6 @@ void CvGameTextMgr::parseCivInfos(CvWStringBuffer &szInfoText, CivilizationTypes
 	CvWString szBuffer;
 	CvWStringBuffer szTempString;
 	CvWString szText;
-	UnitTypes eDefaultUnit;
-	UnitTypes eUniqueUnit;
 	BuildingTypes eDefaultBuilding;
 	BuildingTypes eUniqueBuilding;
 
@@ -4760,10 +4765,10 @@ void CvGameTextMgr::parseCivInfos(CvWStringBuffer &szInfoText, CivilizationTypes
 		}
 
 		bool bFound = false;
-		for (int iI = 0; iI < GC.getNumUnitClassInfos(); ++iI)
+		for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 		{
-			eDefaultUnit = ((UnitTypes)(kCivilizationInfo.getCivilizationUnits(iI)));
-			eUniqueUnit = ((UnitTypes)(GC.getUnitClassInfo((UnitClassTypes) iI).getDefaultUnitIndex()));
+			UnitTypes eDefaultUnit = kCivilizationInfo.getCivilizationUnits(eUnitClass);
+			UnitTypes eUniqueUnit = (UnitTypes)GC.getUnitClassInfo(eUnitClass).getDefaultUnitIndex();
 			if ((eDefaultUnit != NO_UNIT) && (eUniqueUnit != NO_UNIT))
 			{
 				if (eDefaultUnit != eUniqueUnit)
@@ -4811,10 +4816,10 @@ void CvGameTextMgr::parseCivInfos(CvWStringBuffer &szInfoText, CivilizationTypes
 		}
 
 		bFound = false;
-		for (int iI = 0; iI < GC.getNumBuildingClassInfos(); ++iI)
+		for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 		{
-			eDefaultBuilding = ((BuildingTypes)(kCivilizationInfo.getCivilizationBuildings(iI)));
-			eUniqueBuilding = ((BuildingTypes)(GC.getBuildingClassInfo((BuildingClassTypes) iI).getDefaultBuildingIndex()));
+			eDefaultBuilding = kCivilizationInfo.getCivilizationBuildings(eBuildingClass);
+			eUniqueBuilding = (BuildingTypes)GC.getBuildingClassInfo(eBuildingClass).getDefaultBuildingIndex();
 			if ((eDefaultBuilding != NO_BUILDING) && (eUniqueBuilding != NO_BUILDING))
 			{
 				if (eDefaultBuilding != eUniqueBuilding)
@@ -4851,9 +4856,9 @@ void CvGameTextMgr::parseCivInfos(CvWStringBuffer &szInfoText, CivilizationTypes
 			CvWString szDesc;
 			for (int iI = 0; iI < kCivilizationInfo.getNumCivilizationFreeUnits(); iI++)
 			{
-				int iLoopUnitClass = kCivilizationInfo.getCivilizationFreeUnitsClass(iI);
-				ProfessionTypes eLoopUnitProfession = (ProfessionTypes) kCivilizationInfo.getCivilizationFreeUnitsProfession(iI);
-				UnitTypes eLoopUnit = (UnitTypes)kCivilizationInfo.getCivilizationUnits(iLoopUnitClass);
+				UnitClassTypes eLoopUnitClass = kCivilizationInfo.getCivilizationFreeUnitsClass(iI);
+				ProfessionTypes eLoopUnitProfession = kCivilizationInfo.getCivilizationFreeUnitsProfession(iI);
+				UnitTypes eLoopUnit = kCivilizationInfo.getCivilizationUnits(eLoopUnitClass);
 
 				if (eLoopUnit != NO_UNIT)
 				{
@@ -5497,9 +5502,15 @@ void CvGameTextMgr::setBasicUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit,
 		// WTP, ray Troop Ship
 		if (kUnitInfo.getSpecialCargo() != NO_SPECIALUNIT && !kUnitInfo.isGatherBoat() && !kUnitInfo.isSlaveShip() && !kUnitInfo.isTreasureShip() && !kUnitInfo.isTroopShip())
 		{
-			szBuffer.append(gDLL->getText("TXT_KEY_UNIT_CARRIES", GC.getSpecialUnitInfo((SpecialUnitTypes) kUnitInfo.getSpecialCargo()).getTextKeyWide()));
+			szBuffer.append(gDLL->getText("TXT_KEY_UNIT_CARRIES", GC.getSpecialUnitInfo((SpecialUnitTypes)kUnitInfo.getSpecialCargo()).getTextKeyWide()));
 		}
 		//End TAC Whaling, ray
+	}
+
+	if (kUnitInfo.isOnlyDefensive())
+	{
+		szBuffer.append(NEWLINE);
+		szBuffer.append(gDLL->getText("TXT_KEY_UNIT_ONLY_DEFENSIVE"));
 	}
 
 	// WTP, ray, new Harbour System - START
@@ -6116,7 +6127,6 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 	CvWString szTempBuffer;
 	PlayerTypes ePlayer;
 	int iProduction;
-	int iI;
 
 	if (NO_UNIT == eUnit)
 	{
@@ -6150,13 +6160,13 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 
 	if (NO_UNIT != eDefaultUnit && eDefaultUnit != eUnit)
 	{
-		for (iI  = 0; iI < GC.getNumCivilizationInfos(); ++iI)
+		for (CivilizationTypes eCiv = FIRST_CIVILIZATION; eCiv < NUM_CIVILIZATION_TYPES; ++eCiv)
 		{
-			UnitTypes eUniqueUnit = (UnitTypes)GC.getCivilizationInfo((CivilizationTypes)iI).getCivilizationUnits((int)eUnitClass);
+			UnitTypes eUniqueUnit = GC.getCivilizationInfo(eCiv).getCivilizationUnits(eUnitClass);
 			if (eUniqueUnit == eUnit)
 			{
 				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_UNIQUE_UNIT", GC.getCivilizationInfo((CivilizationTypes)iI).getTextKeyWide()));
+				szBuffer.append(gDLL->getText("TXT_KEY_UNIQUE_UNIT", GC.getCivilizationInfo(eCiv).getTextKeyWide()));
 			}
 		}
 
@@ -6169,9 +6179,9 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 	std::map<int, CvWString> mapModifiers;
 	std::map<int, CvWString> mapChanges;
 	std::map<int, CvWString> mapBonus;
-	for (int iYield = 0; iYield < NUM_YIELD_TYPES; iYield++)
+	for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_YIELD_TYPES; ++eYield)
 	{
-		YieldTypes eYield = (YieldTypes) iYield;
+		const CvYieldInfo& kYieldInfo = GC.getYieldInfo(eYield);
 
 		int iModifier = GC.getUnitInfo(eUnit).getYieldModifier(eYield);
 		if (iModifier != 0)
@@ -6187,19 +6197,19 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 				}
 			}
 			//WTP, ray, Slave Hunter and Slave Master - END
-			mapModifiers[iModifier] += CvWString::format(L"%c", GC.getYieldInfo(eYield).getChar());
+			mapModifiers[iModifier] += kYieldInfo.getCharLink();
 		}
 
 		int iChange = GC.getUnitInfo(eUnit).getYieldChange(eYield);
 		if (iChange != 0)
 		{
-			mapChanges[iChange] += CvWString::format(L"%c", GC.getYieldInfo(eYield).getChar());
+			mapChanges[iChange] += kYieldInfo.getCharLink();
 		}
 
 		iChange = GC.getUnitInfo(eUnit).getBonusYieldChange(eYield);
 		if (iChange != 0)
 		{
-			mapBonus[iChange] += CvWString::format(L"%c", GC.getYieldInfo(eYield).getChar());
+			mapBonus[iChange] += kYieldInfo.getCharLink();
 		}
 	}
 
@@ -6260,7 +6270,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 	const InfoArray<YieldTypes, int> &infoYieldDemands = GC.getUnitInfo(eUnit).getYieldDemands();
 	for (int iI = 0; iI < infoYieldDemands.getLength(); ++iI)
 	{
-		szYieldsDemandedList += CvWString::format(L"%c", GC.getYieldInfo(infoYieldDemands.getYield(iI)).getChar());
+		szYieldsDemandedList += GC.getYieldInfo(infoYieldDemands.getYield(iI)).getCharLink();
 	}
 	if(!isEmpty(szYieldsDemandedList))
 	{
@@ -6281,7 +6291,7 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 			}
 			else
 			{
-				eBuilding = (BuildingTypes) GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(GC.getUnitInfo(eUnit).getPrereqBuilding());
+				eBuilding = GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings((BuildingClassTypes)GC.getUnitInfo(eUnit).getPrereqBuilding());
 			}
 			if(eBuilding != NO_BUILDING)
 			{
@@ -6296,15 +6306,15 @@ void CvGameTextMgr::setUnitHelp(CvWStringBuffer &szBuffer, UnitTypes eUnit, bool
 		bool bValid = true;
 		bool bFirst = true;
 		szTempBuffer.clear();
-		for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
+		for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 		{
-			if (GC.getUnitInfo(eUnit).isPrereqOrBuilding(iBuildingClass))
+			if (GC.getUnitInfo(eUnit).isPrereqOrBuilding(eBuildingClass))
 			{
 				bValid = false;
-				BuildingTypes eBuilding = (BuildingTypes) GC.getBuildingClassInfo((BuildingClassTypes) iBuildingClass).getDefaultBuildingIndex();
+				BuildingTypes eBuilding = (BuildingTypes) GC.getBuildingClassInfo(eBuildingClass).getDefaultBuildingIndex();
 				if (ePlayer != NO_PLAYER)
 				{
-					eBuilding = (BuildingTypes) GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(iBuildingClass);
+					eBuilding = GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 				}
 
 				if (NO_BUILDING != eBuilding)
@@ -6464,7 +6474,6 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 	bool bFirst;
 	int iProduction;
 	int iLast;
-	int iI;
 
 	if (NO_BUILDING == eBuilding || eBuilding >= NUM_BUILDING_TYPES)
 	{
@@ -6490,16 +6499,16 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 		szBuffer.append(szTempBuffer);
 		// R&R, ray , fix conflict MYCP and MYPB
 		// std::vector<YieldTypes> eBuildingYieldsConversion;
-		if(kBuilding.getProfessionOutput() != 0)
+		if (kBuilding.getProfessionOutput() != 0)
 		{
-			for (iI = 0; iI < GC.getNumProfessionInfos(); ++iI)
+			for (ProfessionTypes eProfession = FIRST_PROFESSION; eProfession < NUM_PROFESSION_TYPES; ++eProfession)
 			{
 				// R&R, ray , fix conflict MYCP and MYPB
 				std::vector<YieldTypes> eBuildingYieldsConversion;
 
-				if (ePlayer == NO_PLAYER || GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).isValidProfession(iI))
+				if (ePlayer == NO_PLAYER || GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).isValidProfession(eProfession))
 				{
-					CvProfessionInfo& kProfession = GC.getProfessionInfo((ProfessionTypes) iI);
+					const CvProfessionInfo& kProfession = GC.getProfessionInfo(eProfession);
 					if (kProfession.getSpecialBuilding() == kBuilding.getSpecialBuildingType())
 					{
 						if (kProfession.getYieldsProduced(0) != NO_YIELD)
@@ -6509,7 +6518,7 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 								YieldTypes eYieldConsumed = (YieldTypes) kProfession.getYieldsConsumed(j);
 								if (eYieldConsumed != NO_YIELD)
 								{
-									eBuildingYieldsConversion.push_back((YieldTypes) eYieldConsumed);
+									eBuildingYieldsConversion.push_back(eYieldConsumed);
 								}
 							}
 							if (!eBuildingYieldsConversion.empty())
@@ -6543,18 +6552,18 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 		}
 		// R&R, ray , MYCP partially based on code of Aymerick - END
 		int aiYields[NUM_YIELD_TYPES];
-		for (iI = 0; iI < NUM_YIELD_TYPES; ++iI)
+		for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_YIELD_TYPES; ++eYield)
 		{
-			aiYields[iI] = kBuilding.getYieldChange(iI);
+			aiYields[eYield] = kBuilding.getYieldChange(eYield);
 
 			if (NULL != pCity)
 			{
-				aiYields[iI] += pCity->getBuildingYieldChange((BuildingClassTypes)kBuilding.getBuildingClassType(), (YieldTypes)iI);
+				aiYields[eYield] += pCity->getBuildingYieldChange((BuildingClassTypes)kBuilding.getBuildingClassType(), eYield);
 			}
 
 			if (ePlayer != NO_PLAYER)
 			{
-				aiYields[iI] += GET_PLAYER(ePlayer).getBuildingYieldChange((BuildingClassTypes)kBuilding.getBuildingClassType(), (YieldTypes)iI);
+				aiYields[eYield] += GET_PLAYER(ePlayer).getBuildingYieldChange((BuildingClassTypes)kBuilding.getBuildingClassType(), eYield);
 			}
 		}
 		setYieldChangeHelp(szBuffer, L", ", L"", L"", aiYields, false, false);
@@ -6567,13 +6576,13 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 
 	if (NO_BUILDING != eDefaultBuilding && eDefaultBuilding != eBuilding)
 	{
-		for (int iI  = 0; iI < GC.getNumCivilizationInfos(); ++iI)
+		for (CivilizationTypes eCiv  = FIRST_CIVILIZATION; eCiv < NUM_CIVILIZATION_TYPES; ++eCiv)
 		{
-			BuildingTypes eUniqueBuilding = (BuildingTypes)GC.getCivilizationInfo((CivilizationTypes)iI).getCivilizationBuildings((int)eBuildingClass);
+			const BuildingTypes eUniqueBuilding = GC.getCivilizationInfo(eCiv).getCivilizationBuildings(eBuildingClass);
 			if (eUniqueBuilding == eBuilding)
 			{
 				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_UNIQUE_BUILDING", GC.getCivilizationInfo((CivilizationTypes)iI).getTextKeyWide()));
+				szBuffer.append(gDLL->getText("TXT_KEY_UNIQUE_BUILDING", GC.getCivilizationInfo(eCiv).getTextKeyWide()));
 			}
 		}
 
@@ -6584,7 +6593,7 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 	BuildingTypes eNextBuilding = kBuilding.getIndexOf_NextBuildingType_In_SpecialBuilding();
 	while (eNextBuilding != eBuilding)
 	{
-		CvBuildingInfo& kNextBuilding = GC.getBuildingInfo(eNextBuilding);
+		const CvBuildingInfo& kNextBuilding = GC.getBuildingInfo(eNextBuilding);
 
 		if (kBuilding.getSpecialBuildingPriority() > kNextBuilding.getSpecialBuildingPriority())
 		{
@@ -6792,15 +6801,15 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 
 	bFirst = true;
 
-	for (int iI = 0; iI < GC.getNumBuildingClassInfos(); ++iI)
+	for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 	{
 		if (ePlayer != NO_PLAYER)
 		{
-			eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(iI)));
+			eLoopBuilding = GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 		}
 		else
 		{
-			eLoopBuilding = (BuildingTypes)GC.getBuildingClassInfo((BuildingClassTypes)iI).getDefaultBuildingIndex();
+			eLoopBuilding = (BuildingTypes)GC.getBuildingClassInfo(eBuildingClass).getDefaultBuildingIndex();
 		}
 
 		if (eLoopBuilding != NO_BUILDING)
@@ -6861,9 +6870,8 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 		{
 			if (pCity == NULL)
 			{
-				for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+				for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_YIELD_TYPES; ++eYield)
 				{
-					YieldTypes eYield = (YieldTypes) iYield;
 					if (kBuilding.getYieldCost(eYield) > 0)
 					{
 						szTempBuffer.Format(L"\n%d%c", (ePlayer != NO_PLAYER ? GET_PLAYER(ePlayer).getYieldProductionNeeded(eBuilding, eYield) : kBuilding.getYieldCost(eYield)), GC.getYieldInfo(eYield).getChar());
@@ -6890,11 +6898,10 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, BuildingTypes eBu
 					szBuffer.append(szTempBuffer);
 				}
 
-				for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+				for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_YIELD_TYPES; ++eYield)
 				{
-					if (GC.getBuildingInfo(eBuilding).getYieldCost(iYield) > 0)
+					if (GC.getBuildingInfo(eBuilding).getYieldCost(eYield) > 0)
 					{
-						YieldTypes eYield = (YieldTypes) iYield;
 						if (GC.getYieldInfo(eYield).isCargo())
 						{
 							int iCost = GET_PLAYER(pCity->getOwnerINLINE()).getYieldProductionNeeded(eBuilding, eYield);
@@ -6958,45 +6965,45 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 		{
 			szBuffer.append(ENDCOLR);
 		}
-		for (int iI = 0; iI < GC.getNumBuildingClassInfos(); ++iI)
+		for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 		{
-			if (ePlayer == NO_PLAYER && kBuilding.getPrereqNumOfBuildingClass((BuildingClassTypes)iI) > 0)
+			if (ePlayer == NO_PLAYER && kBuilding.getPrereqNumOfBuildingClass(eBuildingClass) > 0)
 			{
-				eLoopBuilding = (BuildingTypes)GC.getBuildingClassInfo((BuildingClassTypes)iI).getDefaultBuildingIndex();
-				szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_SPECIAL_BUILDINGS_NO_CITY", GC.getBuildingInfo(eLoopBuilding).getTextKeyWide(), kBuilding.getPrereqNumOfBuildingClass((BuildingClassTypes)iI)).c_str());
+				eLoopBuilding = (BuildingTypes)GC.getBuildingClassInfo(eBuildingClass).getDefaultBuildingIndex();
+				szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_SPECIAL_BUILDINGS_NO_CITY", GC.getBuildingInfo(eLoopBuilding).getTextKeyWide(), kBuilding.getPrereqNumOfBuildingClass(eBuildingClass)).c_str());
 
 				szBuffer.append(szTempBuffer);
 			}
-			else if (ePlayer != NO_PLAYER && GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI)) > 0)
+			else if (ePlayer != NO_PLAYER && GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, eBuildingClass) > 0)
 			{
-				if ((pCity == NULL) || (GET_PLAYER(ePlayer).getBuildingClassCount((BuildingClassTypes)iI) < GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI))))
+				if (pCity == NULL || GET_PLAYER(ePlayer).getBuildingClassCount(eBuildingClass) < GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, eBuildingClass))
 				{
-					eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(iI)));
+					eLoopBuilding = GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 
 					if (eLoopBuilding != NO_BUILDING)
 					{
 						if (pCity != NULL)
 						{
-							szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_SPECIAL_BUILDINGS", GC.getBuildingInfo(eLoopBuilding).getTextKeyWide(), GET_PLAYER(ePlayer).getBuildingClassCount((BuildingClassTypes)iI), GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI))).c_str());
+							szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_SPECIAL_BUILDINGS", GC.getBuildingInfo(eLoopBuilding).getTextKeyWide(), GET_PLAYER(ePlayer).getBuildingClassCount(eBuildingClass), GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, eBuildingClass)).c_str());
 						}
 						else
 						{
-							szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_SPECIAL_BUILDINGS_NO_CITY", GC.getBuildingInfo(eLoopBuilding).getTextKeyWide(), GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, ((BuildingClassTypes)iI))).c_str());
+							szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_BUILDING_REQUIRES_NUM_SPECIAL_BUILDINGS_NO_CITY", GC.getBuildingInfo(eLoopBuilding).getTextKeyWide(), GET_PLAYER(ePlayer).getBuildingClassPrereqBuilding(eBuilding, eBuildingClass)).c_str());
 						}
 
 						szBuffer.append(szTempBuffer);
 					}
 				}
 			}
-			else if (kBuilding.isBuildingClassNeededInCity(iI))
+			else if (kBuilding.isBuildingClassNeededInCity(eBuildingClass))
 			{
 				if (NO_PLAYER != ePlayer)
 				{
-					eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(iI)));
+					eLoopBuilding = GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationBuildings(eBuildingClass);
 				}
 				else
 				{
-					eLoopBuilding = (BuildingTypes)GC.getBuildingClassInfo((BuildingClassTypes)iI).getDefaultBuildingIndex();
+					eLoopBuilding = (BuildingTypes)GC.getBuildingClassInfo(eBuildingClass).getDefaultBuildingIndex();
 				}
 
 				if (eLoopBuilding != NO_BUILDING)
@@ -7057,14 +7064,13 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 
 		if (!bCivilopediaText)
 		{
-			for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
+			for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_YIELD_TYPES; ++eYield)
 			{
-				if (kBuilding.getYieldCost(iYield) > 0)
+				if (kBuilding.getYieldCost(eYield) > 0)
 				{
-					YieldTypes eYield = (YieldTypes) iYield;
 					if (GC.getYieldInfo(eYield).isCargo())
 					{
-						int iCost = (NO_PLAYER == ePlayer ? GC.getBuildingInfo(eBuilding).getYieldCost(iYield) : GET_PLAYER(ePlayer).getYieldProductionNeeded(eBuilding, eYield));
+						int iCost = (NO_PLAYER == ePlayer ? GC.getBuildingInfo(eBuilding).getYieldCost(eYield) : GET_PLAYER(ePlayer).getYieldProductionNeeded(eBuilding, eYield));
 						if (NULL == pCity || pCity->getYieldStored(eYield) + pCity->getYieldRushed(eYield) < iCost)
 						{
 							szBuffer.append(NEWLINE);
@@ -7226,16 +7232,16 @@ void CvGameTextMgr::setBonusHelp(CvWStringBuffer &szBuffer, BonusTypes eBonus, b
 		}
 	}
 	CivilizationTypes eCivilization = GC.getGameINLINE().getActiveCivilizationType();
-	for (int i = 0; i < GC.getNumBuildingClassInfos(); i++)
+	for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 	{
 		BuildingTypes eLoopBuilding;
 		if (eCivilization == NO_CIVILIZATION)
 		{
-			eLoopBuilding = ((BuildingTypes)(GC.getBuildingClassInfo((BuildingClassTypes)i).getDefaultBuildingIndex()));
+			eLoopBuilding = (BuildingTypes)GC.getBuildingClassInfo(eBuildingClass).getDefaultBuildingIndex();
 		}
 		else
 		{
-			eLoopBuilding = ((BuildingTypes)(GC.getCivilizationInfo(eCivilization).getCivilizationBuildings(i)));
+			eLoopBuilding = GC.getCivilizationInfo(eCivilization).getCivilizationBuildings(eBuildingClass);
 		}
 	}
 	if (!isEmpty(GC.getBonusInfo(eBonus).getHelp()))
@@ -7359,27 +7365,63 @@ void CvGameTextMgr::setImprovementHelp(CvWStringBuffer &szBuffer, ImprovementTyp
 
 		if (info.isWater())
 		{
-			//WTP, ray, Large Rivers - START
-			if (info.getTerrainMakesValid(TERRAIN_LARGE_RIVERS))
+			//WTP - Dyllin - modified to accomodate freshwater, saltwater, plus lake and large river only improvements.
+			
+			//Saltwater only
+			if (info.getTerrainMakesValid(TERRAIN_OCEAN) &&
+				info.getTerrainMakesValid(TERRAIN_COAST) &&
+				info.getTerrainMakesValid(TERRAIN_SHALLOW_COAST) &&
+				!info.getTerrainMakesValid(TERRAIN_LAKE) &&
+				!info.getTerrainMakesValid(TERRAIN_ICE_LAKE) &&
+				!info.getTerrainMakesValid(TERRAIN_LARGE_RIVERS))
+			{
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_BUILD_ONLY_SALTWATER"));
+			}
+
+			//Freshwater only
+			else if (!info.getTerrainMakesValid(TERRAIN_OCEAN) &&
+				!info.getTerrainMakesValid(TERRAIN_COAST) &&
+				!info.getTerrainMakesValid(TERRAIN_SHALLOW_COAST) &&
+				info.getTerrainMakesValid(TERRAIN_LAKE) &&
+				info.getTerrainMakesValid(TERRAIN_ICE_LAKE) &&
+				info.getTerrainMakesValid(TERRAIN_LARGE_RIVERS))
+			{
+				szBuffer.append(NEWLINE);
+				szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_BUILD_ONLY_FRESHWATER"));
+			}
+
+			//Large rivers only
+			else if (!info.getTerrainMakesValid(TERRAIN_OCEAN) &&
+				!info.getTerrainMakesValid(TERRAIN_COAST) &&
+				!info.getTerrainMakesValid(TERRAIN_SHALLOW_COAST) &&
+				!info.getTerrainMakesValid(TERRAIN_LAKE) &&
+				!info.getTerrainMakesValid(TERRAIN_ICE_LAKE) &&
+				info.getTerrainMakesValid(TERRAIN_LARGE_RIVERS))
 			{
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_BUILD_ONLY_LARGE_RIVERS"));
 			}
 
-			//WTP, ray, Lakes
-			if (info.getTerrainMakesValid(TERRAIN_LAKE) || info.getTerrainMakesValid(TERRAIN_ICE_LAKE))
+			//Lakes only
+			else if (!info.getTerrainMakesValid(TERRAIN_OCEAN) &&
+				!info.getTerrainMakesValid(TERRAIN_COAST) &&
+				!info.getTerrainMakesValid(TERRAIN_SHALLOW_COAST) &&
+				info.getTerrainMakesValid(TERRAIN_LAKE) &&
+				info.getTerrainMakesValid(TERRAIN_ICE_LAKE) &&
+				!info.getTerrainMakesValid(TERRAIN_LARGE_RIVERS))
 			{
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_BUILD_ONLY_LAKE"));
 			}
 
-			// old code in else
+			//Goes anywhere there's water.
 			else
 			{
 				szBuffer.append(NEWLINE);
 				szBuffer.append(gDLL->getText("TXT_KEY_IMPROVEMENT_BUILD_ONLY_WATER"));
 			}
-			//WTP, ray, Large Rivers - END
+			//WTP - Dyllin - End
 		}
 
 		if (info.isRequiresFlatlands())
@@ -8049,9 +8091,9 @@ void CvGameTextMgr::setFeatureHelp(CvWStringBuffer &szBuffer, FeatureTypes eFeat
 	{
 		szBuffer.append(feature.getDescription());
 
-		for (int iI = 0; iI < NUM_YIELD_TYPES; ++iI)
+		for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_YIELD_TYPES; ++eYield)
 		{
-			aiYields[iI] = feature.getYieldChange(iI);
+			aiYields[eYield] = feature.getYieldChange(eYield);
 		}
 		setYieldChangeHelp(szBuffer, L"", L"", L"", aiYields);
 	}
@@ -8117,9 +8159,9 @@ void CvGameTextMgr::setTerrainHelp(CvWStringBuffer &szBuffer, TerrainTypes eTerr
 	{
 		szBuffer.append(terrain.getDescription());
 
-		for (int iI = 0; iI < NUM_YIELD_TYPES; ++iI)
+		for (YieldTypes eYield = FIRST_YIELD; eYield < NUM_YIELD_TYPES; ++eYield)
 		{
-			aiYields[iI] = terrain.getYield(iI);
+			aiYields[eYield] = terrain.getYield(eYield);
 		}
 		setYieldChangeHelp(szBuffer, L"", L"", L"", aiYields);
 	}
@@ -9710,8 +9752,8 @@ void CvGameTextMgr::setCitizenHelp(CvWStringBuffer &szString, const CvCity& kCit
 	// Display for become Expert - with turns worked and Expert Unit in Text
 	if(bCanBecomeExpert && lastProfession != NO_PROFESSION && GC.getProfessionInfo(lastProfession).LbD_isUsed() && iLbDRoundsWorked >0)
 	{
-		int expert = GC.getProfessionInfo(lastProfession).LbD_getExpert();
-		UnitTypes expertUnitType = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expert);
+		UnitClassTypes expert = (UnitClassTypes)GC.getProfessionInfo(lastProfession).LbD_getExpert();
+		UnitTypes expertUnitType = GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expert);
 		szString.append(NEWLINE);
 		szString.append(gDLL->getText("TXT_KEY_MISC_HELP_LBD_BECOME_EXPPERT_TURNS_WORKED", iLbDRoundsWorked, GC.getUnitInfo(expertUnitType).getDescription()));
 		szString.append(SEPARATOR);
@@ -9724,8 +9766,8 @@ void CvGameTextMgr::setCitizenHelp(CvWStringBuffer &szString, const CvCity& kCit
 	// Display for become Expert - with turns worked and Expert Unit in Text
 	if(bCanBecomeExpert && lastProfessionBefore != NO_PROFESSION && GC.getProfessionInfo(lastProfessionBefore).LbD_isUsed() && iLbDRoundsWorkedBefore >0)
 	{
-		int expertBefore = GC.getProfessionInfo(lastProfessionBefore).LbD_getExpert();
-		UnitTypes expertUnitTypeBefore = (UnitTypes)GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expertBefore);
+		UnitClassTypes expertBefore = (UnitClassTypes)GC.getProfessionInfo(lastProfessionBefore).LbD_getExpert();
+		UnitTypes expertUnitTypeBefore = GC.getCivilizationInfo(GET_PLAYER(GC.getGameINLINE().getActivePlayer()).getCivilizationType()).getCivilizationUnits(expertBefore);
 		szString.append(NEWLINE);
 		szString.append(gDLL->getText("TXT_KEY_MISC_HELP_LBD_BECOME_EXPPERT_TURNS_WORKED", iLbDRoundsWorkedBefore, GC.getUnitInfo(expertUnitTypeBefore).getDescription()));
 		szString.append(SEPARATOR);
@@ -10190,7 +10232,7 @@ void CvGameTextMgr::setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, i
 		CivilizationTypes eCiv = kActivePlayer.getCivilizationType();
 		if (NO_CIVILIZATION != eCiv)
 		{
-			BuildingTypes eBuilding = (BuildingTypes)GC.getCivilizationInfo(eCiv).getCivilizationBuildings(kEvent.getBuildingClass());
+			BuildingTypes eBuilding = GC.getCivilizationInfo(eCiv).getCivilizationBuildings((BuildingClassTypes)kEvent.getBuildingClass());
 			if (eBuilding != NO_BUILDING)
 			{
 				if (kEvent.getBuildingChange() > 0)
@@ -10210,18 +10252,18 @@ void CvGameTextMgr::setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, i
 	if (kEvent.getNumBuildingYieldChanges() > 0)
 	{
 		CvWStringBuffer szYield;
-		for (int iBuildingClass = 0; iBuildingClass < GC.getNumBuildingClassInfos(); ++iBuildingClass)
+		for (BuildingClassTypes eBuildingClass = FIRST_BUILDINGCLASS; eBuildingClass < NUM_BUILDINGCLASS_TYPES; ++eBuildingClass)
 		{
 			CivilizationTypes eCiv = kActivePlayer.getCivilizationType();
 			if (NO_CIVILIZATION != eCiv)
 			{
-				BuildingTypes eBuilding = (BuildingTypes)GC.getCivilizationInfo(eCiv).getCivilizationBuildings(iBuildingClass);
+				BuildingTypes eBuilding = GC.getCivilizationInfo(eCiv).getCivilizationBuildings(eBuildingClass);
 				if (eBuilding != NO_BUILDING)
 				{
 					int aiYields[NUM_YIELD_TYPES];
 					for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
 					{
-						aiYields[iYield] = kEvent.getBuildingYieldChange(iBuildingClass, iYield);
+						aiYields[iYield] = kEvent.getBuildingYieldChange(eBuildingClass, iYield);
 					}
 
 					szYield.clear();
@@ -10334,11 +10376,11 @@ void CvGameTextMgr::setEventHelp(CvWStringBuffer& szBuffer, EventTypes eEvent, i
 		}
 	}
 
-	for (int i = 0; i < GC.getNumUnitClassInfos(); ++i)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		if (NO_PROMOTION != kEvent.getUnitClassPromotion(i))
+		if (NO_PROMOTION != kEvent.getUnitClassPromotion(eUnitClass))
 		{
-			UnitTypes ePromotedUnit = ((UnitTypes)(GC.getCivilizationInfo(kActivePlayer.getCivilizationType()).getCivilizationUnits(i)));
+			UnitTypes ePromotedUnit = GC.getCivilizationInfo(kActivePlayer.getCivilizationType()).getCivilizationUnits(eUnitClass);
 			if (NO_UNIT != ePromotedUnit)
 			{
 				szBuffer.append(NEWLINE);
@@ -10600,20 +10642,20 @@ void CvGameTextMgr::setFatherHelp(CvWStringBuffer &szBuffer, FatherTypes eFather
 		}
 	}
 
-	for (int iUnitClass = 0; iUnitClass < GC.getNumUnitClassInfos(); ++iUnitClass)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		UnitTypes eUnit = (UnitTypes) GC.getUnitClassInfo((UnitClassTypes) iUnitClass).getDefaultUnitIndex();
+		UnitTypes eUnit = (UnitTypes) GC.getUnitClassInfo(eUnitClass).getDefaultUnitIndex();
 
 		if (ePlayer != NO_PLAYER)
 		{
-			eUnit = (UnitTypes) GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationUnits(iUnitClass);
+			eUnit = GC.getCivilizationInfo(GET_PLAYER(ePlayer).getCivilizationType()).getCivilizationUnits(eUnitClass);
 		}
 
 		if (eUnit != NO_UNIT)
 		{
-			if (kFatherInfo.getFreeUnits(iUnitClass) > 0)
+			if (kFatherInfo.getFreeUnits(eUnitClass) > 0)
 			{
-				szTempBuffer = gDLL->getText("TXT_KEY_FATHER_FREE_UNITS", kFatherInfo.getFreeUnits(iUnitClass), GC.getUnitInfo(eUnit).getTextKeyWide());
+				szTempBuffer = gDLL->getText("TXT_KEY_FATHER_FREE_UNITS", kFatherInfo.getFreeUnits(eUnitClass), GC.getUnitInfo(eUnit).getTextKeyWide());
 				szBuffer.append(NEWLINE);
 				szBuffer.append(szTempBuffer);
 			}

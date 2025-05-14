@@ -429,7 +429,7 @@ bool CvUnitAI::AI_europeUpdate()
 			{
 				// If we're carrying any units we may as well unload them
 				// so that other ships can transport them while we heal
-				AI_unloadUnits(EUROPE);
+				AI_unloadUnits(TRADE_LOCATION_EUROPE);
 			}
 
 			return false;
@@ -514,7 +514,7 @@ bool CvUnitAI::AI_europeUpdate()
 			{
 				if (hasCargo())
 				{
-					AI_sellYieldUnits(EUROPE);
+					AI_sellYieldUnits(TRADE_LOCATION_EUROPE);
 				}
 				crossOcean(UNIT_TRAVEL_STATE_FROM_EUROPE);
 			}
@@ -522,7 +522,7 @@ bool CvUnitAI::AI_europeUpdate()
 			{
 				if (hasCargo())
 				{
-					AI_sellYieldUnits(AFRICA);
+					AI_sellYieldUnits(TRADE_LOCATION_AFRICA);
 				}
 				crossOcean(UNIT_TRAVEL_STATE_FROM_AFRICA);
 			}
@@ -1081,7 +1081,7 @@ void CvUnitAI::AI_setUnitAIType(UnitAITypes eNewValue)
 	{
 		FAssertMsg(eNewValue != UNITAI_SETTLER || (eNewValue == UNITAI_SETTLER && canFound(NULL)),
 			"Unit must be able to found to have this UNITAI!");	
-		FAssertMsg(eNewValue != UNITAI_WORKER || (eNewValue == UNITAI_WORKER && workRate(true) > 0),
+		FAssertMsg(eNewValue != UNITAI_WORKER || (eNewValue == UNITAI_WORKER && workRate(true) > 0 && getProfession() != NO_PROFESSION),
 			"Unit must have non-zero work rate to have this UNITAI!");
 
 		const bool bOnMap = (getX_INLINE() != INVALID_PLOT_COORD) && (getY_INLINE() != INVALID_PLOT_COORD);
@@ -2155,7 +2155,7 @@ void CvUnitAI::AI_scoutMove()
 	if (isHuman()) 
 	{
 		const CvWString szBuffer(gDLL->getText("TXT_KEY_SCOUT_FINISHED_EXPLORING"));
-		gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), NULL, MESSAGE_TYPE_MINOR_EVENT, NULL, (ColorTypes)GC.getInfoTypeForString("COLOR_WHITE"), true, true);
+		gDLL->UI().addPlayerMessage(getOwnerINLINE(), false, GC.getEVENT_MESSAGE_TIME(), szBuffer, coord(), NULL, MESSAGE_TYPE_MINOR_EVENT, NULL, COLOR_WHITE, true, true);
 		getGroup()->setAutomateType(NO_AUTOMATE);
 	}
 	else
@@ -4565,9 +4565,9 @@ int CvUnitAI::AI_getCostDifferenceFreeVsSlave() const
 
 	const CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
 
-	for (int iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
+	for (UnitClassTypes eUnitClass = FIRST_UNITCLASS; eUnitClass < NUM_UNITCLASS_TYPES; ++eUnitClass)
 	{
-		const UnitTypes eLoopUnit = ((UnitTypes)(GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(iI)));
+		const UnitTypes eLoopUnit = GC.getCivilizationInfo(getCivilizationType()).getCivilizationUnits(eUnitClass);
 
 		if (eLoopUnit != NO_UNIT)
 		{
@@ -4612,7 +4612,7 @@ bool CvUnitAI::AI_sailToPreferredPort(bool bMove)
 		//const bool bAfricaRatio = (kOwner.getNumEuropeUnits() / static_cast<double>(cargoSpace()) <= 0.5);
 
 		// 2) Our goods must have a higher value in Africa than in Europe
-		const int iAfricaBetterValue = getCargoValue(AFRICA) - getCargoValue(EUROPE);
+		const int iAfricaBetterValue = getCargoValue(TRADE_LOCATION_AFRICA) - getCargoValue(TRADE_LOCATION_EUROPE);
 
 		// 3) The price of a slave must be less than a free colonist
 		const int iPriceDifference = AI_getCostDifferenceFreeVsSlave();
@@ -6493,9 +6493,13 @@ bool CvUnitAI::AI_africa()
 	if (kOwner.getParent() == NO_PLAYER)
 		return false;
 
-	AI_sellYieldUnits(AFRICA);
+	AI_sellYieldUnits(TRADE_LOCATION_AFRICA);
 
-	if (kOwner.m_estimatedUnemploymentCount < kOwner.getNumCities() * 2)
+	// Disabling this for now until we find a better method to determine the utitility
+#if 0
+	const int iEstimatedUnemploymentCount = kOwner.AI_estimateUnemploymentCount();
+
+	if (iEstimatedUnemploymentCount < kOwner.getNumCities() * 2)
 	{
 		for (int iI = 0; iI < GC.getNumUnitClassInfos(); iI++)
 		{
@@ -6505,13 +6509,15 @@ bool CvUnitAI::AI_africa()
 			if (kUnitInfo.getDefaultUnitAIType() == UNITAI_COLONIST && kUnitInfo.getAfricaCost() > 0)
 			{
 				// Attempt to buy slaves as long as we have have enough gold and free cargo slots
-				const int iPotentialSlavesToBuy = cargoSpace() - getCargo();
+				const int iCount = cargoSpace() - getCargo() - kPLayer.getNumAfricaUnits();
 
-				for (int i=0; i < iPotentialSlavesToBuy; i++)
+				for (int i=0; i < iCount; i++)
 				{
 					if (kOwner.buyAfricaUnit(eLoopUnit, 100) == NULL)
 						// Early exit since we could not buy anymore
 						break;
+					logBBAI("CvUnitAI::AI_africa player %S hurries %d units since iEstimatedUnemploymentCount is %d",
+						kOwner.getCivilizationDescription(), i, iEstimatedUnemploymentCount);
 				}
 
 				// No need to consider other units
@@ -6519,6 +6525,7 @@ bool CvUnitAI::AI_africa()
 			}
 		}
 	}
+#endif
 
 	//Pick up units from Africa (FIFO)
 	std::deque<CvUnit*> aUnits;
@@ -6594,8 +6601,8 @@ bool CvUnitAI::AI_europe()
 {
 	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
 
-	AI_sellYieldUnits(EUROPE);
-	AI_unloadUnits(EUROPE);
+	AI_sellYieldUnits(TRADE_LOCATION_EUROPE);
+	AI_unloadUnits(TRADE_LOCATION_EUROPE);
 
 	// TAC - AI King no Europe trading bugfix - koma13 - START
 	//kOwner.AI_doEurope();
@@ -6647,13 +6654,18 @@ bool CvUnitAI::AI_europe()
 	}
 	// TAC - AI purchases military units - koma13 - END
 
-	if (kOwner.AI_shouldHurryUnit() && kOwner.m_estimatedUnemploymentCount < kOwner.getNumCities() * 2)
+	const int iEstimatedUnemploymentCount = kOwner.AI_estimateUnemploymentCount();
+
+	if (kOwner.AI_shouldHurryUnit() && iEstimatedUnemploymentCount < kOwner.getNumCities() * 2)
 	{
 		const int iPotentialColonistsToHurry = std::max(0, cargoSpace() - getCargo() - kOwner.getNumEuropeUnits());
 
 		if (iPotentialColonistsToHurry > 0)
 		{
-			kOwner.AI_hurryBestDockUnits(std::min(GLOBAL_DEFINE_DOCKS_NEXT_UNITS, iPotentialColonistsToHurry));
+			kOwner.AI_hurryBestDockUnits(std::min(kOwner.CivEffect().getNumUnitsOnDock(), (unsigned int)iPotentialColonistsToHurry));
+			logBBAI("CvUnitAI::AI_europe player %S hurries %d units since iEstimatedUnemploymentCount is %d", 
+				kOwner.getCivilizationDescription(),
+				iPotentialColonistsToHurry, iEstimatedUnemploymentCount);
 		}
 	}
 	// Erik: Pick up the most valuable units first (e.g. statesmen)
@@ -6783,7 +6795,7 @@ bool CvUnitAI::AI_europeAssaultSea()
 {
 	CvPlayer& kOwner = GET_PLAYER(getOwnerINLINE());
 
-	AI_sellYieldUnits(EUROPE);
+	AI_sellYieldUnits(TRADE_LOCATION_EUROPE);
 
 	//Pick up units from Europe (FIFO)
 	while (kOwner.getNumEuropeUnits() > 0)
@@ -14908,10 +14920,31 @@ int CvUnitAI::AI_foundValue(CvPlot* pPlot)
 {
 	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
 
-	// Do not settle the first city on an island
-	if (kOwner.getNumCities() == 0 && pPlot->area()->isIsland())
+	if (kOwner.getNumCities() == 0 && kOwner.getCivCategoryTypes() == CIV_CATEGORY_COLONIAL)
 	{
-		return 0;
+		// Do not settle the first city on an island
+		if (pPlot->area()->isIsland())
+		{
+			return 0;
+		}
+
+		// first AI colony should be a deep water colony
+		bool bFoundDeepWater = false;
+		for (int iDX = -1; iDX <= 1 && !bFoundDeepWater; iDX++)
+		{
+			for (int iDY = -1; iDY <= 1 && !bFoundDeepWater; iDY++)
+			{
+				const CvPlot* pLoopPlot = GC.getMap().plotINLINE(pPlot->getX_INLINE() + iDX, pPlot->getY_INLINE() + iDY);
+				if (pLoopPlot != NULL && pLoopPlot->getTerrainType() == TERRAIN_COAST)
+				{
+					bFoundDeepWater = true;
+				}
+			}
+		}
+		if (!bFoundDeepWater)
+		{
+			return 0;
+		}
 	}
 
 	int iValue = 0;
@@ -19351,7 +19384,7 @@ bool CvUnitAI::AI_moveToCity(bool bUnload, CvCity* pLoopCity)
 }
 //End TAC Whaling, ray
 
-void CvUnitAI::AI_sellYieldUnits(Port port)
+void CvUnitAI::AI_sellYieldUnits(TradeLocationTypes eLocation)
 {
 	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
 	CvPlot* pPlot = plot();
@@ -19378,18 +19411,18 @@ void CvUnitAI::AI_sellYieldUnits(Port port)
 
 	for (uint i = 0; i < apUnits.size(); ++i)
 	{
-		if (port == EUROPE)
+		if (eLocation == TRADE_LOCATION_EUROPE)
 		{
 			kOwner.sellYieldUnitToEurope(apUnits[i], apUnits[i]->getYieldStored(), 0);
 		}
-		else if (port == AFRICA)
+		else if (eLocation == TRADE_LOCATION_AFRICA)
 		{
 			kOwner.sellYieldUnitToAfrica(apUnits[i], apUnits[i]->getYieldStored(), 0);
 		}
 	}
 }
 
-void CvUnitAI::AI_unloadUnits(Port port)
+void CvUnitAI::AI_unloadUnits(TradeLocationTypes eLocation)
 {
 	CvPlayerAI& kOwner = GET_PLAYER(getOwnerINLINE());
 	CvPlot* pPlot = plot();
@@ -19411,11 +19444,11 @@ void CvUnitAI::AI_unloadUnits(Port port)
 
 	for (uint i = 0; i < apUnits.size(); ++i)
 	{
-		if (port == EUROPE)
+		if (eLocation == TRADE_LOCATION_EUROPE)
 		{
 			kOwner.unloadUnitToEurope(apUnits[i]);
 		}
-		else if (port == AFRICA)
+		else if (eLocation == TRADE_LOCATION_AFRICA)
 		{
 			kOwner.unloadUnitToAfrica(apUnits[i]);
 		}

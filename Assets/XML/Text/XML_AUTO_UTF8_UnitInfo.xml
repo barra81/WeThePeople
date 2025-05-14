@@ -57,6 +57,31 @@
 		<English>TXT_KEY_UNIT_ANIMAL_STRATEGY</English>
 	</TEXT>
 	<TEXT>
+		<Tag>TXT_KEY_UNIT_ANACONDA</Tag>
+		<English>Anaconda</English>
+		<French>
+			<Text>Anaconda</Text>
+			<Gender>Male</Gender>
+			<Plural>0</Plural>
+		</French>
+		<German>
+			<Text>Anaconda</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</German>
+		<Italian>
+			<Text>Anaconda</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Italian>
+		<Spanish>
+			<Text>Anaconda</Text>
+			<Gender>Female</Gender>
+			<Plural>0</Plural>
+		</Spanish>
+		<Russian>Анаконда</Russian>
+	</TEXT>
+	<TEXT>
 		<Tag>TXT_KEY_UNIT_BARLEY</Tag>
 		<English>Barley</English>
 		<French>
@@ -257,6 +282,12 @@
 		<English>[COLOR_UNIT_TEXT]Bishops[COLOR_REVERT] are the best source of [LINK=YIELD_CROSSES]crosses[\LINK] a colony could wish for. They are even more effective than [LINK=UNIT_PREACHER]firebrand preachers[\LINK] or [LINK=UNIT_PRIEST]devout priests[\LINK], because they receive a 200% bonus in cross production.[NEWLINE]Your only chance to recruit them is during those rare moments when the [LINK=CONCEPT_CHURCH]Archbishop[\LINK] offers to send you a bishop as a reward for your piety.</English>
 		<French>Les [COLOR_UNIT_TEXT]évêques[COLOR_REVERT] sont la meilleure source de [COLOR_HIGHLIGHT_TEXT]croix[COLOR_REVERT] qu'une colonie peut souhaiter. Ils sont encore plus efficaces que les prédicateurs exaltés, ou les prêtres dévôts mais également très rares.</French>
 		<German>[COLOR_UNIT_TEXT]Bischöfe[COLOR_REVERT] sind die beste Quelle für [LINK=YIELD_CROSSES]Kreuze[\LINK], die sich eine Kolonie wünschen kann. Sie sind sogar noch effektiver als [LINK=UNIT_PREACHER]mitreißende Prediger[\LINK] oder [LINK=UNIT_PRIEST]fromme Priester[\LINK], da sie einen 200%igen Bonus auf die Kreuzproduktion erhalten. Sie sind jedoch sehr selten.[NEWLINE]Du kannst sie rekrutieren, wenn der [LINK=CONCEPT_CHURCH]Erzbischof[\LINK] anbietet, einen Bischof als Belohnung für deine Frömmigkeit zu schicken.</German>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_UNIT_BLACKBEAR_PEDIA</Tag>
+		<English>[TAB]The American black bear (Ursus americanus) is medium-sized by world standards, but nonetheless the continent's smallest. It is the most common bear species. Black bears are omnivores, with their diets varying greatly depending on season and location. They typically live in forested areas, but do leave forests in search of food. They can be attracted to human communities because of the availability of food. The American black bear is listed by the IUCN as Least Concern, due to the species' widespread distribution with a population estimated to be twice that of all other bear species combined. American black bears often mark trees using their teeth and claws as a form of communication with other bears, a behaviour common to many species of bears.</English>
+		<French>[TAB]L'ours noir (Ursus americanus) est de taille moyenne à l'échelle mondiale, mais est l'ours le plus petit du continent. C'est également le plus commun en Amérique du Nord. Ce sont des omnivores, dont le régime varie fortement suivant la saison et le lieu. Ils vivent le plus souvent en forêt, mais peuvent les quitter à la recherche de nourriture. Ils peuvent être attirés par les regroupements humains à cause de la nourriture. L'ours noir américain est listé dans la catégorie IUCN Préoccupation mineire, en raison de son aire géographique étendue et de sa population estimée à deux fois celle des autres epsèces d'ours réunies.  Les ours noirs américains marquent souvent les arbres à coup de griffes et de mâchoires pour laisser un message aux autres ours, ce qui est comportement commun à biens des espèces d'ours.</French>
+		<German>[TAB]Der Amerikanische Schwarzbär (Ursus americanus), auch Baribal genannt, ist eine in Nord-Amerika lebende Raubtierart aus der Familie der Bären (Ursidae). In seiner Heimat wird er meistens als black bear bezeichnet oder als Baribal. Im Vergleich zum eher gefürchteten Grizzlybär gilt der Schwarzbär als weniger gefährlich. Amerikanische Schwarzbären haben den typischen Körperbau der Bären. Der Rumpf ist massiv, die Gliedmaßen kräftig. Die Pfoten haben je fünf starke Krallen, welche die Bären zum Reißen, Graben und Klettern einsetzen. Der Schwanz ist wie bei allen Bären nur ein kurzer Stummel. Der große Kopf ist durch die eher lange, unbehaarte Schnauze, die kleinen Augen und die runden, aufgerichteten Ohren charakterisiert. Trotz ihres Namens sind nicht alle Amerikanischen Schwarzbären schwarz gefärbt. Es gibt auch silbergraue und rötlichbraune Varianten, und manche Baribals haben eine mit Grizzlies nahezu identische Fellfarbe. Die Färbung des Fells hängt mit dem Lebensraum zusammen: während Tiere, die in dichten Wäldern mit kühlerem Klima (im Norden und Osten des Verbreitungsgebietes) leben, eher schwarz sind, haben die Schwarzbären im südlichen und westlichen Teil des Verbreitungsgebietes, die in offenem, trockenerem Terrain wohnen, eine eher bräunliche Färbung. Das Verbreitungsgebiet der Amerikanischen Schwarzbären umfasst große Teile Nord-Amerikas. Sie leben in nahezu ganz Alaska und Kanada mit Ausnahme des äußersten Nordens, im Kerngebiet der Vereinigten Staaten (den 48 zusammenhängenden Staaten) sind sie ebenfalls weit verbreitet und fehlten ursprünglich nur im südwestlichen, trockenen Landesteil. In Mexiko kommen sie vor allem im Bereich der Gebirgszüge Sierra Madre Oriental und Sierra Madre Occidental vor. Amerikanische Schwarzbären wurden und werden vom Menschen aus verschiedensten Gründen gejagt. Dazu zählen die potenzielle Gefährdung des Menschen, die Angst vor gerissenen Weidetieren und zerstörten Agrarflächen und Bienenstöcken, der Bedarf an Fell und Fleisch sowie die Sportjagd. Untersuchungen haben gezeigt, dass der Schaden bei Weidetieren vernachlässigbar ist, dass sie aber wohl auf landwirtschaftlich genutzten Feldern Schäden anrichten können. Die Sportjagd ist weit verbreitet, nach einer Schätzung aus dem Jahr 1995 werden jedes Jahr rund 40.000 Tiere erlegt. Die Verwendung des Bärenfells und des Fleisches ist heute weitgehend zurückgegangen; bei den Indianern war dies der wichtigste Grund für die Bejagung. Die Bärenfellmützen, die zur Paradeuniform verschiedener britischer Regimenter gehören, werden aber bis heute aus dem Fell kanadischer Schwarzbären hergestellt.</German>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_UNIT_BLACKSMITH</Tag>
@@ -1437,7 +1468,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_UNIT_SLAVE_HUNTER_STRATEGY</Tag>
-		<English>[COLOR_UNIT_TEXT]Slave hunters[COLOR_REVERT] are skilled in fighting and capturing runaway slaves including armed rebelling slaves. You can only acquire them by recruitment in Africa or through rare events.</English>
+		<English>[COLOR_UNIT_TEXT]Slave hunters[COLOR_REVERT] are skilled in fighting and capturing runaway slaves including armed rebelling slaves. They start with promotions that make it harder for slaves to escape from any cities where they're stationed. You can only acquire them by recruitment in Africa or through rare events.</English>
 		<German>[COLOR_UNIT_TEXT]Sklavenjäger[COLOR_REVERT] sind darauf spezialisiert flüchtende Sklaven wieder einzufangen oder Sklavenrevolten niederzuschlagen. Sie können lediglich in Afrika rekrutiert werden oder durch seltene Ereignisse erhalten werden.</German>
 	</TEXT>
 	<TEXT>
@@ -1466,7 +1497,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_UNIT_SLAVE_MASTER_STRATEGY</Tag>
-		<English>[COLOR_UNIT_TEXT]Slave overseers[COLOR_REVERT] drive slaves, criminals and indentured servants to work harder to produce more. You can only acquire them by recruitment in Africa or by rare events.</English>
+		<English>[COLOR_UNIT_TEXT]Slave overseers[COLOR_REVERT] drive slaves, criminals and indentured servants to work harder to produce more. Check overseer promotions to see how much more. You can only acquire overseers by recruitment in Africa or by rare events.</English>
 		<German>[COLOR_UNIT_TEXT]Sklavenaufseher[COLOR_REVERT] sind in der Lage Sklaven, Kriminelle und Leibeigene härter arbeiten zu lassen, um mehr zu produzieren. Sie können lediglich in Afrika rekrutiert werden oder durch seltene Ereignisse erhalten werden.</German>
 	</TEXT>
 	<TEXT>
@@ -4155,14 +4186,54 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_UNIT_EXPERT_SETTLER</Tag>
-		<English>Prepared Settler:Prepared Settlers</English>
-		<French>Fondateur préparé:Fondateurs Préparés</French>
+		<English>
+			<Text>Prepared Settler:Prepared Settlers</Text>
+			<Gender>Male</Gender>
+			<Plural>0:1</Plural>
+		</English>
+		<French>
+			<Text>Fondateur préparé:Fondateurs Préparés</Text>
+			<Gender>Male</Gender>
+			<Plural>0:1</Plural>
+		</French>
 		<German>
 			<Text>Vorbereiteter Siedler:Vorbereitete Siedler</Text>
 			<Gender>Male</Gender>
 			<Plural>0:1</Plural>
 		</German>
-		<Russian>Подготовленный поселенец:Подготовленные поселенцы</Russian>
+		<Italian>
+			<Text>Colono preparati:Coloni preparati</Text>
+			<Gender>Male</Gender>
+			<Plural>0:1</Plural>
+		</Italian>
+		<Spanish>
+			<Text>Colono preparado:Colonos preparados</Text>
+			<Gender>Male</Gender>
+			<Plural>0:1</Plural>
+		</Spanish>
+		<Russian>
+			<Text>Подготовленный поселенец:Подготовленные поселенцы</Text>
+			<Gender>Male</Gender>
+			<Plural>0:1</Plural>
+		</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_UNIT_EXPERT_SETTLER_PEDIA</Tag>
+		<English>Some Europeans were self-funded and well equipped to settle the New World without relying upon the support of a colonial organization, sometimes to found their own towns away from the watchful eye of an overzealous crown who enforced religious or regulatory tyranny, sometimes just to have a parchment of land all to themselves.</English>
+		<French>Certains Européens étaient autofinancés et bien équipés pour coloniser le Nouveau Monde sans dépendre du soutien d’une organisation coloniale, parfois pour fonder leurs propres villes loin de l’œil vigilant d’une couronne trop zélée qui imposait une tyrannie religieuse ou réglementaire, parfois simplement pour avoir un parchemin de terre pour eux seuls.</French>
+		<German>Einige Europäer waren selbstfinanziert und gut gerüstet, um die Neue Welt zu besiedeln, ohne auf die Unterstützung einer Kolonialorganisation angewiesen zu sein, manchmal, um ihre eigenen Städte zu gründen, fernab des wachsamen Auges einer übereifrigen Krone, die religiöse oder regulatorische Tyrannei durchsetzte, manchmal nur, um ein Pergament Land ganz für sich allein zu haben.</German>
+		<Italian>Alcuni europei si autofinanziarono e ben equipaggiarono per colonizzare il Nuovo Mondo senza contare sul sostegno di un'organizzazione coloniale, a volte per fondare le proprie città lontano dall'occhio vigile di una corona troppo zelante che imponeva la tirannia religiosa o regolamentare, a volte solo per avere una pergamena di terra tutta per loro.</Italian>
+		<Spanish>Algunos europeos se autofinanciaron y estaban bien equipados para colonizar el Nuevo Mundo sin depender del apoyo de una organización colonial, a veces para fundar sus propias ciudades lejos de la atenta mirada de una corona demasiado celosa que imponía la tiranía religiosa o reguladora, a veces solo para tener un pergamino de tierra para ellos solos.</Spanish>
+		<Russian>Некоторые переселенцы имели финансовую возможность подготовиться к путешествию в Новый Свет и были хорошо экипированы. Они не полагались на поддержку компании, которая осуществлял перевозку желающих к новым землям. Иногда они хотели основать свои собственные поселения вдали от всех, чтобы избавиться от постоянного контроля со стороны властей. А иногда просто для того, чтобы иметь в своем распоряжении хотя бы небольшой клочок земли.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_UNIT_EXPERT_SETTLER_STRATEGY</Tag>
+		<English>Prepared Settlers are a special type of unit only available in Europe. They come prepared with all the equipment necessary to settle cities. As a result, they cannot be trained in the New World, especially since they're otherwise only better at producing a little more food than a Free Colonist, and are therefore worse than any true Specialist.</English>
+		<French>Les colons préparés sont un type spécial d’unité uniquement disponible sur les quais d’Europe. Ils viennent préparés avec tout l’équipement nécessaire pour coloniser les villes. En conséquence, ils ne peuvent pas être entraînés dans le Nouveau Monde, d’autant plus qu’ils ne sont autrement meilleurs qu’un colon libre pour produire un peu plus de nourriture qu’un colon libre, et sont donc pires que n’importe quel vrai spécialiste.</French>
+		<German>Vorbereitete Siedler sind eine spezielle Art von Einheiten, die nur an den Docks Europas erhältlich sind. Sie sind mit der gesamten Ausrüstung ausgestattet, die für die Besiedlung von Städten erforderlich ist. Infolgedessen können sie nicht in der Neuen Welt ausgebildet werden, zumal sie sonst nur etwas besser darin sind, Nahrung zu produzieren als ein Freier Kolonist und daher schlechter sind als jeder echte Spezialist.</German>
+		<Italian>I Settler Preparati sono un tipo speciale di unità disponibile solo sui moli d'Europa. Vengono preparati con tutta l'attrezzatura necessaria per colonizzare le città. Di conseguenza, non possono essere addestrati nel Nuovo Mondo, soprattutto perché sono solo più bravi a produrre un po' più di cibo di un Colono Libero, e sono quindi peggiori di qualsiasi vero Specialista.</Italian>
+		<Spanish>Los colonos preparados son un tipo especial de unidad que solo está disponible en los muelles de Europa. Vienen preparados con todo el equipamiento necesario para asentar ciudades. Como resultado, no pueden ser entrenados en el Nuevo Mundo, especialmente porque de lo contrario solo son mejores para producir un poco más de comida que un Colono Libre y, por lo tanto, son peores que cualquier verdadero Especialista.</Spanish>
+		<Russian>Подготовленные поселенцы — особый тип юнитов, иногда доступный только в доках Европы. Они приходят подготовленными со всем оборудованием, необходимым для заселения городов. Это не профессия, которой можно где-то обучиться. И пусть каждый из них гораздо хуже любого специалиста, но все же они немного превосходят простых колонистов в трудолюбии и способности выращивать еду.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_UNIT_PIONEER</Tag>

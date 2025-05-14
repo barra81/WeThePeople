@@ -229,9 +229,9 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_SECONDCOLONY_2_HELP</Tag>
-		<English>[COLOR_FONT_GOLD]His Majesty is offering blades for the town guard of your colony.[COLOR_REVERT]</English>
+		<English>[COLOR_FONT_GOLD]His Majesty is offering blades and provisions for two town guards of your colonies.[COLOR_REVERT]</English>
 		<French>[COLOR_FONT_GOLD]Votre Roi vous offre des armes pour défendre votre colonie.[COLOR_REVERT]</French>
-		<German>[COLOR_FONT_GOLD]Seine Majestät bietet Euch Klingen für die Stadtwache an, damit Ihr die Kolonie verteidigen könnt.[COLOR_REVERT]</German>
+		<German>[COLOR_FONT_GOLD]Seine Majestät bietet Euch Klingen und Ausrüstung für zwei Stadtwachen an, damit Ihr Eure Kolonien verteidigen könnt.[COLOR_REVERT]</German>
 		<Russian>[COLOR_FONT_GOLD]Его Величество предлагает вам клинки городских стражников для экипирования защитников колонии.[COLOR_REVERT]</Russian>
 	</TEXT>
 	<TEXT>
@@ -438,7 +438,7 @@
 		<English>[COLOR_FONT_GOLD]His Majesty is not amused. Rumours report that He was asking for His smelling salts.[COLOR_REVERT]</English>
 		<French>[COLOR_FONT_GOLD]Le Roi n'apprécie pas votre humour. Il aurait même demandé sa fiole de salmiac pour se remonter.[COLOR_REVERT]</French>
 		<German>[COLOR_FONT_GOLD]Eure Antwort wurde Seiner Majestät zugetragen. Kammerdiener berichten, dass er nach seinem Riechsalz verlangte.[COLOR_REVERT]</German>
-		<Russian>[COLOR_FONT_GOLD]Его Величеству не до смеха. Ходят слухи, что Он просил Свою нюхательную соль.[COLOR_REVERT]</Russian>
+		<Russian>[COLOR_FONT_GOLD]Его Величество в бешенстве. Ходят слухи, что Он расстрелял ваш портрет из мушкета.[COLOR_REVERT]</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FESTIVITY_2_HELP</Tag>
@@ -1212,7 +1212,7 @@
 		<English>A rumour is spreading: A [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] whaling ship is being attacked by a whale seeking revenge.</English>
 		<French>Une rumeur se répend : Un baleinier [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] est attaqué par une baleine revancharde.</French>
 		<German>Ein Gerücht macht die Runde: Ein [COLOR_HIGHLIGHT_TEXT]%s1:4_civ_adjective[COLOR_REVERT] Walfangschiff wird von eime Rache suchenden Wal angegriffen.</German>
-		<Russian>Ходят слухи: [COLOR_HIGHLIGHT_TEXT]%s1:4_civ_adjective[COLOR_REVERT] китобойное судно подвергается нападению мстительного кита.</Russian>
+		<Russian>Ходят слухи: китобойное судно [COLOR_HIGHLIGHT_TEXT]%s1:4_civ_adjective[COLOR_REVERT] подверглось нападению мстительного кита.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_WHALE_ATTACK_1</Tag>
@@ -2050,14 +2050,14 @@
 		<English>A [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] master carpenter wishes to bring his family over from Europe.</English>
 		<French>Un maître charpentier [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] souhaite que sa famille en Europe lui rende visite.</French>
 		<German>Ein [COLOR_HIGHLIGHT_TEXT]%s1:4_civ_adjective[COLOR_REVERT] Zimmermeister möchte seine Familie in die Neue Welt nachkommen lassen.</German>
-		<Russian>[COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] мастер-плотник хочет привезти свою семью из Европы.</Russian>
+		<Russian>Мастер-плотник из [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] хочет перевезти свою семью в Новый Свет.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_CARPENTER_FAMILY_1</Tag>
 		<English>A master carpenter wishes to send a letter to his family in Europe to tell them all about the wonderful New World. Milord, he asks you whether you could give him money to pay for the passage of one of his brothers.</English>
 		<French>Un maître charpentier souhaite envoyer une lettre à sa famille en Europe et leur dire à quel point le Nouveau Monde est beau. Milord, il vous demande si vous pourriez lui donner un peu d'argent pour le passage de l'un de ses frères.</French>
 		<German>Ein Zimmermeister will seiner Familie in der Heimat schreiben, wie sehr ihm das Leben in der Neuen Welt gefällt. Er fragt Euch, Milord, ob Ihr ihm etwas Geld geben möchtet. Er würde es seinen Angehörigen schicken, damit einer seiner Brüder in die Neue Welt nachkommen kann.</German>
-		<Russian>Мастер-плотник хочет послать письмо своей семье в Европу, чтобы рассказать им все о прекрасном Новом Свете. Милорд, он спрашивает вас, не могли бы вы дать ему денег на оплату проезда одного из его братьев.</Russian>
+		<Russian>Не так давно мастер-плотник писал письмо своей семье в Европу, в котором рассказывал о прекрасном Новом Свете. И теперь он спрашивает, Милорд, не могли бы вы оплатить проезд одного из его братьев в наши колонии.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_BOOK_MORMON</Tag>
@@ -2185,7 +2185,7 @@
 		<German>Der Reichtum dieses Landes ist erstaunlich! Kisten voll Gold, Geschmeide und mannigfaltigen Gemmen strömen in die Hafenstädte. Nun, derartiges zu sehen befördert nicht immer das Beste in den Menschen. Um ehrlich zu sein, Milord, man munkelt in den Spelunken und Hafenvierteln bereits, welches Lagerhaus einen Besuch gar lohnen würde. Wenn Ihr nicht bald etwas unternehmt, dann wird die Gier Eure braven Kolonisten vergiften.</German>
 		<Italian>La ricchezza di questa terra è sorprendente! I forzieri pieni d'oro, di gioielli e di molteplici gemme si riversano nelle città portuali. Beh, vedere queste cose non sempre tira fuori il meglio dalle persone. Ad essere onesti, mio signore, ci sono già voci nelle taverne e nei quartieri del porto su quale magazzino varrebbe la pena visitare. Se non agite presto, l'avidità avvelenerà i vostri buoni coloni.</Italian>
 		<Spanish>La riqueza de esta tierra es asombrosa. Cofres llenos de oro, joyas y múltiples gemas llegan a las ciudades portuarias. Pues bien, ver esas cosas no siempre saca lo mejor de las personas. A decir verdad, mi señor, ya hay rumores en las tabernas y los barrios del puerto sobre qué almacén merecería una visita. Si no actúan pronto, la codicia envenenará a sus buenos colonos.</Spanish>
-		<Russian>Богатство этой страны поражает воображение! Сундуки, наполненные золотом, драгоценностями и разнообразными драгоценными камнями, хлынули в портовые города. Что ж, наблюдение таких вещей не всегда пробуждает в людях лучшие качества. Честно говоря, милорд, в тавернах и портовых кварталах уже ходят разговоры о том, какой склад стоит посетить. Если вы не предпримете что-то в ближайшее время, жадность отравит ваших хороших колонистов.</Russian>
+		<Russian>Богатство этой страны поражает воображение! Сундуки, наполненные золотом, серебром и различными драгоценными камнями, копятся на складах портовых городов, ожидая отправки в Старый свет. И наблюдение за этим иногда пробуждает в людях не самые лучшие их качества. Честно говоря, милорд, в тавернах и портовых кварталах уже начинаются разговоры о том, какой склад стоит "посетить". Если вы не предпримете что-то в ближайшее время, жадность отравит разум ваших колонистов.</Russian>
 	</TEXT>
 	<!--RaR Events -->
 	<TEXT>
@@ -2417,7 +2417,7 @@
 		<English>A disease is spreading in a nearby Native village. The disease broke out after our settlers visited them. Now the Native people need our help.</English>
 		<French>Une maladie est en train de se propager dans un village indigène voisin. Les indigènes croient que cela fait suite à la visite de certains de nos colons et demandent de l'aide.</French>
 		<German>Eine Krankheit breitet sich in einer nahegelegenen Siedlung der Wilden aus. Sie behaupten, die Krankheit sei ausgebrochen, nachdem einige unserer Siedler ihr Dorf besucht hatten. Sie bitten nun um unsere Hilfe.</German>
-		<Russian>Болезнь распространяется в соседней деревне индейцев. Заболевание вспыхнуло после того, как наши колонисты побывали там. Сейчас туземцы нуждаются в нашей помощи.</Russian>
+		<Russian>В соседней деревне индейцев начали массово болеть жители. Заболевание вспыхнуло после того, как там побывали наши колонисты. Туземцы нуждаются в нашей помощи.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_SALT_RESOURCE</Tag>
@@ -2550,14 +2550,14 @@
 		<English>A major military conflict in Europe has ended.</English>
 		<French>Un conflit militaire d'importance a pris fin en Europe.</French>
 		<German>Ein bedeutender militärischer Konflikt wurde in Europa beendet.</German>
-		<Russian>Крупный военный конфликт в Европе закончился.</Russian>
+		<Russian>В Европе завершился крупный военный конфликт.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_EUROPEAN_CONFLICT_ENDED</Tag>
 		<English>A large-scale military conflict in Europe has ended. Many troops are no longer needed and have been sent home. Maybe we could hire some of them.</English>
 		<French>Un conflit militaire d'importance a pris fin en Europe. De nombreuses troupes n'y sont plus nécessaires et ont été renvoyées à leur maison. Peut-être pourrions-nous en engager quelques-unes.</French>
 		<German>Ein bedeutender militärischer Konflikt wurde in Europa beendet. Viele Soldaten sind schon entlassen worden. Vielleicht können wir einige davon anheuern.</German>
-		<Russian>Крупномасштабный военный конфликт в Европе завершился. Многие войска больше не нужны и их отправили по домам. Может быть, мы могли бы нанять некоторых из этих бравых солдат.</Russian>
+		<Russian>Крупномасштабный военный конфликт в Европе закончился. Содержать многотысячные армии больше нет нужды и войска распустили по домам. У нас есть возможность завербовать в колониальную армию опытных солдат.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_DRUNKEN_FISHER</Tag>
@@ -2809,7 +2809,7 @@
 		<English>Ensure that the priests are welcomed with a ceremony.</English>
 		<French>Assurez-vous que les prêtres soient accueillis avec cérémonie.</French>
 		<German>Stellt sicher, dass die Priester mit Feierlichkeiten willkommen geheißen werden.</German>
-		<Russian>Удостоверьтесь, что священники приветствуются должным образом.</Russian>
+		<Russian>Удостоверьтесь, что священников встретили должным образом.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_FIVE_BAKERIES</Tag>
@@ -3247,7 +3247,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_SIX_WARSHIPS_QUEST_DONE</Tag>
-		<English>Milord, you've acquired at leaast six warships (frigate or larger) before any other colony could. His Majesty now sends us the promised flagship.</English>
+		<English>Milord, you've acquired at least six warships (frigate or larger) before any other colony could. His Majesty now sends us the promised flagship.</English>
 		<French>Sire, vous avez constitué avant tous les autres une flotte de guerre d'au moins six grands navires de combat. Sa Majesté nous envoie le navire-amiral promis. </French>
 		<German>Milord, die Küsten Eurer Kolonie werden nun von mindestens sechs Kriegsschiffen (Fregatte oder größer) geschützt. Damit seid ihr allen anderen Gouverneuren zuvorgekommen. Seine Majestät schickt uns das versprochene Flaggschiff.</German>
 		<Russian>Милорд, мы приобрели как минимум шесть боевых кораблей (фрегат или больше) раньше, чем любая другая колониальная нация. Его Величество уже отправил нам обещанный флагман.</Russian>
@@ -3642,7 +3642,7 @@
 		<English>A Native slave has saved the life of one of our colonists who fell beneath the hooves of wild horses. The colonist now asks that this slave be set free for his bravery.</English>
 		<French>Un esclave indigène a sauvé la vie de l'un de nos colons lorsque des chevaux sont devenus fous et allaient le piétiner. Le colon demande que l'esclave recouvre sa liberté pour le remercier de son courage.</French>
 		<German>Ein Ureinwohnersklave hat das Leben eines unserer Siedler gerettet, als einige Pferde durchgingen und den Siedler beinahe überrannten. Der Siedler bittet nun, dass der Ureinwohnersklave aufgrund seines Mutes die Freiheit bekommt.</German>
-		<Russian>Раб-абориген спас жизнь одному из наших колонистов, который попал под копыта диких лошадей. Теперь спасённый колонист просит, чтобы этого раба освободили за его храбрость.</Russian>
+		<Russian>Туземный раб спас жизнь одному из наших колонистов, который попал под копыта диких лошадей. Теперь спасённый колонист просит, чтобы этого раба освободили за его храбрость.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_DIPLOMATIC_CONNECTIONS</Tag>
@@ -4278,14 +4278,14 @@
 		<English>The young man must surely have learned something during his time in the fort. Take care that he finishes basic training in the militia, arm him and put him into service.</English>
 		<French>Ce jeune homme a du surement apprendre deux-t^rois choses dans sa jeunesee au fort. Faites en sorte qu'il finisse ses classes dans la milice, équipez le et mettez le au service.</French>
 		<German>Der junge Mann wird sicher etwas während seiner Zeit im Fort gelernt haben. Stellt sicher, dass er zumindest eine grundlegende Ausbildung in der Miliz bekommt, gebt ihm Waffen und lasst ihn in unsere Dienste treten.</German>
-		<Russian>Молодой человек наверняка чему-то научился за время своего пребывания в форте. Позаботьтесь о том, чтобы он закончил базовую подготовку в ополчении, вооружите и назначьте на службу.</Russian>
+		<Russian>Парень наверняка чему-то научился за время своего пребывания в форте. Позаботьтесь о том, чтобы он закончил базовую подготовку в ополчении, вооружите и назначьте на службу.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_SOLDIERS_SON_IN_FORT_2</Tag>
 		<English>We should give the young man a chance for a normal life and let him make his own decisions once he is of age. Give him proper clothes and send him to one of our cities where he can choose a profession to his liking.</English>
 		<French>Nous devons donner à ce jeune homme une chance pour une vie normale, et le laisser prendre des décision une fois adulte. Donnez lui des vêtements civils et envoyez le dans une de nos villes, ou il pourra choisir une profession à son goût.</French>
 		<German>Wir sollten dem jungen Mann eine Chance auf ein normales Leben geben und darauf, seine eigenen Entscheidungen zu treffen. Gebt ihm saubere Kleidung, sendet ihn in eine unserer Städte und lasst ihn selbst einen Beruf wählen.</German>
-		<Russian>Мы должны дать молодому человеку шанс на нормальную жизнь и позволить ему принимать решения самостоятельно, когда он достигнет совершеннолетия. Дайте ему приличную одежду и отправьте в один из наших городов, где он сможет выбрать себе профессию по душе.</Russian>
+		<Russian>Мы должны дать юноше шанс на нормальную жизнь и позволить ему принимать решения самостоятельно, когда он достигнет совершеннолетия. Дайте ему приличную одежду и отправьте в один из наших городов, где он сможет выбрать себе профессию по душе.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_RABBLE</Tag>
@@ -5261,7 +5261,7 @@
 		<Tag>TXT_KEY_EVENT_TRIGGER_DISCOVERY_EVENTS_START_3</Tag>
 		<English>Milord, discovering the continent and returning here alive will be a great challenge for these inexperienced adventurers. None of them know what lies beyond the beach. Shouldn't they get a little help?</English>
 		<German>Milord, den Kontinent zu entdecken und wieder lebend hierher zurückzukehren wird eine große Herausforderung für diese unerfahrenen Abenteurer werden. Keiner von denen weiß, was hinter dem Strand verborgen liegt. Sollten sie nicht ein wenig Beistand erhalten?</German>
-		<Russian>Милорд, исследовать континент и вернуться сюда живым будет непростой задачей. Никто из нас не знает, что находится за теми холмами. Нам стоит заручиться поддержкой опытных исследователей.</Russian>
+		<Russian>Милорд, исследовать континент и вернуться на побережье живым будет непростой задачей. Никто из нас не знает, что находится за теми холмами. Нам стоит заручиться поддержкой опытных исследователей.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_DISCOVERY_EVENTS_START_1</Tag>
@@ -5279,7 +5279,7 @@
 		<Tag>TXT_KEY_EVENT_DISCOVERY_EVENTS_START_3</Tag>
 		<English>You're right. But rather than coming to this New World to plunder and murder, they look forward to trading with the inhabitants of this beautiful land. Profit excites traders. Hire traders.</English>
 		<German>Ihr habt Recht. Aber sie sind nicht in diese Neue Welt gekommen um zu plündern und zu morden. Sie wollen Handel mit den Bewohnern dieses schönen Landes treiben. Die Aussicht auf Profit wird die Händler begeistern. Heuert ein paar Händler an.</German>
-		<Russian>Мы пришли сюда не грабить и убивать, а преумножить наше состояние. Перспектива большой прибыли должна привлечь множество торговцев. Наймите нескольких из них.</Russian>
+		<Russian>Мы пришли сюда не грабить и убивать, а преумножить наше состояние. Перспектива большой прибыли должна привлечь множество торговцев. Наймите кого-нибудь из них.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_DISCOVERY_EVENTS_START_4</Tag>
@@ -5351,7 +5351,7 @@
 		<Tag>TXT_KEY_EVENTTRIGGER_DISCOVERY_EVENTS_ATTACKED</Tag>
 		<English>There's a rumour that a [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] expedition has been attacked and murdered by hostile Natives.</English>
 		<German>Ein Gerücht macht die Runde: Eine [COLOR_HIGHLIGHT_TEXT]%s1:3_civ_adjective[COLOR_REVERT] Expedition wurde von Ureinwohnern angegriffen und abgeschlachtet.</German>
-		<Russian>Ходят слухи, что экспедиция [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] подверглась нападению враждебно настроенными туземцами.</Russian>
+		<Russian>Ходят слухи, что экспедиция [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] подверглась нападению враждебно настроенных туземцев.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_DISCOVERY_EVENTS_ATTACKED_1</Tag>
@@ -5553,13 +5553,13 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_FAKE_NEWS_1</Tag>
-		<English>We support the revolution. Let the scribblers have their way. Let them stir up the atmosphere a little.</English>
+		<English>We support the revolution. The scribblers can have their way. Let them stir up the air a bit.</English>
 		<German>Wir unterstützen die Revolution. Lasst die Schreiberlinge gewähren. Sollen sie die Stimmung ruhig ein wenig anheizen.</German>
 		<Russian>К чёрту короля с его запретами - не препятствовать выпуску этих статей. Нашему обществу давно пора проснуться.</Russian>
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_FAKE_NEWS_2</Tag>
-		<English>Excellent, that's what people like to read. But we mustn't show our support too clearly - not yet.</English>
+		<English>Excellent! Tthat's what people like to read. But we mustn't show our support too clearly - not yet.</English>
 		<German>Hervorragend, sowas lesen die Leute eben gerne. Aber zeigen wir unsere Unterstützung mal lieber nicht zu deutlich - noch nicht.</German>
 		<Russian>Отлично, люди любят читать такие новости. Но давайте не будем слишком явно демонстрировать нашу поддержку – пока.</Russian>
 	</TEXT>	
@@ -5577,7 +5577,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_REVOLUTIONARY_EVENTS_DRUNKEN_SPEECHES</Tag>
-		<English>In the [COLOR_HIGHLIGHT_TEXT]%s2_civ_adjective[COLOR_REVERT] empire taverns and alehouses are becoming conspiratorial hangouts.</English>
+		<English>In the [COLOR_HIGHLIGHT_TEXT]%s2_civ_adjective[COLOR_REVERT] empire taverns and alehouses are turning into conspiratorial hangouts.</English>
 		<German>Im [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] Kolonialreich werden die Taveren und Spelunken zu konspirativen Orten.</German>
 		<Russian>В колониях [COLOR_HIGHLIGHT_TEXT]%s2_civ_adjective[COLOR_REVERT] таверны и кабаки становятся местами заговора.</Russian>
 	</TEXT>
@@ -5589,7 +5589,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_DRUNKEN_SPEECHES_1</Tag>
-		<English>Yes, I've noticed that too. I've actually heard it myself. So what, as long as it's just talk and the drinking doesn't stop them from working. Let them talk! Speaking of which, this feels like a good time for us to go get a drink.</English>
+		<English>Yes, I've noticed that too. I've actually heard it myself. So what, as long as it's just talk and the drinking doesn't stop them from working. Let them talk! Speaking of which, why don't we go get a drink?</English>
 		<German>Ja, das ist mir auch schon aufgefallen, ähm ich meine, es ist mir zu Ohren gekommen. Na und, solange die Leute nur so daherreden und sie das Trinken nicht von der Arbeit abhält, lasst die Leute doch reden. Ich schlage vor, wir genehmigen uns auch erst mal einen guten Tropfen.</German>
 		<Russian>Да, я тоже это заметил, то есть даже сам слышал. Ничего страшного - пока подобные высказвания и выпивка им не мешает работать, пусть болтают. Надо же им где-то выпускать пар. Кстати, а почему бы и нам не опрокинуть по стаканчику?</Russian>
 	</TEXT>	
@@ -5597,7 +5597,7 @@
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_DRUNKEN_SPEECHES_2</Tag>
 		<English>Yes, but what should we do? If we ban people from whoring and drinking, there'll be a revolution on the spot. We just can't let it get too out of hand. Let's move the curfew forward by an hour.</English>
 		<German>Ja, nur was sollen wir tun. Wenn wir den Leuten das Huren und Trinken verbieten, haben wir auf der Stelle eine Revolution. Sorgen wir aber dafür, dass es nicht zu sehr ausartet und verlegen wir die Sperrstunde um eine Stunde nach vorne.</German>
-		<Russian>Да, но что нам делать? Если мы закроем трактиры, нас тут же поднимут на вилы. Но чтобы хоть как-то обезопаситься и держать ситуацию под контролем, давайте перенесем начало комендантского часа, допустим, на один час раньше.</Russian>
+		<Russian>Да, но что нам делать? Если мы закроем трактиры, нас тут же поднимут на вилы. Но чтобы хоть как-то обезопаситься и держать ситуацию под контролем, давайте введём комендантский час.</Russian>
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_DRUNKEN_SPEECHES_3</Tag>
@@ -5607,7 +5607,7 @@
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_DRUNKEN_SPEECHES_4</Tag>
-		<English>That's treason, of course! The ringleaders of the Sons of Liberty meet in the taverns. That's what I've heard. Send the royal troops to arrest them! They will hang.</English>
+		<English>That's treason, of course! The ringleaders of the Sons of Liberty meet in the taverns. That's what I've heard. Send the royal troops to arrest them. They deserve to hang!</English>
 		<German>Das ist natürlich Hochverrat! In den Spelunken treffen sich die Rädelsführer der Söhne der Freiheit, soweit ich gehört habe. Lasst die Königlichen Truppen antreten und sie dingfest machen! Sie werden hängen.</German>
 		<Russian>Господь всемогущий, да это же измена! Насколько я слышал, главари этих так называемых "Сынов свободы" встречаются в тавернах. Отправить туда королевские войска и арестовать их! Скоро они все будут раскачиваться в петле.</Russian>
 	</TEXT>
@@ -5655,7 +5655,7 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_REVOLUTIONARY_EVENTS_LIBERTY_OR_DEATH_1</Tag>
-		<English>Milord, a well-known lawyer, an advocate of revolution, gave an inspiring speech in Congress. He literally said "...give me liberty or give me death!" He meant the King. We have to say something, before they storm our palace. I can already see the torches in the distance!</English>
+		<English>Milord, a well-known lawyer, an advocate of revolution, gave an inspiring speech in Congress. He literally said "...give me liberty or give me death!" His words were directed at the King. We have to say something before they storm our palace. I can already see the torches in the distance!</English>
 		<German>Milord, ein bekannter Anwalt und Verfechter der Revolution hat im Kongress eine ergreifende und begeisternde Rede gehalten. Er sagte wörtlich "...geben Sie mir die Freiheit oder den Tod!" Damit meint er den König. Wir müssen uns dazu äußern, sonst stürmen sie noch den Palast. Ich sehe schon die Fackeln in der Ferne!</German>
 		<Russian>Милорд, известный юрист и защитник революции выступил с вдохновляющей речью в Конгрессе. Он сказал буквально следующее: "...дайте мне свободу или дайте мне смерть!" Он обращался к Королю. Мы срочно должны как-то ответить, иначе толпа возьмёт наш дворец штурмом. Я уже вижу вдалеке факелы!</Russian>
 	</TEXT>
@@ -5673,7 +5673,7 @@
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_KING_MAD_HELP</Tag>
-		<English>His Majesty is beside himself at this reaction. That sounds like treason!</English>
+		<English>His Majesty is beside himself at these protests. They sound like treason!</English>
 		<German>Seine Majestät ist über diese Reaktion wie von Sinnen. Das klingt wie Hochverrat!</German>
 		<Russian>Его Величество вне себя от такой реакции. Он расценивает это, как предательство!</Russian>
 	</TEXT>
@@ -5687,13 +5687,13 @@
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_START_EVENT_HELP</Tag>
 		<English>Send a unit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] to the port of [COLOR_SELECTED_TEXT]%s2_city[COLOR_REVERT] within %d3 rounds.</English>
 		<German>Schickt innerhalb von %d3 Runden eine Einheit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] zum Hafen in [COLOR_SELECTED_TEXT]%s2_city[COLOR_REVERT].</German>
-		<Russian>Отправьте отряд [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] в порт города [COLOR_SELECTED_TEXT]%s2_city[COLOR_REVERT] в течение %d3 раундов.</Russian>
+		<Russian>Отправьте [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] в порт города [COLOR_SELECTED_TEXT]%s2_city[COLOR_REVERT] в течение %d3 ходов.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_REVOLUTIONARY_EVENTS_START</Tag>
-		<English>Influential merchants suggest sending an [COLOR_UNIT_TEXT]envoy[COLOR_REVERT] to Europe to negotiate with the king about the tense situation in the colonies.</English>
+		<English>Influential merchants suggest sending an [COLOR_UNIT_TEXT]envoy[COLOR_REVERT] to Europe to negotiate with the King about the tense situation in the colonies.</English>
 		<German>Einflussreiche Kaufleute schlagen vor, einen [COLOR_UNIT_TEXT]Gesandten[COLOR_REVERT] nach Europa zu schicken, um mit dem König über die angespannte Situation in den Kolonien zu verhandeln.</German>
-		<Russian>Влиятельные торговцы предлагают отправить [COLOR_UNIT_TEXT]посланника[COLOR_REVERT] в Европу для переговоров с Королём.</Russian>
+		<Russian>Торговцы предлагают провести переговоры с Королём о напряжённой ситуации в колониях.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_REVOLUTIONARY_EVENTS_START_DONE</Tag>
@@ -5703,73 +5703,73 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_REVOLUTIONARY_EVENTS_START</Tag>
-		<English>Milord, we should definitely send an envoy to Europe who can speak directly to the King about our situation. It would be best to send a nobleman who knows how to talk to a King. It would help if we can at least negotiate tax concessions.</English>
+		<English>Milord, we should definitely send an envoy to Europe to speak directly to the King about our situation, ideally a nobleman who knows how to talk to a King. At the very least we need tax concessions.</English>
 		<German>Milord, wir sollten unbedingt einen Gesandten nach Europa schicken, der direkt mit dem König über die Situation sprechen kann. Schickt am besten einen [COLOR_UNIT_TEXT]Adligen[COLOR_REVERT], der weiß wie man mit einem König spricht. Vielleicht können wir wenigstens Steuererleichterungen herausschlagen.</German>
-		<Russian>Милорд, нам обязательно следует отправить в Европу посланника, который сможет поговорить о ситуации напрямую с Королём. Лучше всего было бы послать дворянина, который знает, как правильно разговаривать с монархом. Возможно, нам даже удастся договориться о налоговых льготах.</Russian>
+		<Russian>Влиятельные торговцы предлагают отправить [COLOR_UNIT_TEXT]посланника[COLOR_REVERT] в Европу для переговоров с Королём о напряжённой ситуации в колониях. Милорд, нам определенно стоит хорошенько подумать над этим предложением. И если уж кого и отправлять, то пусть это будет дворянин, который знает, как правильно разговаривать с монархом. Возможно, нам даже удастся договориться о налоговых льготах.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_REVOLUTIONARY_EVENTS_START_DONE</Tag>
-		<English>Milord, the nobleman is now at the harbor and ready to sail to Europe. Should we really dare to make demands of the king through an envoy or would we rather remain loyal subjects? However, this could lead to unrest.</English>
+		<English>Milord, the nobleman is now at the harbour, ready to sail for Europe. Do we really dare to make demands on the King or are we better off as humble and obedient subjects? Timidity will probably lead to unrest.</English>
 		<German>Milord, der Adlige steht nun am Hafen und ist bereit zur Überfahrt nach Europa. Sollen wir es wirklich wagen, dem König durch einen Gesandten Forderungen zu stellen oder wollen wir doch lieber die treuen Untertanen bleiben? Das könnte allerdings zu Unruhen führen.</German>
 		<Russian>Милорд, дворянин сейчас находится в гавани и готов отплыть в Европу. Действительно ли мы готовы предъявлять требования Королю или нам лучше остаться верными подданными Его Величества? Боюсь, однако, в любом случае нам надо быть готовыми к народным волнениям.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_START_1</Tag>
-		<English>We will see. The merchants are only concerned about their profits. I'm still in the service of the king. But well, I'll think about it. It's no use to anyone if there's unrest in the colonies.</English>
+		<English>We'll see. The merchants are mainly concerned about their profits. As for me, I still serve the King. Let me think about it. Unrest here is no good for anyone.</English>
 		<German>Wir werden sehen. Die Handelsherren sind doch nur um ihren Profit besorgt. Ich stehe immer noch im Dienste des Königs. Aber gut, ich werde darüber nachdenken. Es nützt niemandem, wenn in den Kolonien Unruhen herrschen.</German>
 		<Russian>Да, непростой вопрос. Торговцы озабочены только своей прибылью... А я все еще на службе у Короля... Думаю, никому не будет никакой пользы, если в колониях начнутся волнения.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_START_FAIL</Tag>
-		<English>Milord, you have waited too long - or did you not want to send an envoy to Europe? That may cost us dearly. There is more and more unrest in the colonies and you will be seen as loyal to the king. Think carefully about what you do next!</English>
+		<English>Milord, you waited too long - or did you just not want to send an envoy to Europe? Your dithering may cost us dearly. Amid unrest in the colonies you're still seen as loyal to the King. Think hard about what you do next!</English>
 		<German>Milord, Ihr habt zu lange gewartet - oder wolltet Ihr gar keinen Gesandten nach Europa schicken? Das wird uns vielleicht noch teuer zu stehen kommen. In den Kolonien gibt es immer mehr Unruhen und man wird Euch als königstreu ansehen. Überlegt gut, was Ihr als nächstes tut!</German>
 		<Russian>Милорд, вы слишком долго ждали – или вы вообще не хотели отправлять посланника в Европу? Это может стоить нам очень дорого. В колониях растут беспорядки и вас будут считать лояльным Королю. Хорошенько подумайте, что нам делать дальше!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_DONE_1</Tag>
-		<English>Yes, definitely. But we don't do things by halves. It's time the king took our concerns seriously. The envoy should not be squeamish. We know what the king and the treasury have in store for us. If necessary, we will now go into confrontation!</English>
+		<English>Yes, definitely. But we can't do things by halves. The King has to take our concerns seriously. The envoy mustn't be squeamish. We've seen what the King's treasury wants from us. If necessary, we're ready to fight!</English>
 		<German>Ja, auf jeden Fall. aber wir machen keine halben Sachen. Es wird Zeit, dass der König unsere Sorgen ernst nimmt. Der Gesandte soll nicht zimperlich sein. Wir wissen, was der König und die Staatskasse an uns haben. Wenn nötig gehen wir nun auf Konfrontation!</German>
 		<Russian>Да, конечно. Но мы не делаем дела наполовину. Пришло время Королю серьёзно отнестись к нашим опасениям. Посланник не должен быть слабовольным. Мы знаем, что готовят нам Король и Парламент. Если нас вынудят, теперь мы пойдем на конфронтацию!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_REVOLUTIONARY_EVENTS_DONE_1</Tag>
-		<English>An envoy was entrusted with the delicate task of wringing tax concessions from the king without offending him.</English>
+		<English>An envoy has been entrusted with the delicate task of wringing tax concessions from the King without offending him.</English>
 		<German>Ein Gesandter wurde mit der heiklen Aufgabe betraut, dem König Steuererleichterungen abzuringen und ihn dabei möglichst nicht zu beleidigen.</German>
 		<Russian>На посланника была возложена деликатная задача — добиться от Короля налоговых уступок, не оскорбив Его Величества.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_DONE_2</Tag>
-		<English>Yes, ship the nobleman to Europe. But we certainly don't want to provoke the king. We just want the envoy to create a good atmosphere, assure the king of our loyalty, and then lobby for trade and tax relief. That will have to be enough!</English>
+		<English>Yes, send the nobleman to Europe. We have no intention of provoking the King. All we want is to create a good atmosphere, assure the King of our loyalty, and then lobby for trade and tax relief. That will be enough.</English>
 		<German>Ja, verschifft den Adligen nach Europa. Aber wir wollen den König auf keinen Fall provozieren. Der Gesandte soll nur ein wenig für gute Stimmung sorgen, dem König unsere Treue versichern und sich für den Handel und dann erst für Steuererleichterungen einsetzen. Dies muss reichen!</German>
 		<Russian>Да, отправьте дворянина в Европу. Но мы, конечно, не хотим провоцировать Короля. Нам нужно, чтобы посланник создал хорошую атмосферу на приёме, заверил Его Величество в нашей лояльности, а затем добился торговых и налоговых льгот. Этого должно быть достаточно для процветания колоний.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_REVOLUTIONARY_EVENTS_DONE_2</Tag>
-		<English>An envoy was entrusted with the delicate task of talking to the king about the conditions for overseas trade and, if possible, not offending him in the process.</English>
+		<English>An envoy has been entrusted with the delicate task of talking to the King about our terms for overseas trade, at the same time taking great pains not to offend His Majesty in any way.</English>
 		<German>Ein Gesandter wurde mit der heiklen Aufgabe betraut, mit dem König über die Bedingungen für den Überseehandel zu sprechen und ihn dabei möglichst nicht zu beleidigen.</German>
 		<Russian>На посланника была возложена деликатная задача переговорить с Королем об условиях заграничной торговли и, по возможности, при этом не обидеть Его Величество.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_DONE_3</Tag>
-		<English>I'm not going to make myself even more unpopular with the king! The nobleman should go to his mistress. Long live the king! I will continue to assert the king's power here.</English>
+		<English>I'm not going to make myself even more unpopular with the King! The nobleman can go back to spending time with his mistress. Long live His Majesty! I will continue to assert the King's power here.</English>
 		<German>Von wegen, ich mache mich beim König doch nicht noch unbeliebter! Der Adlige soll sich zu seiner Mätresse scheren. Es lebe der König! Ich werde die Macht des Königs hier weiter durchsetzen.</German>
 		<Russian>Я не собираюсь делать себя посмешищем в глазах Короля! Дворянин может отправиться к своей любовнице или куда пожелает его деятельная натура. Да здравствует Король! А я продолжу укреплять здесь королевскую власть.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_REVOLUTIONARY_EVENTS_DONE_3</Tag>
-		<English>It was decided not to send an envoy to Europe. This will further inflame the mood against the king and his loyalists in the colonies. Who knows what will happen now.</English>
+		<English>It's been decided not to send an envoy to Europe. This will further inflame the mood against the King and his loyalists in the colonies. Who knows what happens now?</English>
 		<German>Es wurde darauf verzichtet einen Gesandten nach Europa zu senden. Dies wird die Stimmung gegen den König und seine Getreuen in den Kolonien noch weiter anheizen. Wer weiß was jetzt passiert.</German>
 		<Russian>Было решено не отправлять посланника в Европу. Это спровоцирует еще больше беспорядков против Короля и его сторонников в колониях. Кто знает, что произойдет дальше...</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_REVOLUTIONARY_EVENTS_DONE_1A</Tag>
-		<English>The envoy is back from Europe and has made himself very unpopular. The king has become even angrier and will continue to raise taxes. This will lead to more unrest.</English>
+		<English>The envoy is back from Europe and has made himself very unpopular. The King is even angrier and says He'll continue to raise taxes. Unrest will only get worse.</English>
 		<German>Der Gesandte ist aus Europa zurück und hat sich mächtig unbeliebt gemacht. Der König ist noch wütender geworden und wird die Steuern weiter erhöhen. Das wird zu mehr Unruhen führen.</German>
 		<Russian>Посол вернулся из Европы и стал крайне непопулярным. Король разозлился еще больше и пригрозил продолжать повышать налоги. Это приведёт к еще большим беспорядкам в колониях.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_REVOLUTIONARY_EVENTS_DONE_1B</Tag>
-		<English>The envoy is back from Europe and has managed to calm things down a little. But the king is still more annoyed than ever and will continue to raise taxes. So the trip has achieved nothing except to consolidate his position.</English>
+		<English>The envoy is back from Europe. Even though he managed to calm things down a little, the King will continue to raise taxes. In effect the trip has simply solidified His position.</English>
 		<German>Der Gesandte ist aus Europa zurück und konnte die Wogen ein wenig glätten. Aber der König ist trotzdem mehr verärgert als je zuvor und wird die Steuern weiter erhöhen. Die Reise hat also nichts gebracht, außer die Standtpunkte zu festigen.</German>
 		<Russian>Посол вернулся из Европы и сумел немного разрядить обстановку. Но король по-прежнему раздражен и продолжит повышать налоги. Так что поездка не принесла ничего, кроме укрепления его позиций.</Russian>
 	</TEXT>
@@ -5787,37 +5787,37 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_REVOLUTIONARY_EVENTS_ROYAL_TROOPS</Tag>
-		<English>Citizens complain about the amount of troops of the [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] empire in the colonies.</English>
+		<English>Citizens complain about the number of troops of the [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] empire in the colonies.</English>
 		<German>Bürger beschweren sich über die vielen Truppen des [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] Königreichs in den Kolonien.</German>
 		<Russian>Граждане жалуются на количество войск [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] империи в колониях.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_REVOLUTIONARY_EVENTS_ROYAL_TROOPS_1</Tag>
-		<English>Milord, the citizens complain that they have to feed and endure so many troops from Europe. The troops are spreading throughout the colonies. We should do something about it.</English>
+		<English>Milord, the citizens complain that they have to feed and put up with too many European soldiers. Troops seem to be everywhere in our colonies. We have to do something about it.</English>
 		<German>Milord, die Bürger beschweren sich, dass sie so viele Truppen aus Europa durchfüttern und erdulden müssen. Die Truppen machen sich in den Kolonien breit. Wir sollten etwas unternehmen.</German>
 		<Russian>Милорд, граждане жалуются, что им приходится кормить и обустраивать такое большое количество войск из Европы, которые были расквартированы в колониях. Мы должны что-то делать с этим.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_ROYAL_TROOPS_1</Tag>
-		<English>Yes, it seems that way to me too. We should ask the commander to send some troops back to Europe. The king won't like that, but it will calm the citizens down a bit.</English>
+		<English>Yes, it seems that way to me too. We should ask the commander to send some troops back to Europe. The King won't like that, but it will calm the citizens down.</English>
 		<German>Ja, scheint mir auch so. Wir sollten den Kommandeur bitten, einige Truppen nach Europa zurückzuschicken. Das wird zwar dem König nicht gefallen, aber die Bürger etwas beruhigen.</German>
 		<Russian>Да, мне тоже так кажется. Мы должны попросить командующего отправить часть войск обратно в Европу. Королю это точно не понравится, но зато немного успокоит наших граждан.</Russian>
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_ROYAL_TROOPS_2</Tag>
-		<English>The protection of the colonies and the expansion of the empire require sacrifices. The troops stay where they are. But I am happy to contribute something from my casket to supply the troops.</English>
+		<English>The protection of the colonies and the expansion of the empire require sacrifices. The troops stay where they are. My own coffers will cover their pay.</English>
 		<German>Der Schutz der Kolonien und die Erweiterung des Reiches erfordern nun mal Opfer. Die Truppen bleiben wo sie sind. Aber ich bin gerne bereit etwas aus meiner Schatulle zur Versorgung der Truppen beizusteuern.</German>
 		<Russian>Защита колоний и расширение империи требуют жертв. Войска останутся там, где они есть. Я с удовольствием пожертвую небольшую часть средств из своей казны на снабжение войск.</Russian>
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_REVOLUTIONARY_EVENTS_ROYAL_TROOPS_3</Tag>
-		<English>The protection of the colonies and the expansion of the empire require sacrifices. The troops stay where they are. But I can understand people's concerns. We will contribute generously to the provisioning and compensate for any damage caused by the troops in the colonies.</English>
+		<English>The protection of the colonies and the expansion of the empire require sacrifices. The troops stay where they are, but I can understand people's concerns. We will provision the army generously and compensate for any damage caused by our troops.</English>
 		<German>Der Schutz der Kolonien und die Erweiterung des Reiches erfordern nun mal Opfer. Die Truppen bleiben wo sie sind. Aber ich kann die Sorgen der Leute verstehen. Wir werden uns großzügig an der Verproviantierung beteiligen und etwaige Schäden ersetzen, die in den Kolonien durch die Truppen verursacht werden.</German>
 		<Russian>Я понимаю обеспокоенность людей, но эти войска здесь для нашей же защиты. Мы будем компенсировать обеспечение солдат продовольствием, а также возмещать любой ущерб, причиненный войсками.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_1</Tag>
-		<English>Milord, a neighboring Indian village wants to trade with us for mutual benefit. We should definitely send a wagon train and start trading relations. That can only be beneficial.</English>
+		<English>Milord, a neighbouring Native village sees mutual benefit in trading with us for. We should send them a wagon train to start trading relations. That can only be beneficial.</English>
 		<German>Milord, ein benachbartes Indianerdorf möchte zum gegenseitigen Vorteil Handel mit uns treiben. Wir sollten unbedingt einen Wagenzug entsenden und Handelsbeziehungen beginnen. Das kann nur von Vorteil sein.</German>
 		<Russian>Милорд, индейцы из соседней деревни хотят торговать с нами, обещая взаимную выгоду. Нам обязательно следует отправить к ним обоз и начать торговлю. Это предприятие сулит хорошую прибыль.</Russian>
 	</TEXT>
@@ -5829,13 +5829,13 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_HELP</Tag>
-		<English>Send a unit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] to the neighboring Native village within %d3 rounds that likes to trade with you. Take trade goods from Europe or other goods that you have produced locally. It's up to you what you want to trade.</English>
+		<English>Send a unit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] to the neighbouring Native village within %d3 rounds. Take trade goods from Europe or anything else, local or imported. It's up to you whatever you want to trade.</English>
 		<German>Schickt innerhalb von %d3 Runden eine Einheit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] zu dem benachbarten Indianer-Dorf, das mit Euch Handel treiben möchte. Nehmt Handelswaren aus Europa mit oder andere Waren, die ihr vor Ort produziert habt. Es bleibt Euch überlassen, mit was Ihr handeln wollt.</German>
 		<Russian>Отправьте [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] в соседнюю деревню индейцев, которые хотят торговать с вами, в течение %d3 ходов. Возьмите с собой [COLOR_SELECTED_TEXT]мануфактуру[COLOR_REVERT] из Европы или другие товары, которые вы произвели в своих поселениях. Чем вы будете торговать, зависит только от вас.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FAIL_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS</Tag>
-		<English>Unfortunately you have waited too long. The Indian village can't or doesn't want to trade with you at the moment. The wagon train is now available for other uses.</English>
+		<English>Unfortunately you waited too long. The Native village is no longer willing to trade with you right now. The good news is that the wagon train is now available for other uses.</English>
 		<German>Ihr habt leider zulange gewartet. Das Indianerdorf kann oder möchte gegenwärtig keinen Handel mit Euch treiben. Ihr könnt den Wagenzug nun wieder anderweitig verwenden.</German>
 		<Russian>К сожалению, вы слишком долго ждали. В данный момент индейцы не могут или не хотят торговать с вами. Вы можете перенаправить транспорт на другие торговые маршруты.</Russian>
 	</TEXT>
@@ -5847,31 +5847,31 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_1</Tag>
-		<English>We should seize this opportunity. If trade goes well, we could gain allies who will give us an advantage in the competition with our European rivals.</English>
+		<English>We should seize this opportunity. If trade goes well, we might gain allies who will give us an advantage in the competition with our European rivals.</English>
 		<German>Diese Gelegenheit sollten wir nutzen. Wenn der Handel gut läuft, dann könnten wir damit Verbündete gewinnen, die uns im Wettstreit mit unseren europäischen Konkurrenten einen Vorteil verschaffen.</German>
 		<Russian>Нам необходимо воспользоваться этой возможностью. Если торговля пойдёт хорошо, мы сможем обрести союзников, которые дадут нам преимущество в конкурентной борьбе с нашими европейскими соперниками.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_DONE_1</Tag>
-		<English>We shouldn't overreach the Indians right from the first trade. Establishing trade relations currently is more important to me than the gold for our goods.</English>
+		<English>We shouldn't pressue our new Native friends with hard bargaining right from the first trade. Establishing trade relations matters more to me than the gold.</English>
 		<German>Wir sollten die Indianer nicht gleich beim ersten Handel übervorteilen. Der Aufbau der Handelsbeziehungen ist mir gegenwärtig wichtiger als das Gold für unsere Waren.</German>
 		<Russian>Мы не должны требовать больших скидок от индейцев с первой же сделки. Установление хороших торговых отношений сейчас для нас важнее, чем золото.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_DONE_2</Tag>
-		<English>We can negotiate with the Indians, but we should remain fair. We should also stay in the village for a while and see if we can't negotiate a bit more.</English>
+		<English>We can negotiate with the Natives, but we have to be fair. We should stay in the village for a while and see how we can negotiate a bit more.</English>
 		<German>Wir können ruhig kräftig mit den Indianern verhandeln, sollten aber fair bleiben. Wir sollten eine Weile in dem Dorf bleiben und sehen, ob wir nicht noch etwas mehr herausschlagen können.</German>
 		<Russian>Нам нужно вести торговые переговоры с индейцами, но мы должны оставаться справедливыми. И предлагаю остаться в деревне на какое-то время и посмотреть, сможем ли мы договориться ещё о чем-нибудь.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_DONE_3</Tag>
-		<English>Get out everything you can. After all, the natives wanted this trade. Now let them see how Europeans negotiate!</English>
+		<English>Get the most you possibly can! It was the Natives who wanted this trade. Show them how Europeans strike a hard bargain!</English>
 		<German>Holt alles raus, was ihr könnt. Immerhin wollten ja die Indianer diesen Handel. Nun sollen sie mal sehen, wie Europäer verhandeln!</German>
 		<Russian>Забирайте всё, что сможете. В конце концов, индейцы сами хотели этой торговли. Сейчас мы им покажем, как нужно вести переговоры по-европейски!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_DONE_4</Tag>
-		<English>The [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] trade with the natives was successful.</English>
+		<English>The [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] trade with the Natives was successful.</English>
 		<German>Der [COLOR_HIGHLIGHT_TEXT]%s1:3_civ_adjective[COLOR_REVERT] Handel mit den Ureinwohnern war von Erfolg gekrönt!</German>
 		<Russian>Торговля [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] с индейцами прошла успешно.</Russian>
 	</TEXT>
@@ -5881,13 +5881,13 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_6</Tag>
-		<English>The [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] trade with the natives was ultimately too aggressive. The Indians are a bit disgruntled!</English>
+		<English>The [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] trade with the Natives was ultimately too aggressive. Their traders are more than a bit disgruntled!</English>
 		<German>Der [COLOR_HIGHLIGHT_TEXT]%s1:3_civ_adjective[COLOR_REVERT] Handel mit den Ureinwohnern war letztlich zu agressiv. Die Indianer sind etwas verstimmt!</German>
 		<Russian>Индейцы крайне недовольны агрессивными методами ведения торговли со стороны [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT]!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_2_1</Tag>
-		<English>Milord, a neighboring Indian village wants to trade with us for mutual benefit. We should definitely send a trek and develop trading relations. That can only be beneficial.</English>
+		<English>Milord, a neighbouring Native village seeks mutual benefit. We should send a trek to develop trade. That can only be beneficial.</English>
 		<German>Milord, ein benachbartes Indianerdorf möchte zum gegenseitigen Vorteil Handel mit uns treiben. Wir sollten unbedingt einen Treck entsenden und die Handelsbeziehungen weiter ausbauen. Das kann nur von Vorteil sein.</German>
 		<Russian>Милорд, индейцы из соседней деревни хотят торговать с нами, обещая взаимную выгоду. Нам обязательно следует отправить к ним обоз и начать торговлю. Это предприятие сулит хорошую прибыль.</Russian>
 	</TEXT>
@@ -5899,13 +5899,13 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_HELP</Tag>
-		<English>Send a unit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] to the neighboring Native village within %d3 rounds that likes to trade with you. Take trade goods from Europe or other goods that you have produced locally. It's up to you what you want to trade.</English>
+		<English>Send a unit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] to the neighbouring Native village within %d3 rounds. Take trade goods from Europe or anything else, local or imported. It's up to you whatever you want to trade.</English>
 		<German>Schickt innerhalb von %d3 Runden eine Einheit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] zu dem benachbarten Indianer-Dorf, das mit Euch Handel treiben möchte. Nehmt Handelswaren aus Europa mit oder andere Waren, die ihr vor Ort produziert habt. Es bleibt Euch überlassen, mit was Ihr handeln wollt.</German>
 		<Russian>Отправьте [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] в соседнюю деревню индейцев, которые хотят торговать с вами, в течение %d3 ходов. Возьмите с собой [COLOR_SELECTED_TEXT]мануфактуру[COLOR_REVERT] из Европы или другие товары, которые вы произвели в своих поселениях. Чем вы будете торговать, зависит только от вас.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FAIL_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_2</Tag>
-		<English>Unfortunately you have waited too long. The Indian village can't or doesn't want to trade with you at the moment. The trek is now available for other uses.</English>
+		<English>Unfortunately you waited too long. The Native village is no longer willing to trade with you right now. The good news is that the trek becomes available for other uses.</English>
 		<German>Ihr habt leider zulange gewartet. Das Indianerdorf kann oder möchte gegenwärtig keinen Handel mit Euch treiben. Ihr könnt den Treck nun wieder anderweitig verwenden.</German>
 		<Russian>К сожалению, вы слишком долго ждали. В данный момент индейцы не могут или не хотят торговать с вами. Вы можете перенаправить транспорт на другие торговые маршруты.</Russian>
 	</TEXT>
@@ -5917,31 +5917,31 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_2_1</Tag>
-		<English>We should seize this opportunity. If trade goes well again this time, we could gain allies who will give us an advantage in the competition with our European rivals.</English>
+		<English>We should seize this opportunity. If trade goes well, we might gain allies who will give us an advantage in the competition with our European rivals.</English>
 		<German>Diese Gelegenheit sollten wir nutzen. Wenn der Handel auch dieses Mal wieder gut läuft, dann könnten wir damit Verbündete gewinnen, die uns im Wettstreit mit unseren europäischen Konkurrenten einen Vorteil verschaffen.</German>
 		<Russian>Нам необходимо воспользоваться этой возможностью. Если торговля пойдёт хорошо, мы сможем обрести союзников, которые дадут нам преимущество в конкурентной борьбе с нашими европейскими соперниками.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_DONE_2_1</Tag>
-		<English>Trade went very well for us last time. But we should still focus on the good neighborly relations.</English>
-		<German>Beim letzten Mal lief der Handel schon sehr gut für uns. Aber wollten die gute nachbarschaftlichen Beziehungen weiter in den Vordergrund stellen.</German>
+		<English>Trade went very well for us last time, but we must always keep in mind the importance of good neighbourly relations.</English>
+		<German>Beim letzten Mal lief der Handel schon sehr gut für uns. Aber wollten die gute nachbarschaftlichen Beziehungen weiter in den Vordergrund stellen.</German>u
 		<Russian>Мы не должны требовать больших скидок от индейцев с первой же сделки. Установление хороших торговых отношений сейчас для нас важнее, чем золото.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_DONE_2_2</Tag>
-		<English>We can negotiate with the Indians, but we should remain fair. We should also stay in the village for a while and see if we can't negotiate a bit more.</English>
+		<English>We can negotiate with the Natives, but we have to be fair. We should stay in the village for a while and see whether we can negotiate a bit more.</English>
 		<German>Wir können ruhig kräftig mit den Indianern verhandeln, sollten aber fair bleiben. Wir sollten eine Weile in dem Dorf bleiben und sehen, ob wir nicht noch etwas mehr herausschlagen können.</German>
 		<Russian>Нам нужно вести торговые переговоры с индейцами, но мы должны оставаться справедливыми. И предлагаю остаться в деревне на какое-то время и посмотреть, сможем ли мы договориться ещё о чем-нибудь.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_DONE_2_3</Tag>
-		<English>Get out everything you can. After all, the natives wanted this trade. Now let them see how Europeans negotiate!</English>
+		<English>Get as much as you possibly can! It was the Natives who wanted this trade. Show them Europeans know how to strike a hard bargain!</English>
 		<German>Holt alles raus, was ihr könnt. Immerhin wollten ja die Indianer diesen Handel. Nun sollen sie mal sehen, wie Europäer verhandeln!</German>
 		<Russian>Забирайте всё, что сможете. В конце концов, индейцы сами хотели этой торговли. Сейчас мы им покажем, как нужно вести переговоры по-европейски!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_DONE_2_4</Tag>
-		<English>The [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] trade with the natives was successful.</English>
+		<English>The [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] trade with the Natives was successful.</English>
 		<German>Der [COLOR_HIGHLIGHT_TEXT]%s1:3_civ_adjective[COLOR_REVERT] Handel mit den Ureinwohnern war von Erfolg gekrönt!</German>
 		<Russian>Торговля [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] с индейцами прошла успешно.</Russian>
 	</TEXT>
@@ -5951,13 +5951,13 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FRIENDLY_TRADE_WITH_NATIVE_NEIGHBORS_2_6</Tag>
-		<English>The [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] trade with the natives was ultimately too aggressive. The leader and his warriors are angry! They'll might attack us on the way back.</English>
+		<English>The [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] trade with the Natives was ultimately too aggressive. The leader and his warriors are angry! They might attack us on the way back.</English>
 		<German>Der [COLOR_HIGHLIGHT_TEXT]%s1:3_civ_adjective[COLOR_REVERT] Handel mit den Ureinwohnern war letztlich zu agressiv. Der Anführer und seine Krieger sind sauer! Sie werden uns vielleicht auf dem Rückweg angreifen.</German>
 		<Russian>Индейцы крайне недовольны агрессивными методами ведения торговли со стороны [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT]!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_INITIAL_TRADE_WITH_NATIVES_1</Tag>
-		<English>The native women of a nearby indian village have heard about our offer of blankets, pots, beads and other goods. Now they have sent their men to procure these beautiful things for them. The men have not brought any riches with them, but promise us a little food in exchange.</English>
+		<English>The women in a nearby Native village have heard about our blankets, pots and beads. Now they've sent their men to bring them these beautiful things. The men have nothing valuable, just a little food to exchange.</English>
 		<German>Die Ureinwohner-Frauen eines nahegelegenen Dorfes haben von unserem Angebot an Decken, Töpfen, Perlen und derlei gehört. Nun haben sie ihre Männer losgeschickt, ihnen diese schönen Dinge zu beschaffen. Die Männer haben keine Reichtümer mitgebracht, versprechen uns aber ein wenig Nahrung als Tauschware.</German>
 		<Russian>Индейские женщины из соседней деревни узнали, что к нам прибыла большая партия товаров для обмена (одеяла, горшки, бусы и много всего остального) и отправили своих мужчин за этими прекрасными вещами. Те не привезли с собой никаких богатств, но обещают нам взамен немного еды.</Russian>
 	</TEXT>
@@ -5975,25 +5975,25 @@
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_INITIAL_TRADE_WITH_NATIVES_2</Tag>
-		<English>They have to offer us more than just a bit of corn and berries. Send them away. They should only come back when they have something worthwhile to offer us.</English>
+		<English>They have to offer us more than just some corn and berries. Send them away. Tell them to come back when they have something worthwhile to offer us.</English>
 		<German>Da müssen sie uns schon mehr bieten als das bischen Mais und Beeren. Schickt sie weg. Sie sollen erst wiederkommen, wenn sie etwas anbieten können, das sich für uns lohnt.</German>
 		<Russian>Они должны предложить нам нечто большее, чем просто немного кукурузы и ягод. Гоните их прочь и пусть возвращаются только тогда, когда они смогут предложить нам что-то более стоящее.</Russian>
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_INITIAL_TRADE_WITH_NATIVES_3</Tag>
-		<English>Yes, of course. Give them plenty of everything they want in exchange for the food. If the Indian women are happy, the men are happy, too and we don't have to worry too much about raids for the time being.</English>
+		<English>Yes, of course. Give them whatever they want in exchange for the food. When the Native women are happy, the warriors are happy too. We shouldn't have to worry too much about raids for a little while.</English>
 		<German>Ja, natürlich. Gebt Ihnen im Tausch für die Nahrung reichlich von allem, was sie haben möchten. Sind die Indianer-Frauen glücklich, sind es die Männer auch und wir müssen uns erst einmal keine großen Sorgen um Überfälle machen.</German>
 		<Russian>Это не проблема. Дайте им все, что они хотят, в обмен на еду. Если женщины индейцев будут счастливы, то и их мужчины тоже будут счастливы и в ближайшее время нам не придется беспокоиться о набегах.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_TRADE_WITH_NATIVES_BETRAYAL_1</Tag>
-		<English>The native women of a nearby indian village have heard about our offer of blankets, pots, beads and other goods. Now they have sent their men to procure these beautiful things for them. The men have not brought any riches with them, but promise us a little food in exchange.</English>
+		<English>The women in a nearby Native village have heard about our blankets, pots and beads. Now they've sent their men to bring them these beautiful things. The men have nothing valuable, just a little food to exchange.</English>
 		<German>Milord, Krieger eines nahegelegenen Dorfes sind zu uns gekommen und möchten wieder mit uns handeln. Ihre Frauen verlangen nach den üblichen Handelswaren. Insbesondere Decken für den kalten Winter sind dieses Jahr sehr gefragt.</German>
 		<Russian>Милорд, воины из соседней деревни индейцев пришли к нам и хотели бы снова торговать с нами. Их жены требуют еще украшений и одеял для предстоящей зимы.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_TRADE_WITH_NATIVES_BETRAYAL</Tag>
-		<English>The native people of a neighboring village want to trade with the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire.</English>
+		<English>The Native people in a neighbouring village want to trade with the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire.</English>
 		<German>Ureinwohner eines benachbarten Dorfes wollen wieder mit dem [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] Königreich handeln.</German>
 		<Russian>Индейцы снова приезжают в города империи [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] для торговли.</Russian>
 	</TEXT>
@@ -6005,121 +6005,121 @@
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRADE_WITH_NATIVE_BETRAYAL_HELP</Tag>
-		<English>Within %d3 turns, send a unit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] to the neighboring native village that wants to trade with you. But be warned, the trader are up to something. Check the goods again beforehand. If you sell the natives bad goods, they will get angry.</English>
+		<English>Within %d3 turns, send a unit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] to the neighbouring Native village that wants to trade with you. Be on your guard! It looks like the traders are up to something. Double-check the goods beforehand. If we sell shoddy goods to the Natives, they'll make our lives very unpleasant.</English> 
 		<German>Schickt innerhalb von %d3 Runden eine Einheit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] zu dem benachbarten Indianer-Dorf, das mit Euch Handel treiben möchte. Aber seid gewarnt, die Händler führen etwas im Schilde. Kontrolliert die Waren vorher noch einmal. Verkauft ihr den Ureinwohnern schlechte Waren, werden sie wütend werden.</German>
 		<Russian>В течение %d3 ходов отправьте [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] в деревню индейцев, которые хотят торговать с вами. Но будьте осторожны: торговец что-то замышляет. Проверьте повозки перед отправкой. Если вы продадите туземцам плохой товар, они разозлятся.</Russian>
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_TRADE_WITH_NATIVES_BETRAYAL_2</Tag>
-		<English>Milord, we have received word that our traders have reached the native settlements. The convoy can now set off.</English>
+		<English>Milord, we have received word that our traders have arrived at the Native settlements. The convoy can depart now.</English>
 		<German>Milord, wir erhielten Nachricht, dass unsere Händler die Dörfer der Ureinwohner erreicht haben. Die Wagenkolonne kann sich nun auf den Weg machen.</German>
 		<Russian>Милорд, мы получили известие, что наши торговцы добрались до поселений индейцев. Теперь мы можем отправить к ним большой обоз(?).</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRADE_WITH_NATIVES_BETRAYAL_2_1</Tag>
-		<English>The native people of a neighboring village want to trade with the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire.</English>
+		<English>The Native people in a neighbouring village want to trade with the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire.</English>
 		<German>Ureinwohner eines benachbarten Dorfes wollen wieder mit dem [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] Königreich handeln.</German>
 		<Russian>Индейцы снова приезжают в города империи [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] для торговли.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FAIL_TRADE_WITH_NATIVES_BETRAYAL_2</Tag>
-		<English>Unfortunately you have waited too long. The Indian village can't or doesn't want to trade with you at the moment. The trek is now available for other uses.</English>
+		<English>Unfortunately you waited too long. The Native village is no longer willing to trade with you at the moment. The good news is that the trek is now available for other work.</English>
 		<German>Ihr habt leider zulange gewartet. Das Indianerdorf kann oder möchte gegenwärtig keinen Handel mit Euch treiben. Ihr könnt den Treck nun wieder anderweitig verwenden.</German>
 		<Russian>К сожалению, вы слишком долго ждали. В данный момент индейцы не могут или не хотят торговать с вами. Вы можете перенаправить транспорт на другие торговые маршруты.</Russian>
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_TRADE_WITH_NATIVES_BETRAYAL_2_DONE</Tag>
-		<English>The treacherous traders reached the native villages.</English>
+		<English>The treacherous traders reached the Native villages.</English>
 		<German>Verschlagene Händler erreichen die Indianerdörfer.</German>
 		<Russian>Коварные торговцы добрались до деревень индейцев.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRADE_WITH_NATIVES_BETRAYAL_2_DONE_1</Tag>
-		<English>Milord, the wagon train has reached the Indian village. But something is wrong here. The traders look slyly over at the Indians, who are eagerly awaiting the goods. Now it dawns on you - the goods are spoiled and the blankets are moldy, perhaps even infected with smallpox. But there is nothing more you can do, the greed of the traders has won out.</English>
+		<English>Milord, the wagon train has reached the Native village, but something seems wrong. The traders avoid eye contact with villagers eagerly awaiting their goods.[NEWLINE]Suddenly it dawns on you - the goods must be spoiled, the blankets mouldy, perhaps even infected with smallpox.[NEWLINE]It's too late to do anything. The traders' greed has won out.</English>
 		<German>Milord, die Wagenkolonne hat das Indianerdorf erreicht. Aber irgend etwas stimmt hier nicht. Die Händler blicken verschlagen zu den Indianern herüber, die begierig den Waren entgegensehen. Jetzt geht Euch ein Licht auf - die Waren sind verdorben und die Decken verschimmelt, vielleicht sogar mit Pocken infiziert. Aber ihr könnt nichts mehr tun, die Gier auf Seiten der Händler hat gesiegt. Ihr solltet machen, dass ihr da wegkommt!</German>
 		<Russian>Милорд, обоз прибыл в деревню индейцев. Но что-то здесь не так... Торговцы хитро поглядывают на индейцев, с нетерпением ожидающих товар. Теперь до вас доходит — товар испорчен, а одеяла заплесневели, а возможно, даже заражены оспой! Но теперь уже ничего не исправить, жадность торговцев взяла верх. Надо уходить оттуда как можно скорее!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRADE_WITH_NATIVES_BETRAYAL_2_DONE</Tag>
-		<English>Greedy traders sell spoiled and moldy goods to the natives.</English>
+		<English>Greedy traders sell spoiled and mouldy goods to the Natives.</English>
 		<German>Gierige Händler verkaufen den Ureinwohnern verdorbene und verschimmelte Waren.</German>
 		<Russian>Жадные торговцы продают туземцам испорченные и заплесневелые товары.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_TRADE_WITH_NATIVES_BETRAYAL_3</Tag>
-		<English>Natives are deeply disappointed by Europeans and their fraud with traded goods.</English>
+		<English>Natives are bitterly disappointed by Europeans and their fraudulent trading.</English>
 		<German>Ureinwohner sind zutiefst enttäuscht von den Europäern und ihrem Betrug mit gehandelten Waren.</German>
 		<Russian>Индейцы сильно разочарованы европейцами и их мошенничеством с товарами для торговли.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRADE_WITH_NATIVES_BETRAYAL_3</Tag>
-		<English>What have the trader done! Gambled away all trust with a wagonload. The natives will take revenge after many of their women, children and warriors have died as a result of the tainted goods. We must be prepared!</English>
+		<English>What have the traders done? Traded away all our trust for one wagonload. The Natives will certainly take revenge when their women, children and warriors die from tainted goods. We must get ready for the worst!</English>
 		<German>Was haben die Händler getan! Mit einer Wagenladung alles Vertrauen verspielt. Die Ureinwohner werden sich rächen, nachdem viele ihrer Frauen, Kinder und Krieger an den Folgen der verdorbenen Waren umgekommen sind. Wir müssen uns wapnen!</German>
 		<Russian>Что же натворили эти торговцы! Все доверие потеряно из-за одного обоза с плохим товаром. Туземцы будут мстить после того, как многие из их женщин, детей и воинов погибнут из-за тех одеял. Нам нужно готовиться к нападению!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_STIRRED_UP_NATIVES_INITIAL_1</Tag>
-		<English>Milord, some Indians from the nearby villages are increasingly [COLOR_HIGHLIGHT_TEXT]complaining[COLOR_REVERT] about the many [COLOR_HIGHLIGHT_TEXT]soldiers[COLOR_REVERT] stationed in our colonies. They feel threatened and demand that we send some of them back across the big water - that means back to Europe.</English>
+		<English>Milord, some Natives from nearby villages are loudly [COLOR_HIGHLIGHT_TEXT]complaining[COLOR_REVERT] about all the [COLOR_HIGHLIGHT_TEXT]soldiers[COLOR_REVERT] stationed in our colonies. They feel threatened, demanding that we send some of them back across the big water - that means back to Europe.</English>
 		<German>Milord, einige Indianer aus den nahegelegenen Dörfern [COLOR_HIGHLIGHT_TEXT]beschweren[COLOR_REVERT] sich immer häufiger über die vielen [COLOR_HIGHLIGHT_TEXT]Soldaten[COLOR_REVERT], die in unseren Kolonien stationiert sind. Sie fühlen sich bedroht und verlangen, dass wir einige von Ihnen zurück über das große Wasser schicken - zurück nach Europa also.</German>
 		<Russian>Милорд, некоторые индейцы из близлежащих деревень все чаще [COLOR_HIGHLIGHT_TEXT]жалуются[COLOR_REVERT] на множество [COLOR_HIGHLIGHT_TEXT]солдат[COLOR_REVERT], дислоцированных в наших колониях. Они чувствуют угрозу и требуют, чтобы мы отправили некоторых из них обратно через большую воду, то есть в Европу.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_INITIAL_1</Tag>
-		<English>So, do they? Well, as the Indians rightly point out, we have a lot of soldiers here. So we have nothing to fear from the Indians. Tell them....so...um, tell them what you like. The troops are staying here anyway.</English>
+		<English>So, do they? Well, as these Natives rightly point out, we have a lot of soldiers here. We have nothing to fear from the Natives. Tell them....so...um, tell them what you like. The troops are staying!</English>
 		<German>So, tun sie das? Nun, wie die Indianer richtig bemerken, haben wir hier viele Soldaten. Wir haben die Indianer also nicht zu fürchten. Sagt Ihnen....also...ähm, ach sagt ihnen doch was Ihr wollt. Die Truppen bleiben jedenfalls hier.</German>
 		<Russian>Серьёзно? Ну, как они справедливо заметили, солдат у нас здесь много, да. Так что нам не нужно бояться индейцев. Скажите им... эм... хм.. да всё, что угодно. В любом случае, войска останутся здесь.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENTTRIGGER_STIRRED_UP_NATIVES_INITIAL</Tag>
-		<English>Some natives are disgruntled about the many soldiers of the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire.</English>
+		<English>Some Natives are disgruntled about all the soldiers of the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire.</English>
 		<German>Einige Ureinwohner sind verstimmt über die vielen Soldaten im Dienste des [COLOR_HIGHLIGHT_TEXT]%s1:3_civ_adjective[COLOR_REVERT] Königreichs.</German>
 		<Russian>Некоторые индейцы недовольны множеству солдат империи [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] рядом со своими деревнями.</Russian>
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_STIRRED_UP_NATIVES_HORSES_1</Tag>
-		<English>Milord, some Indians from a nearby village [COLOR_HIGHLIGHT_TEXT]are worried[COLOR_REVERT] and at the same time fascinated by our mounted troops. They want you to send the soldiers away. However, they are obviously very fond of the [COLOR_HIGHLIGHT_TEXT]horses [COLOR_REVERT] and "demand" them as a gift.</English>
+		<English>Milord, some Natives from a nearby village [COLOR_HIGHLIGHT_TEXT]are worried[COLOR_REVERT] but at the same time fascinated by our mounted troops. They want you to send the soldiers away. However, they obviously admire the [COLOR_HIGHLIGHT_TEXT]horses[COLOR_REVERT] and demand them as a gift.</English>
 		<German>Milord, einige Indianer aus einem nahegelegenen Dorf [COLOR_HIGHLIGHT_TEXT]sind besorgt[COLOR_REVERT] und gleichzeitig fasziniert von unseren berittenen Truppen. Sie möchten, dass ihr die Soldaten wegschickt. Allerdings finden sie offenbar großen Gefallen an den [COLOR_HIGHLIGHT_TEXT]Pferden [COLOR_REVERT] und "verlangen" sie als Geschenk.</German>
 		<Russian>Милорд, некоторые индейцы из соседней деревни [COLOR_HIGHLIGHT_TEXT]обеспокоены[COLOR_REVERT] и в то же время очарованы нашими конными войсками. Они хотят, чтобы вы отослали солдат подальше от деревни. Однако им очень понравились [COLOR_HIGHLIGHT_TEXT]лошади[COLOR_REVERT] и вожди требуют подарить их племени.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_HORSES_1</Tag>
-		<English>Yes, I understand that. We're starting to spread out quite a bit here and our troops are very intimidating. Well, we need a few more settlers anyway. Send the troops to the barracks and give the Indians the horses as a sign of goodwill. The soldiers can make themselves useful in the colony in other ways.</English>
+		<English>Yes, I understand that. As our towns spread out our troops can be very intimidating. We need more settlers anyway. Send the troops to the barracks and give the Natives the horses as a sign of goodwill. The discharged soldiers will become part of the colony in other ways.</English>
 		<German>Ja, das verstehe ich. Wir machen uns hier langsam ziemlich breit und unsere Truppen sind ja auch sehr einschüchternd. Nun gut, wir brauchen sowieso noch einige Siedler. Schickt die Truppe in die Kaserne und schenkt den Indianern als Zeichen des guten Willens die Pferde. Die Soldaten können sich in der Kolonie anders nützlich machen.</German>
 		<Russian>Да, я понимаю их беспокойство. Мы начинаем здесь понемногу расширяться, а наша кавалерия выглядит довольно устрашающе. Что ж, нам все равно не хватает рабочих рук. Отправьте солдат пока в казармы, мы найдем им применение чуть позже, а лошадей отдайте индейцам в знак доброй воли.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_HORSES_2</Tag>
-		<English>So. All right, a serious situation. But we can't just leave all the horses to them. They would make fun of us. The troops stay where they are. Let the Indians leave without them.</English>
+		<English>So. All right, I admit it's a serious situation. But we can't just give them all the horses. It's ridiculous. They'll laugh at us. The troops stay where they are. The Natives will have to leave without them.</English>
 		<German>Soso. Nun gut, eine ernste Situation. Aber wir können Ihnen ja nicht einfach die ganzen Pferde überlassen. Man würde über uns spotten. Die Truppe bleibt wo sie ist. Die Indianer sollen ohne sie abziehen.</German>
 		<Russian>Непростая ситуация, но мы не можем просто так отдать им всех лошадей. За кого они нас принимают? Войска останутся на своих местах, а индейцам передайте - пусть уходят.</Russian>
 	</TEXT>	
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_HORSES_WN_1</Tag>
-		<English>Some of the mounted troops of the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] have been disbanded and are now to become settlers.</English>
+		<English>Some of the mounted troops of the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] have been disbanded and are ready to become settlers.</English>
 		<German>Ein Teil der berittenen Truppen des [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] Königreichs wurde aufgelöst und soll nun zu Siedlern werden.</German>
 		<Russian>Некоторые отряды конных войск [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] были расформированы и теперь должны стать поселенцами.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_HORSES_WN_2</Tag>
-		<English>The atmosphere between the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire and some of the natives is deteriorating.</English>
+		<English>The atmosphere between the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire and some of the Natives is deteriorating.</English>
 		<German>Die Stimmung zwischen dem [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] Königreich und einigen Ureinwohnern verschlechtert sich.</German>
 		<Russian>Отношения между империей [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] и некоторыми индейцами ухудшаются.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_STIRRED_UP_NATIVES_MUSKETS_1</Tag>
-		<English>Milord, some Indians from a nearby village [COLOR_HIGHLIGHT_TEXT]are worried[COLOR_REVERT] and at the same time fascinated by our infantry troops with their muskets. They want you to send the soldiers away. However, they are obviously very fond of the [COLOR_HIGHLIGHT_TEXT]muskets [COLOR_REVERT] and "demand" them as a gift.</English>
+		<English>Milord, some Natives from a nearby village [COLOR_HIGHLIGHT_TEXT]are worried[COLOR_REVERT] but at the same time fascinated by our infantry troops with their muskets. They want you to send the soldiers away. However, they are obviously tempted by the [COLOR_HIGHLIGHT_TEXT]muskets [COLOR_REVERT] and demand them as a gift.</English>
 		<German>Milord, einige Indianer aus einem nahegelegenen Dorf [COLOR_HIGHLIGHT_TEXT]sind besorgt[COLOR_REVERT] und gleichzeitig fasziniert von unseren Infanterietruppen mit ihren Musketen. Sie möchten, dass ihr die Soldaten wegschickt. Allerdings finden sie offenbar großen Gefallen an den [COLOR_HIGHLIGHT_TEXT]Musketen [COLOR_REVERT] und "verlangen" sie als Geschenk.</German>
 		<Russian>Милорд, некоторые индейцы из соседней деревни [COLOR_HIGHLIGHT_TEXT]обеспокоены[COLOR_REVERT] большим количеством войск в наших городах. Они хотят, чтобы вы отослали солдат подальше от деревни. Однако им очень понравились [COLOR_HIGHLIGHT_TEXT]мушкеты[COLOR_REVERT] и вожди требуют подарить их племени.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_MUSKETS_1</Tag>
-		<English>Yes, I understand that. We're starting to spread out quite a bit here and our troops are very intimidating. Well, we need a few more settlers anyway. Send the troops to the barracks and give the Indians the muskets as a sign of goodwill. The soldiers can make themselves useful in the colony in other ways.</English>
+		<English>Yes, I understand that. As our towns spread out our soldiers can be very intimidating. We need more settlers anyway. Send the troops to the barracks and give the Natives the muskets as a sign of goodwill. Discharged soldiers will be a valued part of the colony.</English>
 		<German>Ja, das verstehe ich. Wir machen uns hier langsam ziemlich breit und unsere Truppen sind ja auch sehr einschüchternd. Nun gut, wir brauchen sowieso noch einige Siedler. Schickt die Truppe in die Kaserne und schenkt den Indianern als Zeichen des guten Willens die Musketen. Die Soldaten können sich in der Kolonie anders nützlich machen.</German>
 		<Russian>Давайте не будем нервировать наших соседей. Солдаты могут быть полезны и в качестве рабочей силы. Распустите один отряд, а их мушкеты передайте индейцам в знак нашего дружеского к ним расположения.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_MUSKETS_2</Tag>
-		<English>So. All right, a serious situation. But we can't just leave all the muskets to them. They would make fun of us. The troops stay where they are. Let the Indians leave without them.</English>
+		<English>So. All right, I admit it's a serious situation. But we can't just give them all the muskets. It's ridiculous. They'll laugh at us. The troops stay where they are. The Natives will have to leave without them.</English>
 		<German>Soso. Nun gut, eine ernste Situation. Aber wir können Ihnen ja nicht einfach die ganzen Musketen überlassen. Man würde über uns spotten. Die Truppe bleibt wo sie ist. Die Indianer sollen ohne sie abziehen.</German>
 		<Russian>Неслыханная дерзость! Может быть нам ещё и пушки им отдать? Пусть убираются прочь!</Russian>
 	</TEXT>	
@@ -6131,67 +6131,67 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_MUSKETS_WN_2</Tag>
-		<English>The atmosphere between the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire and some of the natives is deteriorating significantly.</English>
+		<English>The atmosphere between the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire and some of the Natives is deteriorating significantly.</English>
 		<German>Die Stimmung zwischen dem [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] Königreich und einigen Ureinwohnern verschlechtert sich erheblich.</German>
 		<Russian>Отношения между империей [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] и некоторыми индейцами ухудшаются.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_STIRRED_UP_NATIVES_LANDGRABBING_1</Tag>
-		<English>Milord, some Indians from a nearby village [COLOR_HIGHLIGHT_TEXT]are angry[COLOR_REVERT] about how much we are stealing and exploiting their land. They think the land should belong to everyone and demand that we [COLOR_HIGHLIGHT_TEXT]clear and return it[COLOR_REVERT], at least in part.</English>
+		<English>Milord, some Natives from a nearby village [COLOR_HIGHLIGHT_TEXT]are angry[COLOR_REVERT], saying we're stealing and exploiting their land. They declare land should belong to everyone. They demand we [COLOR_HIGHLIGHT_TEXT]return it[COLOR_REVERT], at least in part.</English>
 		<German>Milord, einige Indianer aus einem nahegelegenen Dorf [COLOR_HIGHLIGHT_TEXT]sind wütend[COLOR_REVERT] darüber, wie sehr wir ihr Land rauben und ausbeuten. Sie meinen das Land sollte allen gehören und verlangen, dass wir es zumindest teilweise wieder [COLOR_HIGHLIGHT_TEXT]räumen und zurückgeben[COLOR_REVERT].</German>
 		<Russian>Милорд, некоторые индейцы из соседней деревни [COLOR_HIGHLIGHT_TEXT]недовольны[COLOR_REVERT] тем, что наши люди самовольно расселяются по округе. Они считают эту землю своей и требуют, чтобы мы [COLOR_HIGHLIGHT_TEXT]отозвали[COLOR_REVERT] поселенцев и уничтожили все возведённые постройки.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_LANDGRABBING_1</Tag>
-		<English>We won't take orders from a few Indians. Take up arms, protect the colonies! Answer them with lead!</English>
+		<English>We won't take orders from a few Natives. Take up arms! Protect the colonies! Answer them with lead!</English>
 		<German>Wir lassen uns doch von so ein paar Indianern nichts befehlen. Zu den Waffen, schützt die Kolonien! Antwortet ihnen mit Blei!</German>
 		<Russian>Мы не позволим каким-то дикарям диктовать нам свои условия. К оружию, братья, защитим наши колонии!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_LANDGRABBING_LN_1</Tag>
-		<English>The atmosphere between the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire and some of the natives is deteriorating significantly.</English>
+		<English>The atmosphere between the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire and some of the Natives is deteriorating fast.</English>
 		<German>Die Stimmung zwischen dem [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] Königreich und einigen Ureinwohnern verschlechtert sich erheblich.</German>
 		<Russian>Отношения между империей [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] и некоторыми индейцами значительно ухудшаются.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_LANDGRABBING_2</Tag>
-		<English>Yes, the Indians are correct. Our colonies are springing up like mushrooms and we are spreading further and further. As a sign of peace, we should demolish some of the buildings in at least one colony. That should appease them.</English>
+		<English>Yes, the Natives are correct. Our colonies are springing up like mushrooms as we spread out further and further. As a sign of peace, we should demolish some of the buildings in at least one colony. That should appease them.</English>
 		<German>Ja, das haben die Indianer nicht unrecht. Unsere Kolonien schießen wie Pilze aus dem Boden und wir breiten uns immer weiter aus. Als Zeichen des Friedens sollten wir zumindest in einer Kolonie einige Bauten wieder abreißen. Das sollte sie besänftigen.</German>
 		<Russian>Индейцев можно понять. Наши колонии растут, как грибы и поселенцы отходят все дальше и дальше от побережья. В знак нашего уважения к туземцам и для поддержания мира нам следует снести некоторые здания хотя бы в одной колонии. Это должно их успокоить.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_LANDGRABBING_LN_2</Tag>
-		<English>In the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] colonies an agreement is reached with some Indians about the ongoing land grab.</English>
+		<English>In the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] colonies an agreement is reached with some Native leaders about the ongoing land grab.</English>
 		<German>In den [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] Kolonien einigt man sich mit einigen Indianern wg. des fortschreitenden Landraubs.</German>
 		<Russian>[COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] договорились с некоторыми индейцами о не распространении колоний на земли туземцев.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_LANDGRABBING_3</Tag>
-		<English>Well, the settlers built everything with hard work. They wouldn't understand if we tore it down now. But I suggest that we compensate the Indians with gold. They can then use it to buy goods from us again.</English>
+		<English>The settlers remember how they worked hard to build everything. They can't understand why we want to tear it down. Maybe we can pay off the Indians with gold. We'll get it back again when they buy goods from us.</English>
 		<German>Nun ja, die Siedler haben alles mit harter Arbeit aufgebaut. Sie würden es nicht verstehen, wenn wir es jetzt niederreißen. Aber ich schlage vor, dass wir die Indianer mit Gold entschädigen. Damit können sie dann bei uns gleich wieder Waren kaufen!</German>
 		<Russian>Эти здания плод тяжёлого труда множества поселенцев. Они бы не поняли, если бы мы начали их разрушать и как бы дело не дошло до мятежа. Давайте предложим индейцам в качестве компенсации золото. Тем более, потом они смогут его потратить на покупку у нас различных товаров!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_STIRRED_UP_NATIVES_LANDGRABBING_LN_3</Tag>
-		<English>The atmosphere between the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire and some of the natives has changed for the better.</English>
+		<English>The atmosphere between the [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] empire and some of the Natives has improved.</English>
 		<German>Die Stimmung zwischen dem [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] Königreich und einigen Ureinwohnern hat sich verbessert.</German>
 		<Russian>Отношения между империей [COLOR_HIGHLIGHT_TEXT]%s1:2_civ_adjective[COLOR_REVERT] и некоторыми индейцами улучшаются.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_NATIVES_ATTACK_HELP</Tag>
-		<English>The natives will [COLOR_FONT_GOLD]attack[COLOR_REVERT] the colony. Only recommended if the space around the colony is not occupied by any unit.</English>
+		<English>The Natives will [COLOR_FONT_GOLD]attack[COLOR_REVERT] the colony. Only recommended if the space around the colony is not occupied by any unit.</English>
 		<German>Die Indianer werden die Siedlung [COLOR_FONT_GOLD]angreifen[COLOR_REVERT]. Nur zu empfehlen, wenn der Platz rund um die Kolonie nicht von irgendeiner Einheit besetzt ist.</German>
 		<Russian>Индейцы [COLOR_FONT_GOLD]нападут[COLOR_REVERT] на колонию. Рекомендуется только в том случае, если пространство вокруг колонии не занято никаким юнитом.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_WHALING_TRIP_1</Tag>
-		<English>Milord, the crew of one of our fishing boats claim to have seen a huge white whale at sea, the biggest whale they have ever seen. We shouldn't miss out on that.</English>
+		<English>Milord, the crew on one of our fishing boats claims to have seen a huge white whale at sea, the biggest whale ever. That's something we have to see!.</English>
 		<German>Milord, die Besatung eines unserer Fischerboote behauptet, sie habe auf dem Meer einen gewaltigen weißen Wal gesehen, so groß wie noch nie ein Wal zuvor gewesen sei. Das sollten wir uns nicht entgehen lassen.</German>
 		<Russian>Милорд, команда одной из наших рыбацких лодок утверждает, что видела в море огромного белого кита! Самого большого кита, которого они когда-либо видели. Мы не должны упустить такой шанс!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_WHALING_TRIP_1</Tag>
-		<English>In any case, the whalers should take a look. Where there's one whale, there's bound to be more. I assume it is worth doing it.</English>
+		<English>At the very least the whalers should take a look. Where there's one whale, there's bound to be more.</English>
 		<German>Auf jeden Fall sollten sich die Walfänger das mal ansehen. Wo ein Wal ist, sind bestimmt noch mehr zu finden. Ich wittere reiche Beute.</German>
 		<Russian>Да, китобоям стоит обратить на это внимание. Там, где есть один кит, обязательно появится и другой. Я чую богатую добычу.</Russian>
 	</TEXT>
@@ -6209,32 +6209,31 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_WHALING_TRIP_DONE_PYTHON</Tag>
-		<English>[ICON_BULLET] Send a unit [COLOR_UNIT_TEXT]%s1:1_unit[COLOR_REVERT] to .</English>
+		<English>[ICON_BULLET] [COLOR_UNIT_TEXT]Humpback whales[COLOR_REVERT] can be very dangerous. Stay alert in case they attack.</English>
 		<German>[ICON_BULLET] Die [COLOR_UNIT_TEXT]Buckelwale[COLOR_REVERT] in der Nähe sind gefährlich. Seid gewarnt, sie werden Euch vermutlich angreifen!</German>
 		<Russian>[ICON_BULLET] [COLOR_UNIT_TEXT]Горбатые киты[COLOR_REVERT] могут быть очень опасны. Будьте осторожны, они могут напасть на судно!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TRIGGER_WHALING_TRIP_DONE</Tag>
-		<English>A [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] whaling boat set sail to find the legendary white whale.</English>
+		<English>A [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] whaling boat sets sail to find the legendary white whale.</English>
 		<German>Ein [COLOR_HIGHLIGHT_TEXT]%s1:3_civ_adjective[COLOR_REVERT] Walfänger ist in See gestochen, um den legendären weißen Wal zu finden.</German>
 		<Russian>Китобои [COLOR_HIGHLIGHT_TEXT]%s1_civ_adjective[COLOR_REVERT] отправились на поиски легендарного белого кита.</Russian>
 	</TEXT>
-
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_WHALING_TRIP_DONE_1</Tag>
-		<English>Milord, our men have the best lookout on board, but couldn't find the great white whale. Nevertheless, there are [COLOR_HIGHLIGHT_TEXT]plenty of whales[COLOR_REVERT] in the area. It seems the fishermen were right about that at least. We stay nearby for a while, maybe we'll find the whale - or it will find us.</English>
+		<English>Milord, our very best lookout couldn't find the great white whale. We did see [COLOR_HIGHLIGHT_TEXT]plenty of whales[COLOR_REVERT] in the area. It seems the fishermen were right about that at least. If we stay around here for a while maybe we'll find the whale - or it will find us.</English>
 		<German>Milord, unsere Männer haben den besten Ausguck an Bord, konnten den großen weißen Wal aber nicht finden. Trotzdem gibt es in dem Gebiet [COLOR_HIGHLIGHT_TEXT]reichlich Wale[COLOR_REVERT]. Es scheint, als hätten die Fischer wenigstens damit Recht gehabt. Wir bleiben eine Weile in der Nähe, vielleicht finden wir den Wal noch - oder er uns.</German>
 		<Russian>Милорд, на борту китобоя хорошие наблюдатели, но они не смогли найти большого белого кита. Тем не менее, в этом районе водится множество других [COLOR_HIGHLIGHT_TEXT]китов[COLOR_REVERT]. Хотя бы в этом рыбаки были правы. Побудем некоторое время неподалеку, может быть, найдем кита – или он найдет нас.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_WHALING_TRIP_DONE_2</Tag>
-		<English>Milord, the whalers can't find any whales at this position. But [COLOR_HIGHLIGHT_TEXT]plenty of schools of fish[COLOR_REVERT]. The fishermen were probably just drunk and mistook a school of fish for a whale. We should report that and send another fishing boat here.</English>
+		<English>Milord, the whalers can't find any whales at this position. But there are [COLOR_HIGHLIGHT_TEXT]plenty of fish[COLOR_REVERT]. The fishermen were probably just drunk and mistook a school of fish for a whale. We should report that and send another fishing boat here.</English>
 		<German>Milord, die Walfänger können keine Wale auf dieser Position finden. Aber [COLOR_HIGHLIGHT_TEXT]jede Menge Fischschwärme[COLOR_REVERT]. Wahrscheinlich waren die Fischer nur betrunken und haben einen Fischschwarm für einen Wal gehalten. Wir sollten das berichten und noch einen Fischkutter hierher schicken.</German>
 		<Russian>Милорд, китобои не могут найти китов в указанном месте. Но они обнаружили множество [COLOR_HIGHLIGHT_TEXT]косяков рыб[COLOR_REVERT]. Вероятно, те рыбаки были просто пьяны и приняли косяк рыбы за кита. Нам следует сообщить об этом и послать сюда еще несколько рыбацких лодок.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_WHALING_TRIP_DONE_3</Tag>
-		<English>[COLOR_HIGHLIGHT_TEXT]There he blows![COLOR_REVERT] Oh my God, look at him! What a giant! None of the whalers have ever seen a whale like this before. We have to kill it or come back with reinforcements, if he escapes. Let's go hunting!</English>
+		<English>[COLOR_HIGHLIGHT_TEXT]There he blows![COLOR_REVERT] Oh my God, look at him! What a giant! None of the whalers have ever seen a whale like this before. We have to kill it or come back with reinforcements if he escapes. Let's go hunting!</English>
 		<German>[COLOR_HIGHLIGHT_TEXT]Da bläst er![COLOR_REVERT] Oh mein Gott, seht ihn Euch an! Was für ein Riese! So einen Wal hat keiner der Walfänger je zuvor gesehen. Wir müssen ihn erlegen oder unbedingt mit Verstärkung wiederkommen, wenn er uns entwischt. Auf zur Jagd!</German>
 		<Russian>[COLOR_HIGHLIGHT_TEXT]Я вижу кита!!![COLOR_REVERT] Боже мой, посмотрите на него! Какой гигант! Никто из китобоев никогда раньше не видел такого огромного кита. Мы непременно должны убить его или вернуться с подкреплением, если он ускользнет от нас. Начинаем охоту!</Russian>
 	</TEXT>
@@ -6270,9 +6269,171 @@
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_WHALING_TRIP_DONE_6</Tag>
-		<English>Milord, another whaling boat has been acquired and equipped.</English>
+		<English>Milord, another whaling boat is ready to go to work.</English>
 		<German>Milord, ein weiteres [COLOR_HIGHLIGHT_TEXT]Walfangschiff[COLOR_REVERT] wurde erworben und ausgerüstet.</German>
 		<Russian>Милорд, еще одно [COLOR_HIGHLIGHT_TEXT]китобойное судно[COLOR_REVERT] приобретено и готово к отплытию.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TREASURE_PROTECTION_NEW_MOUNTED_CONQUISTADOR_HELP</Tag>
+		<English>[ICON_BULLET]Mounted conquistadores join one of your treasure transports.</English>
+		<German>[ICON_BULLET]Berittene Konquistadoren machen sich auf den Weg und beschützen Euer Gold.</German>
+		<Russian>[ICON_BULLET]Конные конкистадоры присоединяются к одному из ваших транспортов с сокровищами.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TREASURE_PROTECTION_NEW_MILITIA_HELP</Tag>
+		<English>[ICON_BULLET]Mounted troops and wagon masters in the treasure transport arm themselves to form a militia.</English>
+		<German>[ICON_BULLET]Einige Wagenlenker und Begleiter eines Schatztransports bewaffnen sich und bilden eine Miliz.</German>
+		<Russian>[ICON_BULLET]Некоторые возничие и сопровождающие транспорт с сокровищами вооружаются и формируют ополчение.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_TREASURE_PROTECTION</Tag>
+		<English>Milord, many of our [COLOR_HIGHLIGHT_TEXT]treasures[COLOR_REVERT] are out in the wilderness unprotected. For pocket money we could recruit adventurers willing to escort them safely to the nearest colony.</English>
+		<German>Milord, viele unserer [COLOR_HIGHLIGHT_TEXT]Schätze[COLOR_REVERT] sind in der Wildnis ungeschützt unterwegs. Einige Abenteurer würden sich gegen ein Handgeld auf den Weg machen und sie sicher in die nächste Kolonie geleiten.</German>
+		<Russian>Милорд, многие из наших [COLOR_HIGHLIGHT_TEXT]сокровищ[COLOR_REVERT] находятся в глуши без защиты. Некоторые искатели приключений готовы отправиться туда и сопроводить их до ближайшей колонии.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TREASURE_PROTECTION_1</Tag>
+		<English>Right, we're going to hire some [COLOR_HIGHLIGHT_TEXT]mounted conquistadors[COLOR_REVERT]. They'll saddle up and be on their way.</English>
+		<German>Sehr schön, wir sollten unbedingt ein paar [COLOR_HIGHLIGHT_TEXT]Berittene Konquistadoren[COLOR_REVERT] anheuern und sie sollten sich gleich auf den Weg machen.</German>
+		<Russian>Что же, нам определенно следует нанять несколько [COLOR_HIGHLIGHT_TEXT]конных конкистадоров[COLOR_REVERT]. И прикажите им отправляться как можно скорее!</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TREASURE_PROTECTION_2</Tag>
+		<English>I do see the problem, but I beieve arming a few workers to form a [COLOR_HIGHLIGHT_TEXT]militia[COLOR_REVERT] should be enough.</English>
+		<German>Ich sehe das Problem, aber es reicht vollkommen aus, wenn wir ein paar Arbeiter bewaffnen und vorübergehend eine [COLOR_HIGHLIGHT_TEXT]Miliz[COLOR_REVERT] bilden lassen.</German>
+		<Russian>Да, это проблема, но вооружить нескольких рабочих, сформировав временное [COLOR_HIGHLIGHT_TEXT]ополчение[COLOR_REVERT], будет вполне достаточно.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TREASURE_PROTECTION_3</Tag>
+		<English>The wagons will have to get there  on their own. I can't spare men or money for that.</English>
+		<German>Ach was, die Wagen müssen sich so durchschlagen. Dafür kann ich keinen Mann und kein Goldstück entbehren.</German>
+		<Russian>Как не прискорбно, но сейчас у нас нет ни людей, ни золота. Перевозчиками придётся полагаться только на свои силы.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TREASURE_PROTECTION_1_News</Tag>
+		<English>Some [COLOR_HIGHLIGHT_TEXT]Mounted Conquistadors[COLOR_REVERT] now escort your treasures safely to the colonies.</English>
+		<German>Einige [COLOR_HIGHLIGHT_TEXT]Berittene Konquistadoren[COLOR_REVERT] begleiten Eure Schätze nun sicher in die Kolonien.</German>
+		<Russian>[COLOR_HIGHLIGHT_TEXT]Конные конкистадоры[COLOR_REVERT] займутся охраной ваших сокровищ в пути.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TREASURE_PROTECTION_2_News</Tag>
+		<English>[COLOR_HIGHLIGHT_TEXT]Militias[COLOR_REVERT] now escort your treasures safely to the colonies.</English>
+		<German>Einige [COLOR_HIGHLIGHT_TEXT]Milizionäre[COLOR_REVERT] begleiten Eure Schätze nun sicher in die Kolonien.</German>
+		<Russian>Сокровища направляются в колонии под охраной [COLOR_HIGHLIGHT_TEXT]ополченцев[COLOR_REVERT].</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TREASURE_PROTECTION_3_News</Tag>
+		<English>Some of your treasures have to make their way through the wilderness without protection.</English>
+		<German>Einige Eurer Schätze müssen sich schutzlos durch die Wildnis einen Weg bahnen.</German>
+		<Russian>Некоторым из ваших сокровищ придется пробираться через дикую местность без какой-либо защиты.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_BUILD_MONASTERY_START</Tag>
+		<English>Milord, some of our [COLOR_HIGHLIGHT_TEXT]missionaries[COLOR_REVERT] must have lost their way in the wilderness. It's a long time since anyone has heard from them. We'd be wiser to set up a [COLOR_HIGHLIGHT_TEXT]monastery[COLOR_REVERT] here instead of having missionaries vanish into the wilderness.</English>
+		<German>Milord, einige unserer [COLOR_HIGHLIGHT_TEXT]Missionare[COLOR_REVERT] haben sich offenbar in der Wildnis verirrt, jedenfalls hat niemand mehr etwas von ihnen gehört. Wir sollten lieber eine [COLOR_HIGHLIGHT_TEXT]Missionsstation[COLOR_REVERT] errichten, statt die Missionare in der Wildnis zu verlieren.</German>
+		<Russian>Милорд, некоторые из наших [COLOR_HIGHLIGHT_TEXT]миссионеров[COLOR_REVERT], кажется, заблудились в глуши. Хорошо бы нам основать [COLOR_HIGHLIGHT_TEXT]монастырь[COLOR_REVERT], чтобы не терять миссионеров в этих диких местах.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENTTRIGGER_BUILD_MONASTERY_DONE</Tag>
+		<English>A colony has set up a new [COLOR_HIGHLIGHT_TEXT]monastery[COLOR_REVERT] to convert Natives to the Christian faith.</English>
+		<German>Eine Kolonie hat eine neue [COLOR_HIGHLIGHT_TEXT]Missionstation[COLOR_REVERT] errichtet, um die Wilden zum christlichen Gott zu bekehren.</German>
+		<Russian>Европейцы основали [COLOR_HIGHLIGHT_TEXT]монастырь[COLOR_REVERT], чтобы обращать туземцев в христианскую веру.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_BUILD_MONASTERY_DONE</Tag>
+		<English>Milord, we have finally completed the monastery. The [COLOR_HIGHLIGHT_TEXT]missionaries[COLOR_REVERT] can begin their work.</English>
+		<German>Milord, wir haben endlich die Missionsstation fertiggestellt. Die [COLOR_HIGHLIGHT_TEXT]Missionare[COLOR_REVERT] können mit ihrer Arbeit beginnen.</German>
+		<Russian>Милорд, мы наконец-то закончили строительство монастыря. [COLOR_HIGHLIGHT_TEXT]Миссионеры[COLOR_REVERT] могут приступить к работе.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_BUILD_MONASTERY_START</Tag>
+		<English>Yes, absolutely. We will provide the necessary money. We have to start building immediately.</English>
+		<German>Ja, unbedingt. Wir werden das nötige Kleingeld zur Verfügung stellen. Wir müssen den Bau sofort beginnen.</German>
+		<Russian>Да, конечно. Мы выделим необходимые средства на строительство. И начинайте работы без промедлений.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_FAIL_BUILD_MONASTERY</Tag>
+		<English>Milord, we couldn't finish the construction in time. The money and building materials for the monastery have been lost.</English>
+		<German>Milord, wir konnten den Bau nicht rechtzeitig fertigstellen. Das Geld und das Baumaterial für die Missionsstation sind verloren.</German>
+		<Russian>Милорд, мы не смогли закончить строительство вовремя. Деньги и строительные материалы для монастыря были потеряны...</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_BUILD_MONASTERY_DECLINE</Tag>
+		<English>I don't think much of the church's efforts to impose our faith on the Native people. Instead of supporting that construction we should use the money elsewhere.</English>
+		<German>Ich halte nicht viel von den Bemühungen der Kirche, den Ureinwohnern unseren Glauben aufzuzwingen. Wir werden den Bau nicht unterstützen und das Geld anderweitig verwenden.</German>
+		<Russian>Не думаю, что индейцы будут в восторге еще от одной постройки на их земле. Мы не будем поддерживать строительство и направим деньги на что-нибудь более важное.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_BUILD_MONASTERY_DONE_1</Tag>
+		<English>It's excellent that we finished the building on time. That guarantees us the support of the church which never hurts, particularly since the church has influence over the King.</English>
+		<German>Hervorragend, dass wir den Bau rechtzeitig fertigstellen konnten, wird uns die Unterstützung der Kirche für einige Zeit sichern. Das kann auf keinen Fall schaden, die Kirche hat Einfluss auf den König.</German>
+		<Russian>Прекрасно, мы смогли закончить строительство вовремя и это обеспечит нам поддержку церкви. А это всегда полезно, ибо церковь имеет влияние на Короля.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_BUILD_MONASTERY_DONE_2</Tag>
+		<English>Outstanding. Since we completed the building on time, the church will hopefully be motivated to send new eager missionaries to the colonies.</English>
+		<German>Hervorragend. Da wir den Bau rechtzeitig fertigstellen konnten, wird die Kirche hoffentlich ermuntern, neue und motivierte Missionare in die Kolonien zu entsenden.</German>
+		<Russian>Превосходно. Поскольку нам удалось завершить строительство вовремя, мы надеемся, что церковь продолжит отправлять в колонии своих миссионеров.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_BUILD_MONASTERY_HELP</Tag>
+		<English>[ICON_BULLET] Within [COLOR_UNIT_TEXT]40[COLOR_REVERT] turns, build a [COLOR_UNIT_TEXT]monastery[COLOR_REVERT] in the colony to support the church's missionary efforts in this region. The church will reward you.</English>
+		<German>[ICON_BULLET] Errichtet innerhalb von [COLOR_UNIT_TEXT]40[COLOR_REVERT] Runden ein [COLOR_UNIT_TEXT]Kloster[COLOR_REVERT] in der Kolonie, um die Missionierungsversuche der Kirche in dieser Region zu unterstützen. Die Kirche wird es Euch danken.</German>
+		<Russian>[ICON_BULLET] В течении [COLOR_UNIT_TEXT]40[COLOR_REVERT] ходов постройте [COLOR_UNIT_TEXT]монастырь[COLOR_REVERT] в указанном месте, чтобы поддержать миссионеров этого региона. Церковь вознаградит вас.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_DRAGOONS_TO_FRONTIER_START</Tag>
+		<English>Milord, the local population is very worried. We have many [COLOR_HIGHLIGHT_TEXT]slaves[COLOR_REVERT] in the colony with no mounted troops who could quickly recapture them. We should station a company of [COLOR_HIGHLIGHT_TEXT]dragoons[COLOR_REVERT] or [COLOR_HIGHLIGHT_TEXT]cavalry[COLOR_REVERT] there.</English>
+		<German>Milord, die örtliche Bevölkerung ist in großer Sorge. Es sind viele [COLOR_HIGHLIGHT_TEXT]Sklaven[COLOR_REVERT] in der Kolonie und keine Berittenen sind in der Kolonie stationiert, um sie notfalls einfangen zu können und mehr Sicherheit zu bieten. Wir sollten lieber eine Einheit [COLOR_HIGHLIGHT_TEXT]Dragoner[COLOR_REVERT] oder [COLOR_HIGHLIGHT_TEXT]Kavallerie[COLOR_REVERT] dort stationieren.</German>
+		<Russian>Милорд, местное население в большой тревоге. В колонии много [COLOR_HIGHLIGHT_TEXT]рабов[COLOR_REVERT] и нет конных войск, которые могли бы быстро поймать беглецов или усмирить мятежников. Хорошо было бы разместить там отряд [COLOR_HIGHLIGHT_TEXT]драгун[COLOR_REVERT] или [COLOR_HIGHLIGHT_TEXT]кавалерии[COLOR_REVERT].</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENTTRIGGER_DRAGOONS_TO_FRONTIER_DONE</Tag>
+		<English>A [COLOR_HIGHLIGHT_TEXT]mounted company[COLOR_REVERT] has been stationed in the colony for more security.</English>
+		<German>In einer Kolonie wurde eine Einheit [COLOR_HIGHLIGHT_TEXT]Berittene[COLOR_REVERT] stationiert, um mehr Sicherheit zu gewährleisten.</German>
+		<Russian>Для обеспечения большей безопасности в колонии был размещен [COLOR_HIGHLIGHT_TEXT]конный отряд[COLOR_REVERT].</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_TRIGGER_DRAGOONS_TO_FRONTIER_DONE</Tag>
+		<English>Milord, we have stationed a mounted unit in the colony. The population can now feel safe again.</English>
+		<German>Milord, wir haben eine Einheit Betittene in der Kolonie stationert. Die Bevölkerung kann sich nun wieder sicher fühlen.</German>
+		<Russian>Милорд, мы разместили в колонии конный отряд. Население теперь может снова чувствовать себя в безопасности.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_DRAGOONS_TO_FRONTIER_START</Tag>
+		<English>Yes, absolutely. We will provide the necessary money to equip the troops. We have to prove the people that the situation is under control.</English>
+		<German>Ja, unbedingt. Wir werden das nötige Kleingeld zur Verfügung stellen, um die Truppe auszurüsten. Wir müssen der Bevölkerung zeigen, dass wir die Lage im Griff haben.</German>
+		<Russian>Конечно. Мы предоставим необходимые средства для оснащения войск. Мы должны показать людям, что ситуация под контролем.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_FAIL_DRAGOONS_TO_FRONTIER</Tag>
+		<English>Milord, we couldn't send the troops in time. The population won't be happy.</English>
+		<German>Milord, wir konnten die Truppen nicht rechtzeit entsenden. Die Bevölkerung wird nicht begeistert sein.</German>
+		<Russian>Милорд, мы не смогли вовремя отправить войска. Население будет недовольно...</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_DRAGOONS_TO_FRONTIER_DECLINE</Tag>
+		<English>As royal servants we should stay out of it. Leave it up to the landowners to keep their slaves from escaping or causing trouble.</English>
+		<German>Nein, wir als königliche Beamte sollten uns da raushalten. Sollen die Großgrundbesitzer selbst sehen, wie sie ihre Sklaven davon abhalten zu fliehen oder Ärger zu machen.</German>
+		<Russian>Солдаты Короля воины, а не надсмотрщики. Пусть землевладельцы сами решают, как не дать своим рабам сбежать и уж тем более бунтовать.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_DRAGOONS_TO_FRONTIER_DONE_1</Tag>
+		<English>Excellent that we were able to secure the colony. This will show the good citizens that we take their concerns seriously and that a strong colonial force will protect them.</English>
+		<German>Hervorragend, dass wir die Kolonie sichern konnten. Das wird den braven Bürgern zeigen, dass wir ihre Sorgen ernst nehmen und und eine starke Kolonialtruppe sie schützt.</German>
+		<Russian>Отлично, нам удалось обезопасить колонию. Это покажет добропорядочным гражданам, что мы серьезно относимся к их проблемам и что колониальные войска готовы защищать их от любых напастей.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_DRAGOONS_TO_FRONTIER_DONE_2</Tag>
+		<English>Outstanding. But we still need to do more, like hiring extra slave overseers. The colonial troops have other tasks to fulfil.</English>
+		<German>Hervorragend. Aber wir sollten noch mehr tun und einige neue Sklavenaufseher anheuern. Die kolonialen Truppen haben auf Dauer andere Aufgaben zu erfüllen.</German>
+		<Russian>Замечательно. Но нам следует сделать больше и нанять новых надсмотрщиков. У колониальных войск в долгосрочной перспективе будут и другие задачи.</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_EVENT_DRAGOONS_TO_FRONTIER_HELP</Tag>
+		<English>[ICON_BULLET] Within [COLOR_UNIT_TEXT]10[COLOR_REVERT] turns, send a unit of [COLOR_UNIT_TEXT]Veteran Dragoons[COLOR_REVERT] or [COLOR_UNIT_TEXT]Veteran Cavalry[COLOR_REVERT] into the colony to protect the citizens and to guard the slaves. That will make the good citizens happy.</English>
+		<German>[ICON_BULLET] Entsendet innerhalb von [COLOR_UNIT_TEXT]10[COLOR_REVERT] Runden eine Einheit [COLOR_UNIT_TEXT]erfahrene Dragooner[COLOR_REVERT] oder [COLOR_UNIT_TEXT]erfahrene Kavallerie[COLOR_REVERT] in die Kolonie, um die Bürger zu schützen und die Sklaven zu bewachen. Das wird die braven Bürger glücklich machen.</German>
+		<Russian>[ICON_BULLET] В течение [COLOR_UNIT_TEXT]10[COLOR_REVERT] ходов отправьте отряд [COLOR_UNIT_TEXT]Ветеран драгун[COLOR_REVERT] или [COLOR_UNIT_TEXT]Ветеран кавалерии[COLOR_REVERT] в колонию для охраны. Это сделает колонистов счастливыми.</Russian>
 	</TEXT>
 </Civ4GameText>
 

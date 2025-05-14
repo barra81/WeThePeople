@@ -18,6 +18,8 @@ BOOST_STATIC_ASSERT(sizeof(CyEffectInfo) == sizeof(CvEffectInfo));
 class CyTerrainInfo : public CvTerrainInfo
 {
 public:
+	int getRiverYieldIncrease(int iYield) const;
+	int getYield(int iYield) const;
 };
 BOOST_STATIC_ASSERT(sizeof(CyTerrainInfo) == sizeof(CvTerrainInfo));
 
@@ -30,18 +32,57 @@ BOOST_STATIC_ASSERT(sizeof(CyBonusInfo) == sizeof(CvBonusInfo));
 class CyFeatureInfo : public CvFeatureInfo
 {
 public:
+	int getYieldChange(int iYield) const;
+	int getRiverYieldIncrease(int iYield) const;
+	bool isTerrain(int iTerrain) const;
 };
 BOOST_STATIC_ASSERT(sizeof(CyFeatureInfo) == sizeof(CvFeatureInfo));
 
 class CyCivilizationInfo : public CvCivilizationInfo
 {
 public:
+	int getDefaultPlayerColor() const;
+	int getArtStyleType() const;
+	int getUnitArtStyleType() const;
+	int getDefaultProfession() const;
+
+	int getNumCityNames() const;
+	int getNumLeaders() const;
+	int getSelectionSoundScriptId() const;
+	int getActionSoundScriptId() const;
+	int getAdvancedStartPoints() const;
+	int getAreaMultiplier() const;
+	int getDensityMultiplier() const;
+	int getTreasure() const;
+	int getFavoredTerrain() const;
+	int getCapturedCityUnitClass() const;
+
+	int getCivilizationBuildings(int iBuildingClass) const;
+	int getCivilizationUnits(int iUnitClass) const;
+	int getNumCivilizationFreeUnits() const;
+	int getCivilizationFreeUnitsClass(int index) const;
+	int getCivilizationFreeUnitsProfession(int index) const;
+	int getCivilizationInitialCivics(int iCivicOption) const;
+	int getFreeYields(int iYield) const;
+	int getTeachUnitClassWeight(int iUnitClass) const;
+	bool isLeaders(int iLeaderHead) const;
+	bool isCivilizationFreeBuildingClass(int iBuildingClass) const;
+	bool isValidProfession(int iProfession) const;
+	bool hasTrait(int iTrait) const;
 };
 BOOST_STATIC_ASSERT(sizeof(CyCivilizationInfo) == sizeof(CvCivilizationInfo));
 
 class CyLeaderHeadInfo : public CvLeaderHeadInfo
 {
 public:
+	int getContactRand(int iContact) const;
+	int getContactDelay(int iContact) const;
+	int getMemoryDecayRand(int iMemory) const;
+	int getMemoryAttitudePercent(int iMemory) const;
+	int getNoWarAttitudeProb(int iAttitude) const;
+	int getUnitAIWeightModifier(int iUnitAI) const;
+	int getImprovementWeightModifier(int iImprovement) const;
+	bool hasTrait(int iTrait) const;
 };
 BOOST_STATIC_ASSERT(sizeof(CyLeaderHeadInfo) == sizeof(CvLeaderHeadInfo));
 
@@ -57,6 +98,8 @@ public:
 	int getDefaultProfession() const;
 	int getLeaderPromotion() const;
 	int getUnitClassType() const;
+
+	const CvArtInfoUnit* getUnitArtStylesArtInfo(int index, int iProfession, int iStyle) const;
 };
 BOOST_STATIC_ASSERT(sizeof(CyUnitInfo) == sizeof(CvUnitInfo));
 
@@ -69,6 +112,7 @@ BOOST_STATIC_ASSERT(sizeof(CySpecialUnitInfo) == sizeof(CvSpecialUnitInfo));
 class CyYieldInfo : public CvYieldInfo
 {
 public:
+	int getUnitClass() const;
 };
 BOOST_STATIC_ASSERT(sizeof(CyYieldInfo) == sizeof(CvYieldInfo));
 
@@ -87,6 +131,7 @@ BOOST_STATIC_ASSERT(sizeof(CyImprovementInfo) == sizeof(CvImprovementInfo));
 class CyGoodyInfo : public CvGoodyInfo
 {
 public:
+	int getUnitClassType() const;
 };
 BOOST_STATIC_ASSERT(sizeof(CyGoodyInfo) == sizeof(CvGoodyInfo));
 
@@ -189,6 +234,7 @@ BOOST_STATIC_ASSERT(sizeof(CyPromotionInfo) == sizeof(CvPromotionInfo));
 class CyProfessionInfo : public CvProfessionInfo
 {
 public:
+	int getPediaUnitGraphics() const;
 };
 BOOST_STATIC_ASSERT(sizeof(CyProfessionInfo) == sizeof(CvProfessionInfo));
 
@@ -267,6 +313,7 @@ BOOST_STATIC_ASSERT(sizeof(CyEventTriggerInfo) == sizeof(CvEventTriggerInfo));
 class CyEventInfo : public CvEventInfo
 {
 public:
+	int getUnitClass() const;
 };
 BOOST_STATIC_ASSERT(sizeof(CyEventInfo) == sizeof(CvEventInfo));
 

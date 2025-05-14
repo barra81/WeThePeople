@@ -546,8 +546,6 @@ void CvGlobals::init()
 	memcpy(m_aaiXYCityPlot_1_plot, aaiXYCityPlot_1_plot, sizeof(aaiXYCityPlot_1_plot));
 	m_aaiXYCityPlot_2_plot = (int*)malloc(sizeof(aaiXYCityPlot_2_plot));
 	memcpy(m_aaiXYCityPlot_2_plot, aaiXYCityPlot_2_plot, sizeof(aaiXYCityPlot_2_plot));
-
-	this->setCityCatchmentRadius(0);
 }
 
 //
@@ -2312,20 +2310,20 @@ CvEventInfo& CvGlobals::getEventInfo(EventTypes eEvent)
 }
 
 // trade screen type - start - Nightinggale
-int CvGlobals::getNumTradeScreenInfos() const
+int CvGlobals::getNumTradeLocationInfos() const
 {
 	return (int)m_paTradeScreenInfo.size();
 }
 
-std::vector<CvTradeScreenInfo*>& CvGlobals::getTradeScreenInfo()
+std::vector<CvTradeLocationInfo*>& CvGlobals::getTradeLocationInfo()
 {
 	return m_paTradeScreenInfo;
 }
 
-const CvTradeScreenInfo& CvGlobals::getTradeScreenInfo(TradeScreenTypes eTradeScreen) const
+const CvTradeLocationInfo& CvGlobals::getTradeLocationInfo(TradeLocationTypes eTradeLocation) const
 {
-	FAssert(validEnumRange(eTradeScreen));
-	return *(m_paTradeScreenInfo[eTradeScreen]);
+	FAssert(validEnumRange(eTradeLocation));
+	return *(m_paTradeScreenInfo[eTradeLocation]);
 }
 // trade screen type - end - Nightinggale
 

@@ -76,33 +76,33 @@
 	<TEXT>
 		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_MIN_LARGE_RIVER_LENGTH_OPT_0</Tag>
 		<English>Minimum 3</English>
-		<Russian>Минимум 3 плитки</Russian>
+		<Russian>Минимум 3 клетки</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_MIN_LARGE_RIVER_LENGTH_OPT_1</Tag>
 		<English>Minimum 5</English>
-		<Russian>Минимум 5 плиток</Russian>
+		<Russian>Минимум 5 клеток</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_MIN_LARGE_RIVER_LENGTH_OPT_2</Tag>
 		<English>Minimum 7 Plots per Large River (default)</English>
 		<French>Minimum 7 cases par grande rivière (par défaut)</French>
-		<Russian>Минимум 7 плиток (по умолчанию)</Russian>
+		<Russian>Минимум 7 клеток (по умолчанию)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_MIN_LARGE_RIVER_LENGTH_OPT_3</Tag>
 		<English>Minimum 9</English>
-		<Russian>Минимум 9 плиток</Russian>
+		<Russian>Минимум 9 клеток</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_MIN_LARGE_RIVER_LENGTH_OPT_4</Tag>
 		<English>Minimum 11</English>
-		<Russian>Минимум 11 плиток</Russian>
+		<Russian>Минимум 11 клеток</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_MIN_LARGE_RIVER_LENGTH_OPT_5</Tag>
 		<English>Minimum 13</English>
-		<Russian>Минимум 13 плиток</Russian>
+		<Russian>Минимум 13 клеток</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_LAND_PERCENT</Tag>
@@ -133,5 +133,30 @@
 		<English>55% Land</English>
 		<French>55% de terres</French>
 		<Russian>55% земли</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_TERRAIN_ROUGHNESS</Tag>
+		<English>Terrain Roughness:</English>
+		<Russian>Неровность местности</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_TERRAIN_ROUGHNESS_OPT_0</Tag>
+		<English>Flat 80% Flat 10% Hill 10% Peak</English>
+		<Russian>Плоская</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_TERRAIN_ROUGHNESS_OPT_1</Tag>
+		<English>Rolling 67%F 16.5%H 16.5%P (default)</English>
+		<Russian>Пологие холмы</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_TERRAIN_ROUGHNESS_OPT_2</Tag>
+		<English>Hilly 54%F 23%H 23%P</English>
+		<Russian>Холмистая</Russian>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_MAP_CUSTOM_OPTION_TERRAIN_ROUGHNESS_OPT_3</Tag>
+		<English>Mountainous 40%F 30%H 30%P</English>
+		<Russian>Горная</Russian>
 	</TEXT>
 </Civ4GameText>

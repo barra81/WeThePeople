@@ -108,14 +108,7 @@ void CyPlayerPythonInterface3(python::class_<CyPlayer>& x)
 		.def("getPlayerTextColorA", &CyPlayer::getPlayerTextColorA, "int ()")
 		.def("getSeaPlotYield", &CyPlayer::getSeaPlotYield, "int (YieldTypes eIndex)")
 		// R&R, Robert Surcouf, No More Variables Hidden game option START
-        .def("getYieldTradedTotal", &CyPlayer::getYieldTradedTotal, "int (YieldTypes eIndex)")
-		.def("getYieldTradedTotalINT", &CyPlayer::getYieldTradedTotalINT, "int (int /*YieldTypes*/ eIndex)")
-		// WTP, ray, Yields Traded Total for Africa and Port Royal - START
-		.def("getYieldTradedTotalAfrica", &CyPlayer::getYieldTradedTotalAfrica, "int (YieldTypes eIndex)")
-		.def("getYieldTradedTotalINTAfrica", &CyPlayer::getYieldTradedTotalINTAfrica, "int (int /*YieldTypes*/ eIndex)")
-		.def("getYieldTradedTotalPortRoyal", &CyPlayer::getYieldTradedTotalPortRoyal, "int (YieldTypes eIndex)")
-		.def("getYieldTradedTotalINTPortRoyal", &CyPlayer::getYieldTradedTotalINTPortRoyal, "int (int /*YieldTypes*/ eIndex)")
-		// WTP, ray, Yields Traded Total for Africa and Port Royal - END
+		.def("getYieldSoldTotal", &CyPlayer::getYieldSoldTotal, "int (TradeLocationTypes eLocation, int /*YieldTypes*/ eIndex)")
 		.def("getMissionaryPoints", &CyPlayer::getMissionaryPoints, "int (int /*PlayerTypes*/ ePlayer)") 
 		.def("missionaryThreshold", &CyPlayer::missionaryThreshold, "int (int /*PlayerTypes*/ ePlayer)") 
 		.def("getMissionaryRateModifier", &CyPlayer::getMissionaryRateModifier, "int (int /*PlayerTypes*/ ePlayer)")

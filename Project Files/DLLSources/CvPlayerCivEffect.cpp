@@ -192,7 +192,7 @@ void CvPlayerCivEffect::rebuildCivEffectCache()
 	// WTP, ray, refactored according to advice of Nightinggale
 	for (BuildingTypes eBuilding = FIRST_BUILDING; eBuilding < NUM_BUILDING_TYPES; ++eBuilding)
 	{
-		if (eBuilding != kCivInfo.getCivilizationBuildings(GC.getBuildingInfo(eBuilding).getBuildingClassType()))
+		if (eBuilding != kCivInfo.getCivilizationBuildings((BuildingClassTypes)GC.getBuildingInfo(eBuilding).getBuildingClassType()))
 		{
 			m_em_iCacheAllowsBuildings.set(eBuilding, -50);
 		}
@@ -264,7 +264,7 @@ void CvPlayerCivEffect::updateHasCivEffectCache() const
 	m_ja_iHasCivEffectCache.safeAdd(1, kCivInfo.getCivEffect());
 	switch (kCivInfo.getCivCategoryTypes())
 	{
-	case CIV_CATEGORY_EUROPEAN:
+	case CIV_CATEGORY_COLONIAL:
 		m_ja_iHasCivEffectCache.safeAdd(1, CIV_EFFECT_DEFAULT_EUROPEAN);
 		break;
 	case CIV_CATEGORY_NATIVE:
