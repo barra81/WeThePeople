@@ -317,21 +317,21 @@
 		<English>Sure! His eldest brother, the blacksmith, is welcome.</English>
 		<French>Bien sûr ! Le frère ainé, le forgeron, est la bienvenue.</French>
 		<German>Aber sicher doch! Sein älterer Bruder, der Schmied, wäre hier gerne gesehen.</German>
-		<Russian>Конечно! Его старший брат, кузнец, нам тоже пригодится.</Russian>
+		<Russian>Конечно! Его старший брат, кузнец, нам очень бы пригодился.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_CARPENTER_FAMILY_2</Tag>
 		<English>Perhaps his youngest brother, a farmer at the parents' homestead, wants to come.</English>
 		<French>Peut-être son frère plus jeune souhaite venir, celui qui est fermier dans la propriété de ses parents.</French>
 		<German>Vielleicht möchte sein jüngerer Bruder, der noch auf dem elterlichen Hof arbeitet, nach Amerika kommen?</German>
-		<Russian>Возможно, его младший брат, фермер, тоже хочет приехать?</Russian>
+		<Russian>Мы бы с удовольствием приняли его младшего брата, фермера.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_CARPENTER_FAMILY_3</Tag>
 		<English>As I recall his cousin is on the run because he is a poacher. Does he want to come? Make it clear I won't pay for his passage.</English>
 		<French>Je crois que son cousin est un braconnier en fuite. Peut-être souhaite-t-il venir ? Mais je ne peux pas payer pour son passage.</French>
 		<German>Wurde sein Vetter nicht vom Landbüttel daheim als Wilderer gesucht? Nun, er kann hier gerne ein neues Leben anfangen. Für die Überfahrt hat er aber selber aufzukommen.</German>
-		<Russian>Насколько я помню, его двоюродный брат находится в бегах, потому что он браконьер. Он хочет прийти? Объясните, что я не буду платить за его проезд.</Russian>
+		<Russian>Мне докладывали, его двоюродный брат находится в бегах за браконьерство. Если он пожелает приехать, мы найдём ему работу. Но переезд будет за его счёт.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_CATTLETHIEF_1</Tag>
@@ -443,7 +443,7 @@
 		<English>Maybe we can hire some elite troops.</English>
 		<French>Peut-être devrions-nous engager quelques troupes d'élite.</French>
 		<German>Vielleicht gelingt es uns, einige Elitetruppen zu rekrutieren.</German>
-		<Russian>Может быть, мы сможем нанять несколько элитных солдат.</Russian>
+		<Russian>Если кого и нанимать, то только самых лучших!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_CONFLICT_HIRE_GENERAL</Tag>
@@ -457,14 +457,14 @@
 		<English>A few more veterans to strengthen our forces would not hurt.</English>
 		<French>Quelques vétérans pour renforcer nos troupes ne feront pas de mal.</French>
 		<German>Einige Veteranen, um unsere Truppen zu verstärken, wären sicherlich nicht verkehrt.</German>
-		<Russian>Еще несколько ветеранов не помешали бы для усиления наших войск.</Russian>
+		<Russian>Ветераны сражений помогут нашим новобранцам набраться опыта.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_CONFLICT_IGNORE</Tag>
 		<English>We currently cannot afford to invest into more military.</English>
 		<French>Nous ne pouvons pas nous permettre d'investir dans notre armée en ce moment.</French>
 		<German>Wir können es uns momentan nicht leisten, für mehr Truppen Geld auszugeben.</German>
-		<Russian>В настоящее время мы не можем позволить себе вкладывать больше средств в армию.</Russian>
+		<Russian>В настоящее время мы не можем позволить себе дополнительные вложения средств в армию.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_CONIFEROUS_FIRE_1</Tag>
@@ -473,7 +473,7 @@
 		<German>Schickt den Köhlern je einen Batzen Gold und mein Versprechen, den Liebenden das Hochzeitsbankett zu spendieren. Mammon macht missvergnügte Männer mürbe.</German>
 		<Italian>Organizza un rimboschimento.</Italian>
 		<Spanish>Que empiecen las tareas de repoblación forestal.</Spanish>
-		<Russian>Организуйте пересадку.</Russian>
+		<Russian>Организуйте высадку новых саженцев.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_CONIFEROUS_FIRE_2</Tag>
@@ -498,7 +498,7 @@
 		<English>That is bad news, but at this time we cannot afford to help.</English>
 		<French>C'est une mauvaise nouvelle, mais nous ne disposons pas des moyens pour aider.</French>
 		<German>Das sind wahrhaft schlechte Nachrichten, aber im Moment können wir nicht helfen.</German>
-		<Russian>Это плохая новость, но сейчас мы не можем позволить себе траты.</Russian>
+		<Russian>Ужасная новость, но сейчас мы не можем позволить себе такие траты.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_CONTAMINATED_WELL_2</Tag>
@@ -631,7 +631,7 @@
 		<English>Send them some food. It's probably just the flu. They should recover.</English>
 		<French>Envoyez leur de la nourriture. Il s'agit probablement d'une mauvaise grippe contre laquelle les indigènes ne sont pas immunisés.</French>
 		<German>Schickt ihnen etwas Nahrung. Es ist sicherlich nur eine kleine Erkältung und es geht ihnen bald besser.</German>
-		<Russian>Отправьте им немного еды. Это, наверное, просто грипп. Они должны выздороветь.</Russian>
+		<Russian>Отправьте им немного еды. Наверняка это обычная простуда. Они поправятся.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_DISEASED_NATIVES_2</Tag>
@@ -645,7 +645,7 @@
 		<English>We are deeply sorry, but there is nothing we can do to help.</English>
 		<French>Nous sommes vraiment désolé, mais nous ne pouvons rien faire pour les aider.</French>
 		<German>Wir bedauern zutiefst, aber es gibt nichts, was wir für sie tun können.</German>
-		<Russian>Нам очень жаль, но мы ничем не можем помочь.</Russian>
+		<Russian>Очень жаль, но мы ничем не можем помочь.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_DISEASED_NATIVES_FOLLOW_UP_1</Tag>
@@ -830,7 +830,7 @@
 		<English>He lived like a savage? He shall help us to open up the wilderness.</English>
 		<French>Il a vécu comme un sauvage ? Ils devraient nous aider à rendre l'arrière-pays plus accessible.</French>
 		<German>Wie ein Wilder hat dieser Mann gelebt? Dann soll er zur Buße helfen, die Wildnis urbar zu machen.</German>
-		<Russian>Жил, как дикарь? Он поможет нам освоить пустыню.</Russian>
+		<Russian>Жил с местными дикарями? Пусть помогает нам осваивать пустоши.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FIRST_CATHEDRAL_3</Tag>
@@ -879,35 +879,35 @@
 		<English>Great idea! I would have done so myself.</English>
 		<French>Très bonne idée ! Je n'aurais pas proposé mieux.</French>
 		<German>Famoser Einfall! Hätte von mir sein können.</German>
-		<Russian>Отличная идея! Я бы и сам так сделал.</Russian>
+		<Russian>Отличная идея! Я хотел предложить то же самое, но они меня опередили.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FIRST_WHEELWRIGHT_2</Tag>
 		<English>They don't seem to know what to do with the tools I give them. Take everything from these wastrels. They don't need it!</English>
 		<French>Ils ne semblent pas savoir quoi faire de leurs outils. Reprenez tout à ces gaspilleurs, ils n'en ont pas besoin !</French>
 		<German>Die wissen wohl nicht wohin mit den Eisenwaren, die ich ihnen zuteile. Nehmt diesen Verschwendern weg, was sie nicht benötigen!</German>
-		<Russian>Кажется, они не знают, что делать с инструментами, которые я им даю. Заберите всё у этих бродяг. Им это не нужно!</Russian>
+		<Russian>Видимо, они не знают, что делать с инструментами, которые они получают. Заберите всё у этих бродяг. Им это не нужно!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FIRST_WHEELWRIGHT_3</Tag>
 		<English>What? Even more bread and beer? Nobody will become fat and lazy under my attendance. Tell these dawdlers to fast and pray!</English>
 		<French>Pour produire encore plus de pain et de bière ? Veulent-ils tous finir paresseux et obèses ? Dites à ces lambins de jeûner et prier !</French>
 		<German>Was? Noch mehr Brot und Bier? Fett und faul wollen die wohl werden. Sagt diesen Tagedieben, sie sollen fasten und beten.</German>
-		<Russian>Что? Еще больше хлеба и пива? Под моим наблюдением никто не станет толстым и ленивым. Скажи этим бездельникам поститься и молиться!</Russian>
+		<Russian>Что? Еще больше хлеба и пива? Пока я правитель колоний, никто здесь не станет толстым и ленивым. Прикажите этим бездельникам поститься и молиться!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FIRST_WHEELWRIGHT_4</Tag>
 		<English>Are they bored? These lazy dogs! I'll hurry them along!</English>
 		<French>Pourquoi proposent-ils ça, ils s'ennuient ? Je vais leur apprendre à travailler !</French>
 		<German>Langweilen sich diese faulen Hunde etwa? Die werde ich antreiben!</German>
-		<Russian>Им скучно? Ленивые собаки! Я потороплю их!</Russian>
+		<Russian>Им нечем заняться? Ленивые собаки! Назначить увеличенную норму выработки для этой мастерской!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FIRST_WHEELWRIGHT_5</Tag>
 		<English>Carts? For peasants? These meddlers will construct a magnificent carriage for me instead.</English>
 		<French>Des chariots ? Pour des paysans ? Ces entremetteurs vont plutôt construire une magnifique voiture pour moi !</French>
 		<German>Karren? Für Bauern? Diese Wichtigtuer sollen mir erst mal eine prachtvolle Amtskutsche bauen.</German>
-		<Russian>Тележки? Для крестьян? Вместо этого эти бездельники соорудят для меня великолепную карету.</Russian>
+		<Russian>Тележки? Крестьянам? С них и вёдер хватит, а мне нужен роскошный транспорт для встречи высокопоставленных гостей.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_FIVE_CATHEDRALS</Tag>
@@ -1202,7 +1202,7 @@
 		<German>Gewiss. Nächstenliebe ist Christenpflicht! Die Wilden sollten uns allerdings solche Dienste anständig entgelten.</German>
 		<Italian>Dovremmo stabilire un commercio con la gente del posto per avere questi rari prodotti.</Italian>
 		<Spanish>Debemos establecer un intercambio interno con los lugareños a cambio de esos raros bienes.</Spanish>
-		<Russian>Конечно. Милосердие – христианский долг! Однако туземцы должны должным образом платить нам за такие услуги.</Russian>
+		<Russian>Конечно! Милосердие – христианский долг! Однако туземцам придётся должным образом платить нам эти услуги.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_HERBS_2</Tag>
@@ -1470,7 +1470,7 @@
 		<English>Well, our Native friends have no reason to lie. We will punish the man. He shall never work as a missionary or a priest again.</English>
 		<French>Bon, nos amis indigènes n'ont pas de raison de mentir. Nous allons le punir. Il n'exercera plus jamais la fonction de missionnaire ou de prêtre.</French>
 		<German>Nun, unsere wilden Freunde haben keinen Grund zu lügen. Wir werden den Mann bestrafen. Er wird natürlich auch nie wieder ein kirchliches Amt inne haben.</German>
-		<Russian>Что ж, нашим друзьям из числа индейцев нет причин врать. Мы накажем человека. Он больше никогда не будет работать миссионером или священником.</Russian>
+		<Russian>Нашим друзьям-индейцам нет причин врать. Мы накажем этого человека. Он больше никогда не будет работать миссионером или священником.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_MONASTERY_HEALING_WOUNDED_1</Tag>
@@ -1710,14 +1710,14 @@
 		<English>Well then, print some passages from the Bible. We shall spread the word of Jesus Christ and the Apostles.</English>
 		<French>Très bien, dans ce cas nous pourrions imprimer des passages de la Bible. Nous devons propager encore davantage la parole du Christ et de ses apôtres.</French>
 		<German>Dann druckt Passage aus der Bibel. Wir werden die Worte Jesus Christi und der Apostel verbreiten.</German>
-		<Russian>Ну тогда напечатайте несколько отрывков из Библии. Мы будем распространять слово Иисуса Христа и его апостолов.</Russian>
+		<Russian>Начните печатать отрывки из Библии. Будем распространять слово Иисуса Христа и его апостолов.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_PRINTING_PRESS_2</Tag>
 		<English>We could print some interesting colonial news. Maybe an entertaining story from time to time.</English>
 		<French>Nous pourrions imprimer les nouvelles truculantes de nos colonies. Des histoires plus légères et divertissantes.</French>
 		<German>Wir könnten Nachrichten aus den Kolonien drucken. Vielleicht auch eine unterhaltsame Geschichte von Zeit zu Zeit.</German>
-		<Russian>Мы могли бы напечатать кое-какие интересные новости из колоний. Возможно, время от времени будет появляться какая-нибудь занимательная история.</Russian>
+		<Russian>Мы могли бы печатать разные колониальные новости. Возможно, время от времени, будет появляться какая-нибудь интересная история.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_PRIVATEER_1</Tag>
@@ -1850,21 +1850,21 @@
 		<English>Researchers at the Royal Court expect more information about the savages in our region. Let the men search for the legacy of the Natives! Our researchers are particularly taken with the mysterious knot writing.</English>
 		<French>Des chercheurs de la cour du Roi souhaitent en savoir davantager sur les sauvages de notre région. Demandons à nos hommes de chercher à propos de l'héritage de nos indigènes! En particulier, l'écriture mystérieuse des nœuds a retenu l'attention de nos chercheurs.</French>
 		<German>Bei Hofe erwartet man sich weitere Erkenntnisse über die Wilden. Lasst nach ihren Hinterlassenschaften suchen! Insbesondere die geheimnisvolle Knotenschrift hat es unseren Forschern angetan.</German>
-		<Russian>Исследователи Королевского двора ожидают больше информации о дикарях нашего региона. Пусть люди ищут наследие туземцев! Наших исследователей особенно интересует таинственная узелковая письменность.</Russian>
+		<Russian>Летописцы Королевского двора ожидают больше информации о дикарях этого региона. Прикажите разведчикам заняться поиском любых вещей из жизни индейцев! Особенно интересно было бы выяснить хоть что-нибудь про таинственную узелковую письменность.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_RUINS_DONE_2</Tag>
 		<English>Let them search the junk and see if they can get something useful.</English>
 		<French>Qu'ils cherchent dans le bazar pour voir s'ils y trouvent quelque chose d'utile.</French>
 		<German>Lasst sie die Schrotthaufen nach etwas Verwertbarem durchsuchen.</German>
-		<Russian>Пусть они обыщут этот хлам. Может и найдут что-нибудь полезное.</Russian>
+		<Russian>Некоторые торговцы утверждают, что видели у туземцев что-то похожее на повозку. Интересно было бы на неё взглянуть.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_RUINS_DONE_3</Tag>
 		<English>My palace needs renovation. Let them search for treasures!</English>
 		<French>Mon palais a besoin d'une petite restauration. Qu'ils recherchent un trésor !</French>
 		<German>Mein Palast müsste dringend renoviert werden. Lasst sie nach Schätzen suchen!</German>
-		<Russian>Мой дворец нуждается в ремонте. Пусть ищут сокровища!</Russian>
+		<Russian>Мой особняк нуждается в ремонте. Пусть ищут сокровища!</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_RUINS_DONE_4</Tag>
@@ -2107,7 +2107,7 @@
 		<English>The tavern is more important because it will help to bring the citizens closer together.</English>
 		<French>La taverne permettra de rassembler les citoyens ensemble. Il s'agit du choix le plus sensé.</French>
 		<German>Die Taverne ist wichtiger, da sie helfen wird, die Gemeinde näher zusammen zu bringen.</German>
-		<Russian>Таверна более важна, потому что она поможет сблизиться новым гражданам.</Russian>
+		<Russian>Таверна важнее, она помогает новым колонистам адаптироваться на новом месте.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_TAVERN_VS_CHAPEL_3</Tag>
@@ -2703,7 +2703,7 @@
 		<Tag>TXT_KEY_EVENTTRIGGER_COLONY_GROWTH</Tag>
 		<English>Our colony has grown a lot. Naturally our rivals are striving to do the same. We need to reach a population of 20 to increase our production and strengthen our borders.</English>
 		<French>Votre colonie a beaucoup grandi. Mais nous ne pouvons que nous attendre à ce que nos rivaux fassent de même. Nous devons atteindre une population de 20 pour augmenter notre production et renforcer nos frontières.</French>
-		<German>> Ihre Kolonie ist stark gewachsen. Aber wir können nur erwarten, dass unsere Konkurrenten dasselbe tun. Wir müssen eine Bevölkerungszahl von 20 erreichen, um unsere Produktion zu steigern und unsere Grenzen zu stärken.</German>
+		<German>Ihre Kolonie ist stark gewachsen. Aber wir können nur erwarten, dass unsere Konkurrenten dasselbe tun. Wir müssen eine Bevölkerungszahl von 20 erreichen, um unsere Produktion zu steigern und unsere Grenzen zu stärken.</German>
 		<Russian>Наша колония сильно выросла. Однако и у наших соперников дела могут пойти также хорошо. Нам нужно достичь населения в 20 человек, чтобы увеличить производство и укрепить наши границы.</Russian>
 	</TEXT>
 	<TEXT>
@@ -2744,7 +2744,7 @@
 	<TEXT>
 		<Tag>TXT_KEY_EVENT_COLONY_GROWTH_DONE_2</Tag>
 		<English>Thefts, shakedowns and other shady business are taking place in broad daylight. We need a judge to restore order!</English>
-		<French>> Les vols et autres affaires louches ont lieu en plein jour. Il nous faut un juge pour rétablir l'ordre!</French>
+		<French>Les vols et autres affaires louches ont lieu en plein jour. Il nous faut un juge pour rétablir l'ordre!</French>
 		<German>Diebstähle und andere dubiose Geschäfte geschehen am helllichten Tag. Wir brauchen einen Richter, der die Ordnung wiederherstellt!</German>
 		<Russian>Кражи и другие тёмные дела происходят средь бела дня! Нам срочно нужен судья, чтобы восстановить порядок!</Russian>
 	</TEXT>

@@ -12,7 +12,7 @@
 		<German>Gouverneur, diese Welt ist groß - aber nicht groß genug für uns beide. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] erklärt Euch den Krieg!)</German>
 		<Italian>Questo mondo non è grande abbastanza per tutti e due! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] dichiara guerra!)</Italian>
 		<Spanish>¡Este mundo no es lo bastante grande para nuestras dos naciones! (¡[COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] os declara la guerra!)</Spanish>
-		<Russian>Губернатор, этот мир велик, но для нас двоих он слишком мал. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет войну!)</Russian>
+		<Russian>Губернатор, этот мир велик, но для нас двоих он слишком мал. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет вам войну!)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_DECLARE_WAR_2</Tag>
@@ -21,7 +21,7 @@
 		<German>Unsere Geduld ist erschöpft. Wir sehen uns auf dem Schlachtfeld wieder. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] erklärt Euch den Krieg!)</German>
 		<Italian>Abbiamo subito le tue insolenze troppo a lungo! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] dichiara guerra!)</Italian>
 		<Spanish>¡Ya hemos aguantado bastante vuestras insolencias! (¡[COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] os declara la guerra!)</Spanish>
-		<Russian>Наше терпение закончилось. До встречи на поле боя! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет войну!)</Russian>
+		<Russian>Наше терпение закончилось. До встречи на поле боя! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет вам войну!)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_DECLARE_WAR_3</Tag>
@@ -30,7 +30,7 @@
 		<German>Jetzt wird Blut fließen. Und es wird nicht das unsrige sein. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] erklärt Euch den Krieg!)</German>
 		<Italian>Preparati ad affrontare il tuo destino! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] dichiara guerra!)</Italian>
 		<Spanish>¡Preparaos para afrontar vuestra perdición! (¡[COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] os declara la guerra!)</Spanish>
-		<Russian>Сейчас прольётся чья-то кровь. И она будет явно не наша. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет войну!)</Russian>
+		<Russian>Сейчас прольётся чья-то кровь. И она будет явно не наша. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет вам войну!)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_DECLARE_WAR_4</Tag>
@@ -39,7 +39,7 @@
 		<German>Die Zeit ist reif. Reif für eine Entscheidung - darüber, wem dieses schöne Land gehört. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] erklärt Euch den Krieg!)</German>
 		<Italian>Ora pagherai per aver insultato l'[COLOR_HIGHLIGHT_TEXT][OUR_EMPIRE][COLOR_REVERT]! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] dichiara guerra!)</Italian>
 		<Spanish>¡Ahora pagaréis vuestros incontables insultos al [COLOR_HIGHLIGHT_TEXT][OUR_EMPIRE][COLOR_REVERT]! (¡[COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] os declara la guerra!)</Spanish>
-		<Russian>Настало время решить, кому принадлежит эта прекрасная страна. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет войну!)</Russian>
+		<Russian>Настало время решить, кому принадлежит эта прекрасная страна. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет вам войну!)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_DECLARE_WAR_5</Tag>
@@ -48,7 +48,7 @@
 		<German>Die Zeit der Verhandlungen ist vorbei, [CT_NAME]! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] erklärt Euch den Krieg!)</German>
 		<Italian>È finito il tempo delle chiacchiere, [CT_NAME]! Risolveremo la questione sul campo di battaglia! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] dichiara guerra!)</Italian>
 		<Spanish>¡Se acabó la charla, [CT_NAME]! ¡Zanjaremos nuestras diferencias en el campo de batalla! (¡[COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] os declara la guerra!)</Spanish>
-		<Russian>Время разговоров закончилось, [CT_NAME]! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет войну!)</Russian>
+		<Russian>Время разговоров закончилось, [CT_NAME]! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет вам войну!)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_DECLARE_WAR_6</Tag>
@@ -57,7 +57,7 @@
 		<German>Von weit her seit Ihr angereist in diesen Teil der Welt. Eure Rückreise habt Ihr verwirkt. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] erklärt Euch den Krieg!)</German>
 		<Italian>I miei innumerevoli seguaci vi stermineranno rapidamente! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] dichiara guerra!)</Italian>
 		<Spanish>¡Pronto mis incontables seguidores os destruirán a todos! (¡[COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] os declara la guerra!)</Spanish>
-		<Russian>Вы слишком далеко забрались в своем путешествии и только что лишились возможности вернуться домой. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет войну!)</Russian>
+		<Russian>Вы слишком далеко забрались в своем путешествии и только что лишились возможности вернуться домой. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет вам войну!)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_DECLARE_WAR_7</Tag>
@@ -66,7 +66,7 @@
 		<German>Zeit zu sterben, [CT_NAME]! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] erklärt Euch den Krieg!)</German>
 		<Italian>È tempo di morire, [CT_NAME]. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] dichiara guerra!)</Italian>
 		<Spanish>Es hora de morir, [CT_NAME]. (¡[COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] os declara la guerra!)</Spanish>
-		<Russian>Время умирать, [CT_NAME]. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет войну!)</Russian>
+		<Russian>Время умирать, [CT_NAME]. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет вам войну!)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_DECLARE_WAR_8</Tag>
@@ -75,7 +75,7 @@
 		<German>Küsst ein letztes Mal Euer Weib und packt Eure Waffen. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] erklärt Euch den Krieg!)</German>
 		<Italian>Folle! Ti distruggeremo! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] dichiara guerra!)</Italian>
 		<Spanish>¡Idiota! ¡Ahora os destruiremos! (¡[COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] os declara la guerra!)</Spanish>
-		<Russian>Поцелуй свою жену в последний раз и берись за оружие. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет войну!)</Russian>
+		<Russian>Поцелуй свою жену в последний раз и берись за оружие. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет вам войну!)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_DECLARE_WAR_9</Tag>
@@ -84,7 +84,7 @@
 		<German>Bald werdet Ihr Eurem Schöpfer gegenüber treten. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] erklärt Euch den Krieg!)</German>
 		<Italian>Credo tu sappia che questo significa guerra. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] dichiara guerra!)</Italian>
 		<Spanish>Supongo que os dais cuenta de que esto significa la guerra. (¡[COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] os declara la guerra!)</Spanish>
-		<Russian>Вскоре вы встретитесь лицом к лицу со своим Создателем. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет войну!)</Russian>
+		<Russian>Вскоре вы встретитесь лицом к лицу со своим Создателем. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет вам войну!)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_DECLARE_WAR_10</Tag>
@@ -93,7 +93,7 @@
 		<German>Eine dunkle Zeit steht Euch bevor. Nehmt Abschied von Eurer Familie und bestimmt, wo Euer Grabstein stehen soll. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] erklärt Euch den Krieg!)</German>
 		<Italian>L'[COLOR_HIGHLIGHT_TEXT][OUR_EMPIRE][COLOR_REVERT] ne ha abbastanza della tua perfidia e dei tuoi tradimenti! Ora pagherai! ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] dichiara guerra!)</Italian>
 		<Spanish>¡El poderoso [COLOR_HIGHLIGHT_TEXT][OUR_EMPIRE][COLOR_REVERT] ya ha soportado bastante vuestras traiciones y engaños! ¡Lo vais a pagar! (¡[COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] os declara la guerra!)</Spanish>
-		<Russian>Для вас настали тёмные времена. Прощайтесь с семьей и выбирайте надгробие. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет войну!)</Russian>
+		<Russian>Для вас настали тёмные времена. Прощайтесь с семьей и выбирайте надгробие. ([COLOR_HIGHLIGHT_TEXT][OUR_NAME][COLOR_REVERT] объявляет вам войну!)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_REFUSE_TO_TALK_1</Tag>
@@ -5773,7 +5773,7 @@
 		<German>Ihr seid von weit her gekommen, Weißer Mann. Eure Kleidung ist schmutzig, Ihr seht ausgezehrt aus, und Euer Atem riecht wie faulender Fisch. Baut Eure Zelte auf und seid unsere Gäste. Kommt wieder zu Kräften. Doch vergesst nicht: Die Erde, auf der Ihr steht, ist nicht Euer Eigen. Wir sind die Kinder dieser Welt, und Ihr seid Fremde hier.</German>
 		<Italian>Hai fatto molta strada, uomo bianco. I tuoi vestiti sono sporchi, hai l'aria sofferente e il tuo alito puzza di pesce in decomposizione. Piantate le vostre tende e siate nostri ospiti. Ritrova la tua forza. Ma ricordate, la terra su cui vi trovate non è vostra. Noi siamo i figli di questo mondo e voi siete stranieri qui.</Italian>
 		<Spanish>Has recorrido un largo camino, hombre blanco. Tu ropa está sucia, tienes un aspecto demacrado y tu aliento huele a pescado podrido. Monta tus tiendas y sé nuestro invitado. Recupera tu fuerza. Pero recuerda que la tierra sobre la que estás no es tuya. Nosotros somos los hijos de este mundo, y ustedes son extraños aquí.</Spanish>
-		<Russian>Вы проделали долгий путь, путники. Грязная одежда, изможденные лица и от вас пахнет морем. Ставьте палатки, будьте нашими гостями. Восстановите свою силу. Но никогда не забывайте: эта земля, на которой вы стоите, не ваша. Мы дети этого мира, а вы здесь чужие.</Russian>
+		<Russian>Вы проделали долгий путь, незнакомцы. Изможденные лица, грязная одежда, от которой пахнет морем. Будьте нашими гостями - разбейте лагерь и отдохните. Но никогда не забывайте: эта земля, на которой вы стоите, не ваша. Мы - дети этого мира, а вы здесь чужие.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>USER_DIPLO_FOUND_FIRST_CITY_1</Tag>
@@ -5782,7 +5782,7 @@
 		<German>Wir danken als Fremde für die Gastfreundschaft, die man uns erweist.</German>
 		<Italian>Come stranieri, rendiamo grazie per l'ospitalità che ci è stata mostrata.</Italian>
 		<Spanish>Como extranjeros, damos las gracias por la hospitalidad que se nos ha brindado.</Spanish>
-		<Russian>Как чужестранцы, мы благодарим за оказанное нам гостеприимство.</Russian>
+		<Russian>Мы благодарим вождя за оказанное нам гостеприимство.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>AI_DIPLO_FOUND_CITY_1</Tag>
@@ -6973,7 +6973,7 @@
 		<German>Seine Eminenz hat in Eurer Sache mit [COLOR_HIGHLIGHT_TEXT]Eurem König[COLOR_REVERT] gesprochen.</German>
 		<Italian>Sua Eminenza ha parlato al [COLOR_HIGHLIGHT_TEXT]vostro Re[COLOR_REVERT] in vostro favore.</Italian>
 		<Spanish>Su Eminencia ha hablado con [COLOR_HIGHLIGHT_TEXT]su Rey[COLOR_REVERT] en su nombre.</Spanish>
-		<Russian>[COLOR_HIGHLIGHT_TEXT]Его Высокопреосвященство[COLOR_REVERT] замолвил слово за вас перед [COLOR_HIGHLIGHT_TEXT]вашим Королем[COLOR_REVERT].</Russian>
+		<Russian>[COLOR_HIGHLIGHT_TEXT]Его Высокопреосвященство[COLOR_REVERT] улучшил отношение [COLOR_HIGHLIGHT_TEXT]вашего Короля[COLOR_REVERT] к колониям.</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_CHURCH_SPOKE_FAVOUR_EUROPEAN</Tag>
